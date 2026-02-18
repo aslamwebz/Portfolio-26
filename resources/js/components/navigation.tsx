@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState } from 'react';
 import { Link } from '@inertiajs/react';
 
 interface NavigationProps {
@@ -9,23 +9,6 @@ interface NavigationProps {
 
 export default function Navigation({ auth }: NavigationProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-    const ticking = useRef(false);
-
-    const handleScroll = useCallback(() => {
-        if (!ticking.current) {
-            window.requestAnimationFrame(() => {
-                setScrolled(window.pageYOffset > 20);
-                ticking.current = false;
-            });
-            ticking.current = true;
-        }
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [handleScroll]);
 
     const navLinks = [
         { href: '#about', label: 'About' },
@@ -35,13 +18,7 @@ export default function Navigation({ auth }: NavigationProps) {
     ];
 
     return (
-        <nav
-            className={`fixed top-0 right-0 left-0 z-50 transition-colors duration-200 ${
-                scrolled
-                    ? 'border-b border-slate-800 bg-slate-900'
-                    : 'border-b border-slate-800/50 bg-slate-900'
-            }`}
-        >
+        <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-slate-900">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}

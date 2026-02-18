@@ -2,39 +2,27 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function Terminal() {
     const [displayText, setDisplayText] = useState('');
-    const [phase, setPhase] = useState<'typing' | 'waiting' | 'output'>(
-        'typing',
-    );
+    const [showOutput, setShowOutput] = useState(false);
     const fullText = 'php artisan deploy --env=production';
-    const textRef = useRef('');
     const indexRef = useRef(0);
 
     useEffect(() => {
-        if (phase !== 'typing') return;
-
         const typeNextChar = () => {
             if (indexRef.current < fullText.length) {
-                textRef.current += fullText[indexRef.current];
-                setDisplayText(textRef.current);
+                setDisplayText(fullText.slice(0, indexRef.current + 1));
                 indexRef.current++;
-
-                const delay = Math.random() * 80 + 40;
-                setTimeout(typeNextChar, delay);
+                setTimeout(typeNextChar, 60);
             } else {
-                setPhase('waiting');
-                setTimeout(() => setPhase('output'), 300);
+                setTimeout(() => setShowOutput(true), 300);
             }
         };
 
         const initialDelay = setTimeout(typeNextChar, 800);
         return () => clearTimeout(initialDelay);
-    }, [phase]);
+    }, []);
 
     return (
-        <div
-            className="terminal-glow overflow-hidden rounded-xl border border-slate-700 bg-slate-800"
-            style={{ contain: 'layout paint' }}
-        >
+        <div className="terminal-glow overflow-hidden rounded-xl border border-slate-700 bg-slate-800">
             <div className="flex items-center gap-2 border-b border-slate-700 bg-slate-900 px-4 py-3">
                 <div className="flex gap-2">
                     <div className="h-3 w-3 rounded-full bg-red-500"></div>
@@ -52,7 +40,7 @@ export default function Terminal() {
                     </div>
                     <div className="rounded border border-slate-700/50 bg-slate-900/50 p-3">
                         <div className="mb-2 flex items-center gap-2">
-                            <span className="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
+                            <span className="h-2 w-2 rounded-full bg-green-500"></span>
                             <span className="text-green-400">
                                 ● server.service
                             </span>
@@ -84,15 +72,12 @@ export default function Terminal() {
                 <div className="mb-4">
                     <span className="text-primary-400">$</span>
                     <span className="ml-2">{displayText}</span>
-                    {phase !== 'output' && (
-                        <span className="bg-primary-400 animate-cursor ml-1 inline-block h-5 w-2"></span>
+                    {!showOutput && (
+                        <span className="bg-primary-400 ml-1 inline-block h-5 w-0.5"></span>
                     )}
                 </div>
-                {phase === 'output' && (
-                    <div
-                        className="animate-fade-in"
-                        style={{ animationFillMode: 'both' }}
-                    >
+                {showOutput && (
+                    <div>
                         <div className="space-y-1 text-slate-400">
                             <div>
                                 <span className="text-blue-400">[INFO]</span>{' '}
@@ -127,7 +112,7 @@ export default function Terminal() {
                         <div className="mt-4 flex items-center gap-2">
                             <span className="text-slate-500">$</span>
                             <span className="text-slate-400">_</span>
-                            <span className="animate-cursor inline-block h-5 w-2 bg-slate-400"></span>
+                            <span className="inline-block h-5 w-0.5 bg-slate-400"></span>
                         </div>
                     </div>
                 )}

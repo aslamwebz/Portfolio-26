@@ -184,18 +184,12 @@
         background-clip: text;
     }
 
-    .animate-cursor {
-        animation: cursor 1s step-end infinite;
-    }
-
     .animate-slide-up {
         animation: slideUp 0.6s ease-out;
-        will-change: transform, opacity;
     }
 
     .animate-fade-in {
         animation: fadeIn 0.5s ease-out;
-        will-change: opacity;
     }
 
     /* Performance optimization for fixed elements */
@@ -208,16 +202,6 @@
     .backdrop-blur-md,
     .backdrop-blur-sm {
         transform: translateZ(0);
-    }
-}
-
-@keyframes cursor {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
     }
 }
 

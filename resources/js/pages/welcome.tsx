@@ -278,7 +278,7 @@ export default function Welcome({
                             {/* Left Content */}
                             <div className="animate-slide-up">
                                 <div className="bg-primary-400/10 border-primary-400/30 text-primary-400 mb-6 inline-flex items-center rounded-full border px-3 py-1 font-mono text-xs">
-                                    <span className="bg-primary-400 mr-2 h-2 w-2 animate-pulse rounded-full"></span>
+                                    <span className="bg-primary-400 mr-2 h-2 w-2 rounded-full"></span>
                                     Available for opportunities
                                 </div>
 
@@ -734,7 +734,7 @@ export default function Welcome({
                                         >
                                             {exp.isCurrent && (
                                                 <div className="mb-2 flex items-center gap-2">
-                                                    <span className="h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
+                                                    <span className="h-2 w-2 rounded-full bg-green-400"></span>
                                                     <span className="text-xs font-medium text-green-400">
                                                         CURRENT
                                                     </span>
