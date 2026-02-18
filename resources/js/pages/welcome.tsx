@@ -491,7 +491,7 @@ export default function Welcome({
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="grid items-center gap-16 lg:grid-cols-2">
                             {/* Left - Visual */}
-                            <div className="relative">
+                            <div className="relative flex flex-col justify-center">
                                 <div className="from-primary-400/10 absolute -inset-4 rounded-2xl bg-gradient-to-r to-blue-500/10 opacity-50"></div>
                                 <div className="relative rounded-xl border border-slate-700 bg-slate-800 p-8">
                                     <div className="mb-6 flex items-center gap-4">
@@ -560,12 +560,12 @@ export default function Welcome({
                             </div>
 
                             {/* Right - Content */}
-                            <div>
-                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                            <div className="flex flex-col justify-center">
+                                <div className="mb-4 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
                                     ABOUT ME
                                 </div>
 
-                                <h2 className="mb-6 text-3xl font-bold sm:text-4xl">
+                                <h2 className="mb-6 text-2xl font-bold sm:text-3xl">
                                     From Infrastructure to
                                     <span className="gradient-text">
                                         {' '}
