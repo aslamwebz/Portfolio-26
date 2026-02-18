@@ -1,38 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Terminal() {
-    const [currentText, setCurrentText] = useState('');
-    const [showCursor, setShowCursor] = useState(true);
-    const [showOutput, setShowOutput] = useState(false);
+    const [displayText, setDisplayText] = useState('');
+    const [phase, setPhase] = useState<'typing' | 'waiting' | 'output'>(
+        'typing',
+    );
     const fullText = 'php artisan deploy --env=production';
+    const textRef = useRef('');
+    const indexRef = useRef(0);
 
     useEffect(() => {
-        let charIndex = 0;
-        const typeInterval = setInterval(
-            () => {
-                if (charIndex < fullText.length) {
-                    setCurrentText(fullText.slice(0, charIndex + 1));
-                    charIndex++;
-                } else {
-                    clearInterval(typeInterval);
-                    setTimeout(() => setShowOutput(true), 500);
-                }
-            },
-            Math.random() * 100 + 50,
-        );
+        if (phase !== 'typing') return;
 
-        const cursorInterval = setInterval(() => {
-            setShowCursor((prev) => !prev);
-        }, 500);
+        const typeNextChar = () => {
+            if (indexRef.current < fullText.length) {
+                textRef.current += fullText[indexRef.current];
+                setDisplayText(textRef.current);
+                indexRef.current++;
 
-        return () => {
-            clearInterval(typeInterval);
-            clearInterval(cursorInterval);
+                const delay = Math.random() * 80 + 40;
+                setTimeout(typeNextChar, delay);
+            } else {
+                setPhase('waiting');
+                setTimeout(() => setPhase('output'), 300);
+            }
         };
-    }, []);
+
+        const initialDelay = setTimeout(typeNextChar, 800);
+        return () => clearTimeout(initialDelay);
+    }, [phase]);
 
     return (
-        <div className="terminal-glow overflow-hidden rounded-xl border border-slate-700 bg-slate-800">
+        <div
+            className="terminal-glow overflow-hidden rounded-xl border border-slate-700 bg-slate-800"
+            style={{ contain: 'layout paint' }}
+        >
             <div className="flex items-center gap-2 border-b border-slate-700 bg-slate-900 px-4 py-3">
                 <div className="flex gap-2">
                     <div className="h-3 w-3 rounded-full bg-red-500"></div>
@@ -81,13 +83,16 @@ export default function Terminal() {
                 </div>
                 <div className="mb-4">
                     <span className="text-primary-400">$</span>
-                    <span className="ml-2">{currentText}</span>
-                    {showCursor && (
+                    <span className="ml-2">{displayText}</span>
+                    {phase !== 'output' && (
                         <span className="bg-primary-400 animate-cursor ml-1 inline-block h-5 w-2"></span>
                     )}
                 </div>
-                {showOutput && (
-                    <div className="animate-fade-in">
+                {phase === 'output' && (
+                    <div
+                        className="animate-fade-in"
+                        style={{ animationFillMode: 'both' }}
+                    >
                         <div className="space-y-1 text-slate-400">
                             <div>
                                 <span className="text-blue-400">[INFO]</span>{' '}

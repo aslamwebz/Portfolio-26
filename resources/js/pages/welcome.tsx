@@ -261,17 +261,14 @@ export default function Welcome({
 
                 {/* Hero Section */}
                 <section className="relative flex min-h-screen items-center overflow-hidden pt-16">
-                    {/* Background Grid - GPU accelerated */}
-                    <div
-                        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-                        style={{ willChange: 'transform' }}
-                    >
+                    {/* Background Grid - simplified */}
+                    <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
                         <div
                             className="absolute inset-0"
                             style={{
                                 backgroundImage:
-                                    'linear-gradient(to right, #34d399 1px, transparent 1px), linear-gradient(to bottom, #34d399 1px, transparent 1px)',
-                                backgroundSize: '60px 60px',
+                                    'radial-gradient(circle, #34d399 1px, transparent 1px)',
+                                backgroundSize: '40px 40px',
                             }}
                         ></div>
                     </div>
@@ -377,13 +374,7 @@ export default function Welcome({
                         <div className="grid items-center gap-16 lg:grid-cols-2">
                             {/* Left - Visual */}
                             <div className="relative">
-                                <div
-                                    className="from-primary-400/20 absolute -inset-4 rounded-2xl bg-gradient-to-r to-blue-500/20 opacity-50 blur-2xl"
-                                    style={{
-                                        willChange: 'transform',
-                                        transform: 'translateZ(0)',
-                                    }}
-                                ></div>
+                                <div className="from-primary-400/10 absolute -inset-4 rounded-2xl bg-gradient-to-r to-blue-500/10 opacity-50"></div>
                                 <div className="relative rounded-xl border border-slate-700 bg-slate-800 p-8">
                                     <div className="mb-6 flex items-center gap-4">
                                         <div className="bg-primary-400/10 border-primary-400/30 flex h-16 w-16 items-center justify-center rounded-xl border">
