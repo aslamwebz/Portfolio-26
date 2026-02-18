@@ -17,6 +17,18 @@ export default function Navigation({ auth }: NavigationProps) {
         { href: '#projects', label: 'Projects' },
     ];
 
+    const handleSmoothScroll = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        href: string,
+    ) => {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        setIsOpen(false);
+    };
+
     return (
         <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-slate-900">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -24,6 +36,7 @@ export default function Navigation({ auth }: NavigationProps) {
                     {/* Logo */}
                     <a
                         href="#"
+                        onClick={(e) => handleSmoothScroll(e, '#')}
                         className="font-mono text-xl font-semibold tracking-tight"
                     >
                         <span className="text-primary-400">&lt;</span>MA
@@ -36,6 +49,9 @@ export default function Navigation({ auth }: NavigationProps) {
                             <a
                                 key={link.href}
                                 href={link.href}
+                                onClick={(e) =>
+                                    handleSmoothScroll(e, link.href)
+                                }
                                 className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
                             >
                                 {link.label}
@@ -43,6 +59,7 @@ export default function Navigation({ auth }: NavigationProps) {
                         ))}
                         <a
                             href="#contact"
+                            onClick={(e) => handleSmoothScroll(e, '#contact')}
                             className="bg-primary-400/10 text-primary-400 border-primary-400/30 hover:bg-primary-400/20 rounded-lg border px-4 py-2 text-sm font-medium transition-all"
                         >
                             Contact
@@ -109,7 +126,7 @@ export default function Navigation({ auth }: NavigationProps) {
                         <a
                             key={link.href}
                             href={link.href}
-                            onClick={() => setIsOpen(false)}
+                            onClick={(e) => handleSmoothScroll(e, link.href)}
                             className="block text-slate-400 transition-colors hover:text-white"
                         >
                             {link.label}
@@ -117,7 +134,7 @@ export default function Navigation({ auth }: NavigationProps) {
                     ))}
                     <a
                         href="#contact"
-                        onClick={() => setIsOpen(false)}
+                        onClick={(e) => handleSmoothScroll(e, '#contact')}
                         className="text-primary-400 block"
                     >
                         Contact

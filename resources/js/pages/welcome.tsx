@@ -304,6 +304,14 @@ export default function Welcome({
                                 <div className="flex flex-wrap gap-4">
                                     <a
                                         href="#projects"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            document
+                                                .querySelector('#projects')
+                                                ?.scrollIntoView({
+                                                    behavior: 'smooth',
+                                                });
+                                        }}
                                         className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold text-slate-900 transition-colors"
                                     >
                                         View Projects
@@ -323,6 +331,14 @@ export default function Welcome({
                                     </a>
                                     <a
                                         href="#contact"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            document
+                                                .querySelector('#contact')
+                                                ?.scrollIntoView({
+                                                    behavior: 'smooth',
+                                                });
+                                        }}
                                         className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-6 py-3 font-medium text-white transition-colors hover:bg-slate-700"
                                     >
                                         <svg
