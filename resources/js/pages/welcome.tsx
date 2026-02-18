@@ -366,16 +366,16 @@ export default function Welcome({
                         ></div>
                     </div>
 
-                    <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="grid items-center gap-12 lg:grid-cols-2">
+                    <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+                        <div className="grid w-full items-start gap-12 lg:grid-cols-2">
                             {/* Left Content */}
-                            <div className="animate-slide-up">
+                            <div className="animate-slide-up flex flex-col justify-center">
                                 <div className="mb-6 inline-flex items-center rounded-full border border-green-400/30 bg-green-400/10 px-4 py-1.5 font-mono text-sm font-medium text-green-400">
                                     <span className="mr-2 text-lg">●</span>
                                     Open to Work — Available Immediately
                                 </div>
 
-                                <h1 className="mb-6 text-4xl leading-tight font-bold sm:text-5xl lg:text-6xl">
+                                <h1 className="mb-6 text-3xl leading-tight font-bold sm:text-4xl lg:text-5xl">
                                     Senior Backend Engineer
                                     <span className="gradient-text">
                                         {' '}
@@ -462,7 +462,7 @@ export default function Welcome({
                             </div>
 
                             {/* Right Content - Terminal */}
-                            <div className="animate-fade-in lg:pl-8">
+                            <div className="animate-fade-in flex items-center justify-center lg:pl-8">
                                 <Terminal />
                             </div>
                         </div>
