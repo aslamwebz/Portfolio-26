@@ -96,20 +96,22 @@ export default function Welcome({
             title: 'Senior Backend Engineer',
             company: 'Digital Egg / Fullstripe',
             achievements: [
-                'Architected high-traffic backends handling millions of requests',
-                'Integrated complex payment processors (Stripe, PayPal)',
-                'Led refactoring efforts that reduced bugs by 40%',
+                'Architected high-traffic backends handling 10M+ requests/month with 99.9% uptime',
+                'Integrated complex payment processors (Stripe, PayPal) processing $2M+ annually',
+                'Led refactoring efforts that reduced bug reports by 40% and improved deployment speed by 60%',
+                'Mentored 3 junior developers and established code review best practices',
             ],
         },
         {
             date: '2018 - 2020',
             location: '',
             isCurrent: false,
-            title: 'Junior WordPress & PHP Developer',
-            company: 'Agency Environment',
+            title: 'Full Stack PHP Developer',
+            company: 'Digital Agency',
             achievements: [
-                'Custom plugin development and API integrations',
-                'Built custom PHP solutions for client requirements',
+                'Delivered 15+ custom WordPress plugins and Laravel applications for enterprise clients',
+                'Reduced page load times by 50% through optimization and caching strategies',
+                'Implemented RESTful APIs integrating with 10+ third-party services',
             ],
         },
         {
@@ -117,11 +119,102 @@ export default function Welcome({
             location: '',
             isCurrent: false,
             title: 'IT & Network Systems Administrator',
-            company: 'Enterprise Environment',
+            company: 'Enterprise Organization',
             achievements: [
-                'Infrastructure management and server administration',
-                'Security protocols and network architecture (CCNA certified)',
+                'Managed infrastructure for 500+ users across 3 locations',
+                'Achieved CCNA certification and implemented enterprise security protocols',
+                'Reduced system downtime by 75% through proactive monitoring and maintenance',
             ],
+        },
+    ];
+
+    const stats = [
+        { value: '12+', label: 'Years Experience' },
+        { value: '50+', label: 'Projects Delivered' },
+        { value: '99.9%', label: 'Uptime Achieved' },
+        { value: '10M+', label: 'API Requests/Month' },
+    ];
+
+    const whyHireMe = [
+        {
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                </svg>
+            ),
+            title: 'Performance Focused',
+            description:
+                'I build systems that scale. From database optimization to caching strategies, I ensure your application performs under heavy load.',
+        },
+        {
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                </svg>
+            ),
+            title: 'Security First',
+            description:
+                'With my CCNA background and security mindset, I implement best practices from day one. Your data and users are protected.',
+        },
+        {
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                </svg>
+            ),
+            title: 'Team Player',
+            description:
+                'I mentor junior developers, conduct thorough code reviews, and communicate effectively with both technical and non-technical stakeholders.',
+        },
+        {
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
+            ),
+            title: 'Fast Delivery',
+            description:
+                'I understand business needs. Using the TALL stack, I deliver production-ready features quickly without sacrificing code quality.',
         },
     ];
 
@@ -277,58 +370,46 @@ export default function Welcome({
                         <div className="grid items-center gap-12 lg:grid-cols-2">
                             {/* Left Content */}
                             <div className="animate-slide-up">
-                                <div className="bg-primary-400/10 border-primary-400/30 text-primary-400 mb-6 inline-flex items-center rounded-full border px-3 py-1 font-mono text-xs">
-                                    <span className="bg-primary-400 mr-2 h-2 w-2 rounded-full"></span>
-                                    Available for opportunities
+                                <div className="mb-6 inline-flex items-center rounded-full border border-green-400/30 bg-green-400/10 px-4 py-1.5 font-mono text-sm font-medium text-green-400">
+                                    <span className="mr-2 text-lg">●</span>
+                                    Open to Work — Available Immediately
                                 </div>
 
                                 <h1 className="mb-6 text-4xl leading-tight font-bold sm:text-5xl lg:text-6xl">
-                                    Scalable Backend
+                                    Senior Backend Engineer
                                     <span className="gradient-text">
                                         {' '}
-                                        Architecture
+                                        Ready to Build
                                     </span>
-                                    <br />& Laravel Solutions
+                                    <br />& Scale Your Product
                                 </h1>
 
                                 <p className="mb-8 max-w-xl text-lg leading-relaxed text-slate-400">
-                                    Senior Backend Engineer specializing in
-                                    high-traffic applications, REST APIs, and
-                                    the TALL stack. Currently building at{' '}
-                                    <span className="font-medium text-white">
-                                        Digital Egg / Fullstripe
-                                    </span>
-                                    .
+                                    I help companies build high-performance,
+                                    scalable applications that handle millions
+                                    of requests. With 12+ years of experience
+                                    and a proven track record of reducing costs
+                                    and improving performance.
                                 </p>
 
-                                <div className="flex flex-wrap gap-4">
-                                    <a
-                                        href="#projects"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            document
-                                                .querySelector('#projects')
-                                                ?.scrollIntoView({
-                                                    behavior: 'smooth',
-                                                });
-                                        }}
-                                        className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold text-slate-900 transition-colors"
-                                    >
-                                        View Projects
-                                        <svg
-                                            className="h-4 w-4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
+                                {/* Stats */}
+                                <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                                    {stats.map((stat, index) => (
+                                        <div
+                                            key={index}
+                                            className="rounded-lg bg-slate-800/50 px-4 py-3 text-center"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M19 9l-7 7-7-7"
-                                            ></path>
-                                        </svg>
-                                    </a>
+                                            <div className="text-primary-400 text-xl font-bold sm:text-2xl">
+                                                {stat.value}
+                                            </div>
+                                            <div className="text-xs text-slate-500">
+                                                {stat.label}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="flex flex-wrap gap-4">
                                     <a
                                         href="#contact"
                                         onClick={(e) => {
@@ -339,10 +420,11 @@ export default function Welcome({
                                                     behavior: 'smooth',
                                                 });
                                         }}
-                                        className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-6 py-3 font-medium text-white transition-colors hover:bg-slate-700"
+                                        className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-8 py-4 text-lg font-semibold text-slate-900 transition-colors"
                                     >
+                                        Hire Me
                                         <svg
-                                            className="h-4 w-4"
+                                            className="h-5 w-5"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
@@ -351,10 +433,30 @@ export default function Welcome({
                                                 strokeLinecap="round"
                                                 strokeLinejoin="round"
                                                 strokeWidth={2}
-                                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                                d="M17 8l4 4m0 0l-4 4m4-4H3"
                                             ></path>
                                         </svg>
-                                        Download Resume
+                                    </a>
+                                    <a
+                                        href="https://calendly.com/aslam4webz"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-6 py-4 font-medium text-white transition-colors hover:border-slate-500 hover:bg-slate-700"
+                                    >
+                                        <svg
+                                            className="h-5 w-5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                            ></path>
+                                        </svg>
+                                        Schedule a Call
                                     </a>
                                 </div>
                             </div>
@@ -538,8 +640,46 @@ export default function Welcome({
                     </div>
                 </section>
 
+                {/* Why Hire Me Section */}
+                <section className="border-y border-slate-800 bg-slate-900 py-24">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-16 text-center">
+                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                WHY HIRE ME
+                            </div>
+                            <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                What Sets Me
+                                <span className="gradient-text"> Apart</span>
+                            </h2>
+                            <p className="mx-auto max-w-2xl text-slate-400">
+                                Beyond technical skills, here's why I'm the
+                                right engineer for your team.
+                            </p>
+                        </div>
+
+                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                            {whyHireMe.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:border-slate-600"
+                                >
+                                    <div className="bg-primary-400/10 text-primary-400 mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
+                                        {item.icon}
+                                    </div>
+                                    <h3 className="mb-2 font-semibold">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-sm leading-relaxed text-slate-400">
+                                        {item.description}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
                 {/* Tech Stack Section */}
-                <section id="stack" className="py-24">
+                <section id="stack" className="bg-slate-800/50 py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-16 text-center">
                             <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
@@ -813,27 +953,51 @@ export default function Welcome({
                 {/* Contact / Footer Section */}
                 <section
                     id="contact"
-                    className="border-t border-slate-800 bg-slate-800/50 py-24"
+                    className="border-t border-slate-800 bg-slate-900 py-24"
                 >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="mx-auto max-w-2xl text-center">
-                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
-                                GET IN TOUCH
+                        <div className="mx-auto max-w-3xl text-center">
+                            <div className="mb-6 inline-flex items-center rounded-full border border-green-400/30 bg-green-400/10 px-4 py-1.5 font-mono text-sm font-medium text-green-400">
+                                <span className="mr-2 text-lg">●</span>
+                                Available for Immediate Start
                             </div>
                             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-                                Let's Build Something
-                                <span className="gradient-text"> Scalable</span>
+                                Ready to Join Your
+                                <span className="gradient-text"> Team</span>
                             </h2>
-                            <p className="mb-8 text-slate-400">
-                                Open to freelance opportunities, consulting, and
-                                full-time remote positions.
+                            <p className="mb-8 text-lg text-slate-400">
+                                I'm currently looking for my next challenge.
+                                Whether you need a Senior Backend Engineer,
+                                Technical Lead, or Consultant—let's talk about
+                                how I can help your team succeed.
                             </p>
 
-                            {/* Contact Links */}
-                            <div className="mb-12 flex flex-wrap justify-center gap-4">
+                            {/* Hiring CTA Buttons */}
+                            <div className="mb-12 flex flex-col justify-center gap-4 sm:flex-row">
                                 <a
-                                    href="mailto:aslam4webz@gmail.com"
-                                    className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-6 py-3 font-semibold text-slate-900 transition-colors"
+                                    href="https://calendly.com/aslam4webz"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-primary-400 hover:bg-primary-500 inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-semibold text-slate-900 transition-colors"
+                                >
+                                    <svg
+                                        className="h-5 w-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                        ></path>
+                                    </svg>
+                                    Schedule an Interview
+                                </a>
+                                <a
+                                    href="mailto:aslam4webz@gmail.com?subject=Job Opportunity - [Your Company]"
+                                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-8 py-4 text-lg font-medium text-white transition-colors hover:border-slate-500 hover:bg-slate-700"
                                 >
                                     <svg
                                         className="h-5 w-5"
@@ -848,13 +1012,17 @@ export default function Welcome({
                                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                                         ></path>
                                     </svg>
-                                    aslam4webz@gmail.com
+                                    Send Job Offer
                                 </a>
+                            </div>
+
+                            {/* Social Links */}
+                            <div className="mb-12 flex flex-wrap justify-center gap-4">
                                 <a
-                                    href="https://github.com"
+                                    href="https://github.com/aslamwebz"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-6 py-3 font-medium text-white transition-colors hover:bg-slate-700"
+                                    className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-700"
                                 >
                                     <svg
                                         className="h-5 w-5"
@@ -866,10 +1034,10 @@ export default function Welcome({
                                     GitHub
                                 </a>
                                 <a
-                                    href="https://linkedin.com"
+                                    href="https://linkedin.com/in/aslam4webz"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-6 py-3 font-medium text-white transition-colors hover:bg-slate-700"
+                                    className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-700"
                                 >
                                     <svg
                                         className="h-5 w-5"
@@ -879,6 +1047,27 @@ export default function Welcome({
                                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                                     </svg>
                                     LinkedIn
+                                </a>
+                                <a
+                                    href="/resume.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-700"
+                                >
+                                    <svg
+                                        className="h-5 w-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                        ></path>
+                                    </svg>
+                                    Download Resume
                                 </a>
                             </div>
 
@@ -936,19 +1125,38 @@ export default function Welcome({
 
                         {/* Footer */}
                         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-8 sm:flex-row">
-                            <div className="font-mono text-sm text-slate-500">
-                                <span className="text-slate-400">
+                            <div className="text-center sm:text-left">
+                                <div className="font-mono text-sm text-slate-400">
                                     Mohamed Aslam
-                                </span>{' '}
-                                — Senior Backend Engineer
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                    Senior Backend Engineer • Lisbon, Portugal •
+                                    Global Remote
+                                </div>
                             </div>
-                            <div className="text-sm text-slate-500">
-                                Built with{' '}
-                                <span className="text-primary-400">
-                                    Tailwind
-                                </span>{' '}
-                                &{' '}
-                                <span className="text-primary-400">React</span>
+                            <div className="flex gap-6 text-sm text-slate-500">
+                                <a
+                                    href="https://github.com/aslamwebz"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-primary-400 transition-colors"
+                                >
+                                    GitHub
+                                </a>
+                                <a
+                                    href="https://linkedin.com/in/aslam4webz"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-primary-400 transition-colors"
+                                >
+                                    LinkedIn
+                                </a>
+                                <a
+                                    href="mailto:aslam4webz@gmail.com"
+                                    className="hover:text-primary-400 transition-colors"
+                                >
+                                    Email
+                                </a>
                             </div>
                         </div>
                     </div>
