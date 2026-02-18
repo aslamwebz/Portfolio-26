@@ -127,70 +127,104 @@ export default function Welcome({
 
     const projects = [
         {
-            icon: (
-                <svg
-                    className="h-8 w-8 text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    ></path>
-                </svg>
-            ),
-            category: 'API Architecture',
-            title: 'High-Traffic API Architecture',
+            id: 9,
+            title: 'Shad Admin',
             description:
-                'Designed secure REST APIs for mobile/web platforms with role-based permissions, rate limiting, and comprehensive audit logging using Laravel Nova & Filament.',
-            tags: ['Laravel', 'REST API', 'RBAC'],
+                'A premium admin dashboard built with Vue 3, Vite, Pinia, and Tailwind CSS, powered by shadcn-vue for reusable components and elegant UI design.',
+            link: 'https://webz-admin.vercel.app/',
+            image: '/img/webzadmin.png',
+            github: 'https://github.com/aslamwebz/webz-admin',
+            technologies: [
+                'Vue',
+                'Vite',
+                'Tailwindcss',
+                'Shadvue CDN',
+                'Pinia',
+            ],
+            category: 'Vue',
         },
         {
-            icon: (
-                <svg
-                    className="h-8 w-8 text-green-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                    ></path>
-                </svg>
-            ),
-            category: 'Payment Systems',
-            title: 'Payment & Notification Systems',
+            id: 8,
+            title: 'Vanguard-co',
             description:
-                'Integrated complex payment gateways (Stripe, PayPal) with webhook handling, retry logic, and real-time notification systems for SaaS platforms.',
-            tags: ['Stripe', 'Webhooks', 'Queues'],
+                "Vanguard & Co. — A refined, modern e-commerce site showcasing premium men's watches and accessories through an elegant, minimalist interface.",
+            link: 'https://vanguard-co.vercel.app/',
+            image: '/img/vanguard.png',
+            github: 'https://github.com/aslamwebz/Vanguard',
+            technologies: ['React', 'Next Js', 'Tailwindcss'],
+            category: 'React',
         },
         {
-            icon: (
-                <svg
-                    className="h-8 w-8 text-purple-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                    ></path>
-                </svg>
-            ),
-            category: 'Refactoring',
-            title: 'System Refactoring',
+            id: 7,
+            title: 'PennyPilot',
             description:
-                'Refactored legacy codebases to improve deployment stability, test coverage, and maintainability. Reduced bug reports by 40% and improved deployment frequency.',
-            tags: ['Testing', 'CI/CD', 'Docker'],
+                'PennyPilot-X — An intuitive, modern expense tracking web app designed to help users manage their personal finances effortlessly.',
+            link: 'https://pennypilot-x.vercel.app/',
+            image: '/img/penny_pilot.png',
+            github: 'https://github.com/aslamwebz/Penny-Pilot',
+            technologies: ['React', 'Next Js', 'Typescript', 'Tailwindcss'],
+            category: 'React',
+        },
+        {
+            id: 6,
+            title: 'Sentinel Solutions',
+            description:
+                'Sentinel Solutions — A modern, professional website for a full-spectrum security firm, designed to convey trust, readiness, and high-level expertise.',
+            link: 'https://sentinel-solutions.vercel.app',
+            image: '/img/sentinel.png',
+            github: 'https://github.com/aslamwebz/Sentinel-Solutions',
+            technologies: ['React', 'vite', 'tailwindcss', 'css3'],
+            category: 'React',
+        },
+        {
+            id: 5,
+            title: 'Wine Dine',
+            description:
+                'Wine & Dine — A modern, elegant restaurant website that captures the upscale ambiance of a vineyard-based fine dining venue.',
+            link: 'https://wine-dine.vercel.app/',
+            image: '/img/wine-dine.png',
+            github: 'https://github.com/aslamwebz/wine-dine',
+            technologies: [
+                'vite',
+                'Typescript',
+                'React',
+                'shadcdn-ui',
+                'tailwind css',
+            ],
+            category: 'React',
+        },
+        {
+            id: 1,
+            title: 'Hearty Meal',
+            description:
+                'An innovative food ordering platform that connects local restaurants with hungry customers. Features include real-time order tracking, customizable menus, and a seamless checkout process.',
+            link: null,
+            image: '/img/hm-main.png',
+            github: 'https://github.com/aslamwebz/Portfolio/tree/main/resources/js/Pages/HeartyMeal',
+            technologies: ['php', 'laravel', 'vue', 'tailwind'],
+            category: 'Vue',
+        },
+        {
+            id: 3,
+            title: 'AI Projects',
+            description:
+                'A collection of AI projects using Python and Crew AI that use AI to enhance functionality and user experiences.',
+            link: null,
+            image: '/img/ai-main.png',
+            github: 'https://github.com/aslamwebz/ai',
+            technologies: ['python', 'crewai', 'Ollama', 'openai', 'streamlit'],
+            category: 'AI',
+        },
+        {
+            id: 4,
+            title: 'AI Laravel Projects',
+            description:
+                'A collection of Laravel projects that use AI to enhance functionality and user experiences.',
+            link: '/ai',
+            image: '/img/ai-main.png',
+            github: 'https://github.com/aslamwebz/Portfolio/blob/dev/app/Http/Controllers/AIController.php',
+            technologies: ['laravel', 'vue', 'openai', 'tailwind'],
+            category: 'AI',
         },
     ];
 
@@ -549,8 +583,103 @@ export default function Welcome({
                     </div>
                 </section>
 
+                {/* Projects Section */}
+                <section id="projects" className="bg-slate-800/50 py-24">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-16 text-center">
+                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                CASE STUDIES
+                            </div>
+                            <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                Featured
+                                <span className="gradient-text"> Projects</span>
+                            </h2>
+                            <p className="mx-auto max-w-2xl text-slate-400">
+                                A collection of projects I've built, showcasing
+                                my expertise in full-stack development, AI
+                                integration, and modern web technologies.
+                            </p>
+                        </div>
+
+                        <div className="grid gap-6 md:grid-cols-3">
+                            {projects.map((project) => (
+                                <div
+                                    key={project.id}
+                                    className="hover:border-primary-400/50 group overflow-hidden rounded-xl border border-slate-700 bg-slate-800 transition-all"
+                                >
+                                    <div className="relative h-48 overflow-hidden bg-slate-900">
+                                        <div className="to-primary-400/20 absolute inset-0 bg-gradient-to-br from-blue-500/20"></div>
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="text-center">
+                                                <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 transition-transform group-hover:scale-110">
+                                                    <svg
+                                                        className="text-primary-400 h-8 w-8"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                                                        ></path>
+                                                    </svg>
+                                                </div>
+                                                <div className="font-mono text-xs text-slate-500">
+                                                    {project.category}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="mb-2 text-lg font-semibold">
+                                            {project.title}
+                                        </h3>
+                                        <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-400">
+                                            {project.description}
+                                        </p>
+                                        <div className="mb-4 flex flex-wrap gap-2">
+                                            {project.technologies
+                                                .slice(0, 4)
+                                                .map((tech) => (
+                                                    <span
+                                                        key={tech}
+                                                        className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-400"
+                                                    >
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                        </div>
+                                        <div className="flex gap-3">
+                                            {project.link && (
+                                                <a
+                                                    href={project.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+                                                >
+                                                    Live Demo →
+                                                </a>
+                                            )}
+                                            <a
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-sm font-medium text-slate-400 hover:text-white"
+                                            >
+                                                GitHub →
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
                 {/* Experience Section */}
-                <section id="experience" className="bg-slate-800/50 py-24">
+                <section id="experience" className="py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-16 text-center">
                             <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
@@ -634,70 +763,6 @@ export default function Welcome({
                                                     ),
                                                 )}
                                             </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Projects Section */}
-                <section id="projects" className="py-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="mb-16 text-center">
-                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
-                                CASE STUDIES
-                            </div>
-                            <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-                                Backend
-                                <span className="gradient-text">
-                                    {' '}
-                                    Architectures
-                                </span>
-                            </h2>
-                            <p className="mx-auto max-w-2xl text-slate-400">
-                                Backend systems don't screenshot well. Here are
-                                the architectures I've designed and the problems
-                                I've solved.
-                            </p>
-                        </div>
-
-                        <div className="grid gap-6 md:grid-cols-3">
-                            {projects.map((project, index) => (
-                                <div
-                                    key={index}
-                                    className="hover:border-primary-400/50 group overflow-hidden rounded-xl border border-slate-700 bg-slate-800 transition-all"
-                                >
-                                    <div className="relative h-48 overflow-hidden bg-slate-900">
-                                        <div className="to-primary-400/20 absolute inset-0 bg-gradient-to-br from-blue-500/20"></div>
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="text-center">
-                                                <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 transition-transform group-hover:scale-110">
-                                                    {project.icon}
-                                                </div>
-                                                <div className="font-mono text-xs text-slate-500">
-                                                    {project.category}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="p-6">
-                                        <h3 className="mb-2 text-lg font-semibold">
-                                            {project.title}
-                                        </h3>
-                                        <p className="mb-4 text-sm leading-relaxed text-slate-400">
-                                            {project.description}
-                                        </p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tags.map((tag) => (
-                                                <span
-                                                    key={tag}
-                                                    className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-400"
-                                                >
-                                                    {tag}
-                                                </span>
-                                            ))}
                                         </div>
                                     </div>
                                 </div>
