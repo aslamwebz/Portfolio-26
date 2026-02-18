@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from '@inertiajs/react';
 
 interface NavigationProps {
@@ -10,14 +10,22 @@ interface NavigationProps {
 export default function Navigation({ auth }: NavigationProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const ticking = useRef(false);
+
+    const handleScroll = useCallback(() => {
+        if (!ticking.current) {
+            window.requestAnimationFrame(() => {
+                setScrolled(window.pageYOffset > 20);
+                ticking.current = false;
+            });
+            ticking.current = true;
+        }
+    }, []);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.pageYOffset > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [handleScroll]);
 
     const navLinks = [
         { href: '#about', label: 'About' },

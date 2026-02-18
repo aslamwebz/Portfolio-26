@@ -145,6 +145,7 @@
 
     html {
         scroll-behavior: smooth;
+        overscroll-behavior: none;
     }
 
     /* Custom scrollbar */
@@ -189,10 +190,24 @@
 
     .animate-slide-up {
         animation: slideUp 0.6s ease-out;
+        will-change: transform, opacity;
     }
 
     .animate-fade-in {
         animation: fadeIn 0.5s ease-out;
+        will-change: opacity;
+    }
+
+    /* Performance optimization for fixed elements */
+    .fixed {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
+    /* Optimize backdrop blur for performance */
+    .backdrop-blur-md,
+    .backdrop-blur-sm {
+        transform: translateZ(0);
     }
 }
 
