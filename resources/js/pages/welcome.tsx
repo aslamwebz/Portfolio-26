@@ -618,7 +618,7 @@ export default function Welcome({
                         </div>
 
                         <div className="grid gap-6 md:grid-cols-3">
-                            {projects.map((project) => (
+                            {projects.slice(0, 3).map((project) => (
                                 <div
                                     key={project.id}
                                     className="hover:border-primary-400/50 group overflow-hidden rounded-xl border border-slate-700 bg-slate-800 transition-all"
@@ -690,6 +690,29 @@ export default function Welcome({
                                     </div>
                                 </div>
                             ))}
+                        </div>
+
+                        {/* More Projects Link */}
+                        <div className="mt-12 text-center">
+                            <a
+                                href="/projects"
+                                className="bg-primary-400/10 text-primary-400 border-primary-400/30 hover:bg-primary-400/20 inline-flex items-center gap-2 rounded-lg border px-6 py-3 font-medium transition-all"
+                            >
+                                View All Projects
+                                <svg
+                                    className="h-4 w-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    ></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </section>
