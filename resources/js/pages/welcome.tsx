@@ -1,6 +1,8 @@
 import { Head, usePage } from '@inertiajs/react';
 import Terminal from '@/components/terminal';
 import Navigation from '@/components/navigation';
+import Particles from '@/components/particles';
+import { Reveal } from '@/components/reveal';
 
 export default function Welcome({
     canRegister = true,
@@ -354,6 +356,9 @@ export default function Welcome({
 
                 {/* Hero Section */}
                 <section className="relative flex min-h-screen items-center overflow-hidden pt-16">
+                    {/* Particles Background */}
+                    <Particles />
+
                     {/* Background Grid - simplified */}
                     <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
                         <div
@@ -365,6 +370,9 @@ export default function Welcome({
                             }}
                         ></div>
                     </div>
+
+                    {/* Gradient glow behind terminal */}
+                    <div className="bg-primary-400/10 pointer-events-none absolute top-1/2 right-0 h-[600px] w-[600px] translate-x-1/4 -translate-y-1/2 rounded-full blur-[120px]"></div>
 
                     <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
                         <div className="grid w-full items-start gap-12 lg:grid-cols-2">
@@ -643,36 +651,43 @@ export default function Welcome({
                 {/* Why Hire Me Section */}
                 <section className="border-y border-slate-800 bg-slate-900 py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="mb-16 text-center">
-                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
-                                WHY HIRE ME
+                        <Reveal>
+                            <div className="mb-16 text-center">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                    WHY HIRE ME
+                                </div>
+                                <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                    What Sets Me
+                                    <span className="gradient-text">
+                                        {' '}
+                                        Apart
+                                    </span>
+                                </h2>
+                                <p className="mx-auto max-w-2xl text-slate-400">
+                                    Beyond technical skills, here's why I'm the
+                                    right engineer for your team.
+                                </p>
                             </div>
-                            <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-                                What Sets Me
-                                <span className="gradient-text"> Apart</span>
-                            </h2>
-                            <p className="mx-auto max-w-2xl text-slate-400">
-                                Beyond technical skills, here's why I'm the
-                                right engineer for your team.
-                            </p>
-                        </div>
+                        </Reveal>
 
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                             {whyHireMe.map((item, index) => (
-                                <div
+                                <Reveal
                                     key={index}
-                                    className="rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:border-slate-600"
+                                    delay={index as 0 | 1 | 2 | 3}
                                 >
-                                    <div className="bg-primary-400/10 text-primary-400 mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-                                        {item.icon}
+                                    <div className="card-hover group hover:border-primary-400/30 rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:bg-slate-800">
+                                        <div className="bg-primary-400/10 text-primary-400 mb-4 flex h-12 w-12 items-center justify-center rounded-lg transition-transform group-hover:scale-110">
+                                            {item.icon}
+                                        </div>
+                                        <h3 className="mb-2 font-semibold transition-colors group-hover:text-white">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-sm leading-relaxed text-slate-400">
+                                            {item.description}
+                                        </p>
                                     </div>
-                                    <h3 className="mb-2 font-semibold">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-sm leading-relaxed text-slate-400">
-                                        {item.description}
-                                    </p>
-                                </div>
+                                </Reveal>
                             ))}
                         </div>
                     </div>
@@ -700,28 +715,30 @@ export default function Welcome({
                         </div>
 
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                            {techStack.map((stack) => (
-                                <div
+                            {techStack.map((stack, index) => (
+                                <Reveal
                                     key={stack.title}
-                                    className="hover:border-primary-400/50 group rounded-xl border border-slate-700 bg-slate-800 p-6 transition-colors"
+                                    delay={index as 0 | 1 | 2 | 3}
                                 >
-                                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 transition-transform group-hover:scale-110">
-                                        {stack.icon}
+                                    <div className="card-hover group hover:border-primary-400/30 rounded-xl border border-slate-700 bg-slate-800 p-6 transition-all">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 transition-all group-hover:scale-110 group-hover:bg-blue-500/20">
+                                            {stack.icon}
+                                        </div>
+                                        <h3 className="mb-3 font-semibold transition-colors group-hover:text-white">
+                                            {stack.title}
+                                        </h3>
+                                        <div className="flex flex-wrap gap-2">
+                                            {stack.tags.map((tag) => (
+                                                <span
+                                                    key={tag}
+                                                    className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-300 transition-colors group-hover:bg-slate-700"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
-                                    <h3 className="mb-3 font-semibold">
-                                        {stack.title}
-                                    </h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {stack.tags.map((tag) => (
-                                            <span
-                                                key={tag}
-                                                className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-300"
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
+                                </Reveal>
                             ))}
                         </div>
 
@@ -758,77 +775,79 @@ export default function Welcome({
                         </div>
 
                         <div className="grid gap-6 md:grid-cols-3">
-                            {projects.slice(0, 3).map((project) => (
-                                <div
+                            {projects.slice(0, 3).map((project, index) => (
+                                <Reveal
                                     key={project.id}
-                                    className="hover:border-primary-400/50 group overflow-hidden rounded-xl border border-slate-700 bg-slate-800 transition-all"
+                                    delay={index as 0 | 1 | 2}
                                 >
-                                    <div className="relative h-48 overflow-hidden bg-slate-900">
-                                        <div className="to-primary-400/20 absolute inset-0 bg-gradient-to-br from-blue-500/20"></div>
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="text-center">
-                                                <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 transition-transform group-hover:scale-110">
-                                                    <svg
-                                                        className="text-primary-400 h-8 w-8"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth={2}
-                                                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                                                        ></path>
-                                                    </svg>
-                                                </div>
-                                                <div className="font-mono text-xs text-slate-500">
-                                                    {project.category}
+                                    <div className="card-hover group hover:border-primary-400/30 overflow-hidden rounded-xl border border-slate-700 bg-slate-800 transition-all">
+                                        <div className="relative h-48 overflow-hidden bg-slate-900">
+                                            <div className="to-primary-400/20 absolute inset-0 bg-gradient-to-br from-blue-500/20 transition-opacity group-hover:opacity-75"></div>
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <div className="text-center">
+                                                    <div className="group-hover:border-primary-400/30 mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 transition-all group-hover:scale-110">
+                                                        <svg
+                                                            className="text-primary-400 h-8 w-8"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                                                            ></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div className="font-mono text-xs text-slate-500">
+                                                        {project.category}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="p-6">
-                                        <h3 className="mb-2 text-lg font-semibold">
-                                            {project.title}
-                                        </h3>
-                                        <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-400">
-                                            {project.description}
-                                        </p>
-                                        <div className="mb-4 flex flex-wrap gap-2">
-                                            {project.technologies
-                                                .slice(0, 4)
-                                                .map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-400"
+                                        <div className="p-6">
+                                            <h3 className="mb-2 text-lg font-semibold transition-colors group-hover:text-white">
+                                                {project.title}
+                                            </h3>
+                                            <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-400">
+                                                {project.description}
+                                            </p>
+                                            <div className="mb-4 flex flex-wrap gap-2">
+                                                {project.technologies
+                                                    .slice(0, 4)
+                                                    .map((tech) => (
+                                                        <span
+                                                            key={tech}
+                                                            className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-400 transition-colors group-hover:bg-slate-700"
+                                                        >
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                            </div>
+                                            <div className="flex gap-3">
+                                                {project.link && (
+                                                    <a
+                                                        href={project.link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-primary-400 hover:text-primary-300 text-sm font-medium"
                                                     >
-                                                        {tech}
-                                                    </span>
-                                                ))}
-                                        </div>
-                                        <div className="flex gap-3">
-                                            {project.link && (
+                                                        Live Demo →
+                                                    </a>
+                                                )}
                                                 <a
-                                                    href={project.link}
+                                                    href={project.github}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+                                                    className="text-sm font-medium text-slate-400 hover:text-white"
                                                 >
-                                                    Live Demo →
+                                                    GitHub →
                                                 </a>
-                                            )}
-                                            <a
-                                                href={project.github}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-sm font-medium text-slate-400 hover:text-white"
-                                            >
-                                                GitHub →
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Reveal>
                             ))}
                         </div>
 
