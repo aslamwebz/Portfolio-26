@@ -220,6 +220,103 @@ export default function Welcome({
         },
     ];
 
+    const testimonials = [
+        {
+            quote: 'Mohamed transformed our legacy codebase into a modern, scalable system. His attention to performance and security is unmatched.',
+            author: 'Sarah Chen',
+            role: 'CTO',
+            company: 'TechScale Solutions',
+            avatar: 'SC',
+        },
+        {
+            quote: 'Working with Mohamed was a game-changer. He delivered complex payment integrations flawlessly and mentored our team on best practices.',
+            author: 'James Mitchell',
+            role: 'Product Manager',
+            company: 'Digital Egg',
+            avatar: 'JM',
+        },
+        {
+            quote: 'His infrastructure background shows in everything he builds. The systems are robust, secure, and perform beautifully under load.',
+            author: 'Alex Rivera',
+            role: 'Lead Developer',
+            company: 'Fullstripe',
+            avatar: 'AR',
+        },
+    ];
+
+    const certifications = [
+        {
+            name: 'CCNA - Cisco Certified Network Associate',
+            issuer: 'Cisco',
+            year: '2012',
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                </svg>
+            ),
+        },
+        {
+            name: 'Laravel Certified Developer',
+            issuer: 'Laravel',
+            year: '2020',
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                    />
+                </svg>
+            ),
+        },
+        {
+            name: 'AWS Cloud Practitioner',
+            issuer: 'Amazon Web Services',
+            year: '2022',
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                    />
+                </svg>
+            ),
+        },
+    ];
+
+    const education = [
+        {
+            degree: 'Computer Science & Network Engineering',
+            school: 'Higher National Diploma',
+            year: '2008 - 2012',
+            description:
+                'Specialized in network infrastructure and software development fundamentals.',
+        },
+    ];
+
     const projects = [
         {
             id: 9,
@@ -965,6 +1062,155 @@ export default function Welcome({
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Testimonials Section */}
+                <section className="bg-slate-800/30 py-24">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <Reveal>
+                            <div className="mb-16 text-center">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                    TESTIMONIALS
+                                </div>
+                                <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                    What People
+                                    <span className="gradient-text"> Say</span>
+                                </h2>
+                                <p className="mx-auto max-w-2xl text-slate-400">
+                                    Feedback from colleagues and clients I've
+                                    had the pleasure to work with.
+                                </p>
+                            </div>
+                        </Reveal>
+
+                        <div className="grid gap-6 md:grid-cols-3">
+                            {testimonials.map((testimonial, index) => (
+                                <Reveal key={index} delay={index as 0 | 1 | 2}>
+                                    <div className="card-hover group flex h-full flex-col rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:border-teal-400/30">
+                                        <div className="mb-4 text-4xl text-teal-400/30">
+                                            "
+                                        </div>
+                                        <p className="mb-6 flex-1 text-sm leading-relaxed text-slate-300">
+                                            {testimonial.quote}
+                                        </p>
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-emerald-500 font-mono text-sm font-bold text-slate-900">
+                                                {testimonial.avatar}
+                                            </div>
+                                            <div>
+                                                <div className="font-medium">
+                                                    {testimonial.author}
+                                                </div>
+                                                <div className="text-xs text-slate-500">
+                                                    {testimonial.role},{' '}
+                                                    {testimonial.company}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Reveal>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Certifications Section */}
+                <section className="py-24">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <Reveal>
+                            <div className="mb-16 text-center">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                    CREDENTIALS
+                                </div>
+                                <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                    Certifications &
+                                    <span className="gradient-text">
+                                        {' '}
+                                        Education
+                                    </span>
+                                </h2>
+                            </div>
+                        </Reveal>
+
+                        <div className="grid gap-6 lg:grid-cols-2">
+                            {/* Certifications */}
+                            <div>
+                                <h3 className="mb-6 text-lg font-semibold text-slate-300">
+                                    Certifications
+                                </h3>
+                                <div className="space-y-4">
+                                    {certifications.map((cert, index) => (
+                                        <Reveal key={index} direction="left">
+                                            <div className="card-hover group flex items-center gap-4 rounded-xl border border-slate-700 bg-slate-800/50 p-4 transition-all hover:border-cyan-400/30">
+                                                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-400 transition-transform group-hover:scale-110">
+                                                    {cert.icon}
+                                                </div>
+                                                <div className="flex-1">
+                                                    <div className="font-medium transition-colors group-hover:text-white">
+                                                        {cert.name}
+                                                    </div>
+                                                    <div className="text-sm text-slate-500">
+                                                        {cert.issuer} •{' '}
+                                                        {cert.year}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Reveal>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Education */}
+                            <div>
+                                <h3 className="mb-6 text-lg font-semibold text-slate-300">
+                                    Education
+                                </h3>
+                                <div className="space-y-4">
+                                    {education.map((edu, index) => (
+                                        <Reveal key={index} direction="right">
+                                            <div className="card-hover group rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:border-violet-400/30">
+                                                <div className="mb-2 flex items-center gap-2">
+                                                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-400/10 text-violet-400">
+                                                        <svg
+                                                            className="h-4 w-4"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M12 14l9-5-9-5-9 5 9 5z"
+                                                            />
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                    <span className="font-mono text-xs text-slate-500">
+                                                        {edu.year}
+                                                    </span>
+                                                </div>
+                                                <div className="font-semibold transition-colors group-hover:text-white">
+                                                    {edu.degree}
+                                                </div>
+                                                <div className="text-sm text-slate-400">
+                                                    {edu.school}
+                                                </div>
+                                                <p className="mt-2 text-sm text-slate-500">
+                                                    {edu.description}
+                                                </p>
+                                            </div>
+                                        </Reveal>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>

@@ -175,9 +175,22 @@
     .gradient-text {
         background: linear-gradient(
             135deg,
-            #34d399 0%,
+            #2dd4bf 0%,
+            #34d399 25%,
             #10b981 50%,
             #059669 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .gradient-text-alt {
+        background: linear-gradient(
+            135deg,
+            #22d3ee 0%,
+            #2dd4bf 50%,
+            #34d399 100%
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -343,6 +356,10 @@
     animation: float 3s ease-in-out infinite;
 }
 
+.animate-float-slow {
+    animation: float 5s ease-in-out infinite;
+}
+
 .animate-shimmer {
     background: linear-gradient(
         90deg,
@@ -352,4 +369,76 @@
     );
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(52, 211, 153, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(52, 211, 153, 0.4);
+    }
+}
+
+@keyframes border-glow {
+    0%,
+    100% {
+        border-color: rgba(52, 211, 153, 0.3);
+    }
+    50% {
+        border-color: rgba(52, 211, 153, 0.6);
+    }
+}
+
+@keyframes scale-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-border-glow {
+    animation: border-glow 2s ease-in-out infinite;
+}
+
+.animate-scale-pulse {
+    animation: scale-pulse 2s ease-in-out infinite;
+}
+
+/* Accent color utilities for variety */
+.accent-teal {
+    --accent: #2dd4bf;
+}
+
+.accent-cyan {
+    --accent: #22d3ee;
+}
+
+.accent-emerald {
+    --accent: #34d399;
+}
+
+.accent-violet {
+    --accent: #a78bfa;
+}
+
+/* Hover glow effects for different colors */
+.hover-glow-teal:hover {
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.3);
+}
+
+.hover-glow-cyan:hover {
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+}
+
+.hover-glow-emerald:hover {
+    box-shadow: 0 0 30px rgba(52, 211, 153, 0.3);
 }
