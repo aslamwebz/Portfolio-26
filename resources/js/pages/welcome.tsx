@@ -214,6 +214,73 @@ const ProjectCarousel = ({ projects }: { projects: Project[] }) => {
     );
 };
 
+const IconShow = ({ icons }: { icons: { name: string; url: string }[] }) => {
+    return (
+        <div className="relative flex overflow-hidden py-12">
+            <div className="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-16 px-8 whitespace-nowrap">
+                {icons.map((icon, i) => (
+                    <div
+                        key={`${icon.name}-${i}`}
+                        className="group flex flex-col items-center gap-4 transition-all hover:scale-110"
+                    >
+                        <div className="group-hover:border-primary-400/30 relative flex h-20 w-20 items-center justify-center rounded-2xl border border-slate-700/50 bg-slate-800/50 p-4 transition-all group-hover:bg-slate-800">
+                            <img
+                                src={icon.url}
+                                alt={icon.name}
+                                className="h-12 w-12 object-contain transition-all"
+                            />
+                        </div>
+                        <span className="font-mono text-xs font-medium text-slate-500 transition-colors group-hover:text-slate-300">
+                            {icon.name}
+                        </span>
+                    </div>
+                ))}
+            </div>
+            {/* Duplicate for infinite loop */}
+            <div
+                aria-hidden="true"
+                className="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-16 px-8 whitespace-nowrap"
+            >
+                {icons.map((icon, i) => (
+                    <div
+                        key={`${icon.name}-duplicate-${i}`}
+                        className="group flex flex-col items-center gap-4 transition-all hover:scale-110"
+                    >
+                        <div className="group-hover:border-primary-400/30 relative flex h-20 w-20 items-center justify-center rounded-2xl border border-slate-700/50 bg-slate-800/50 p-4 transition-all group-hover:bg-slate-800">
+                            <img
+                                src={icon.url}
+                                alt={icon.name}
+                                className="h-12 w-12 object-contain transition-all"
+                            />
+                        </div>
+                        <span className="font-mono text-xs font-medium text-slate-500 transition-colors group-hover:text-slate-300">
+                            {icon.name}
+                        </span>
+                    </div>
+                ))}
+            </div>
+
+            <style
+                dangerouslySetInnerHTML={{
+                    __html: `
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-100%); }
+                }
+                .animate-marquee {
+                    animation: marquee 40s linear infinite;
+                }
+            `,
+                }}
+            />
+
+            {/* Gradient Mask for edges */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-slate-900 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-slate-900 to-transparent" />
+        </div>
+    );
+};
+
 export default function Welcome({
     canRegister = true,
     dbProjects = [],
@@ -225,26 +292,66 @@ export default function Welcome({
 }) {
     const { auth } = usePage().props;
 
-    const techStack = [
+    const techIcons = [
         {
-            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-laravel-4695747-3903173.png', // Laravel 3D
-            title: 'Core Backend',
-            tags: ['PHP', 'Laravel', 'MySQL', 'Redis'],
+            name: 'PHP',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg',
         },
         {
-            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-react-7578010-6184852.png', // React 3D
-            title: 'Frontend & UI',
-            tags: ['React', 'Inertia.js', 'Tailwind CSS', 'Vue.js'],
+            name: 'Laravel',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg',
         },
         {
-            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-docker-4695749-3903175.png', // Docker 3D
-            title: 'DevOps & Tools',
-            tags: ['Docker', 'Git', 'GitHub Actions', 'Azure'],
+            name: 'MySQL',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg',
         },
         {
-            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-php-7578026-6184868.png', // PHP 3D (to represent and fill space)
-            title: 'Architecture',
-            tags: ['TALL Stack', 'Multi-tenancy', 'REST APIs', 'TDD'],
+            name: 'Redis',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
+        },
+        {
+            name: 'Docker',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+        },
+        {
+            name: 'React',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+        },
+        {
+            name: 'TypeScript',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+        },
+        {
+            name: 'Tailwind CSS',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
+        },
+        {
+            name: 'Vue.js',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg',
+        },
+        {
+            name: 'Linux',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg',
+        },
+        {
+            name: 'Azure',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg',
+        },
+        {
+            name: 'GitHub',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg',
+        },
+        {
+            name: 'Livewire',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/livewire/livewire-original.svg',
+        },
+        {
+            name: 'Alpine.js',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/alpinejs/alpinejs-original.svg',
+        },
+        {
+            name: 'Actions',
+            url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg',
         },
     ];
 
@@ -477,7 +584,7 @@ export default function Welcome({
     const education = [
         {
             degree: 'GCE Ordinary Level',
-            school: 'DCB Mother Tongue School',
+            school: 'DCB',
             year: '1996 - 2008',
             description:
                 'Foundation secondary education in Badulla, Sri Lanka.',
@@ -1012,49 +1119,7 @@ export default function Welcome({
                             </p>
                         </div>
 
-                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                            {techStack.map((stack, index) => (
-                                <Reveal
-                                    key={stack.title}
-                                    delay={index as 0 | 1 | 2 | 3}
-                                >
-                                    <div className="card-hover group hover:border-primary-400/30 rounded-xl border border-slate-700 bg-slate-800 p-6 transition-all">
-                                        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-slate-700/30 p-2 transition-all group-hover:scale-110 group-hover:bg-slate-700/50">
-                                            <img
-                                                src={stack.icon}
-                                                alt={stack.title}
-                                                className="h-12 w-12 object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
-                                            />
-                                        </div>
-                                        <h3 className="mb-3 font-semibold transition-colors group-hover:text-white">
-                                            {stack.title}
-                                        </h3>
-                                        <div className="flex flex-wrap gap-2">
-                                            {stack.tags.map((tag) => (
-                                                <span
-                                                    key={tag}
-                                                    className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-300 transition-colors group-hover:bg-slate-700"
-                                                >
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </Reveal>
-                            ))}
-                        </div>
-
-                        {/* Additional Skills */}
-                        <div className="mt-12 flex flex-wrap justify-center gap-3">
-                            {additionalSkills.map((skill) => (
-                                <span
-                                    key={skill}
-                                    className="rounded-full border border-slate-700 bg-slate-800 px-4 py-2 text-sm text-slate-400"
-                                >
-                                    {skill}
-                                </span>
-                            ))}
-                        </div>
+                        <IconShow icons={techIcons} />
                     </div>
                 </section>
 
