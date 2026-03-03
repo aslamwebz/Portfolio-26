@@ -3,11 +3,45 @@ import Navigation from '@/components/navigation';
 import Particles from '@/components/particles';
 import { Reveal } from '@/components/reveal';
 import Terminal from '@/components/terminal';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
+
+interface DbProject {
+    id: number;
+    title: string;
+    description: string;
+    image: string | null;
+    link: string | null;
+    github: string | null;
+    technologies: string[] | null;
+    category: string;
+    sort_order: number;
+    is_featured: boolean;
+}
+
+interface DbCertification {
+    id: number;
+    name: string;
+    issuer: string;
+    year: string;
+    description: string | null;
+    image: string | null;
+    sort_order: number;
+}
 
 export default function Welcome({
     canRegister = true,
+    dbProjects = [],
+    dbCertifications = [],
 }: {
     canRegister?: boolean;
+    dbProjects?: DbProject[];
+    dbCertifications?: DbCertification[];
 }) {
     const { auth } = usePage().props;
 
@@ -249,6 +283,9 @@ export default function Welcome({
             name: 'CCNA - Cisco Certified Network Associate',
             issuer: 'Cisco',
             year: '2012',
+            description:
+                'Validation of knowledge for fundamental networking concepts, IP connectivity, IP services, security fundamentals, and automation and programmability.',
+            image: '/img/ccna_certificate.png',
             icon: (
                 <svg
                     className="h-6 w-6"
@@ -269,6 +306,9 @@ export default function Welcome({
             name: 'Laravel Certified Developer',
             issuer: 'Laravel',
             year: '2020',
+            description:
+                'Official certification certifying expertise in the Laravel framework, including architectural patterns, Eloquent ORM, security, and application deployment.',
+            image: '/img/laravel_certificate.png',
             icon: (
                 <svg
                     className="h-6 w-6"
@@ -289,6 +329,9 @@ export default function Welcome({
             name: 'AWS Cloud Practitioner',
             issuer: 'Amazon Web Services',
             year: '2022',
+            description:
+                'Foundational understanding of building and operating on the AWS Cloud, including cloud concepts, security, technology, and billing.',
+            image: '/img/aws_certificate.png',
             icon: (
                 <svg
                     className="h-6 w-6"
@@ -419,6 +462,49 @@ export default function Welcome({
             category: 'AI',
         },
     ];
+
+    // Use DB data if available, otherwise fall back to hardcoded data
+    const displayProjects =
+        dbProjects.length > 0
+            ? dbProjects.map((p) => ({
+                  id: p.id,
+                  title: p.title,
+                  description: p.description,
+                  link: p.link,
+                  image: p.image ? `/storage/${p.image}` : '/img/ai-main.png',
+                  github: p.github,
+                  technologies: p.technologies || [],
+                  category: p.category,
+              }))
+            : projects;
+
+    const displayCertifications =
+        dbCertifications.length > 0
+            ? dbCertifications.map((c) => ({
+                  name: c.name,
+                  issuer: c.issuer,
+                  year: c.year,
+                  description: c.description || '',
+                  image: c.image
+                      ? `/storage/${c.image}`
+                      : '/img/ccna_certificate.png',
+                  icon: (
+                      <svg
+                          className="h-6 w-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                      >
+                          <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                          />
+                      </svg>
+                  ),
+              }))
+            : certifications;
 
     const additionalSkills = [
         'PHPUnit',
@@ -1141,108 +1227,29 @@ export default function Welcome({
                                     Certifications
                                 </h3>
                                 <div className="grid gap-4 sm:grid-cols-2">
-                                    {certifications.map((cert, index) => (
-                                        <Reveal key={index} direction="left">
-                                            <Dialog>
-                                                <DialogTrigger asChild>
-                                                    <div className="card-hover group cursor-pointer overflow-hidden rounded-xl border border-slate-700 bg-slate-800/50 p-0 transition-all hover:border-cyan-400/30">
-                                                        <div className="relative h-32 w-full overflow-hidden bg-slate-900 sm:h-40">
-                                                            <img
-                                                                src={cert.image}
-                                                                alt={cert.name}
-                                                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                                            />
-                                                            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 transition-opacity group-hover:opacity-100">
-                                                                <div className="rounded-full bg-cyan-400/80 p-2 text-slate-900">
-                                                                    <svg
-                                                                        className="h-5 w-5"
-                                                                        fill="none"
-                                                                        stroke="currentColor"
-                                                                        viewBox="0 0 24 24"
-                                                                    >
-                                                                        <path
-                                                                            strokeLinecap="round"
-                                                                            strokeLinejoin="round"
-                                                                            strokeWidth={
-                                                                                2
-                                                                            }
-                                                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6"
-                                                                        />
-                                                                    </svg>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="p-4">
-                                                            <div className="flex items-center gap-3">
-                                                                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-400">
-                                                                    {cert.icon}
-                                                                </div>
-                                                                <div className="min-w-0">
-                                                                    <div className="truncate font-medium transition-colors group-hover:text-white">
-                                                                        {
-                                                                            cert.name
-                                                                        }
-                                                                    </div>
-                                                                    <div className="text-xs text-slate-500">
-                                                                        {
-                                                                            cert.issuer
-                                                                        }{' '}
-                                                                        •{' '}
-                                                                        {
-                                                                            cert.year
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </DialogTrigger>
-                                                <DialogContent className="max-w-3xl overflow-hidden border-slate-700 bg-slate-900 p-0">
-                                                    <div className="grid md:grid-cols-2">
-                                                        <div className="flex items-center justify-center bg-slate-950 p-2">
-                                                            <img
-                                                                src={cert.image}
-                                                                alt={cert.name}
-                                                                className="h-auto max-h-[70vh] w-full rounded-lg object-contain"
-                                                            />
-                                                        </div>
-                                                        <div className="flex flex-col justify-center p-8">
-                                                            <DialogHeader className="mb-6">
-                                                                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-400">
-                                                                    {cert.icon}
-                                                                </div>
-                                                                <DialogTitle className="text-2xl leading-tight font-bold text-white">
-                                                                    {cert.name}
-                                                                </DialogTitle>
-                                                                <div className="mt-2 font-mono text-sm tracking-wider text-cyan-400 uppercase">
-                                                                    {
-                                                                        cert.issuer
-                                                                    }{' '}
-                                                                    • CertID:{' '}
-                                                                    {cert.year}-
-                                                                    {index +
-                                                                        100}
-                                                                </div>
-                                                            </DialogHeader>
-                                                            <div className="space-y-4">
-                                                                <p className="leading-relaxed text-slate-400">
-                                                                    {
-                                                                        cert.description
+                                    {displayCertifications.map(
+                                        (cert, index) => (
+                                            <Reveal
+                                                key={index}
+                                                direction="left"
+                                            >
+                                                <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <div className="card-hover group cursor-pointer overflow-hidden rounded-xl border border-slate-700 bg-slate-800/50 p-0 transition-all hover:border-cyan-400/30">
+                                                            <div className="relative h-32 w-full overflow-hidden bg-slate-900 sm:h-40">
+                                                                <img
+                                                                    src={
+                                                                        cert.image
                                                                     }
-                                                                </p>
-                                                                <div className="pt-6">
-                                                                    <a
-                                                                        href={
-                                                                            cert.image
-                                                                        }
-                                                                        target="_blank"
-                                                                        className="inline-flex items-center gap-2 rounded-lg bg-cyan-400 px-6 py-2.5 text-sm font-semibold text-slate-900 transition-colors hover:bg-cyan-500"
-                                                                    >
-                                                                        View
-                                                                        Full
-                                                                        Certificate
+                                                                    alt={
+                                                                        cert.name
+                                                                    }
+                                                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                                />
+                                                                <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 transition-opacity group-hover:opacity-100">
+                                                                    <div className="rounded-full bg-cyan-400/80 p-2 text-slate-900">
                                                                         <svg
-                                                                            className="h-4 w-4"
+                                                                            className="h-5 w-5"
                                                                             fill="none"
                                                                             stroke="currentColor"
                                                                             viewBox="0 0 24 24"
@@ -1253,18 +1260,120 @@ export default function Welcome({
                                                                                 strokeWidth={
                                                                                     2
                                                                                 }
-                                                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6"
                                                                             />
                                                                         </svg>
-                                                                    </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="p-4">
+                                                                <div className="flex items-center gap-3">
+                                                                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-400">
+                                                                        {
+                                                                            cert.icon
+                                                                        }
+                                                                    </div>
+                                                                    <div className="min-w-0">
+                                                                        <div className="truncate font-medium transition-colors group-hover:text-white">
+                                                                            {
+                                                                                cert.name
+                                                                            }
+                                                                        </div>
+                                                                        <div className="text-xs text-slate-500">
+                                                                            {
+                                                                                cert.issuer
+                                                                            }{' '}
+                                                                            •{' '}
+                                                                            {
+                                                                                cert.year
+                                                                            }
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </DialogContent>
-                                            </Dialog>
-                                        </Reveal>
-                                    ))}
+                                                    </DialogTrigger>
+                                                    <DialogContent className="max-w-3xl overflow-hidden border-slate-700 bg-slate-900 p-0">
+                                                        <div className="grid md:grid-cols-2">
+                                                            <div className="flex items-center justify-center bg-slate-950 p-2">
+                                                                <img
+                                                                    src={
+                                                                        cert.image
+                                                                    }
+                                                                    alt={
+                                                                        cert.name
+                                                                    }
+                                                                    className="h-auto max-h-[70vh] w-full rounded-lg object-contain"
+                                                                />
+                                                            </div>
+                                                            <div className="flex flex-col justify-center p-8">
+                                                                <DialogHeader className="mb-6">
+                                                                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-400">
+                                                                        {
+                                                                            cert.icon
+                                                                        }
+                                                                    </div>
+                                                                    <DialogTitle className="text-2xl leading-tight font-bold text-white">
+                                                                        {
+                                                                            cert.name
+                                                                        }
+                                                                    </DialogTitle>
+                                                                    <div className="mt-2 font-mono text-sm tracking-wider text-cyan-400 uppercase">
+                                                                        {
+                                                                            cert.issuer
+                                                                        }{' '}
+                                                                        •
+                                                                        CertID:{' '}
+                                                                        {
+                                                                            cert.year
+                                                                        }
+                                                                        -
+                                                                        {index +
+                                                                            100}
+                                                                    </div>
+                                                                </DialogHeader>
+                                                                <div className="space-y-4">
+                                                                    <p className="leading-relaxed text-slate-400">
+                                                                        {
+                                                                            cert.description
+                                                                        }
+                                                                    </p>
+                                                                    <div className="pt-6">
+                                                                        <a
+                                                                            href={
+                                                                                cert.image
+                                                                            }
+                                                                            target="_blank"
+                                                                            className="inline-flex items-center gap-2 rounded-lg bg-cyan-400 px-6 py-2.5 text-sm font-semibold text-slate-900 transition-colors hover:bg-cyan-500"
+                                                                        >
+                                                                            View
+                                                                            Full
+                                                                            Certificate
+                                                                            <svg
+                                                                                className="h-4 w-4"
+                                                                                fill="none"
+                                                                                stroke="currentColor"
+                                                                                viewBox="0 0 24 24"
+                                                                            >
+                                                                                <path
+                                                                                    strokeLinecap="round"
+                                                                                    strokeLinejoin="round"
+                                                                                    strokeWidth={
+                                                                                        2
+                                                                                    }
+                                                                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                                                                />
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </DialogContent>
+                                                </Dialog>
+                                            </Reveal>
+                                        ),
+                                    )}
                                 </div>
                             </div>
 

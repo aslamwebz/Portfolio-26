@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Certification;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -7,6 +9,8 @@ use Laravel\Fortify\Features;
 Route::get('/', function () {
     return Inertia::render('welcome', [
         'canRegister' => Features::enabled(Features::registration()),
+        'dbProjects' => Project::orderBy('sort_order')->get(),
+        'dbCertifications' => Certification::orderBy('sort_order')->get(),
     ]);
 })->name('home');
 
@@ -15,7 +19,9 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/projects', function () {
-    return Inertia::render('projects/index');
+    return Inertia::render('projects/index', [
+        'dbProjects' => Project::orderBy('sort_order')->get(),
+    ]);
 })->name('projects');
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';
