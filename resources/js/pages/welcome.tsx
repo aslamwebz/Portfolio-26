@@ -34,6 +34,186 @@ interface DbCertification {
     sort_order: number;
 }
 
+interface Project {
+    id: number;
+    title: string;
+    description: string;
+    link: string;
+    image: string;
+    github: string;
+    technologies: string[];
+    category: string;
+}
+
+const ProjectCarousel = ({ projects }: { projects: Project[] }) => {
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+
+    const next = () => {
+        setCurrentIndex((prev) => (prev + 1) % projects.length);
+    };
+
+    const prev = () => {
+        setCurrentIndex(
+            (prev) => (prev - 1 + projects.length) % projects.length,
+        );
+    };
+
+    const project = projects[currentIndex];
+
+    return (
+        <div className="group relative overflow-hidden rounded-2xl border border-slate-700 bg-slate-800/50">
+            <div className="grid md:grid-cols-2">
+                {/* Left Pane: Image */}
+                <div className="relative h-64 overflow-hidden bg-slate-900 md:h-[450px]">
+                    <AnimatePresence mode="wait">
+                        <motion.img
+                            key={project.id}
+                            src={project.image}
+                            alt={project.title}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 20 }}
+                            className="h-full w-full object-cover"
+                        />
+                    </AnimatePresence>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                        <span className="bg-primary-400 rounded-full px-3 py-1 font-mono text-xs font-bold text-slate-900">
+                            {project.category}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Right Pane: Details */}
+                <div className="flex flex-col justify-center p-8 lg:p-12">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={project.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <h3 className="mb-4 text-2xl font-bold text-white lg:text-3xl">
+                                {project.title}
+                            </h3>
+                            <p className="mb-6 text-lg leading-relaxed text-slate-400">
+                                {project.description}
+                            </p>
+
+                            <div className="mb-8 flex flex-wrap gap-2">
+                                {project.technologies.map((tech) => (
+                                    <span
+                                        key={tech}
+                                        className="rounded-lg border border-slate-700/50 bg-slate-900 px-3 py-1.5 font-mono text-xs text-slate-300"
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+
+                            <div className="flex items-center gap-6">
+                                {project.link && (
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="bg-primary-400 hover:bg-primary-500 flex items-center gap-2 rounded-lg px-6 py-3 font-bold text-slate-900 transition-all"
+                                    >
+                                        Live Demo
+                                        <svg
+                                            className="h-4 w-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                            />
+                                        </svg>
+                                    </a>
+                                )}
+                                <a
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 font-medium text-slate-400 hover:text-white"
+                                >
+                                    View Source
+                                    <svg
+                                        className="h-4 w-4"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="absolute right-4 bottom-4 flex gap-2">
+                <button
+                    onClick={prev}
+                    className="hover:bg-primary-400 flex h-12 w-12 items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 text-white transition-all hover:text-slate-900"
+                >
+                    <svg
+                        className="h-6 w-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 19l-7-7 7-7"
+                        />
+                    </svg>
+                </button>
+                <button
+                    onClick={next}
+                    className="hover:bg-primary-400 flex h-12 w-12 items-center justify-center rounded-xl border border-slate-700 bg-slate-800/80 text-white transition-all hover:text-slate-900"
+                >
+                    <svg
+                        className="h-6 w-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                        />
+                    </svg>
+                </button>
+            </div>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2 md:left-[25%]">
+                {projects.map((_, i) => (
+                    <div
+                        key={i}
+                        className={`h-1.5 rounded-full transition-all ${
+                            i === currentIndex
+                                ? 'bg-primary-400 w-8'
+                                : 'w-2 bg-slate-600'
+                        }`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
 export default function Welcome({
     canRegister = true,
     dbProjects = [],
@@ -47,80 +227,24 @@ export default function Welcome({
 
     const techStack = [
         {
-            icon: (
-                <svg
-                    className="h-6 w-6 text-blue-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                    ></path>
-                </svg>
-            ),
-            title: 'Core',
-            tags: ['PHP', 'Laravel', 'MySQL'],
+            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-laravel-4695747-3903173.png', // Laravel 3D
+            title: 'Core Backend',
+            tags: ['PHP', 'Laravel', 'MySQL', 'Redis'],
         },
         {
-            icon: (
-                <svg
-                    className="text-primary-400 h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                    ></path>
-                </svg>
-            ),
-            title: 'TALL Stack',
-            tags: ['Tailwind', 'Alpine.js', 'Livewire'],
+            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-react-7578010-6184852.png', // React 3D
+            title: 'Frontend & UI',
+            tags: ['React', 'Inertia.js', 'Tailwind CSS', 'Vue.js'],
         },
         {
-            icon: (
-                <svg
-                    className="h-6 w-6 text-purple-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-                    ></path>
-                </svg>
-            ),
-            title: 'Tools',
-            tags: ['Filament', 'Nova', 'Docker', 'Git', 'Pest'],
+            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-docker-4695749-3903175.png', // Docker 3D
+            title: 'DevOps & Tools',
+            tags: ['Docker', 'Git', 'GitHub Actions', 'Azure'],
         },
         {
-            icon: (
-                <svg
-                    className="h-6 w-6 text-orange-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                    ></path>
-                </svg>
-            ),
+            icon: 'https://cdn.iconscout.com/icon/free/png-512/free-php-7578026-6184868.png', // PHP 3D (to represent and fill space)
             title: 'Architecture',
-            tags: ['REST APIs', 'JSON', 'OOP', 'Linux'],
+            tags: ['TALL Stack', 'Multi-tenancy', 'REST APIs', 'TDD'],
         },
     ];
 
@@ -130,45 +254,45 @@ export default function Welcome({
             location: 'Remote, UK',
             isCurrent: true,
             title: 'Senior Backend Engineer',
-            company: 'Digital Egg / Fullstripe',
+            company: 'Digital Egg Ltd / Fullstripe s.r.o',
             achievements: [
-                'Architected high-traffic backends handling 10M+ requests/month with 99.9% uptime',
-                'Integrated complex payment processors (Stripe, PayPal) processing $2M+ annually',
-                'Led refactoring efforts that reduced bug reports by 40% and improved deployment speed by 60%',
-                'Mentored 3 junior developers and established code review best practices',
+                'Architected and scaled a Laravel multi-tenant SaaS for 50K+ users with robust RBAC and security audits',
+                'Maintained 15+ RESTful API endpoints using Laravel Sanctum/Passport with 100% test coverage',
+                'Optimized high-traffic payment billing flows (Stripe, PayPal) and real-time notification systems',
+                'Developed custom admin dashboards with Filament & Nova, reducing task completion time by 35%',
+                'Led refactoring that reduced production bugs by 40% and halved deployment rollback rates',
             ],
         },
         {
-            date: '2018 - 2020',
-            location: '',
+            date: 'July 2018 - Nov 2020',
+            location: 'Remote, Sri Lanka',
             isCurrent: false,
-            title: 'Full Stack PHP Developer',
-            company: 'Digital Agency',
+            title: 'Junior WordPress & PHP Developer',
+            company: 'Remote Office One',
             achievements: [
-                'Delivered 15+ custom WordPress plugins and Laravel applications for enterprise clients',
-                'Reduced page load times by 50% through optimization and caching strategies',
-                'Implemented RESTful APIs integrating with 10+ third-party services',
+                'Built 50+ WordPress sites and PHP web apps with clean, documented code and modern UI',
+                'Developed custom WP plugins and integrated external REST APIs, increasing platform flexibility',
+                'Contributed to internal knowledge base, improving developer onboarding speed',
             ],
         },
         {
-            date: '2012 - 2018',
-            location: '',
+            date: 'Dec 2012 - May 2018',
+            location: 'Qatar',
             isCurrent: false,
-            title: 'IT & Network Systems Administrator',
-            company: 'Enterprise Organization',
+            title: 'IT Infrastructure & Network Engineer',
+            company: 'Multiple Companies',
             achievements: [
-                'Managed infrastructure for 500+ users across 3 locations',
-                'Achieved CCNA certification and implemented enterprise security protocols',
-                'Reduced system downtime by 75% through proactive monitoring and maintenance',
+                'Managed enterprise server, network, and security infrastructure across multiple organizations',
+                'Expertise in Linux administration, deployments, and operations supporting backend work',
             ],
         },
     ];
 
     const stats = [
-        { value: '12+', label: 'Years Experience' },
-        { value: '50+', label: 'Projects Delivered' },
-        { value: '99.9%', label: 'Uptime Achieved' },
-        { value: '10M+', label: 'API Requests/Month' },
+        { value: '50K+', label: 'Platform Users' },
+        { value: '5+', label: 'Years Laravel Exp.' },
+        { value: '15+', label: 'APIs Maintained' },
+        { value: '100%', label: 'Test Coverage' },
     ];
 
     const whyHireMe = [
@@ -352,11 +476,11 @@ export default function Welcome({
 
     const education = [
         {
-            degree: 'Computer Science & Network Engineering',
-            school: 'Higher National Diploma',
-            year: '2008 - 2012',
+            degree: 'GCE Ordinary Level',
+            school: 'DCB Mother Tongue School',
+            year: '1996 - 2008',
             description:
-                'Specialized in network infrastructure and software development fundamentals.',
+                'Foundation secondary education in Badulla, Sri Lanka.',
         },
     ];
 
@@ -463,48 +587,40 @@ export default function Welcome({
         },
     ];
 
-    // Use DB data if available, otherwise fall back to hardcoded data
-    const displayProjects =
-        dbProjects.length > 0
-            ? dbProjects.map((p) => ({
-                  id: p.id,
-                  title: p.title,
-                  description: p.description,
-                  link: p.link,
-                  image: p.image ? `/storage/${p.image}` : '/img/ai-main.png',
-                  github: p.github,
-                  technologies: p.technologies || [],
-                  category: p.category,
-              }))
-            : projects;
+    // Strictly Backend-Driven Data
+    const displayProjects = dbProjects.map((p) => ({
+        id: p.id,
+        title: p.title,
+        description: p.description,
+        link: p.link,
+        image: p.image ? `/storage/${p.image}` : '/img/ai-main.png',
+        github: p.github,
+        technologies: p.technologies || [],
+        category: p.category,
+    }));
 
-    const displayCertifications =
-        dbCertifications.length > 0
-            ? dbCertifications.map((c) => ({
-                  name: c.name,
-                  issuer: c.issuer,
-                  year: c.year,
-                  description: c.description || '',
-                  image: c.image
-                      ? `/storage/${c.image}`
-                      : '/img/ccna_certificate.png',
-                  icon: (
-                      <svg
-                          className="h-6 w-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                      >
-                          <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                          />
-                      </svg>
-                  ),
-              }))
-            : certifications;
+    const displayCertifications = dbCertifications.map((c) => ({
+        name: c.name,
+        issuer: c.issuer,
+        year: c.year,
+        description: c.description || '',
+        image: c.image ? `/storage/${c.image}` : '/img/ccna_certificate.png',
+        icon: (
+            <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                />
+            </svg>
+        ),
+    }));
 
     const additionalSkills = [
         'PHPUnit',
@@ -576,11 +692,10 @@ export default function Welcome({
                                 </h1>
 
                                 <p className="mb-8 max-w-xl text-lg leading-relaxed text-slate-400">
-                                    I help companies build high-performance,
-                                    scalable applications that handle millions
-                                    of requests. With 12+ years of experience
-                                    and a proven track record of reducing costs
-                                    and improving performance.
+                                    I build scalable Laravel applications and
+                                    robust REST APIs for enterprise platforms.
+                                    Deeply focused on security, multi-tenancy,
+                                    and high-performance backend architecture.
                                 </p>
 
                                 {/* Stats */}
@@ -904,8 +1019,12 @@ export default function Welcome({
                                     delay={index as 0 | 1 | 2 | 3}
                                 >
                                     <div className="card-hover group hover:border-primary-400/30 rounded-xl border border-slate-700 bg-slate-800 p-6 transition-all">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500/10 transition-all group-hover:scale-110 group-hover:bg-blue-500/20">
-                                            {stack.icon}
+                                        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-slate-700/30 p-2 transition-all group-hover:scale-110 group-hover:bg-slate-700/50">
+                                            <img
+                                                src={stack.icon}
+                                                alt={stack.title}
+                                                className="h-12 w-12 object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
+                                            />
                                         </div>
                                         <h3 className="mb-3 font-semibold transition-colors group-hover:text-white">
                                             {stack.title}
@@ -939,7 +1058,7 @@ export default function Welcome({
                     </div>
                 </section>
 
-                {/* Projects Section */}
+                {/* Projects Section - 2 Pane Carousel */}
                 <section id="projects" className="bg-slate-800/50 py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-16 text-center">
@@ -951,111 +1070,173 @@ export default function Welcome({
                                 <span className="gradient-text"> Projects</span>
                             </h2>
                             <p className="mx-auto max-w-2xl text-slate-400">
-                                A collection of projects I've built, showcasing
-                                my expertise in full-stack development, AI
-                                integration, and modern web technologies.
+                                A collection of projects I&apos;ve built,
+                                showcasing my expertise in full-stack
+                                development, AI integration, and modern web
+                                technologies.
                             </p>
                         </div>
 
-                        <div className="grid gap-6 md:grid-cols-3">
-                            {projects.slice(0, 3).map((project, index) => (
-                                <Reveal
-                                    key={project.id}
-                                    delay={index as 0 | 1 | 2}
-                                >
-                                    <div className="card-hover group hover:border-primary-400/30 overflow-hidden rounded-xl border border-slate-700 bg-slate-800 transition-all">
-                                        <div className="relative h-48 overflow-hidden bg-slate-900">
-                                            <div className="to-primary-400/20 absolute inset-0 bg-gradient-to-br from-blue-500/20 transition-opacity group-hover:opacity-75"></div>
-                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                <div className="text-center">
-                                                    <div className="group-hover:border-primary-400/30 mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 transition-all group-hover:scale-110">
-                                                        <svg
-                                                            className="text-primary-400 h-8 w-8"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth={2}
-                                                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                                                            ></path>
-                                                        </svg>
+                        {displayProjects.length > 0 ? (
+                            <div className="relative mx-auto max-w-5xl">
+                                <ProjectCarousel projects={displayProjects} />
+                            </div>
+                        ) : (
+                            <div className="rounded-xl border border-dashed border-slate-700 py-20 text-center">
+                                <p className="text-slate-500">
+                                    No projects found. Add some in the admin
+                                    panel!
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </section>
+
+                {/* Certifications Section - Adjacent to Projects */}
+                <section id="certifications" className="bg-slate-900 py-24">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <Reveal>
+                            <div className="mb-16 text-center">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                    CREDENTIALS
+                                </div>
+                                <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                    Certifications &
+                                    <span className="gradient-text">
+                                        {' '}
+                                        Trust
+                                    </span>
+                                </h2>
+                            </div>
+                        </Reveal>
+
+                        {displayCertifications.length > 0 ? (
+                            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                                {displayCertifications.map((cert, index) => (
+                                    <Reveal
+                                        key={index}
+                                        delay={(index % 3) as 0 | 1 | 2}
+                                    >
+                                        <Dialog>
+                                            <DialogTrigger asChild>
+                                                <div className="card-hover group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-xl border border-slate-700 bg-slate-800/50 p-0 transition-all">
+                                                    <div className="relative h-48 w-full overflow-hidden bg-slate-950">
+                                                        <img
+                                                            src={cert.image}
+                                                            alt={cert.name}
+                                                            className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                                                        />
+                                                        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 transition-opacity group-hover:opacity-100">
+                                                            <div className="bg-primary-400/80 rounded-full p-3 text-slate-900">
+                                                                <svg
+                                                                    className="h-6 w-6"
+                                                                    fill="none"
+                                                                    stroke="currentColor"
+                                                                    viewBox="0 0 24 24"
+                                                                >
+                                                                    <path
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        strokeWidth={
+                                                                            2
+                                                                        }
+                                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6"
+                                                                    />
+                                                                </svg>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className="font-mono text-xs text-slate-500">
-                                                        {project.category}
+                                                    <div className="p-6">
+                                                        <div className="flex items-center gap-4">
+                                                            <div className="bg-primary-400/10 text-primary-400 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg">
+                                                                {cert.icon}
+                                                            </div>
+                                                            <div className="min-w-0">
+                                                                <div className="truncate font-semibold transition-colors group-hover:text-white">
+                                                                    {cert.name}
+                                                                </div>
+                                                                <div className="text-sm text-slate-500">
+                                                                    {
+                                                                        cert.issuer
+                                                                    }{' '}
+                                                                    •{' '}
+                                                                    {cert.year}
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className="p-6">
-                                            <h3 className="mb-2 text-lg font-semibold transition-colors group-hover:text-white">
-                                                {project.title}
-                                            </h3>
-                                            <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-400">
-                                                {project.description}
-                                            </p>
-                                            <div className="mb-4 flex flex-wrap gap-2">
-                                                {project.technologies
-                                                    .slice(0, 4)
-                                                    .map((tech) => (
-                                                        <span
-                                                            key={tech}
-                                                            className="rounded bg-slate-900 px-2 py-1 font-mono text-xs text-slate-400 transition-colors group-hover:bg-slate-700"
-                                                        >
-                                                            {tech}
-                                                        </span>
-                                                    ))}
-                                            </div>
-                                            <div className="flex gap-3">
-                                                {project.link && (
-                                                    <a
-                                                        href={project.link}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-primary-400 hover:text-primary-300 text-sm font-medium"
-                                                    >
-                                                        Live Demo →
-                                                    </a>
-                                                )}
-                                                <a
-                                                    href={project.github}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-sm font-medium text-slate-400 hover:text-white"
-                                                >
-                                                    GitHub →
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Reveal>
-                            ))}
-                        </div>
-
-                        {/* More Projects Link */}
-                        <div className="mt-12 text-center">
-                            <a
-                                href="/projects"
-                                className="bg-primary-400/10 text-primary-400 border-primary-400/30 hover:bg-primary-400/20 inline-flex items-center gap-2 rounded-lg border px-6 py-3 font-medium transition-all"
-                            >
-                                View All Projects
-                                <svg
-                                    className="h-4 w-4"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                    ></path>
-                                </svg>
-                            </a>
-                        </div>
+                                            </DialogTrigger>
+                                            <DialogContent className="max-w-4xl border-slate-700 bg-slate-900 p-0 text-white">
+                                                <div className="grid md:grid-cols-2">
+                                                    <div className="flex items-center justify-center bg-slate-950 p-6">
+                                                        <img
+                                                            src={cert.image}
+                                                            alt={cert.name}
+                                                            className="h-auto max-h-[70vh] w-full object-contain"
+                                                        />
+                                                    </div>
+                                                    <div className="flex flex-col justify-center p-8">
+                                                        <DialogHeader className="mb-6">
+                                                            <div className="bg-primary-400/10 text-primary-400 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                                                                {cert.icon}
+                                                            </div>
+                                                            <DialogTitle className="text-2xl font-bold text-white">
+                                                                {cert.name}
+                                                            </DialogTitle>
+                                                            <p className="text-primary-400 mt-2 font-mono text-sm tracking-widest uppercase">
+                                                                {cert.issuer} •{' '}
+                                                                {cert.year}
+                                                            </p>
+                                                        </DialogHeader>
+                                                        <div className="space-y-4">
+                                                            <p className="text-slate-400">
+                                                                {
+                                                                    cert.description
+                                                                }
+                                                            </p>
+                                                            <div className="pt-6">
+                                                                <a
+                                                                    href={
+                                                                        cert.image
+                                                                    }
+                                                                    target="_blank"
+                                                                    className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold text-slate-900 transition-colors"
+                                                                >
+                                                                    View Full
+                                                                    Certificate
+                                                                    <svg
+                                                                        className="h-4 w-4"
+                                                                        fill="none"
+                                                                        stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                    >
+                                                                        <path
+                                                                            strokeLinecap="round"
+                                                                            strokeLinejoin="round"
+                                                                            strokeWidth={
+                                                                                2
+                                                                            }
+                                                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                                                        />
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </DialogContent>
+                                        </Dialog>
+                                    </Reveal>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="rounded-xl border border-dashed border-slate-700 py-20 text-center">
+                                <p className="text-slate-500">
+                                    No certifications found.
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </section>
 
@@ -1198,234 +1379,6 @@ export default function Welcome({
                                     </div>
                                 </Reveal>
                             ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Certifications Section */}
-                <section className="py-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <Reveal>
-                            <div className="mb-16 text-center">
-                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
-                                    CREDENTIALS
-                                </div>
-                                <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-                                    Certifications &
-                                    <span className="gradient-text">
-                                        {' '}
-                                        Education
-                                    </span>
-                                </h2>
-                            </div>
-                        </Reveal>
-
-                        <div className="grid gap-6 lg:grid-cols-2">
-                            {/* Certifications */}
-                            <div>
-                                <h3 className="mb-6 text-lg font-semibold text-slate-300">
-                                    Certifications
-                                </h3>
-                                <div className="grid gap-4 sm:grid-cols-2">
-                                    {displayCertifications.map(
-                                        (cert, index) => (
-                                            <Reveal
-                                                key={index}
-                                                direction="left"
-                                            >
-                                                <Dialog>
-                                                    <DialogTrigger asChild>
-                                                        <div className="card-hover group cursor-pointer overflow-hidden rounded-xl border border-slate-700 bg-slate-800/50 p-0 transition-all hover:border-cyan-400/30">
-                                                            <div className="relative h-32 w-full overflow-hidden bg-slate-900 sm:h-40">
-                                                                <img
-                                                                    src={
-                                                                        cert.image
-                                                                    }
-                                                                    alt={
-                                                                        cert.name
-                                                                    }
-                                                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                                                />
-                                                                <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 transition-opacity group-hover:opacity-100">
-                                                                    <div className="rounded-full bg-cyan-400/80 p-2 text-slate-900">
-                                                                        <svg
-                                                                            className="h-5 w-5"
-                                                                            fill="none"
-                                                                            stroke="currentColor"
-                                                                            viewBox="0 0 24 24"
-                                                                        >
-                                                                            <path
-                                                                                strokeLinecap="round"
-                                                                                strokeLinejoin="round"
-                                                                                strokeWidth={
-                                                                                    2
-                                                                                }
-                                                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6"
-                                                                            />
-                                                                        </svg>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="p-4">
-                                                                <div className="flex items-center gap-3">
-                                                                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-400">
-                                                                        {
-                                                                            cert.icon
-                                                                        }
-                                                                    </div>
-                                                                    <div className="min-w-0">
-                                                                        <div className="truncate font-medium transition-colors group-hover:text-white">
-                                                                            {
-                                                                                cert.name
-                                                                            }
-                                                                        </div>
-                                                                        <div className="text-xs text-slate-500">
-                                                                            {
-                                                                                cert.issuer
-                                                                            }{' '}
-                                                                            •{' '}
-                                                                            {
-                                                                                cert.year
-                                                                            }
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </DialogTrigger>
-                                                    <DialogContent className="max-w-3xl overflow-hidden border-slate-700 bg-slate-900 p-0">
-                                                        <div className="grid md:grid-cols-2">
-                                                            <div className="flex items-center justify-center bg-slate-950 p-2">
-                                                                <img
-                                                                    src={
-                                                                        cert.image
-                                                                    }
-                                                                    alt={
-                                                                        cert.name
-                                                                    }
-                                                                    className="h-auto max-h-[70vh] w-full rounded-lg object-contain"
-                                                                />
-                                                            </div>
-                                                            <div className="flex flex-col justify-center p-8">
-                                                                <DialogHeader className="mb-6">
-                                                                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-400">
-                                                                        {
-                                                                            cert.icon
-                                                                        }
-                                                                    </div>
-                                                                    <DialogTitle className="text-2xl leading-tight font-bold text-white">
-                                                                        {
-                                                                            cert.name
-                                                                        }
-                                                                    </DialogTitle>
-                                                                    <div className="mt-2 font-mono text-sm tracking-wider text-cyan-400 uppercase">
-                                                                        {
-                                                                            cert.issuer
-                                                                        }{' '}
-                                                                        •
-                                                                        CertID:{' '}
-                                                                        {
-                                                                            cert.year
-                                                                        }
-                                                                        -
-                                                                        {index +
-                                                                            100}
-                                                                    </div>
-                                                                </DialogHeader>
-                                                                <div className="space-y-4">
-                                                                    <p className="leading-relaxed text-slate-400">
-                                                                        {
-                                                                            cert.description
-                                                                        }
-                                                                    </p>
-                                                                    <div className="pt-6">
-                                                                        <a
-                                                                            href={
-                                                                                cert.image
-                                                                            }
-                                                                            target="_blank"
-                                                                            className="inline-flex items-center gap-2 rounded-lg bg-cyan-400 px-6 py-2.5 text-sm font-semibold text-slate-900 transition-colors hover:bg-cyan-500"
-                                                                        >
-                                                                            View
-                                                                            Full
-                                                                            Certificate
-                                                                            <svg
-                                                                                className="h-4 w-4"
-                                                                                fill="none"
-                                                                                stroke="currentColor"
-                                                                                viewBox="0 0 24 24"
-                                                                            >
-                                                                                <path
-                                                                                    strokeLinecap="round"
-                                                                                    strokeLinejoin="round"
-                                                                                    strokeWidth={
-                                                                                        2
-                                                                                    }
-                                                                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                                                                />
-                                                                            </svg>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </DialogContent>
-                                                </Dialog>
-                                            </Reveal>
-                                        ),
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Education */}
-                            <div>
-                                <h3 className="mb-6 text-lg font-semibold text-slate-300">
-                                    Education
-                                </h3>
-                                <div className="space-y-4">
-                                    {education.map((edu, index) => (
-                                        <Reveal key={index} direction="right">
-                                            <div className="card-hover group rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:border-violet-400/30">
-                                                <div className="mb-2 flex items-center gap-2">
-                                                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-400/10 text-violet-400">
-                                                        <svg
-                                                            className="h-4 w-4"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth={2}
-                                                                d="M12 14l9-5-9-5-9 5 9 5z"
-                                                            />
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth={2}
-                                                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                    <span className="font-mono text-xs text-slate-500">
-                                                        {edu.year}
-                                                    </span>
-                                                </div>
-                                                <div className="font-semibold transition-colors group-hover:text-white">
-                                                    {edu.degree}
-                                                </div>
-                                                <div className="text-sm text-slate-400">
-                                                    {edu.school}
-                                                </div>
-                                                <p className="mt-2 text-sm text-slate-500">
-                                                    {edu.description}
-                                                </p>
-                                            </div>
-                                        </Reveal>
-                                    ))}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </section>
