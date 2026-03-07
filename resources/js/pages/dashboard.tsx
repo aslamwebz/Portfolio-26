@@ -544,13 +544,13 @@ export default function Dashboard({
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                        d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"
                     />
                 </svg>
             ),
-            title: 'Security First',
+            title: 'Adaptability & Quick Learning',
             description:
-                'With my CCNA background and security mindset, I implement best practices from day one. Your data and users are protected.',
+                'I thrive in fast-paced environments, quickly mastering new technologies and adapting to evolving infrastructure and business requirements with a growth-oriented mindset.',
         },
         {
             icon: (
