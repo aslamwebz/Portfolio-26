@@ -1,5 +1,5 @@
 import { Head, usePage } from '@inertiajs/react';
-import type { Variants} from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { motion, useInView, animate } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import Navigation from '@/components/navigation';
@@ -159,63 +159,63 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'PHP',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg',
+                    url: '/icons/php.svg',
                 },
                 {
                     name: 'Laravel',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg',
+                    url: '/icons/laravel.svg',
                 },
                 {
                     name: 'MySQL',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg',
+                    url: '/icons/mysql.svg',
                 },
                 {
                     name: 'Livewire',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/livewire/livewire-original.svg',
+                    url: '/icons/livewire.svg',
                 },
                 {
                     name: 'REST',
-                    url: 'https://cdn.simpleicons.org/fastapi/ffffff',
+                    url: '/icons/rest.svg',
                 },
                 {
                     name: 'RBAC',
-                    url: 'https://cdn.simpleicons.org/auth0/ffffff',
+                    url: '/icons/rbac.svg',
                 },
                 {
                     name: 'OAuth 2.0',
-                    url: 'https://cdn.simpleicons.org/auth0/ffffff',
+                    url: '/icons/oauth.svg',
                 },
                 {
                     name: 'Redis',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
+                    url: '/icons/redis.svg',
                 },
                 {
                     name: 'Events',
-                    url: 'https://cdn.simpleicons.org/socketdotio/ffffff',
+                    url: '/icons/events.svg',
                 },
                 {
                     name: 'Sanctum',
-                    url: 'https://cdn.simpleicons.org/jsonwebtokens/ffffff',
+                    url: '/icons/sanctum.svg',
                 },
                 {
                     name: 'Passport',
-                    url: 'https://cdn.simpleicons.org/passport/ffffff',
+                    url: '/icons/passport.svg',
                 },
                 {
                     name: 'Queues',
-                    url: 'https://cdn.simpleicons.org/rabbitmq/ffffff',
+                    url: '/icons/queues.svg',
                 },
                 {
                     name: 'Horizon',
-                    url: 'https://cdn.simpleicons.org/laravelhorizon/ffffff',
+                    url: '/icons/horizon.svg',
                 },
                 {
                     name: 'Multi-tenant',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+                    url: '/icons/multi-tenant.svg',
                 },
                 {
                     name: 'Microservices',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
+                    url: '/icons/microservices.svg',
                 },
             ],
         },
@@ -239,39 +239,39 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'Filament',
-                    url: 'https://logo.svgcdn.com/devicon/filamentphp-original.svg',
+                    url: '/icons/filament.svg',
                 },
                 {
                     name: 'Nova',
-                    url: 'https://static.cdnlogo.com/logos/l/57/laravel.svg',
+                    url: '/icons/nova.svg',
                 },
                 {
                     name: 'API Dev',
-                    url: 'https://logo.svgcdn.com/devicon/postman-original.svg',
+                    url: '/icons/api-dev.svg',
                 },
                 {
                     name: 'HTML5',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+                    url: '/icons/html5.svg',
                 },
                 {
                     name: 'CSS3',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg',
+                    url: '/icons/css3.svg',
                 },
                 {
                     name: 'JavaScript',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
+                    url: '/icons/javascript.svg',
                 },
                 {
                     name: 'Alpine.js',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/alpinejs/alpinejs-original.svg',
+                    url: '/icons/alpinejs.svg',
                 },
                 {
                     name: 'Vue.js',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg',
+                    url: '/icons/vuejs.svg',
                 },
                 {
                     name: 'TailwindCSS',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
+                    url: '/icons/tailwindcss.svg',
                 },
             ],
         },
@@ -295,35 +295,35 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'Git',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
+                    url: '/icons/git.svg',
                 },
                 {
                     name: 'GitHub',
-                    url: 'https://cdn.simpleicons.org/github/ffffff',
+                    url: '/icons/github.svg',
                 },
                 {
                     name: 'Docker',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+                    url: '/icons/docker.svg',
                 },
                 {
                     name: 'Bitbucket',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bitbucket/bitbucket-original.svg',
+                    url: '/icons/bitbucket.svg',
                 },
                 {
                     name: 'Azure',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg',
+                    url: '/icons/azure.svg',
                 },
                 {
                     name: 'Actions',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg',
+                    url: '/icons/actions.svg',
                 },
                 {
                     name: 'CI/CD',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg',
+                    url: '/icons/cicd.svg',
                 },
                 {
                     name: 'Linux',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg',
+                    url: '/icons/linux.svg',
                 },
             ],
         },
@@ -347,31 +347,31 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'PHPUnit',
-                    url: 'https://cdn.simpleicons.org/testinglibrary/ffffff',
+                    url: '/icons/phpunit.svg',
                 },
                 {
                     name: 'Pest',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg',
+                    url: '/icons/pest.svg',
                 },
                 {
                     name: 'OpenAPI',
-                    url: 'https://cdn.simpleicons.org/openapiinitiative/ffffff',
+                    url: '/icons/openapi.svg',
                 },
                 {
                     name: 'Postman',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg',
+                    url: '/icons/postman.svg',
                 },
                 {
                     name: 'Sentry',
-                    url: 'https://cdn.simpleicons.org/sentry/ffffff',
+                    url: '/icons/sentry.svg',
                 },
                 {
                     name: 'Telescope',
-                    url: 'https://cdn.simpleicons.org/opentelemetry/ffffff',
+                    url: '/icons/telescope.svg',
                 },
                 {
                     name: 'Logrocket',
-                    url: 'https://cdn.simpleicons.org/rocketdotchat/ffffff',
+                    url: '/icons/logrocket.svg',
                 },
             ],
         },
@@ -395,35 +395,35 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'Claude Code',
-                    url: 'https://cdn.simpleicons.org/anthropic/ffffff',
+                    url: '/icons/claude.svg',
                 },
                 {
                     name: 'Cursor',
-                    url: 'https://cdn.simpleicons.org/cursor/ffffff',
+                    url: '/icons/cursor.svg',
                 },
                 {
                     name: 'Windsurf',
-                    url: 'data:image/svg+xml;utf8,%3Csvg%20fill%3D%27%2523ffffff%27%20role%3D%27img%27%20viewBox%3D%270%200%2024%2024%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Ctitle%3ECodeium%3C/title%3E%3Cpath%20d%3D%27M1%200a1%201%200%200%200-1%201v22c0%20.063.007.124.018.184L0%2023.199l.025.026c.103.443.5.775.975.775h22a1%201%200%200%200%201-1V1a1%201%200%200%200-1-1H1zm.707%201h20.582l-2%202H3.707l-2-2zM23%201.705v20.588l-2-2V3.705l2-2zM1%201.707l2%202v16.492l-2%202V1.707zM4%204h16v16H4V4zm3.537%203c-1.006%200-1.51.535-1.51%201.605v2.297c0%20.4-.184.6-.554.6a.47.47%200%200%200-.344.139.512.512%200%200%200-.129.365.49.49%200%200%200%20.129.353.47.47%200%200%200%20.344.139c.37%200%20.554.2.554.6v2.297c0%201.07.504%201.605%201.51%201.605.136%200%20.248-.05.334-.148A.494.494%200%200%200%208%2016.498a.512.512%200%200%200-.129-.365.439.439%200%200%200-.334-.139c-.376%200-.564-.199-.564-.6v-2.296c0-.46-.1-.823-.297-1.092.099-.138.173-.3.222-.485.05-.183.075-.389.075-.619V8.605c0-.4.188-.6.564-.6a.439.439%200%200%200%20.334-.138A.499.499%200%200%200%208%207.512a.53.53%200%200%200-.129-.364A.425.425%200%200%200%207.537%207zm8.926%200a.425.425%200%200%200-.334.148.53.53%200%200%200-.129.364.5.5%200%200%200%20.129.355.439.439%200%200%200%20.334.139c.376%200%20.564.199.564.6v2.296c0%20.23.025.436.075.62.049.183.123.346.222.484-.197.27-.297.632-.297%201.092v2.297c0%20.4-.188.6-.564.6a.439.439%200%200%200-.334.138.512.512%200%200%200-.129.365c0%20.145.043.262.129.354a.425.425%200%200%200%20.334.148c1.006%200%201.51-.535%201.51-1.605v-2.297c0-.4.184-.6.554-.6a.439.439%200%200%200%20.334-.139.475.475%200%200%200%20.139-.353.492.492%200%200%200-.139-.365.439.439%200%200%200-.334-.139c-.37%200-.554-.2-.554-.6V8.605c0-1.07-.504-1.605-1.51-1.605zm-7.25%206a.737.737%200%200%200-.496.227.717.717%200%200%200-.217.529.74.74%200%200%200%20.75.744.74.74%200%200%200%20.75-.744.717.717%200%200%200-.217-.53A.71.71%200%200%200%209.25%2013h-.037zm2.75%200a.737.737%200%200%200-.496.227.717.717%200%200%200-.217.529.74.74%200%200%200%20.217.53c.152.143.33.214.533.214a.74.74%200%200%200%20.75-.744.717.717%200%200%200-.217-.53A.71.71%200%200%200%2012%2013h-.037zm2.75%200a.737.737%200%200%200-.496.227.717.717%200%200%200-.217.529.74.74%200%200%200%20.217.53c.152.143.33.214.533.214a.74.74%200%200%200%20.75-.744.717.717%200%200%200-.217-.53.71.71%200%200%200-.533-.226h-.037zm-11.1%208h16.68l2%202H1.613l2-2z%27/%3E%3C/svg%3E',
+                    url: '/icons/windsurf.svg',
                 },
                 {
                     name: 'Perplexity',
-                    url: 'data:image/svg+xml;utf8,%3Csvg%20fill%3D%27%2523ffffff%27%20role%3D%27img%27%20viewBox%3D%270%200%2024%2024%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Ctitle%3EPerplexity%3C/title%3E%3Cpath%20d%3D%27M22.3977%207.0896h-2.3106V.0676l-7.5094%206.3542V.1577h-1.1554v6.1966L4.4904%200v7.0896H1.6023v10.3976h2.8882V24l6.932-6.3591v6.2005h1.1554v-6.0469l6.9318%206.1807v-6.4879h2.8882V7.0896zm-3.4657-4.531v4.531h-5.355l5.355-4.531zm-13.2862.0676%204.8691%204.4634H5.6458V2.6262zM2.7576%2016.332V8.245h7.8476l-6.1149%206.1147v1.9723H2.7576zm2.8882%205.0404v-3.8852h.0001v-2.6488l5.7763-5.7764v7.0111l-5.7764%205.2993zm12.7086.0248-5.7766-5.1509V9.0618l5.7766%205.7766v6.5588zm2.8882-5.0652h-1.733v-1.9723L13.3948%208.245h7.8478v8.087z%27/%3E%3C/svg%3E',
+                    url: '/icons/perplexity.svg',
                 },
                 {
                     name: 'Open Code',
-                    url: 'https://cdn.simpleicons.org/vuedotjs/ffffff',
+                    url: '/icons/open-code.svg',
                 },
                 {
                     name: 'Ollama',
-                    url: 'https://cdn.simpleicons.org/ollama/ffffff',
+                    url: '/icons/ollama.svg',
                 },
                 {
                     name: 'LRVL Boost',
-                    url: 'https://cdn.simpleicons.org/lightning/ffffff',
+                    url: '/icons/lrvl-boost.svg',
                 },
                 {
                     name: 'AI SDK',
-                    url: 'https://cdn.simpleicons.org/openai/ffffff',
+                    url: '/icons/ai-sdk.svg',
                 },
             ],
         },
@@ -453,19 +453,19 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'Rector',
-                    url: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg',
+                    url: '/icons/rector.svg',
                 },
                 {
                     name: 'Pint',
-                    url: 'https://cdn.simpleicons.org/prettier/ffffff',
+                    url: '/icons/pint.svg',
                 },
                 {
                     name: 'PHPStan',
-                    url: 'data:image/svg+xml;utf8,<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="%23232323" d="m6.405 24.179l-.636 1.506a1.008 1.008 0 0 0 .547 1.269a1.031 1.031 0 0 0 1.316-.348l.218-.521Z"/><path fill="%23516cb3" d="M16.08 4.6a7.47 7.47 0 0 1 4.47 1.5a.408.408 0 0 0 .536 0a.385.385 0 0 0 .029-.538a1.747 1.747 0 0 0-.9-.593a3.11 3.11 0 0 1 2.531-.961c2.323 0 7.258 3.374 7.258 9.7c0 6.074-3.977 7.383-5.058 7.383c-1.645 0-3.351-1.7-3.351-2.781a4.886 4.886 0 0 0 2.363-3.32s.087-2.591 0-4.786a.462.462 0 0 0-.138-.254a.457.457 0 0 0-.261-.121a.412.412 0 0 0-.294.117a.418.418 0 0 0-.126.292c0 .245.108 1.762.027 4.486a3.66 3.66 0 0 1-2.086 2.87a15.766 15.766 0 0 0 .528-1.827c.051-.239 0-.405-.159-.473a.353.353 0 0 0-.4.08a.357.357 0 0 0-.076.123c-.107.215-3.885 12.5-9.111 12.5c-4.415 0-6.96-6.3-6.96-7.745a1.884 1.884 0 0 1 1.734-2.126A3.329 3.329 0 0 1 8.688 19.2c.135.26-.582.883-.582.883l-.625-.5a.384.384 0 0 0-.488.014a.364.364 0 0 0-.01.511c.159.16 4.932 4.006 4.932 4.006a.445.445 0 0 0 .568.037a.377.377 0 0 0 .017-.529l-1.344-1.083l1.432-4.03s-2.2-.982-3.632.1a2.79 2.79 0 0 0-2.261-1.261a2.5 2.5 0 0 0-1.738.666a2.537 2.537 0 0 0-.808 1.686A8.647 8.647 0 0 1 2 13.741c0-4.378 3.467-9.735 7.487-9.735a3.916 3.916 0 0 1 2.488.889l-.888.675a.407.407 0 0 0-.03.558a.377.377 0 0 0 .507.051A6.486 6.486 0 0 1 16.08 4.6"/><path fill="%23232323" d="m9.853 21.5l1.273-2.884a9.495 9.495 0 0 0 1.543.16a5.887 5.887 0 0 0 5.761-5.939a6 6 0 0 0-12-.194a5.826 5.826 0 0 0 2.7 5.14l-1.024 2.309Zm9.908-8.49a.318.318 0 0 1-.27-.149a.322.322 0 0 1-.018-.309a1.5 1.5 0 0 1 1.244-.849a1.483 1.483 0 0 1 1.241.8a.322.322 0 0 1 .025.248a.32.32 0 0 1-.159.191a.318.318 0 0 1-.432-.148a.848.848 0 0 0-.675-.452c-.433 0-.666.481-.67.481a.318.318 0 0 1-.286.186Z"/><path fill="%23d2d2d2" d="M12.425 16.7a3.86 3.86 0 1 0-3.832-3.86a3.846 3.846 0 0 0 3.832 3.86"/><path fill="%23232323" d="M12.425 14.834a1.992 1.992 0 1 0-1.978-1.992a1.985 1.985 0 0 0 1.978 1.992"/></svg>',
+                    url: '/icons/phpstan.svg',
                 },
                 {
                     name: 'Larastan',
-                    url: 'https://cdn.simpleicons.org/php/white',
+                    url: '/icons/larastan.svg',
                 },
             ],
         },
@@ -606,28 +606,105 @@ export default function Dashboard({
         category: p.category,
     }));
 
-    const displayCertifications = dbCertifications.map((c) => ({
-        name: c.name,
-        issuer: c.issuer,
-        year: c.year,
-        description: c.description || '',
-        image: c.image ? `/storage/${c.image}` : '/img/ccna_certificate.png',
-        icon: (
-            <svg
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                />
-            </svg>
-        ),
-    }));
+    const defaultCertifications = [
+        {
+            name: 'CCNA: Introduction to Networks',
+            issuer: 'Cisco Networking Academy',
+            year: '2023',
+            description:
+                'Foundational knowledge in network architecture, IP addressing, and routing.',
+            image: '/img/ccna_certificate.png',
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                </svg>
+            ),
+        },
+        {
+            name: 'AWS Academy Graduate',
+            issuer: 'Amazon Web Services',
+            year: '2024',
+            description:
+                'Cloud foundations, architecture, and deployment strategies on AWS.',
+            image: '/img/aws_certificate.png',
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                </svg>
+            ),
+        },
+        {
+            name: 'Laravel Certified Developer',
+            issuer: 'Laravel LLC',
+            year: '2024',
+            description:
+                'Expertise in Laravel framework, ecosystem, and advanced PHP development.',
+            image: '/img/laravel_certificate.png',
+            icon: (
+                <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                </svg>
+            ),
+        },
+    ];
+
+    const displayCertifications =
+        dbCertifications.length > 0
+            ? dbCertifications.map((c) => ({
+                  name: c.name,
+                  issuer: c.issuer,
+                  year: c.year,
+                  description: c.description || '',
+                  image: c.image
+                      ? `/storage/${c.image}`
+                      : '/img/ccna_certificate.png',
+                  icon: (
+                      <svg
+                          className="h-6 w-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                      >
+                          <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                          />
+                      </svg>
+                  ),
+              }))
+            : defaultCertifications;
 
     return (
         <>
@@ -1396,11 +1473,7 @@ export default function Dashboard({
                                     CREDENTIALS
                                 </div>
                                 <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-                                    Certifications &
-                                    <span className="hero-gradient-text">
-                                        {' '}
-                                        Trust
-                                    </span>
+                                    Certifications
                                 </h2>
                             </div>
                         </Reveal>
@@ -1674,7 +1747,7 @@ export default function Dashboard({
                                     GitHub
                                 </a>
                                 <a
-                                    href="https://linkedin.com/in/aslam4webz"
+                                    href="https://linkedin.com/in/emaslam"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-700"
@@ -1787,7 +1860,7 @@ export default function Dashboard({
                                     GitHub
                                 </a>
                                 <a
-                                    href="https://linkedin.com/in/aslam4webz"
+                                    href="https://linkedin.com/in/emaslam"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="hover:text-primary-400 transition-colors"
