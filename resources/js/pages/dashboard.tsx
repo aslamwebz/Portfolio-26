@@ -1,8 +1,9 @@
 import { Head, usePage } from '@inertiajs/react';
+import type { Variants} from 'framer-motion';
+import { motion, useInView, animate } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 import Navigation from '@/components/navigation';
-import Particles from '@/components/particles';
 import { Reveal } from '@/components/reveal';
-import Terminal from '@/components/terminal';
 import {
     Dialog,
     DialogContent,
@@ -10,8 +11,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { motion, useInView, Variants, animate } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
 
 interface DbProject {
     id: number;
@@ -36,32 +35,11 @@ interface DbCertification {
     sort_order: number;
 }
 
-interface Project {
-    id: number;
-    title: string;
-    description: string;
-    link: string | null;
-    image: string;
-    github: string | null;
-    technologies: string[];
-    category: string;
-}
-
 // Framer Motion Variants
 const containerVariants: Variants = {
     hidden: {},
     visible: {
         transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-};
-
-const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 32, scale: 0.97 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
     },
 };
 
@@ -83,15 +61,6 @@ const slideInRight: Variants = {
     },
 };
 
-const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, ease: 'easeOut' },
-    },
-};
-
 function AnimatedCounter({
     from,
     to,
@@ -109,7 +78,7 @@ function AnimatedCounter({
         const controls = animate(from, to, {
             duration,
             ease: 'easeOut',
-            onUpdate(value) {
+            onUpdate(value: number) {
                 if (nodeRef.current) {
                     nodeRef.current.textContent = Math.round(value).toString();
                 }
@@ -144,11 +113,9 @@ function AnimatedSection({
 }
 
 export default function Dashboard({
-    canRegister = true,
     dbProjects = [],
     dbCertifications = [],
 }: {
-    canRegister?: boolean;
     dbProjects?: DbProject[];
     dbCertifications?: DbCertification[];
 }) {
@@ -544,13 +511,6 @@ export default function Dashboard({
         },
     ];
 
-    const stats = [
-        { value: '50K+', label: 'Platform Users' },
-        { value: '5+', label: 'Years Laravel Exp.' },
-        { value: '15+', label: 'APIs Maintained' },
-        { value: '100%', label: 'Test Coverage' },
-    ];
-
     const whyHireMe = [
         {
             icon: (
@@ -634,215 +594,6 @@ export default function Dashboard({
         },
     ];
 
-    const testimonials = [
-        {
-            quote: 'Mohamed transformed our legacy codebase into a modern, scalable system. His attention to performance and security is unmatched.',
-            author: 'Sarah Chen',
-            role: 'CTO',
-            company: 'TechScale Solutions',
-            avatar: 'SC',
-        },
-        {
-            quote: 'Working with Mohamed was a game-changer. He delivered complex payment integrations flawlessly and mentored our team on best practices.',
-            author: 'James Mitchell',
-            role: 'Product Manager',
-            company: 'Digital Egg',
-            avatar: 'JM',
-        },
-        {
-            quote: 'His infrastructure background shows in everything he builds. The systems are robust, secure, and perform beautifully under load.',
-            author: 'Alex Rivera',
-            role: 'Lead Developer',
-            company: 'Fullstripe',
-            avatar: 'AR',
-        },
-    ];
-
-    const certifications = [
-        {
-            name: 'CCNA - Cisco Certified Network Associate',
-            issuer: 'Cisco',
-            year: '2012',
-            description:
-                'Validation of knowledge for fundamental networking concepts, IP connectivity, IP services, security fundamentals, and automation and programmability.',
-            image: '/img/ccna_certificate.png',
-            icon: (
-                <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                    />
-                </svg>
-            ),
-        },
-        {
-            name: 'Laravel Certified Developer',
-            issuer: 'Laravel',
-            year: '2020',
-            description:
-                'Official certification certifying expertise in the Laravel framework, including architectural patterns, Eloquent ORM, security, and application deployment.',
-            image: '/img/laravel_certificate.png',
-            icon: (
-                <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                    />
-                </svg>
-            ),
-        },
-        {
-            name: 'AWS Cloud Practitioner',
-            issuer: 'Amazon Web Services',
-            year: '2022',
-            description:
-                'Foundational understanding of building and operating on the AWS Cloud, including cloud concepts, security, technology, and billing.',
-            image: '/img/aws_certificate.png',
-            icon: (
-                <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
-                    />
-                </svg>
-            ),
-        },
-    ];
-
-    const education = [
-        {
-            degree: 'GCE Ordinary Level',
-            school: 'DCB',
-            year: '1996 - 2008',
-            description:
-                'Foundation secondary education in Badulla, Sri Lanka.',
-        },
-    ];
-
-    const projects = [
-        {
-            id: 9,
-            title: 'Shad Admin',
-            description:
-                'A premium admin dashboard built with Vue 3, Vite, Pinia, and Tailwind CSS, powered by shadcn-vue for reusable components and elegant UI design.',
-            link: 'https://webz-admin.vercel.app/',
-            image: '/img/webzadmin.png',
-            github: 'https://github.com/aslamwebz/webz-admin',
-            technologies: [
-                'Vue',
-                'Vite',
-                'Tailwindcss',
-                'Shadvue CDN',
-                'Pinia',
-            ],
-            category: 'Vue',
-        },
-        {
-            id: 8,
-            title: 'Vanguard-co',
-            description:
-                "Vanguard & Co. — A refined, modern e-commerce site showcasing premium men's watches and accessories through an elegant, minimalist interface.",
-            link: 'https://vanguard-co.vercel.app/',
-            image: '/img/vanguard.png',
-            github: 'https://github.com/aslamwebz/Vanguard',
-            technologies: ['React', 'Next Js', 'Tailwindcss'],
-            category: 'React',
-        },
-        {
-            id: 7,
-            title: 'PennyPilot',
-            description:
-                'PennyPilot-X — An intuitive, modern expense tracking web app designed to help users manage their personal finances effortlessly.',
-            link: 'https://pennypilot-x.vercel.app/',
-            image: '/img/penny_pilot.png',
-            github: 'https://github.com/aslamwebz/Penny-Pilot',
-            technologies: ['React', 'Next Js', 'Typescript', 'Tailwindcss'],
-            category: 'React',
-        },
-        {
-            id: 6,
-            title: 'Sentinel Solutions',
-            description:
-                'Sentinel Solutions — A modern, professional website for a full-spectrum security firm, designed to convey trust, readiness, and high-level expertise.',
-            link: 'https://sentinel-solutions.vercel.app',
-            image: '/img/sentinel.png',
-            github: 'https://github.com/aslamwebz/Sentinel-Solutions',
-            technologies: ['React', 'vite', 'tailwindcss', 'css3'],
-            category: 'React',
-        },
-        {
-            id: 5,
-            title: 'Wine Dine',
-            description:
-                'Wine & Dine — A modern, elegant restaurant website that captures the upscale ambiance of a vineyard-based fine dining venue.',
-            link: 'https://wine-dine.vercel.app/',
-            image: '/img/wine-dine.png',
-            github: 'https://github.com/aslamwebz/wine-dine',
-            technologies: [
-                'vite',
-                'Typescript',
-                'React',
-                'shadcdn-ui',
-                'tailwind css',
-            ],
-            category: 'React',
-        },
-        {
-            id: 1,
-            title: 'Hearty Meal',
-            description:
-                'An innovative food ordering platform that connects local restaurants with hungry customers. Features include real-time order tracking, customizable menus, and a seamless checkout process.',
-            link: null,
-            image: '/img/hm-main.png',
-            github: 'https://github.com/aslamwebz/Portfolio/tree/main/resources/js/Pages/HeartyMeal',
-            technologies: ['php', 'laravel', 'vue', 'tailwind'],
-            category: 'Vue',
-        },
-        {
-            id: 3,
-            title: 'AI Projects',
-            description:
-                'A collection of AI projects using Python and Crew AI that use AI to enhance functionality and user experiences.',
-            link: null,
-            image: '/img/ai-main.png',
-            github: 'https://github.com/aslamwebz/ai',
-            technologies: ['python', 'crewai', 'Ollama', 'openai', 'streamlit'],
-            category: 'AI',
-        },
-        {
-            id: 4,
-            title: 'AI Laravel Projects',
-            description:
-                'A collection of Laravel projects that use AI to enhance functionality and user experiences.',
-            link: '/ai',
-            image: '/img/ai-main.png',
-            github: 'https://github.com/aslamwebz/Portfolio/blob/dev/app/Http/Controllers/AIController.php',
-            technologies: ['laravel', 'vue', 'openai', 'tailwind'],
-            category: 'AI',
-        },
-    ];
-
     // Strictly Backend-Driven Data
     const displayProjects = dbProjects.map((p) => ({
         id: p.id,
@@ -877,15 +628,6 @@ export default function Dashboard({
             </svg>
         ),
     }));
-
-    const additionalSkills = [
-        'PHPUnit',
-        'Cypress',
-        'CI/CD',
-        'Redis',
-        'Queue Management',
-        'WebSockets',
-    ];
 
     return (
         <>

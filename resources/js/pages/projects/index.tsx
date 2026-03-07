@@ -14,7 +14,11 @@ interface Project {
 
 interface ProjectsProps {
     auth?: {
-        user?: any;
+        user?: {
+            name: string;
+            email: string;
+            [key: string]: unknown;
+        };
     };
 }
 
@@ -121,8 +125,6 @@ export default function Projects({ auth }: ProjectsProps) {
             category: 'AI',
         },
     ];
-
-    const categories = ['All', 'React', 'Vue', 'AI'];
 
     return (
         <>

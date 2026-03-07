@@ -3,7 +3,11 @@ import { useState } from 'react';
 
 interface NavigationProps {
     auth?: {
-        user?: any;
+        user?: {
+            name: string;
+            email: string;
+            [key: string]: unknown;
+        };
     };
 }
 
