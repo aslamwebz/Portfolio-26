@@ -906,7 +906,7 @@ export default function Dashboard({
                 />
             </Head>
 
-            <div className="min-h-screen bg-slate-900 text-white">
+            <div className="min-h-screen bg-[#0A0A0A] text-white">
                 <Navigation auth={auth} />
 
                 {/* Cinematic Hero Section */}
@@ -1273,7 +1273,10 @@ export default function Dashboard({
                 </section>
 
                 {/* About Section */}
-                <section id="about" className="bg-slate-800/50 py-24">
+                <section
+                    id="about"
+                    className="relative border-t border-white/5 bg-[#050505] py-24"
+                >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <AnimatedSection className="grid items-center gap-16 lg:grid-cols-2">
                             {/* Left - Visual */}
@@ -1282,7 +1285,7 @@ export default function Dashboard({
                                 className="relative flex flex-col justify-center"
                             >
                                 <div className="from-primary-400/10 absolute -inset-4 rounded-2xl bg-gradient-to-r to-blue-500/10 opacity-50"></div>
-                                <div className="relative rounded-xl border border-slate-700 bg-slate-800 p-8">
+                                <div className="relative rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
                                     <div className="mb-6 flex items-center gap-4">
                                         <div className="bg-primary-400/10 border-primary-400/30 flex h-16 w-16 items-center justify-center rounded-xl border">
                                             <svg
@@ -1310,7 +1313,7 @@ export default function Dashboard({
                                     </div>
 
                                     <div className="space-y-4 font-mono text-sm">
-                                        <div className="flex justify-between border-b border-slate-700 py-2">
+                                        <div className="flex justify-between border-b border-white/5 py-2">
                                             <span className="text-slate-400">
                                                 Experience
                                             </span>
@@ -1318,19 +1321,19 @@ export default function Dashboard({
                                                 12+ Years
                                             </span>
                                         </div>
-                                        <div className="flex justify-between border-b border-slate-700 py-2">
+                                        <div className="flex justify-between border-b border-white/5 py-2">
                                             <span className="text-slate-400">
                                                 Focus
                                             </span>
                                             <span>Backend Architecture</span>
                                         </div>
-                                        <div className="flex justify-between border-b border-slate-700 py-2">
+                                        <div className="flex justify-between border-b border-white/5 py-2">
                                             <span className="text-slate-400">
-                                                Stack
+                                                Location
                                             </span>
-                                            <span>TALL Stack</span>
+                                            <span>Lisbon, Portugal</span>
                                         </div>
-                                        <div className="flex justify-between border-b border-slate-700 py-2">
+                                        <div className="flex justify-between border-b border-white/5 py-2">
                                             <span className="text-slate-400">
                                                 Location
                                             </span>
@@ -1353,13 +1356,13 @@ export default function Dashboard({
                                 variants={slideInRight}
                                 className="flex flex-col justify-center"
                             >
-                                <div className="mb-4 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                <div className="mb-4 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
                                     ABOUT ME
                                 </div>
 
                                 <h2 className="mb-6 text-2xl font-bold sm:text-3xl">
                                     From Infrastructure to
-                                    <span className="gradient-text">
+                                    <span className="hero-gradient-text">
                                         {' '}
                                         Architecture
                                     </span>
@@ -1433,16 +1436,16 @@ export default function Dashboard({
                 </section>
 
                 {/* Why Hire Me Section */}
-                <section className="border-y border-slate-800 bg-slate-900 py-24">
+                <section className="border-y border-white/5 bg-[#0A0A0A] py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <Reveal>
                             <div className="mb-16 text-center">
-                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
                                     WHY HIRE ME
                                 </div>
                                 <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
                                     What Sets Me
-                                    <span className="gradient-text">
+                                    <span className="hero-gradient-text">
                                         {' '}
                                         Apart
                                     </span>
@@ -1460,7 +1463,7 @@ export default function Dashboard({
                                     key={index}
                                     delay={index as 0 | 1 | 2 | 3}
                                 >
-                                    <div className="card-hover group hover:border-primary-400/30 rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:bg-slate-800">
+                                    <div className="card-hover group hover:border-primary-400/30 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
                                         <div className="bg-primary-400/10 text-primary-400 mb-4 flex h-12 w-12 items-center justify-center rounded-lg transition-transform group-hover:scale-110">
                                             {item.icon}
                                         </div>
@@ -1478,15 +1481,15 @@ export default function Dashboard({
                 </section>
 
                 {/* Tech Stack Section */}
-                <section id="stack" className="bg-slate-800/50 py-24">
+                <section id="stack" className="bg-[#050505] py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-16 text-center">
-                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                            <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
                                 TECH STACK
                             </div>
                             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
                                 Tools I Use to Build
-                                <span className="gradient-text">
+                                <span className="hero-gradient-text">
                                     {' '}
                                     Scalable Systems
                                 </span>
@@ -1502,7 +1505,7 @@ export default function Dashboard({
                             {categorization.map((category) => (
                                 <div key={category.title} className="space-y-8">
                                     <div className="flex flex-col items-center gap-4 text-center">
-                                        <div className="hover:border-primary-400/30 flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-700 bg-slate-800/80 shadow-xl transition-all hover:scale-110">
+                                        <div className="hover:border-primary-400/30 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-xl backdrop-blur-md transition-all hover:scale-110">
                                             {category.icon}
                                         </div>
                                         <h3 className="text-primary-400 text-xs font-bold tracking-[0.2em] uppercase">
@@ -1515,7 +1518,7 @@ export default function Dashboard({
                                                 key={icon.name}
                                                 className="group relative flex flex-col items-center gap-2"
                                             >
-                                                <div className="group-hover:border-primary-400/20 flex h-11 w-11 items-center justify-center rounded-xl border border-slate-700/50 bg-slate-800 p-2.5 shadow-lg transition-all group-hover:scale-110 group-hover:bg-slate-700">
+                                                <div className="group-hover:border-primary-400/20 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2.5 shadow-lg backdrop-blur-sm transition-all group-hover:scale-110 group-hover:bg-white/10">
                                                     <img
                                                         src={icon.url}
                                                         alt={icon.name}
@@ -1535,15 +1538,21 @@ export default function Dashboard({
                 </section>
 
                 {/* Projects Section - 2 Pane Carousel */}
-                <section id="projects" className="bg-slate-800/50 py-24">
+                <section
+                    id="projects"
+                    className="border-t border-white/5 bg-[#0A0A0A] py-24"
+                >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-16 text-center">
-                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                            <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
                                 CASE STUDIES
                             </div>
                             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
                                 Featured
-                                <span className="gradient-text"> Projects</span>
+                                <span className="hero-gradient-text">
+                                    {' '}
+                                    Projects
+                                </span>
                             </h2>
                             <p className="mx-auto max-w-2xl text-slate-400">
                                 A collection of projects I&apos;ve built,
@@ -1560,7 +1569,7 @@ export default function Dashboard({
                                         key={project.id}
                                         delay={(index % 4) as 0 | 1 | 2 | 3}
                                     >
-                                        <div className="group hover:border-primary-400/30 overflow-hidden rounded-2xl border border-slate-700 bg-slate-800/50 transition-all">
+                                        <div className="group hover:border-primary-400/30 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all">
                                             <div className="relative h-48 overflow-hidden">
                                                 <img
                                                     src={project.image}
@@ -1568,7 +1577,7 @@ export default function Dashboard({
                                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                 />
                                                 <div className="absolute top-4 left-4">
-                                                    <span className="text-primary-400 border-primary-400/20 rounded-full border bg-slate-900/80 px-3 py-1 text-[10px] font-bold backdrop-blur-sm">
+                                                    <span className="text-primary-400 border-primary-400/20 rounded-full border bg-black/60 px-3 py-1 text-[10px] font-bold backdrop-blur-md">
                                                         {project.category}
                                                     </span>
                                                 </div>
@@ -1586,7 +1595,7 @@ export default function Dashboard({
                                                         .map((tech) => (
                                                             <span
                                                                 key={tech}
-                                                                className="rounded bg-slate-900 px-2 py-0.5 text-[10px] text-slate-400"
+                                                                className="rounded border border-white/5 bg-black/40 px-2 py-0.5 text-[10px] text-slate-400 backdrop-blur-sm"
                                                             >
                                                                 {tech}
                                                             </span>
@@ -1621,7 +1630,7 @@ export default function Dashboard({
                                 ))}
                             </div>
                         ) : (
-                            <div className="rounded-xl border border-dashed border-slate-700 py-20 text-center">
+                            <div className="rounded-xl border border-dashed border-white/10 bg-white/5 py-20 text-center">
                                 <p className="text-slate-500">
                                     No projects found. Add some in the admin
                                     panel!
@@ -1632,16 +1641,19 @@ export default function Dashboard({
                 </section>
 
                 {/* Certifications Section - Adjacent to Projects */}
-                <section id="certifications" className="bg-slate-900 py-24">
+                <section
+                    id="certifications"
+                    className="border-t border-white/5 bg-[#050505] py-24"
+                >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <Reveal>
                             <div className="mb-16 text-center">
-                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
                                     CREDENTIALS
                                 </div>
                                 <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
                                     Certifications &
-                                    <span className="gradient-text">
+                                    <span className="hero-gradient-text">
                                         {' '}
                                         Trust
                                     </span>
@@ -1658,14 +1670,14 @@ export default function Dashboard({
                                     >
                                         <Dialog>
                                             <DialogTrigger asChild>
-                                                <div className="card-hover group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-xl border border-slate-700 bg-slate-800/50 p-0 transition-all">
-                                                    <div className="relative h-48 w-full overflow-hidden bg-slate-950">
+                                                <div className="card-hover group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 p-0 backdrop-blur-md transition-all hover:bg-white/10">
+                                                    <div className="relative h-48 w-full overflow-hidden bg-[#0A0A0A]">
                                                         <img
                                                             src={cert.image}
                                                             alt={cert.name}
                                                             className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                                                         />
-                                                        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 transition-opacity group-hover:opacity-100">
+                                                        <div className="absolute inset-0 flex items-center justify-center bg-[#0A0A0A]/60 opacity-0 transition-opacity group-hover:opacity-100">
                                                             <div className="bg-primary-400/80 rounded-full p-3 text-slate-900">
                                                                 <svg
                                                                     className="h-6 w-6"
@@ -1706,9 +1718,9 @@ export default function Dashboard({
                                                     </div>
                                                 </div>
                                             </DialogTrigger>
-                                            <DialogContent className="max-w-4xl border-slate-700 bg-slate-900 p-0 text-white">
+                                            <DialogContent className="max-w-4xl border-white/10 bg-[#0A0A0A] p-0 text-white shadow-2xl">
                                                 <div className="grid md:grid-cols-2">
-                                                    <div className="flex items-center justify-center bg-slate-950 p-6">
+                                                    <div className="flex items-center justify-center border-r border-white/5 bg-[#050505] p-6">
                                                         <img
                                                             src={cert.image}
                                                             alt={cert.name}
@@ -1780,15 +1792,18 @@ export default function Dashboard({
                 </section>
 
                 {/* Experience Section */}
-                <section id="experience" className="py-24">
+                <section id="experience" className="bg-[#0A0A0A] py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-16 text-center">
-                            <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                            <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
                                 EXPERIENCE
                             </div>
                             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
                                 Professional
-                                <span className="gradient-text"> Journey</span>
+                                <span className="hero-gradient-text">
+                                    {' '}
+                                    Journey
+                                </span>
                             </h2>
                         </div>
 
@@ -1798,12 +1813,12 @@ export default function Dashboard({
                                     key={index}
                                     className="relative pl-8 sm:pl-0"
                                 >
-                                    <div className="absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-slate-700 sm:block"></div>
+                                    <div className="absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-white/10 sm:block"></div>
                                     <div
-                                        className={`absolute top-6 left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-4 border-slate-800 sm:flex ${
+                                        className={`absolute top-6 left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-4 border-[#0A0A0A] sm:flex ${
                                             exp.isCurrent
                                                 ? 'bg-primary-400'
-                                                : 'bg-slate-600'
+                                                : 'bg-white/20'
                                         }`}
                                     ></div>
 
@@ -1827,7 +1842,7 @@ export default function Dashboard({
                                             )}
                                         </div>
                                         <div
-                                            className={`rounded-xl border border-slate-700 bg-slate-800 p-6 ${
+                                            className={`rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm ${
                                                 index % 2 === 1
                                                     ? 'sm:order-0 sm:mr-8'
                                                     : 'sm:ml-8'
@@ -1873,16 +1888,19 @@ export default function Dashboard({
                 </section>
 
                 {/* Testimonials Section */}
-                <section className="bg-slate-800/30 py-24">
+                <section className="border-y border-white/5 bg-[#050505] py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <Reveal>
                             <div className="mb-16 text-center">
-                                <div className="mb-6 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
                                     TESTIMONIALS
                                 </div>
                                 <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
                                     What People
-                                    <span className="gradient-text"> Say</span>
+                                    <span className="hero-gradient-text">
+                                        {' '}
+                                        Say
+                                    </span>
                                 </h2>
                                 <p className="mx-auto max-w-2xl text-slate-400">
                                     Feedback from colleagues and clients I've
@@ -1894,7 +1912,7 @@ export default function Dashboard({
                         <div className="grid gap-6 md:grid-cols-3">
                             {testimonials.map((testimonial, index) => (
                                 <Reveal key={index} delay={index as 0 | 1 | 2}>
-                                    <div className="card-hover group flex h-full flex-col rounded-xl border border-slate-700 bg-slate-800/50 p-6 transition-all hover:border-teal-400/30">
+                                    <div className="card-hover group flex h-full flex-col rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-teal-400/30 hover:bg-white/10">
                                         <div className="mb-4 text-4xl text-teal-400/30">
                                             "
                                         </div>
@@ -1925,7 +1943,7 @@ export default function Dashboard({
                 {/* Contact / Footer Section */}
                 <section
                     id="contact"
-                    className="border-t border-slate-800 bg-slate-900 py-24"
+                    className="border-t border-white/5 bg-[#0A0A0A] py-24"
                 >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mx-auto max-w-3xl text-center">
@@ -1935,7 +1953,10 @@ export default function Dashboard({
                             </div>
                             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
                                 Ready to Join Your
-                                <span className="gradient-text"> Team</span>
+                                <span className="hero-gradient-text">
+                                    {' '}
+                                    Team
+                                </span>
                             </h2>
                             <p className="mb-8 text-lg text-slate-400">
                                 I'm currently looking for my next challenge.

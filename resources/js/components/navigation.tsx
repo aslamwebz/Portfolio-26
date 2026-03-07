@@ -30,7 +30,7 @@ export default function Navigation({ auth }: NavigationProps) {
     };
 
     return (
-        <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-slate-900">
+        <nav className="fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-[#0A0A0A]/80 backdrop-blur-md">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
@@ -115,7 +115,7 @@ export default function Navigation({ auth }: NavigationProps) {
 
             {/* Mobile Menu */}
             <div
-                className={`border-b border-slate-700 bg-slate-800 transition-all duration-200 md:hidden ${
+                className={`border-b border-white/5 bg-[#0A0A0A]/95 backdrop-blur-md transition-all duration-200 md:hidden ${
                     isOpen
                         ? 'max-h-96 opacity-100'
                         : 'max-h-0 overflow-hidden opacity-0'
