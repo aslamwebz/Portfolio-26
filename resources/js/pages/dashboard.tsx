@@ -1,7 +1,7 @@
 import { Head, usePage } from '@inertiajs/react';
 import type { Variants } from 'framer-motion';
 import { motion, useInView, animate } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import Navigation from '@/components/navigation';
 import { Reveal } from '@/components/reveal';
 import {
@@ -137,6 +137,33 @@ export default function Dashboard({
             if (hero) hero.removeEventListener('mousemove', handleMouseMove);
         };
     }, []);
+
+    const [selectedCertIndex, setSelectedCertIndex] = useState<number | null>(
+        null,
+    );
+
+    const nextCert = useCallback(() => {
+        if (selectedCertIndex === null) return;
+        setSelectedCertIndex((prev) => (prev! + 1) % dbCertifications.length);
+    }, [selectedCertIndex, dbCertifications.length]);
+
+    const prevCert = useCallback(() => {
+        if (selectedCertIndex === null) return;
+        setSelectedCertIndex(
+            (prev) =>
+                (prev! - 1 + dbCertifications.length) % dbCertifications.length,
+        );
+    }, [selectedCertIndex, dbCertifications.length]);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (selectedCertIndex === null) return;
+            if (e.key === 'ArrowRight') nextCert();
+            if (e.key === 'ArrowLeft') prevCert();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedCertIndex, nextCert, prevCert]);
 
     const categorization = [
         {
@@ -612,8 +639,10 @@ export default function Dashboard({
         year: c.year,
         description: c.description || '',
         image: c.image
-            ? `/storage/${c.image}`
-            : '/img/certifications/ccna1.jpg',
+            ? c.image.startsWith('/') || c.image.startsWith('http')
+                ? c.image
+                : `/storage/${c.image}`
+            : '/img/certifications/MCSA.jpg',
         icon: (
             <svg
                 className="h-6 w-6"
@@ -1410,19 +1439,174 @@ export default function Dashboard({
                                         key={index}
                                         delay={(index % 3) as 0 | 1 | 2}
                                     >
-                                        <Dialog>
-                                            <DialogTrigger asChild>
-                                                <div className="card-hover group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 p-0 backdrop-blur-md transition-all hover:bg-white/10">
-                                                    <div className="relative h-48 w-full overflow-hidden bg-[#0A0A0A]">
-                                                        <img
-                                                            src={cert.image}
-                                                            alt={cert.name}
-                                                            className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                                        <div
+                                            onClick={() =>
+                                                setSelectedCertIndex(index)
+                                            }
+                                            className="card-hover group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 p-0 backdrop-blur-md transition-all hover:bg-white/10"
+                                        >
+                                            <div className="relative h-48 w-full overflow-hidden bg-[#0A0A0A]">
+                                                <img
+                                                    src={cert.image}
+                                                    alt={cert.name}
+                                                    className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center bg-[#0A0A0A]/60 opacity-0 transition-opacity group-hover:opacity-100">
+                                                    <div className="bg-primary-400/80 rounded-full p-3 text-slate-900">
+                                                        <svg
+                                                            className="h-6 w-6"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6"
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="p-6">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="bg-primary-400/10 text-primary-400 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg">
+                                                        {cert.icon}
+                                                    </div>
+                                                    <div className="min-w-0">
+                                                        <div className="truncate font-semibold transition-colors group-hover:text-white">
+                                                            {cert.name}
+                                                        </div>
+                                                        <div className="text-sm text-slate-500">
+                                                            {cert.issuer} •{' '}
+                                                            {cert.year}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Reveal>
+                                ))}
+
+                                <Dialog
+                                    open={selectedCertIndex !== null}
+                                    onOpenChange={(open) =>
+                                        !open && setSelectedCertIndex(null)
+                                    }
+                                >
+                                    <DialogContent className="max-w-[95vw] overflow-hidden border-white/10 bg-[#0A0A0A] p-0 text-white shadow-2xl xl:max-w-screen-2xl">
+                                        {selectedCertIndex !== null && (
+                                            <div className="relative grid md:grid-cols-2">
+                                                {/* Navigation Buttons */}
+                                                <button
+                                                    onClick={prevCert}
+                                                    className="absolute top-1/2 left-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                >
+                                                    <svg
+                                                        className="h-6 w-6"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M15 19l-7-7 7-7"
                                                         />
-                                                        <div className="absolute inset-0 flex items-center justify-center bg-[#0A0A0A]/60 opacity-0 transition-opacity group-hover:opacity-100">
-                                                            <div className="bg-primary-400/80 rounded-full p-3 text-slate-900">
+                                                    </svg>
+                                                </button>
+                                                <button
+                                                    onClick={nextCert}
+                                                    className="absolute top-1/2 right-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                >
+                                                    <svg
+                                                        className="h-6 w-6"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M9 5l7 7-7 7"
+                                                        />
+                                                    </svg>
+                                                </button>
+
+                                                {/* Left: Image */}
+                                                <div className="flex items-center justify-center border-r border-white/5 bg-[#050505] p-6 md:p-12">
+                                                    <img
+                                                        src={
+                                                            displayCertifications[
+                                                                selectedCertIndex
+                                                            ].image
+                                                        }
+                                                        alt={
+                                                            displayCertifications[
+                                                                selectedCertIndex
+                                                            ].name
+                                                        }
+                                                        className="h-auto max-h-[75vh] w-full rounded-lg object-contain shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+                                                    />
+                                                </div>
+
+                                                {/* Right: Details */}
+                                                <div className="flex flex-col justify-center p-8 md:p-12">
+                                                    <DialogHeader className="mb-6">
+                                                        <div className="bg-primary-400/10 text-primary-400 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl">
+                                                            {
+                                                                displayCertifications[
+                                                                    selectedCertIndex
+                                                                ].icon
+                                                            }
+                                                        </div>
+                                                        <DialogTitle className="text-2xl font-bold text-white md:text-3xl lg:text-4xl">
+                                                            {
+                                                                displayCertifications[
+                                                                    selectedCertIndex
+                                                                ].name
+                                                            }
+                                                        </DialogTitle>
+                                                        <p className="text-primary-400 mt-2 font-mono text-sm tracking-widest uppercase">
+                                                            {
+                                                                displayCertifications[
+                                                                    selectedCertIndex
+                                                                ].issuer
+                                                            }{' '}
+                                                            •{' '}
+                                                            {
+                                                                displayCertifications[
+                                                                    selectedCertIndex
+                                                                ].year
+                                                            }
+                                                        </p>
+                                                    </DialogHeader>
+                                                    <div className="space-y-4">
+                                                        <p className="text-lg leading-relaxed text-slate-400 lg:text-xl">
+                                                            {
+                                                                displayCertifications[
+                                                                    selectedCertIndex
+                                                                ].description
+                                                            }
+                                                        </p>
+                                                        <div className="pt-8">
+                                                            <a
+                                                                href={
+                                                                    displayCertifications[
+                                                                        selectedCertIndex
+                                                                    ].image
+                                                                }
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-8 py-4 text-base font-bold text-slate-900 shadow-[0_0_20px_rgba(34,197,94,0.3)] transition-all hover:scale-105 active:scale-95"
+                                                            >
+                                                                View Full
+                                                                Certificate
                                                                 <svg
-                                                                    className="h-6 w-6"
+                                                                    className="h-5 w-5"
                                                                     fill="none"
                                                                     stroke="currentColor"
                                                                     viewBox="0 0 24 24"
@@ -1433,95 +1617,17 @@ export default function Dashboard({
                                                                         strokeWidth={
                                                                             2
                                                                         }
-                                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m4-3H6"
+                                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                                                                     />
                                                                 </svg>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="p-6">
-                                                        <div className="flex items-center gap-4">
-                                                            <div className="bg-primary-400/10 text-primary-400 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg">
-                                                                {cert.icon}
-                                                            </div>
-                                                            <div className="min-w-0">
-                                                                <div className="truncate font-semibold transition-colors group-hover:text-white">
-                                                                    {cert.name}
-                                                                </div>
-                                                                <div className="text-sm text-slate-500">
-                                                                    {
-                                                                        cert.issuer
-                                                                    }{' '}
-                                                                    •{' '}
-                                                                    {cert.year}
-                                                                </div>
-                                                            </div>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </DialogTrigger>
-                                            <DialogContent className="max-w-4xl border-white/10 bg-[#0A0A0A] p-0 text-white shadow-2xl">
-                                                <div className="grid md:grid-cols-2">
-                                                    <div className="flex items-center justify-center border-r border-white/5 bg-[#050505] p-6">
-                                                        <img
-                                                            src={cert.image}
-                                                            alt={cert.name}
-                                                            className="h-auto max-h-[70vh] w-full object-contain"
-                                                        />
-                                                    </div>
-                                                    <div className="flex flex-col justify-center p-8">
-                                                        <DialogHeader className="mb-6">
-                                                            <div className="bg-primary-400/10 text-primary-400 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl">
-                                                                {cert.icon}
-                                                            </div>
-                                                            <DialogTitle className="text-2xl font-bold text-white">
-                                                                {cert.name}
-                                                            </DialogTitle>
-                                                            <p className="text-primary-400 mt-2 font-mono text-sm tracking-widest uppercase">
-                                                                {cert.issuer} •{' '}
-                                                                {cert.year}
-                                                            </p>
-                                                        </DialogHeader>
-                                                        <div className="space-y-4">
-                                                            <p className="text-slate-400">
-                                                                {
-                                                                    cert.description
-                                                                }
-                                                            </p>
-                                                            <div className="pt-6">
-                                                                <a
-                                                                    href={
-                                                                        cert.image
-                                                                    }
-                                                                    target="_blank"
-                                                                    className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold text-slate-900 transition-colors"
-                                                                >
-                                                                    View Full
-                                                                    Certificate
-                                                                    <svg
-                                                                        className="h-4 w-4"
-                                                                        fill="none"
-                                                                        stroke="currentColor"
-                                                                        viewBox="0 0 24 24"
-                                                                    >
-                                                                        <path
-                                                                            strokeLinecap="round"
-                                                                            strokeLinejoin="round"
-                                                                            strokeWidth={
-                                                                                2
-                                                                            }
-                                                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                                                        />
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </DialogContent>
-                                        </Dialog>
-                                    </Reveal>
-                                ))}
+                                            </div>
+                                        )}
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                         ) : (
                             <div className="rounded-xl border border-dashed border-slate-700 py-20 text-center">
