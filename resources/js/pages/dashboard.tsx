@@ -208,15 +208,15 @@ export default function Dashboard({
                 },
                 {
                     name: 'REST',
-                    url: 'https://cdn.simpleicons.org/fastapi/white',
+                    url: 'https://cdn.simpleicons.org/fastapi/ffffff',
                 },
                 {
                     name: 'RBAC',
-                    url: 'https://cdn.simpleicons.org/auth0/white',
+                    url: 'https://cdn.simpleicons.org/auth0/ffffff',
                 },
                 {
                     name: 'OAuth 2.0',
-                    url: 'https://cdn.simpleicons.org/auth0/white',
+                    url: 'https://cdn.simpleicons.org/auth0/ffffff',
                 },
                 {
                     name: 'Redis',
@@ -224,23 +224,23 @@ export default function Dashboard({
                 },
                 {
                     name: 'Events',
-                    url: 'https://cdn.simpleicons.org/socketdotio/white',
+                    url: 'https://cdn.simpleicons.org/socketdotio/ffffff',
                 },
                 {
                     name: 'Sanctum',
-                    url: 'https://cdn.simpleicons.org/jsonwebtokens/white',
+                    url: 'https://cdn.simpleicons.org/jsonwebtokens/ffffff',
                 },
                 {
                     name: 'Passport',
-                    url: 'https://cdn.simpleicons.org/passport/white',
+                    url: 'https://cdn.simpleicons.org/passport/ffffff',
                 },
                 {
                     name: 'Queues',
-                    url: 'https://cdn.simpleicons.org/rabbitmq/white',
+                    url: 'https://cdn.simpleicons.org/rabbitmq/ffffff',
                 },
                 {
                     name: 'Horizon',
-                    url: 'https://cdn.simpleicons.org/laravelhorizon/white',
+                    url: 'https://cdn.simpleicons.org/laravelhorizon/ffffff',
                 },
                 {
                     name: 'Multi-tenant',
@@ -332,7 +332,7 @@ export default function Dashboard({
                 },
                 {
                     name: 'GitHub',
-                    url: 'https://cdn.simpleicons.org/github/white',
+                    url: 'https://cdn.simpleicons.org/github/ffffff',
                 },
                 {
                     name: 'Docker',
@@ -380,7 +380,7 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'PHPUnit',
-                    url: 'https://cdn.simpleicons.org/testinglibrary/white',
+                    url: 'https://cdn.simpleicons.org/testinglibrary/ffffff',
                 },
                 {
                     name: 'Pest',
@@ -388,7 +388,7 @@ export default function Dashboard({
                 },
                 {
                     name: 'OpenAPI',
-                    url: 'https://cdn.simpleicons.org/openapiinitiative/white',
+                    url: 'https://cdn.simpleicons.org/openapiinitiative/ffffff',
                 },
                 {
                     name: 'Postman',
@@ -396,15 +396,15 @@ export default function Dashboard({
                 },
                 {
                     name: 'Sentry',
-                    url: 'https://cdn.simpleicons.org/sentry/white',
+                    url: 'https://cdn.simpleicons.org/sentry/ffffff',
                 },
                 {
                     name: 'Telescope',
-                    url: 'https://cdn.simpleicons.org/opentelemetry/white',
+                    url: 'https://cdn.simpleicons.org/opentelemetry/ffffff',
                 },
                 {
                     name: 'Logrocket',
-                    url: 'https://cdn.simpleicons.org/rocketdotchat/white',
+                    url: 'https://cdn.simpleicons.org/rocketdotchat/ffffff',
                 },
             ],
         },
@@ -428,11 +428,11 @@ export default function Dashboard({
             icons: [
                 {
                     name: 'Claude Code',
-                    url: 'https://cdn.simpleicons.org/anthropic/white',
+                    url: 'https://cdn.simpleicons.org/anthropic/ffffff',
                 },
                 {
                     name: 'Cursor',
-                    url: 'https://cdn.simpleicons.org/cursor/white',
+                    url: 'https://cdn.simpleicons.org/cursor/ffffff',
                 },
                 {
                     name: 'Windsurf',
@@ -444,19 +444,19 @@ export default function Dashboard({
                 },
                 {
                     name: 'Open Code',
-                    url: 'https://cdn.simpleicons.org/vuedotjs/white',
+                    url: 'https://cdn.simpleicons.org/vuedotjs/ffffff',
                 },
                 {
                     name: 'Ollama',
-                    url: 'https://cdn.simpleicons.org/ollama/white',
+                    url: 'https://cdn.simpleicons.org/ollama/ffffff',
                 },
                 {
                     name: 'LRVL Boost',
-                    url: 'https://cdn.simpleicons.org/lightning/white',
+                    url: 'https://cdn.simpleicons.org/lightning/ffffff',
                 },
                 {
                     name: 'AI SDK',
-                    url: 'https://cdn.simpleicons.org/openai/white',
+                    url: 'https://cdn.simpleicons.org/openai/ffffff',
                 },
             ],
         },
@@ -490,7 +490,7 @@ export default function Dashboard({
                 },
                 {
                     name: 'Pint',
-                    url: 'https://cdn.simpleicons.org/prettier/white',
+                    url: 'https://cdn.simpleicons.org/prettier/ffffff',
                 },
                 {
                     name: 'PHPStan',
