@@ -66,10 +66,10 @@ export default function Navigation({ auth }: NavigationProps) {
                         </a>
                         {auth?.user && (
                             <Link
-                                href="/dashboard"
+                                href="/admin"
                                 className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
                             >
-                                Dashboard
+                                Admin
                             </Link>
                         )}
                     </div>
@@ -141,10 +141,10 @@ export default function Navigation({ auth }: NavigationProps) {
                     </a>
                     {auth?.user && (
                         <Link
-                            href="/dashboard"
+                            href="/admin"
                             className="block text-slate-400 transition-colors hover:text-white"
                         >
-                            Dashboard
+                            Admin
                         </Link>
                     )}
                 </div>
