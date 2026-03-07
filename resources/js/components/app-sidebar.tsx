@@ -12,15 +12,19 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { admin } from '@/routes';
 import type { NavItem } from '@/types';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Admin',
-        href: admin(),
+        title: 'Dashboard',
+        href: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: 'Backend (Admin)',
+        href: '/admin',
+        icon: LayoutGrid, // Or another icon
     },
 ];
 
@@ -44,7 +48,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={admin()} prefetch>
+                            <Link href="/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

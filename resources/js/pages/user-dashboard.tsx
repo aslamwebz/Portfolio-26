@@ -1,19 +1,18 @@
 import { Head } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
-import { admin } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Admin',
-        href: admin().url,
+        title: 'Dashboard',
+        href: '/dashboard',
     },
 ];
 
-export default function Admin() {
+export default function UserDashboard() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Admin" />
+            <Head title="Dashboard" />
             <div className="mx-auto max-w-7xl space-y-6 p-6">
                 {/* Welcome Message */}
                 <div className="rounded-xl border border-slate-700 bg-slate-800 p-6">

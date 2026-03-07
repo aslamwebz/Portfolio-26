@@ -14,9 +14,9 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('admin', function () {
-    return Inertia::render('admin');
-})->middleware(['auth', 'verified'])->name('admin');
+Route::get('dashboard', function () {
+    return Inertia::render('user-dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/projects', function () {
     return Inertia::render('projects/index', [
@@ -24,4 +24,4 @@ Route::get('/projects', function () {
     ]);
 })->name('projects');
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

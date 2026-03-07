@@ -65,12 +65,20 @@ export default function Navigation({ auth }: NavigationProps) {
                             Contact
                         </a>
                         {auth?.user && (
-                            <Link
-                                href="/admin"
-                                className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
-                            >
-                                Admin
-                            </Link>
+                            <>
+                                <Link
+                                    href="/dashboard"
+                                    className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
+                                >
+                                    Dashboard
+                                </Link>
+                                <a
+                                    href="/admin"
+                                    className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
+                                >
+                                    Admin
+                                </a>
+                            </>
                         )}
                     </div>
 
@@ -140,12 +148,20 @@ export default function Navigation({ auth }: NavigationProps) {
                         Contact
                     </a>
                     {auth?.user && (
-                        <Link
-                            href="/admin"
-                            className="block text-slate-400 transition-colors hover:text-white"
-                        >
-                            Admin
-                        </Link>
+                        <>
+                            <Link
+                                href="/dashboard"
+                                className="block text-slate-400 transition-colors hover:text-white"
+                            >
+                                Dashboard
+                            </Link>
+                            <a
+                                href="/admin"
+                                className="block text-slate-400 transition-colors hover:text-white"
+                            >
+                                Admin
+                            </a>
+                        </>
                     )}
                 </div>
             </div>
