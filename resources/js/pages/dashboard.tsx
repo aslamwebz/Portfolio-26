@@ -10,8 +10,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { motion, useInView, Variants } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, Variants, animate } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 
 interface DbProject {
     id: number;
@@ -92,6 +92,35 @@ const fadeUp: Variants = {
     },
 };
 
+function AnimatedCounter({
+    from,
+    to,
+    duration = 2,
+}: {
+    from: number;
+    to: number;
+    duration?: number;
+}) {
+    const nodeRef = useRef<HTMLSpanElement>(null);
+    const isInView = useInView(nodeRef, { once: true, margin: '-50px' });
+
+    useEffect(() => {
+        if (!isInView || !nodeRef.current) return;
+        const controls = animate(from, to, {
+            duration,
+            ease: 'easeOut',
+            onUpdate(value) {
+                if (nodeRef.current) {
+                    nodeRef.current.textContent = Math.round(value).toString();
+                }
+            },
+        });
+        return () => controls.stop();
+    }, [from, to, duration, isInView]);
+
+    return <span ref={nodeRef}>{from}</span>;
+}
+
 function AnimatedSection({
     children,
     className = '',
@@ -124,6 +153,23 @@ export default function Dashboard({
     dbCertifications?: DbCertification[];
 }) {
     const { auth } = usePage().props;
+    const heroContentRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!heroContentRef.current) return;
+            const rect = heroContentRef.current.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            heroContentRef.current.style.setProperty('--mouse-x', `${x}px`);
+            heroContentRef.current.style.setProperty('--mouse-y', `${y}px`);
+        };
+        const hero = document.getElementById('hero-section');
+        if (hero) hero.addEventListener('mousemove', handleMouseMove);
+        return () => {
+            if (hero) hero.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, []);
 
     const categorization = [
         {
@@ -863,177 +909,367 @@ export default function Dashboard({
             <div className="min-h-screen bg-slate-900 text-white">
                 <Navigation auth={auth} />
 
-                {/* Hero Section */}
-                <section className="relative flex min-h-screen items-center overflow-hidden pt-16">
-                    {/* Particles Background */}
-                    <Particles />
+                {/* Cinematic Hero Section */}
+                <section
+                    id="hero-section"
+                    className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#0A0A0A] pt-20"
+                >
+                    {/* Background layers */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,20,20,1)_0%,rgba(0,0,0,1)_100%)]" />
+                    <div className="grain-overlay absolute inset-0" />
 
-                    {/* Background Grid - simplified */}
-                    <div className="pointer-events-none absolute inset-0 opacity-[0.02]">
-                        <div
-                            className="absolute inset-0"
-                            style={{
-                                backgroundImage:
-                                    'radial-gradient(circle, #34d399 1px, transparent 1px)',
-                                backgroundSize: '40px 40px',
-                            }}
-                        ></div>
+                    {/* Spotlight mouse tracker */}
+                    <div
+                        ref={heroContentRef}
+                        className="hero-spotlight absolute inset-0 z-0"
+                    />
+
+                    {/* Accent Lines */}
+                    <div className="pointer-events-none absolute inset-0 flex justify-between px-[5vw] opacity-10">
+                        {[...Array(6)].map((_, i) => (
+                            <div
+                                key={i}
+                                className="relative h-full w-[1px] bg-slate-800"
+                            >
+                                <div
+                                    className="animate-beam absolute top-0 left-0 h-32 w-full bg-gradient-to-b from-transparent via-indigo-500 to-transparent"
+                                    style={{
+                                        animationDelay: `${i * 1.5}s`,
+                                        opacity: i % 2 === 0 ? 0.6 : 0.3,
+                                    }}
+                                />
+                            </div>
+                        ))}
                     </div>
 
-                    {/* Animated glow orbs */}
-                    <div className="bg-primary-400/10 pointer-events-none absolute top-1/2 right-0 h-[600px] w-[600px] translate-x-1/4 -translate-y-1/2 animate-pulse rounded-full blur-[120px]" />
-                    <div className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/4 translate-y-1/4 rounded-full bg-purple-500/5 blur-[100px]" />
-
-                    <div className="relative z-10 mx-auto flex w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-                        <div className="grid w-full items-start gap-12 lg:grid-cols-2">
-                            {/* Left Content */}
+                    <div className="relative z-10 mx-auto flex w-full max-w-[90rem] flex-col gap-16 px-4 sm:px-6 lg:px-8 xl:flex-row xl:items-center xl:justify-between xl:gap-8">
+                        {/* Left: Typography & Hero Messaging */}
+                        <div className="flex w-full flex-col xl:w-1/2 xl:pr-12">
                             <motion.div
-                                variants={containerVariants}
-                                initial="hidden"
-                                animate="visible"
-                                className="flex flex-col justify-center"
+                                initial={{
+                                    opacity: 0,
+                                    scale: 0.9,
+                                    filter: 'blur(10px)',
+                                }}
+                                animate={{
+                                    opacity: 1,
+                                    scale: 1,
+                                    filter: 'blur(0px)',
+                                }}
+                                transition={{
+                                    duration: 0.8,
+                                    ease: [0.22, 1, 0.36, 1],
+                                }}
+                                className="mb-8 inline-flex items-center gap-3 self-start rounded-full border border-white/5 bg-white/5 px-4 py-2 text-xs font-semibold tracking-widest text-slate-300 uppercase backdrop-blur-md"
                             >
-                                <motion.div
-                                    variants={fadeUp}
-                                    className="mb-6 inline-flex w-fit items-center rounded-full border border-green-400/30 bg-green-400/10 px-4 py-1.5 font-mono text-sm font-medium text-green-400"
-                                >
-                                    <span className="mr-2 animate-pulse text-lg">
-                                        ●
-                                    </span>
-                                    Open to Work — Available Immediately
-                                </motion.div>
-
-                                <motion.h1
-                                    variants={fadeUp}
-                                    className="mb-6 text-3xl leading-tight font-bold sm:text-4xl lg:text-5xl"
-                                >
-                                    Senior Backend Engineer
-                                    <span className="gradient-text">
-                                        {' '}
-                                        Ready to Build
-                                    </span>
-                                    <br />& Scale Your Product
-                                </motion.h1>
-
-                                <motion.p
-                                    variants={fadeUp}
-                                    className="mb-8 max-w-xl text-lg leading-relaxed text-slate-400"
-                                >
-                                    I build scalable Laravel applications and
-                                    robust REST APIs for enterprise platforms.
-                                    Deeply focused on security, multi-tenancy,
-                                    and high-performance backend architecture.
-                                </motion.p>
-
-                                {/* Stats */}
-                                <motion.div
-                                    variants={containerVariants}
-                                    className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4"
-                                >
-                                    {stats.map((stat, index) => (
-                                        <motion.div
-                                            key={index}
-                                            variants={cardVariants}
-                                            whileHover={{ scale: 1.06, y: -2 }}
-                                            className="rounded-xl border border-slate-700/50 bg-slate-800/60 px-4 py-3 text-center backdrop-blur-sm"
-                                        >
-                                            <div className="text-primary-400 text-xl font-bold sm:text-2xl">
-                                                {stat.value}
-                                            </div>
-                                            <div className="text-xs text-slate-500">
-                                                {stat.label}
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-
-                                <motion.div
-                                    variants={fadeUp}
-                                    className="flex flex-wrap gap-4"
-                                >
-                                    <a
-                                        href="#contact"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            document
-                                                .querySelector('#contact')
-                                                ?.scrollIntoView({
-                                                    behavior: 'smooth',
-                                                });
-                                        }}
-                                        className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-8 py-4 text-lg font-semibold text-slate-900 transition-colors"
-                                    >
-                                        Hire Me
-                                        <svg
-                                            className="h-5 w-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                            ></path>
-                                        </svg>
-                                    </a>
-                                    <a
-                                        href="https://calendly.com/aslam4webz"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-6 py-4 font-medium text-white transition-colors hover:border-slate-500 hover:bg-slate-700"
-                                    >
-                                        <svg
-                                            className="h-5 w-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                            ></path>
-                                        </svg>
-                                        Schedule a Call
-                                    </a>
-                                </motion.div>
+                                <span className="relative flex h-2 w-2">
+                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                                </span>
+                                System Architect & Backend Engineer
                             </motion.div>
 
-                            {/* Right Content - Terminal */}
+                            <motion.h1
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 0.1,
+                                    ease: 'easeOut',
+                                }}
+                                className="text-[3.5rem] leading-[1.05] font-black tracking-tight text-white sm:text-[4.5rem] md:text-[5.5rem]"
+                            >
+                                Building the
+                                <br />
+                                <span className="hero-gradient-text block py-2 pr-2">
+                                    Infrastructure
+                                </span>
+                                of Tomorrow.
+                            </motion.h1>
+
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 0.2,
+                                    ease: 'easeOut',
+                                }}
+                                className="mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-400 sm:text-xl"
+                            >
+                                I write{' '}
+                                <span className="font-medium tracking-wide text-slate-200">
+                                    high-octane Laravel applications
+                                </span>{' '}
+                                that scale instantly, secure effortlessly, and
+                                perform beyond expectations.
+                            </motion.p>
+
                             <motion.div
-                                initial={{ opacity: 0, x: 40 }}
-                                animate={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{
                                     duration: 0.8,
                                     delay: 0.3,
+                                    ease: 'easeOut',
+                                }}
+                                className="mt-12 flex flex-wrap items-center gap-6"
+                            >
+                                <a
+                                    href="#contact"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        document
+                                            .querySelector('#contact')
+                                            ?.scrollIntoView({
+                                                behavior: 'smooth',
+                                            });
+                                    }}
+                                    className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-8 text-sm font-bold tracking-wide text-black transition-all hover:scale-105"
+                                >
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        Deploy the Future
+                                        <svg
+                                            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2.5}
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                            />
+                                        </svg>
+                                    </span>
+                                    <div className="absolute inset-0 z-0 bg-gradient-to-r from-indigo-200 via-white to-fuchsia-200 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                                </a>
+                                <a
+                                    href="https://github.com/aslamwebz"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex h-14 items-center justify-center gap-3 rounded-full border border-white/10 bg-white/5 px-8 text-sm font-semibold text-slate-300 backdrop-blur-md transition-all hover:bg-white/10 hover:text-white"
+                                >
+                                    View GitHub
+                                </a>
+                            </motion.div>
+                        </div>
+
+                        {/* Right: Floating Code Card & Stats */}
+                        <div className="relative flex w-full flex-col items-center justify-center xl:w-1/2">
+                            {/* Stats overlay boxes */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -50, y: -20 }}
+                                animate={{ opacity: 1, x: 0, y: 0 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 0.5,
+                                    ease: 'easeOut',
+                                }}
+                                className="absolute top-4 -left-4 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-left-12 lg:top-12"
+                            >
+                                <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+                                    Requests/sec
+                                </div>
+                                <div className="text-3xl font-black text-indigo-400">
+                                    <AnimatedCounter
+                                        from={0}
+                                        to={8450}
+                                        duration={2.5}
+                                    />
+                                    +
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, x: 50, y: 50 }}
+                                animate={{ opacity: 1, x: 0, y: 0 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 0.7,
+                                    ease: 'easeOut',
+                                }}
+                                className="absolute -right-4 bottom-12 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-right-8"
+                            >
+                                <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+                                    Uptime
+                                </div>
+                                <div className="text-3xl font-black text-emerald-400">
+                                    99.
+                                    <AnimatedCounter
+                                        from={0}
+                                        to={999}
+                                        duration={3}
+                                    />
+                                    %
+                                </div>
+                            </motion.div>
+
+                            {/* Centerpiece Floating Code Window */}
+                            <motion.div
+                                initial={{
+                                    opacity: 0,
+                                    scale: 0.9,
+                                    rotateY: 15,
+                                }}
+                                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                                transition={{
+                                    duration: 1,
+                                    delay: 0.4,
                                     ease: [0.22, 1, 0.36, 1],
                                 }}
-                                className="flex w-full items-center justify-center lg:pl-8"
+                                style={{ transformPerspective: 1000 }}
+                                className="animate-float-slow relative w-full max-w-lg"
                             >
-                                <Terminal />
+                                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-indigo-500 via-fuchsia-500 to-emerald-500 opacity-20 blur-xl" />
+                                <div className="relative rounded-2xl border border-white/10 bg-[#0d0d12]/90 shadow-2xl backdrop-blur-2xl">
+                                    <div className="flex items-center justify-between border-b border-white/5 px-4 py-3">
+                                        <div className="flex gap-2">
+                                            <div className="h-3 w-3 rounded-full bg-red-500/80" />
+                                            <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
+                                            <div className="h-3 w-3 rounded-full bg-green-500/80" />
+                                        </div>
+                                        <div className="font-mono text-[10px] tracking-wider text-slate-500">
+                                            ScaleService.php
+                                        </div>
+                                    </div>
+                                    <div className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed tracking-wide text-slate-300">
+                                        <pre>
+                                            <code>
+                                                <span className="code-keyword">
+                                                    namespace
+                                                </span>{' '}
+                                                App\Services;
+                                                <br />
+                                                <br />
+                                                <span className="code-keyword">
+                                                    use
+                                                </span>{' '}
+                                                Illuminate\Support\Facades\Cache;
+                                                <br />
+                                                <br />
+                                                <span className="code-keyword">
+                                                    final class
+                                                </span>{' '}
+                                                <span className="text-indigo-300">
+                                                    ScaleService
+                                                </span>
+                                                <br />
+                                                &#123;
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span className="code-keyword">
+                                                    public function
+                                                </span>{' '}
+                                                <span className="code-function">
+                                                    handleTrafficSpike
+                                                </span>
+                                                (
+                                                <span className="code-variable">
+                                                    $payload
+                                                </span>
+                                                ):{' '}
+                                                <span className="code-keyword">
+                                                    void
+                                                </span>
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&#123;
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span className="code-bracket">
+                                                    if
+                                                </span>{' '}
+                                                (!Cache::
+                                                <span className="code-function">
+                                                    lock
+                                                </span>
+                                                (
+                                                <span className="code-string">
+                                                    'deploy'
+                                                </span>
+                                                )-&gt;
+                                                <span className="code-function">
+                                                    get
+                                                </span>
+                                                ()) &#123;
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span className="code-keyword">
+                                                    throw new
+                                                </span>{' '}
+                                                Exception(
+                                                <span className="code-string">
+                                                    'Scaling in progress'
+                                                </span>
+                                                );
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
+                                                <br />
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span className="code-comment">
+                                                    // Dispatch to horizons fast
+                                                    queue
+                                                </span>
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProcessCriticalData::
+                                                <span className="code-function">
+                                                    dispatch
+                                                </span>
+                                                (
+                                                <span className="code-variable">
+                                                    $payload
+                                                </span>
+                                                )<br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;
+                                                <span className="code-function">
+                                                    onQueue
+                                                </span>
+                                                (
+                                                <span className="code-string">
+                                                    'high-priority'
+                                                </span>
+                                                );
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&#125;
+                                                <br />
+                                                &#125;
+                                            </code>
+                                        </pre>
+                                    </div>
+                                </div>
                             </motion.div>
                         </div>
                     </div>
 
                     {/* Scroll Indicator */}
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-                        <svg
-                            className="h-6 w-6 text-slate-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                            ></path>
-                        </svg>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5, duration: 0.8 }}
+                        className="absolute bottom-6 left-1/2 -translate-x-1/2"
+                    >
+                        <div className="flex flex-col items-center gap-2 mix-blend-difference">
+                            <span className="text-[10px] font-medium tracking-[0.2em] text-slate-400 uppercase">
+                                Explore
+                            </span>
+                            <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-600 p-1.5">
+                                <motion.div
+                                    animate={{
+                                        y: [0, 12, 0],
+                                        opacity: [1, 0.5, 1],
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: 'easeInOut',
+                                    }}
+                                    className="h-2 w-1.5 rounded-full bg-slate-400"
+                                />
+                            </div>
+                        </div>
+                    </motion.div>
                 </section>
 
                 {/* About Section */}
@@ -1041,7 +1277,10 @@ export default function Dashboard({
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <AnimatedSection className="grid items-center gap-16 lg:grid-cols-2">
                             {/* Left - Visual */}
-                            <motion.div variants={slideInLeft} className="relative flex flex-col justify-center">
+                            <motion.div
+                                variants={slideInLeft}
+                                className="relative flex flex-col justify-center"
+                            >
                                 <div className="from-primary-400/10 absolute -inset-4 rounded-2xl bg-gradient-to-r to-blue-500/10 opacity-50"></div>
                                 <div className="relative rounded-xl border border-slate-700 bg-slate-800 p-8">
                                     <div className="mb-6 flex items-center gap-4">
@@ -1110,7 +1349,10 @@ export default function Dashboard({
                             </motion.div>
 
                             {/* Right - Content */}
-                            <motion.div variants={slideInRight} className="flex flex-col justify-center">
+                            <motion.div
+                                variants={slideInRight}
+                                className="flex flex-col justify-center"
+                            >
                                 <div className="mb-4 inline-flex items-center rounded-full border border-slate-700 bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
                                     ABOUT ME
                                 </div>
