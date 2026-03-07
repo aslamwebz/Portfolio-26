@@ -7,6 +7,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to push build assets back to repo
 
     steps:
       - name: Checkout Code
@@ -20,13 +22,35 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install NPM Dependencies & Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Commit and Push Build Assets
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/build -f
+          if git diff --staged --quiet; then
+            echo "No changes to build assets."
+          else
+            git commit -m "chore: auto-build assets [skip ci]"
+            git push origin main
+          fi
+
       - name: Deploy to Hostinger via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT || 65002 }}
+          port: ${{ secrets.SSH_PORT || '65002' }} # Use string 65002
           script: |
             cd public_html
             git pull origin main
