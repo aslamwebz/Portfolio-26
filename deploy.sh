@@ -10,10 +10,8 @@ php artisan down || true
 echo "Installing Composer dependencies..."
 composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-# 3. Compile NPM assets (React Dashboard)
-echo "Building Node modules..."
-npm install
-npm run build
+# 3. Build assets are handled via Git (Commited to repo)
+# No longer building on server to avoid memory issues
 
 # 4. Migrate the database (Force required for production)
 echo "Running database migrations..."
