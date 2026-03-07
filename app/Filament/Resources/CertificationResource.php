@@ -18,9 +18,9 @@ class CertificationResource extends Resource
 {
     protected static ?string $model = Certification::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-academic-cap';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Portfolio';
+    protected static string|\UnitEnum|null $navigationGroup = 'Portfolio';
 
     protected static ?int $navigationSort = 2;
 

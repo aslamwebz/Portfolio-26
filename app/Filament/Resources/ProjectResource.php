@@ -21,9 +21,9 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-code-bracket-square';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-code-bracket-square';
 
-    protected static string | \UnitEnum | null $navigationGroup = 'Portfolio';
+    protected static string|\UnitEnum|null $navigationGroup = 'Portfolio';
 
     protected static ?int $navigationSort = 1;
 
@@ -95,7 +95,7 @@ class ProjectResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category')
                     ->badge()
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'React' => 'info',
                         'Vue' => 'success',
                         'AI' => 'warning',

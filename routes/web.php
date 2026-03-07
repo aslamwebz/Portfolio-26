@@ -24,4 +24,4 @@ Route::get('/projects', function () {
     ]);
 })->name('projects');
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';
