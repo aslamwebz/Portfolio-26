@@ -1335,9 +1335,11 @@ export default function Dashboard({
                                         </div>
                                         <div className="flex justify-between border-b border-white/5 py-2">
                                             <span className="text-slate-400">
-                                                Location
+                                                TRC Status
                                             </span>
-                                            <span>Lisbon, Portugal</span>
+                                            <span className="text-primary-400">
+                                                Portugal TRC
+                                            </span>
                                         </div>
                                         <div className="flex justify-between py-2">
                                             <span className="text-slate-400">
@@ -1463,7 +1465,7 @@ export default function Dashboard({
                                     key={index}
                                     delay={index as 0 | 1 | 2 | 3}
                                 >
-                                    <div className="card-hover group hover:border-primary-400/30 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
+                                    <div className="card-hover group hover:border-primary-400/30 h-full rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
                                         <div className="bg-primary-400/10 text-primary-400 mb-4 flex h-12 w-12 items-center justify-center rounded-lg transition-transform group-hover:scale-110">
                                             {item.icon}
                                         </div>
@@ -1807,7 +1809,7 @@ export default function Dashboard({
                             </h2>
                         </div>
 
-                        <div className="mx-auto max-w-3xl space-y-8">
+                        <div className="mx-auto max-w-5xl space-y-8">
                             {experiences.map((exp, index) => (
                                 <div
                                     key={index}
@@ -1887,59 +1889,6 @@ export default function Dashboard({
                     </div>
                 </section>
 
-                {/* Testimonials Section */}
-                <section className="border-y border-white/5 bg-[#050505] py-24">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <Reveal>
-                            <div className="mb-16 text-center">
-                                <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
-                                    TESTIMONIALS
-                                </div>
-                                <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-                                    What People
-                                    <span className="hero-gradient-text">
-                                        {' '}
-                                        Say
-                                    </span>
-                                </h2>
-                                <p className="mx-auto max-w-2xl text-slate-400">
-                                    Feedback from colleagues and clients I've
-                                    had the pleasure to work with.
-                                </p>
-                            </div>
-                        </Reveal>
-
-                        <div className="grid gap-6 md:grid-cols-3">
-                            {testimonials.map((testimonial, index) => (
-                                <Reveal key={index} delay={index as 0 | 1 | 2}>
-                                    <div className="card-hover group flex h-full flex-col rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-teal-400/30 hover:bg-white/10">
-                                        <div className="mb-4 text-4xl text-teal-400/30">
-                                            "
-                                        </div>
-                                        <p className="mb-6 flex-1 text-sm leading-relaxed text-slate-300">
-                                            {testimonial.quote}
-                                        </p>
-                                        <div className="flex items-center gap-3">
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-emerald-500 font-mono text-sm font-bold text-slate-900">
-                                                {testimonial.avatar}
-                                            </div>
-                                            <div>
-                                                <div className="font-medium">
-                                                    {testimonial.author}
-                                                </div>
-                                                <div className="text-xs text-slate-500">
-                                                    {testimonial.role},{' '}
-                                                    {testimonial.company}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Reveal>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
                 {/* Contact / Footer Section */}
                 <section
                     id="contact"
@@ -1964,50 +1913,6 @@ export default function Dashboard({
                                 Technical Lead, or Consultant—let's talk about
                                 how I can help your team succeed.
                             </p>
-
-                            {/* Hiring CTA Buttons */}
-                            <div className="mb-12 flex flex-col justify-center gap-4 sm:flex-row">
-                                <a
-                                    href="https://calendly.com/aslam4webz"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-primary-400 hover:bg-primary-500 inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-lg font-semibold text-slate-900 transition-colors"
-                                >
-                                    <svg
-                                        className="h-5 w-5"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                        ></path>
-                                    </svg>
-                                    Schedule an Interview
-                                </a>
-                                <a
-                                    href="mailto:aslam4webz@gmail.com?subject=Job Opportunity - [Your Company]"
-                                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-8 py-4 text-lg font-medium text-white transition-colors hover:border-slate-500 hover:bg-slate-700"
-                                >
-                                    <svg
-                                        className="h-5 w-5"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                        ></path>
-                                    </svg>
-                                    Send Job Offer
-                                </a>
-                            </div>
 
                             {/* Social Links */}
                             <div className="mb-12 flex flex-wrap justify-center gap-4">
@@ -2108,9 +2013,12 @@ export default function Dashboard({
                                     </div>
                                     <button
                                         type="submit"
-                                        className="bg-primary-400 hover:bg-primary-500 w-full rounded-lg px-6 py-3 font-semibold text-slate-900 transition-colors"
+                                        className="group relative w-full overflow-hidden rounded-lg bg-white px-6 py-4 font-bold text-black transition-all hover:scale-[1.02] active:scale-[0.98]"
                                     >
-                                        Send Message
+                                        <div className="from-primary-400 absolute inset-0 bg-gradient-to-r to-blue-500 opacity-0 transition-opacity group-hover:opacity-100" />
+                                        <span className="relative z-10 transition-colors group-hover:text-white">
+                                            Send Message
+                                        </span>
                                     </button>
                                 </form>
                             </div>
