@@ -138,33 +138,6 @@ export default function Dashboard({
         };
     }, []);
 
-    const [selectedCertIndex, setSelectedCertIndex] = useState<number | null>(
-        null,
-    );
-
-    const nextCert = useCallback(() => {
-        if (selectedCertIndex === null) return;
-        setSelectedCertIndex((prev) => (prev! + 1) % dbCertifications.length);
-    }, [selectedCertIndex, dbCertifications.length]);
-
-    const prevCert = useCallback(() => {
-        if (selectedCertIndex === null) return;
-        setSelectedCertIndex(
-            (prev) =>
-                (prev! - 1 + dbCertifications.length) % dbCertifications.length,
-        );
-    }, [selectedCertIndex, dbCertifications.length]);
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (selectedCertIndex === null) return;
-            if (e.key === 'ArrowRight') nextCert();
-            if (e.key === 'ArrowLeft') prevCert();
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [selectedCertIndex, nextCert, prevCert]);
-
     const categorization = [
         {
             title: 'Backend & Architecture',
@@ -663,6 +636,65 @@ export default function Dashboard({
             </svg>
         ),
     }));
+
+    const [selectedCertIndex, setSelectedCertIndex] = useState<number | null>(
+        null,
+    );
+
+    const [selectedProjectIndex, setSelectedProjectIndex] = useState<
+        number | null
+    >(null);
+
+    const nextCert = useCallback(() => {
+        if (selectedCertIndex === null) return;
+        setSelectedCertIndex(
+            (prev) => (prev! + 1) % displayCertifications.length,
+        );
+    }, [selectedCertIndex, displayCertifications.length]);
+
+    const prevCert = useCallback(() => {
+        if (selectedCertIndex === null) return;
+        setSelectedCertIndex(
+            (prev) =>
+                (prev! - 1 + displayCertifications.length) %
+                displayCertifications.length,
+        );
+    }, [selectedCertIndex, displayCertifications.length]);
+
+    const nextProject = useCallback(() => {
+        if (selectedProjectIndex === null) return;
+        setSelectedProjectIndex((prev) => (prev! + 1) % displayProjects.length);
+    }, [selectedProjectIndex, displayProjects.length]);
+
+    const prevProject = useCallback(() => {
+        if (selectedProjectIndex === null) return;
+        setSelectedProjectIndex(
+            (prev) =>
+                (prev! - 1 + displayProjects.length) % displayProjects.length,
+        );
+    }, [selectedProjectIndex, displayProjects.length]);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (selectedCertIndex !== null) {
+                if (e.key === 'ArrowRight') nextCert();
+                if (e.key === 'ArrowLeft') prevCert();
+            }
+            if (selectedProjectIndex !== null) {
+                if (e.key === 'ArrowRight') nextProject();
+                if (e.key === 'ArrowLeft') prevProject();
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [
+        selectedCertIndex,
+        nextCert,
+        prevCert,
+        selectedProjectIndex,
+        nextProject,
+        prevProject,
+    ]);
 
     return (
         <>
@@ -1348,7 +1380,12 @@ export default function Dashboard({
                                         key={project.id}
                                         delay={(index % 4) as 0 | 1 | 2 | 3}
                                     >
-                                        <div className="group hover:border-primary-400/30 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all">
+                                        <div
+                                            onClick={() =>
+                                                setSelectedProjectIndex(index)
+                                            }
+                                            className="group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all"
+                                        >
                                             <div className="relative h-48 overflow-hidden">
                                                 <img
                                                     src={project.image}
@@ -1492,6 +1529,178 @@ export default function Dashboard({
                                         </div>
                                     </Reveal>
                                 ))}
+
+                                <Dialog
+                                    open={selectedProjectIndex !== null}
+                                    onOpenChange={(open) =>
+                                        !open && setSelectedProjectIndex(null)
+                                    }
+                                >
+                                    <DialogContent className="max-w-[95vw] overflow-hidden border-white/10 bg-[#0A0A0A] p-0 text-white shadow-2xl xl:max-w-screen-2xl">
+                                        {selectedProjectIndex !== null && (
+                                            <div className="relative grid md:grid-cols-2">
+                                                {/* Navigation Buttons */}
+                                                <button
+                                                    onClick={prevProject}
+                                                    className="absolute top-1/2 left-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                >
+                                                    <svg
+                                                        className="h-6 w-6"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M15 19l-7-7 7-7"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <button
+                                                    onClick={nextProject}
+                                                    className="absolute top-1/2 right-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                >
+                                                    <svg
+                                                        className="h-6 w-6"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M9 5l7 7-7 7"
+                                                        />
+                                                    </svg>
+                                                </button>
+
+                                                {/* Left: Image */}
+                                                <div className="flex items-center justify-center border-r border-white/5 bg-[#050505] p-6 md:p-12">
+                                                    <img
+                                                        src={
+                                                            displayProjects[
+                                                                selectedProjectIndex
+                                                            ].image
+                                                        }
+                                                        alt={
+                                                            displayProjects[
+                                                                selectedProjectIndex
+                                                            ].title
+                                                        }
+                                                        className="h-auto max-h-[75vh] w-full rounded-lg object-contain shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+                                                    />
+                                                </div>
+
+                                                {/* Right: Details */}
+                                                <div className="flex flex-col justify-center p-8 md:p-12">
+                                                    <DialogHeader className="mb-6">
+                                                        <div className="text-primary-400 border-primary-400/20 mb-4 inline-flex items-center self-start rounded-full border bg-black/40 px-3 py-1 text-xs font-bold backdrop-blur-md">
+                                                            {
+                                                                displayProjects[
+                                                                    selectedProjectIndex
+                                                                ].category
+                                                            }
+                                                        </div>
+                                                        <DialogTitle className="text-2xl font-bold text-white md:text-3xl lg:text-4xl">
+                                                            {
+                                                                displayProjects[
+                                                                    selectedProjectIndex
+                                                                ].title
+                                                            }
+                                                        </DialogTitle>
+                                                    </DialogHeader>
+                                                    <div className="space-y-6">
+                                                        <p className="text-lg leading-relaxed text-slate-400 lg:text-xl">
+                                                            {
+                                                                displayProjects[
+                                                                    selectedProjectIndex
+                                                                ].description
+                                                            }
+                                                        </p>
+
+                                                        <div className="flex flex-wrap gap-2 pt-4">
+                                                            {displayProjects[
+                                                                selectedProjectIndex
+                                                            ].technologies.map(
+                                                                (tech) => (
+                                                                    <span
+                                                                        key={
+                                                                            tech
+                                                                        }
+                                                                        className="rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs text-slate-300 backdrop-blur-sm"
+                                                                    >
+                                                                        {tech}
+                                                                    </span>
+                                                                ),
+                                                            )}
+                                                        </div>
+
+                                                        <div className="flex items-center gap-4 pt-8">
+                                                            {displayProjects[
+                                                                selectedProjectIndex
+                                                            ].link && (
+                                                                <a
+                                                                    href={
+                                                                        displayProjects[
+                                                                            selectedProjectIndex
+                                                                        ].link!
+                                                                    }
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="bg-primary-400 hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-8 py-4 text-sm font-bold text-slate-900 shadow-[0_0_20px_rgba(34,197,94,0.3)] transition-all hover:scale-105 active:scale-95"
+                                                                >
+                                                                    Live Demo
+                                                                    <svg
+                                                                        className="h-4 w-4"
+                                                                        fill="none"
+                                                                        stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                    >
+                                                                        <path
+                                                                            strokeLinecap="round"
+                                                                            strokeLinejoin="round"
+                                                                            strokeWidth={
+                                                                                2
+                                                                            }
+                                                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                                                        />
+                                                                    </svg>
+                                                                </a>
+                                                            )}
+                                                            {displayProjects[
+                                                                selectedProjectIndex
+                                                            ].github && (
+                                                                <a
+                                                                    href={
+                                                                        displayProjects[
+                                                                            selectedProjectIndex
+                                                                        ]
+                                                                            .github!
+                                                                    }
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-8 py-4 text-sm font-bold text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/10 active:scale-95"
+                                                                >
+                                                                    Source Code
+                                                                    <svg
+                                                                        className="h-4 w-4"
+                                                                        fill="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                    >
+                                                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                                                    </svg>
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </DialogContent>
+                                </Dialog>
 
                                 <Dialog
                                     open={selectedCertIndex !== null}
