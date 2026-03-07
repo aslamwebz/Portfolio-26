@@ -594,21 +594,60 @@ export default function Dashboard({
         },
     ];
 
-    // Strictly Backend-Driven Data
-    const displayProjects = dbProjects.map((p) => ({
-        id: p.id,
-        title: p.title,
-        description: p.description,
-        link: p.link,
-        image: p.image
-            ? p.image.startsWith('/') || p.image.startsWith('http')
-                ? p.image
-                : `/${p.image}`
-            : '/img/ai-main.png',
-        github: p.github,
-        technologies: Array.isArray(p.technologies) ? p.technologies : [],
-        category: p.category,
-    }));
+    const [activeFilter, setActiveFilter] = useState('All');
+
+    // Strictly Backend-Driven Data with Laravel Priority
+    const displayProjects = dbProjects
+        .map((p) => ({
+            id: p.id,
+            title: p.title,
+            description: p.description,
+            link: p.link,
+            image: p.image
+                ? p.image.startsWith('/') || p.image.startsWith('http')
+                    ? p.image
+                    : `/${p.image}`
+                : '/img/ai-main.png',
+            github: p.github,
+            technologies: Array.isArray(p.technologies) ? p.technologies : [],
+            category: p.category,
+        }))
+        .sort((a, b) => {
+            const aHasLaravel = a.technologies.some((t) =>
+                t.toLowerCase().includes('laravel'),
+            );
+            const bHasLaravel = b.technologies.some((t) =>
+                t.toLowerCase().includes('laravel'),
+            );
+            // Laravel comes first
+            if (aHasLaravel && !bHasLaravel) return -1;
+            if (!aHasLaravel && bHasLaravel) return 1;
+            return 0;
+        });
+
+    const filteredProjects =
+        activeFilter === 'All'
+            ? displayProjects
+            : displayProjects.filter((p) =>
+                  p.technologies.some((t) => {
+                      const tech = t.toLowerCase();
+                      const filter = activeFilter.toLowerCase();
+                      if (tech === filter) return true;
+                      // Laravel/WordPress/Livewire/Pest/TALL implies PHP
+                      if (filter === 'php') {
+                          return [
+                              'laravel',
+                              'wordpress',
+                              'php',
+                              'livewire',
+                              'tall',
+                              'pest',
+                              'phpunit',
+                          ].some((p) => tech.includes(p));
+                      }
+                      return false;
+                  }),
+              );
 
     const displayCertifications = dbCertifications.map((c) => ({
         name: c.name,
@@ -663,16 +702,18 @@ export default function Dashboard({
 
     const nextProject = useCallback(() => {
         if (selectedProjectIndex === null) return;
-        setSelectedProjectIndex((prev) => (prev! + 1) % displayProjects.length);
-    }, [selectedProjectIndex, displayProjects.length]);
+        setSelectedProjectIndex(
+            (prev) => (prev! + 1) % filteredProjects.length,
+        );
+    }, [selectedProjectIndex, filteredProjects.length]);
 
     const prevProject = useCallback(() => {
         if (selectedProjectIndex === null) return;
         setSelectedProjectIndex(
             (prev) =>
-                (prev! - 1 + displayProjects.length) % displayProjects.length,
+                (prev! - 1 + filteredProjects.length) % filteredProjects.length,
         );
-    }, [selectedProjectIndex, displayProjects.length]);
+    }, [selectedProjectIndex, filteredProjects.length]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -1373,9 +1414,31 @@ export default function Dashboard({
                             </p>
                         </div>
 
-                        {displayProjects.length > 0 ? (
+                        <div className="mb-12 flex flex-wrap justify-center gap-4">
+                            {[
+                                'All',
+                                'PHP',
+                                'TypeScript',
+                                'JavaScript',
+                                'Python',
+                            ].map((lang) => (
+                                <button
+                                    key={lang}
+                                    onClick={() => setActiveFilter(lang)}
+                                    className={`rounded-full border px-6 py-2 text-sm font-bold transition-all duration-300 ${
+                                        activeFilter === lang
+                                            ? 'border-primary-400 bg-primary-400/10 text-primary-400 shadow-[0_0_20px_rgba(34,197,94,0.2)]'
+                                            : 'border-white/5 bg-white/5 text-slate-400 hover:border-white/20 hover:bg-white/10 hover:text-white'
+                                    } backdrop-blur-md`}
+                                >
+                                    {lang}
+                                </button>
+                            ))}
+                        </div>
+
+                        {filteredProjects.length > 0 ? (
                             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                {displayProjects.map((project, index) => (
+                                {filteredProjects.map((project, index) => (
                                     <Reveal
                                         key={project.id}
                                         delay={(index % 4) as 0 | 1 | 2 | 3}
