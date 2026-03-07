@@ -627,9 +627,13 @@ export default function Dashboard({
         title: p.title,
         description: p.description,
         link: p.link,
-        image: p.image ? `/storage/${p.image}` : '/img/ai-main.png',
+        image: p.image
+            ? p.image.startsWith('/') || p.image.startsWith('http')
+                ? p.image
+                : `/${p.image}`
+            : '/img/ai-main.png',
         github: p.github,
-        technologies: p.technologies || [],
+        technologies: Array.isArray(p.technologies) ? p.technologies : [],
         category: p.category,
     }));
 
