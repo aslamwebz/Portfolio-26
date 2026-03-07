@@ -1538,7 +1538,7 @@ export default function Dashboard({
                                 >
                                     <DialogContent className="max-w-[95vw] overflow-hidden border-white/10 bg-[#0A0A0A] p-0 text-white shadow-2xl xl:max-w-screen-2xl">
                                         {selectedProjectIndex !== null && (
-                                            <div className="relative grid md:grid-cols-2">
+                                            <div className="relative grid md:grid-cols-3">
                                                 {/* Navigation Buttons */}
                                                 <button
                                                     onClick={prevProject}
@@ -1578,7 +1578,7 @@ export default function Dashboard({
                                                 </button>
 
                                                 {/* Left: Image */}
-                                                <div className="flex items-center justify-center border-r border-white/5 bg-[#050505] p-6 md:p-12">
+                                                <div className="flex items-center justify-center border-r border-white/5 bg-[#050505] p-6 md:col-span-2 md:p-12">
                                                     <img
                                                         src={
                                                             displayProjects[
@@ -1590,12 +1590,12 @@ export default function Dashboard({
                                                                 selectedProjectIndex
                                                             ].title
                                                         }
-                                                        className="h-auto max-h-[75vh] w-full rounded-lg object-contain shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+                                                        className="h-auto max-h-[85vh] w-full rounded-lg object-contain shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
                                                     />
                                                 </div>
 
                                                 {/* Right: Details */}
-                                                <div className="flex flex-col justify-center p-8 md:p-12">
+                                                <div className="flex flex-col justify-center p-8 md:col-span-1 md:p-12">
                                                     <DialogHeader className="mb-6">
                                                         <div className="text-primary-400 border-primary-400/20 mb-4 inline-flex items-center self-start rounded-full border bg-black/40 px-3 py-1 text-xs font-bold backdrop-blur-md">
                                                             {
