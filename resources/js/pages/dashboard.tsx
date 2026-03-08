@@ -1615,7 +1615,7 @@ export default function Dashboard({
                                     <div className="w-full md:w-1/2 md:pl-12">
                                         <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-amber-400/30 hover:bg-white/10">
                                             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-400">
-                                                1 Year Completed
+                                                1st of 4 Years Completed
                                             </div>
                                             <h3 className="mb-1 text-lg font-bold text-white">
                                                 Professional Bachelor&apos;s in
