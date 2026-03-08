@@ -633,7 +633,8 @@ export default function Dashboard({
                       const tech = t.toLowerCase();
                       const filter = activeFilter.toLowerCase();
                       if (tech === filter) return true;
-                      // Laravel/WordPress/Livewire/Pest/TALL implies PHP
+
+                      // Smart matching for common ecosystem tags
                       if (filter === 'php') {
                           return [
                               'laravel',
@@ -643,7 +644,18 @@ export default function Dashboard({
                               'tall',
                               'pest',
                               'phpunit',
+                              'blade',
                           ].some((p) => tech.includes(p));
+                      }
+                      if (filter === 'vue') {
+                          return ['vue', 'nuxt', 'vite'].some((p) =>
+                              tech.includes(p),
+                          );
+                      }
+                      if (filter === 'react') {
+                          return ['react', 'next', 'vite', 'remix'].some((p) =>
+                              tech.includes(p),
+                          );
                       }
                       return false;
                   }),
@@ -1415,25 +1427,21 @@ export default function Dashboard({
                         </div>
 
                         <div className="mb-12 flex flex-wrap justify-center gap-4">
-                            {[
-                                'All',
-                                'PHP',
-                                'TypeScript',
-                                'JavaScript',
-                                'Python',
-                            ].map((lang) => (
-                                <button
-                                    key={lang}
-                                    onClick={() => setActiveFilter(lang)}
-                                    className={`rounded-full border px-6 py-2 text-sm font-bold transition-all duration-300 ${
-                                        activeFilter === lang
-                                            ? 'border-primary-400 bg-primary-400/10 text-primary-400 shadow-[0_0_20px_rgba(34,197,94,0.2)]'
-                                            : 'border-white/5 bg-white/5 text-slate-400 hover:border-white/20 hover:bg-white/10 hover:text-white'
-                                    } backdrop-blur-md`}
-                                >
-                                    {lang}
-                                </button>
-                            ))}
+                            {['All', 'PHP', 'Vue', 'React', 'Python'].map(
+                                (lang) => (
+                                    <button
+                                        key={lang}
+                                        onClick={() => setActiveFilter(lang)}
+                                        className={`rounded-full border px-6 py-2 text-sm font-bold transition-all duration-300 ${
+                                            activeFilter === lang
+                                                ? 'border-primary-400 bg-primary-400/10 text-primary-400 shadow-[0_0_20px_rgba(34,197,94,0.2)]'
+                                                : 'border-white/5 bg-white/5 text-slate-400 hover:border-white/20 hover:bg-white/10 hover:text-white'
+                                        } backdrop-blur-md`}
+                                    >
+                                        {lang}
+                                    </button>
+                                ),
+                            )}
                         </div>
 
                         {filteredProjects.length > 0 ? (
