@@ -1602,8 +1602,42 @@ export default function Dashboard({
                                 </div>
                             </Reveal>
 
-                            {/* A/L */}
+                            {/* Latvia CS Degree */}
                             <Reveal delay={1}>
+                                <div className="relative mb-12 flex flex-col items-center gap-8 md:flex-row">
+                                    <div className="hidden w-full md:block md:w-1/2 md:pr-12 md:text-right">
+                                        <span className="font-mono text-sm text-slate-500">
+                                            2020 — 2021
+                                        </span>
+                                    </div>
+                                    {/* Center Dot */}
+                                    <div className="absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-amber-400/50 bg-amber-400/20 md:block" />
+                                    <div className="w-full md:w-1/2 md:pl-12">
+                                        <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-amber-400/30 hover:bg-white/10">
+                                            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-400">
+                                                1 Year Completed
+                                            </div>
+                                            <h3 className="mb-1 text-lg font-bold text-white">
+                                                Professional Bachelor&apos;s in
+                                                Computer Systems
+                                            </h3>
+                                            <p className="mb-3 text-sm text-slate-400">
+                                                Turiba University, Riga, Latvia
+                                            </p>
+                                            <p className="text-xs leading-relaxed text-slate-500">
+                                                Completed full first-year
+                                                curriculum while balancing
+                                                part-time engineering work.
+                                                Paused due to COVID-19 financial
+                                                pressures.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Reveal>
+
+                            {/* A/L */}
+                            <Reveal delay={2}>
                                 <div className="relative mb-12 flex flex-col items-center gap-8 md:flex-row">
                                     <div className="hidden w-full md:block md:w-1/2 md:pr-12 md:text-right">
                                         <span className="font-mono text-sm text-slate-500">
@@ -1629,7 +1663,7 @@ export default function Dashboard({
                             </Reveal>
 
                             {/* O/L */}
-                            <Reveal delay={2}>
+                            <Reveal delay={3}>
                                 <div className="relative flex flex-col items-center gap-8 md:flex-row">
                                     <div className="w-full md:w-1/2 md:pr-12 md:text-right">
                                         <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-blue-400/30 hover:bg-white/10">
