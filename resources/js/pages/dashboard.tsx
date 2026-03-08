@@ -1303,6 +1303,132 @@ export default function Dashboard({
                     </div>
                 </section>
 
+                {/* Education Section */}
+                <section
+                    id="education"
+                    className="relative border-t border-white/5 bg-[#0A0A0A] py-24"
+                >
+                    <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+                        <Reveal>
+                            <div className="mb-16 text-center">
+                                <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
+                                    EDUCATION
+                                </div>
+                                <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                    Academic
+                                    <span className="hero-gradient-text">
+                                        {' '}
+                                        Background
+                                    </span>
+                                </h2>
+                                <p className="mx-auto max-w-2xl text-slate-400">
+                                    A foundation built on strong academics and a
+                                    commitment to continuous learning.
+                                </p>
+                            </div>
+                        </Reveal>
+
+                        <div className="relative">
+                            {/* Timeline Line */}
+                            <div className="from-primary-400/40 absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b via-white/10 to-transparent md:block" />
+
+                            {/* MBA - Current */}
+                            <Reveal>
+                                <div className="relative mb-12 flex flex-col items-center gap-8 md:flex-row">
+                                    <div className="w-full md:w-1/2 md:pr-12 md:text-right">
+                                        <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-emerald-400/30 hover:bg-white/10">
+                                            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                                                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+                                                In Progress
+                                            </div>
+                                            <h3 className="mb-1 text-lg font-bold text-white">
+                                                Master of Business
+                                                Administration (MBA)
+                                            </h3>
+                                            <p className="text-primary-400 mb-1 text-sm font-medium">
+                                                International Business
+                                            </p>
+                                            <p className="mb-3 text-sm text-slate-400">
+                                                Imperial College of Business
+                                                Studies, Sri Lanka
+                                            </p>
+                                            <p className="text-xs leading-relaxed text-slate-500">
+                                                Awarded by the{' '}
+                                                <span className="font-medium text-slate-300">
+                                                    University of the West of
+                                                    Scotland (UWS)
+                                                </span>
+                                                . A prestigious program designed
+                                                to develop business leaders with
+                                                a global perspective.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {/* Center Dot */}
+                                    <div className="border-primary-400/50 bg-primary-400 shadow-primary-400/30 absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 shadow-lg md:block" />
+                                    <div className="hidden w-full md:block md:w-1/2 md:pl-12">
+                                        <span className="font-mono text-sm text-slate-500">
+                                            2024 — Present
+                                        </span>
+                                    </div>
+                                </div>
+                            </Reveal>
+
+                            {/* A/L */}
+                            <Reveal delay={1}>
+                                <div className="relative mb-12 flex flex-col items-center gap-8 md:flex-row">
+                                    <div className="hidden w-full md:block md:w-1/2 md:pr-12 md:text-right">
+                                        <span className="font-mono text-sm text-slate-500">
+                                            2011
+                                        </span>
+                                    </div>
+                                    {/* Center Dot */}
+                                    <div className="absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white/30 bg-white/10 md:block" />
+                                    <div className="w-full md:w-1/2 md:pl-12">
+                                        <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-blue-400/30 hover:bg-white/10">
+                                            <h3 className="mb-1 text-lg font-bold text-white">
+                                                GCE Advanced Level (A/L)
+                                            </h3>
+                                            <p className="mb-1 text-sm text-slate-400">
+                                                Dharmadutha College, Badulla
+                                            </p>
+                                            <span className="font-mono text-xs text-slate-500 md:hidden">
+                                                2011
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Reveal>
+
+                            {/* O/L */}
+                            <Reveal delay={2}>
+                                <div className="relative flex flex-col items-center gap-8 md:flex-row">
+                                    <div className="w-full md:w-1/2 md:pr-12 md:text-right">
+                                        <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-blue-400/30 hover:bg-white/10">
+                                            <h3 className="mb-1 text-lg font-bold text-white">
+                                                GCE Ordinary Level (O/L)
+                                            </h3>
+                                            <p className="mb-1 text-sm text-slate-400">
+                                                Dharmadutha College, Badulla
+                                            </p>
+                                            <span className="font-mono text-xs text-slate-500 md:hidden">
+                                                2009
+                                            </span>
+                                        </div>
+                                    </div>
+                                    {/* Center Dot */}
+                                    <div className="absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white/30 bg-white/10 md:block" />
+                                    <div className="hidden w-full md:block md:w-1/2 md:pl-12">
+                                        <span className="font-mono text-sm text-slate-500">
+                                            2009
+                                        </span>
+                                    </div>
+                                </div>
+                            </Reveal>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Why Hire Me Section */}
                 <section className="border-y border-white/5 bg-[#0A0A0A] py-24">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
