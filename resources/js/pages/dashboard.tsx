@@ -1574,7 +1574,7 @@ export default function Dashboard({
                                                 Administration (MBA)
                                             </h3>
                                             <p className="text-primary-400 mb-1 text-sm font-medium">
-                                                International Business
+                                                in International Business
                                             </p>
                                             <p className="mb-3 text-sm text-slate-400">
                                                 Imperial College of Business
@@ -1625,9 +1625,9 @@ export default function Dashboard({
                                                 Turiba University, Riga, Latvia
                                             </p>
                                             <p className="text-xs leading-relaxed text-slate-500">
-                                                Completed full first-year
+                                                Completed only the first-year
                                                 curriculum while balancing
-                                                part-time engineering work.
+                                                work.
                                                 Paused due to COVID-19 financial
                                                 pressures.
                                             </p>
