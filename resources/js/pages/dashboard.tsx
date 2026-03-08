@@ -410,7 +410,7 @@ export default function Dashboard({
                     url: '/icons/perplexity.svg',
                 },
                 {
-                    name: 'Open Code',
+                    name: 'OpenAI',
                     url: '/icons/open-code.svg',
                 },
                 {
@@ -604,9 +604,11 @@ export default function Dashboard({
             description: p.description,
             link: p.link,
             image: p.image
-                ? p.image.startsWith('/') || p.image.startsWith('http')
+                ? p.image.startsWith('http')
                     ? p.image
-                    : `/${p.image}`
+                    : p.image.startsWith('/')
+                      ? p.image
+                      : `/${p.image}`
                 : '/img/ai-main.png',
             github: p.github,
             technologies: Array.isArray(p.technologies) ? p.technologies : [],
@@ -667,9 +669,11 @@ export default function Dashboard({
         year: c.year,
         description: c.description || '',
         image: c.image
-            ? c.image.startsWith('/') || c.image.startsWith('http')
+            ? c.image.startsWith('http')
                 ? c.image
-                : `/storage/${c.image}`
+                : c.image.startsWith('/')
+                  ? c.image
+                  : `/${c.image}`
             : '/img/certifications/MCSA.jpg',
         icon: (
             <svg
