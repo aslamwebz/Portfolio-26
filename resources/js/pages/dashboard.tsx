@@ -1596,7 +1596,7 @@ export default function Dashboard({
                                     <div className="border-primary-400/50 bg-primary-400 shadow-primary-400/30 absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 shadow-lg md:block" />
                                     <div className="hidden w-full md:block md:w-1/2 md:pl-12">
                                         <span className="font-mono text-sm text-slate-500">
-                                            2024 — Present
+                                            2025 — Present
                                         </span>
                                     </div>
                                 </div>
