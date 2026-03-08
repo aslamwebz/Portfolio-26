@@ -49,7 +49,7 @@ class CertificationResource extends Resource
                     ->schema([
                         FileUpload::make('image')
                             ->image()
-                            ->directory('certifications')
+                            ->directory('img/certifications')
                             ->columnSpanFull(),
                         TextInput::make('sort_order')
                             ->numeric()

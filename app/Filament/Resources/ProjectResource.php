@@ -72,7 +72,7 @@ class ProjectResource extends Resource
                     ->schema([
                         FileUpload::make('image')
                             ->image()
-                            ->directory('projects')
+                            ->directory('img/projects')
                             ->columnSpanFull(),
                         TextInput::make('sort_order')
                             ->numeric()
@@ -95,7 +95,7 @@ class ProjectResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'React' => 'info',
                         'Vue' => 'success',
                         'AI' => 'warning',
