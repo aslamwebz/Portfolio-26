@@ -1626,8 +1626,7 @@ export default function Dashboard({
                                             </p>
                                             <p className="text-xs leading-relaxed text-slate-500">
                                                 Completed only the first-year
-                                                curriculum while balancing
-                                                work.
+                                                curriculum while balancing work.
                                                 Paused due to COVID-19 financial
                                                 pressures.
                                             </p>
@@ -1639,14 +1638,7 @@ export default function Dashboard({
                             {/* A/L */}
                             <Reveal delay={2}>
                                 <div className="relative mb-12 flex flex-col items-center gap-8 md:flex-row">
-                                    <div className="hidden w-full md:block md:w-1/2 md:pr-12 md:text-right">
-                                        <span className="font-mono text-sm text-slate-500">
-                                            2011
-                                        </span>
-                                    </div>
-                                    {/* Center Dot */}
-                                    <div className="absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white/30 bg-white/10 md:block" />
-                                    <div className="w-full md:w-1/2 md:pl-12">
+                                    <div className="w-full md:w-1/2 md:pr-12 md:text-right">
                                         <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-blue-400/30 hover:bg-white/10">
                                             <h3 className="mb-1 text-lg font-bold text-white">
                                                 GCE Advanced Level (A/L)
@@ -1659,13 +1651,27 @@ export default function Dashboard({
                                             </span>
                                         </div>
                                     </div>
+                                    {/* Center Dot */}
+                                    <div className="absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white/30 bg-white/10 md:block" />
+                                    <div className="hidden w-full md:block md:w-1/2 md:pl-12">
+                                        <span className="font-mono text-sm text-slate-500">
+                                            2011
+                                        </span>
+                                    </div>
                                 </div>
                             </Reveal>
 
                             {/* O/L */}
                             <Reveal delay={3}>
                                 <div className="relative flex flex-col items-center gap-8 md:flex-row">
-                                    <div className="w-full md:w-1/2 md:pr-12 md:text-right">
+                                    <div className="hidden w-full md:block md:w-1/2 md:pr-12 md:text-right">
+                                        <span className="font-mono text-sm text-slate-500">
+                                            2009
+                                        </span>
+                                    </div>
+                                    {/* Center Dot */}
+                                    <div className="absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white/30 bg-white/10 md:block" />
+                                    <div className="w-full md:w-1/2 md:pl-12">
                                         <div className="group relative rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-blue-400/30 hover:bg-white/10">
                                             <h3 className="mb-1 text-lg font-bold text-white">
                                                 GCE Ordinary Level (O/L)
@@ -1677,13 +1683,6 @@ export default function Dashboard({
                                                 2009
                                             </span>
                                         </div>
-                                    </div>
-                                    {/* Center Dot */}
-                                    <div className="absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full border-2 border-white/30 bg-white/10 md:block" />
-                                    <div className="hidden w-full md:block md:w-1/2 md:pl-12">
-                                        <span className="font-mono text-sm text-slate-500">
-                                            2009
-                                        </span>
                                     </div>
                                 </div>
                             </Reveal>
