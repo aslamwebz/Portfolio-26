@@ -88,6 +88,19 @@ class ProjectSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'title' => 'HireAI',
+                'description' => 'The Ultimate AI-Powered Job Application Suite. Leverage AI to build stunning resumes, optimize for ATS, analyze CVs, and prepare for interviews.',
+                'image' => 'img/projects/hiareai.png',
+                'github' => 'https://github.com/aslamwebz/HireAI',
+                'link' => null,
+                'technologies' => json_encode(['Laravel 12', 'Livewire 4', 'Flux UI', 'Tailwind CSS 4']),
+                'category' => 'AI SaaS',
+                'sort_order' => 7,
+                'is_featured' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         DB::table('projects')->truncate();
