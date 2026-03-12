@@ -13,15 +13,35 @@ import {
 } from '@/components/ui/dialog';
 
 // ─── Typewriter Code Component ────────────────────────────────────────────────
-const PEST_TEST_CODE = `it('processes a stripe subscription', function () {
-    $user = User::factory()->create();
-    $plan = Plan::factory()->stripe()->create();
+const PEST_TEST_CODE = `<?php
 
+use App\\Models\\{User, Plan, Order};
+use App\\Services\\PaymentService;
+
+beforeEach(function () {
+    $this->user = User::factory()->create();
+    $this->plan = Plan::factory()->stripe()->create();
+});
+
+it('processes a stripe subscription', function () {
     $order = app(PaymentService::class)
-        ->charge($user, $plan);
+        ->charge($this->user, $this->plan);
 
-    expect($order)->toBeInstanceOf(Order::class)
-        ->and($order->status)->toBe('active');
+    expect($order)
+        ->toBeInstanceOf(Order::class)
+        ->and($order->status)->toBe('active')
+        ->and($order->user_id)->toBe($this->user->id);
+});
+
+it('sends a welcome email after checkout', function () {
+    Mail::fake();
+
+    app(PaymentService::class)
+        ->charge($this->user, $this->plan);
+
+    Mail::assertSent(WelcomeMail::class, fn ($mail) =>
+        $mail->hasTo($this->user->email)
+    );
 });`;
 
 function TypewriterCode() {
@@ -69,7 +89,10 @@ function TypewriterCode() {
         .replace(/>/g, '&gt;');
 
     return (
-        <pre className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed tracking-wide text-slate-300">
+        <pre
+            className="overflow-hidden p-6 font-mono text-[12px] leading-relaxed tracking-wide text-slate-300"
+            style={{ minHeight: '22rem', maxHeight: '22rem' }}
+        >
             <code
                 dangerouslySetInnerHTML={{
                     __html:
