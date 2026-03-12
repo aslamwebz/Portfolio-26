@@ -2323,7 +2323,7 @@ export default function Dashboard({
                                 </div>
                                 <div className="text-xs text-slate-500">
                                     Software Engineer • Portugal •
-                                    {new Date().getFullYear()}mote
+                                    {new Date().getFullYear()}
                                 </div>
                             </div>
                             <div className="flex gap-6 text-sm text-slate-500">
