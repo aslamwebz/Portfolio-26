@@ -2200,9 +2200,9 @@ export default function Dashboard({
                             </h2>
                             <p className="mb-8 text-lg text-slate-400">
                                 I'm currently looking for my next challenge.
-                                Whether you need a Senior Backend Engineer,
-                                Technical Lead, or Consultant—let's talk about
-                                how I can help your team succeed.
+                                Whether you need a Software Engineer, custom API
+                                integration, or a high-traffic backend system,
+                                I&apos;m ready to build it.eam succeed.
                             </p>
 
                             {/* Social Links */}
@@ -2322,8 +2322,8 @@ export default function Dashboard({
                                     Mohamed Aslam
                                 </div>
                                 <div className="text-xs text-slate-500">
-                                    Senior Backend Engineer • Lisbon, Portugal •
-                                    Global Remote
+                                    Software Engineer • Portugal •
+                                    {new Date().getFullYear()}mote
                                 </div>
                             </div>
                             <div className="flex gap-6 text-sm text-slate-500">

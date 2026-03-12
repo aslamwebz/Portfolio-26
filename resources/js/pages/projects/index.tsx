@@ -268,7 +268,7 @@ export default function Projects({ auth }: ProjectsProps) {
                             <span className="text-slate-400">
                                 Mohamed Aslam
                             </span>{' '}
-                            — Senior Backend Engineer
+                            — Software Engineer
                         </div>
                     </div>
                 </footer>
