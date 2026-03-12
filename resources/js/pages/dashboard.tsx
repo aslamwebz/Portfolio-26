@@ -823,7 +823,7 @@ export default function Dashboard({
                                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                                     <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
                                 </span>
-                                System Architect & Backend Engineer
+                                Laravel Engineer & Product Builder
                             </motion.div>
 
                             <motion.h1
@@ -854,12 +854,13 @@ export default function Dashboard({
                                 }}
                                 className="mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-400 sm:text-xl"
                             >
-                                I write{' '}
+                                4+ years turning ideas into polished, reliable
+                                products using{' '}
                                 <span className="font-medium tracking-wide text-slate-200">
-                                    high-octane Laravel applications
+                                    Laravel, Livewire, and modern front-end
+                                    tools.
                                 </span>{' '}
-                                that scale instantly, secure effortlessly, and
-                                perform beyond expectations.
+                                Let&apos;s build something great together.
                             </motion.p>
 
                             <motion.div
@@ -927,12 +928,12 @@ export default function Dashboard({
                                 className="absolute top-4 -left-4 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-left-12 lg:top-12"
                             >
                                 <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
-                                    Requests/sec
+                                    Apps Shipped
                                 </div>
                                 <div className="text-3xl font-black text-indigo-400">
                                     <AnimatedCounter
                                         from={0}
-                                        to={8450}
+                                        to={50}
                                         duration={2.5}
                                     />
                                     +
@@ -950,13 +951,12 @@ export default function Dashboard({
                                 className="absolute -right-4 bottom-12 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-right-8"
                             >
                                 <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
-                                    Uptime
+                                    Test Coverage
                                 </div>
                                 <div className="text-3xl font-black text-emerald-400">
-                                    99.
                                     <AnimatedCounter
                                         from={0}
-                                        to={999}
+                                        to={95}
                                         duration={3}
                                     />
                                     %
@@ -988,7 +988,7 @@ export default function Dashboard({
                                             <div className="h-3 w-3 rounded-full bg-green-500/80" />
                                         </div>
                                         <div className="font-mono text-[10px] tracking-wider text-slate-500">
-                                            ScaleService.php
+                                            PaymentService.php
                                         </div>
                                     </div>
                                     <div className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed tracking-wide text-slate-300">
@@ -1003,14 +1003,19 @@ export default function Dashboard({
                                                 <span className="code-keyword">
                                                     use
                                                 </span>{' '}
-                                                Illuminate\Support\Facades\Cache;
+                                                App\Models\Order;
+                                                <br />
+                                                <span className="code-keyword">
+                                                    use
+                                                </span>{' '}
+                                                Laravel\Cashier\Cashier;
                                                 <br />
                                                 <br />
                                                 <span className="code-keyword">
                                                     final class
                                                 </span>{' '}
                                                 <span className="text-indigo-300">
-                                                    ScaleService
+                                                    PaymentService
                                                 </span>
                                                 <br />
                                                 &#123;
@@ -1020,74 +1025,60 @@ export default function Dashboard({
                                                     public function
                                                 </span>{' '}
                                                 <span className="code-function">
-                                                    handleTrafficSpike
+                                                    charge
                                                 </span>
                                                 (
                                                 <span className="code-variable">
-                                                    $payload
+                                                    $user
+                                                </span>
+                                                ,{' '}
+                                                <span className="code-variable">
+                                                    $plan
                                                 </span>
                                                 ):{' '}
                                                 <span className="code-keyword">
-                                                    void
+                                                    Order
                                                 </span>
                                                 <br />
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&#123;
                                                 <br />
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span className="code-bracket">
-                                                    if
-                                                </span>{' '}
-                                                (!Cache::
-                                                <span className="code-function">
-                                                    lock
+                                                <span className="code-comment">
+                                                    // Idempotent Stripe
+                                                    checkout
                                                 </span>
-                                                (
-                                                <span className="code-string">
-                                                    'deploy'
-                                                </span>
-                                                )-&gt;
-                                                <span className="code-function">
-                                                    get
-                                                </span>
-                                                ()) &#123;
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span className="code-keyword">
-                                                    throw new
-                                                </span>{' '}
-                                                Exception(
-                                                <span className="code-string">
-                                                    'Scaling in progress'
-                                                </span>
-                                                );
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
-                                                <br />
                                                 <br />
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span className="code-comment">
-                                                    // Dispatch to horizons fast
-                                                    queue
+                                                <span className="code-keyword">
+                                                    return
+                                                </span>{' '}
+                                                <span className="code-variable">
+                                                    $user
                                                 </span>
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProcessCriticalData::
+                                                -&gt;
                                                 <span className="code-function">
-                                                    dispatch
+                                                    newSubscription
+                                                </span>
+                                                (<br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span className="code-string">
+                                                    'default'
+                                                </span>
+                                                ,{' '}
+                                                <span className="code-variable">
+                                                    $plan
+                                                </span>
+                                                -&gt;stripe_id
+                                                <br />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)-&gt;
+                                                <span className="code-function">
+                                                    create
                                                 </span>
                                                 (
                                                 <span className="code-variable">
-                                                    $payload
+                                                    $user
                                                 </span>
-                                                )<br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;
-                                                <span className="code-function">
-                                                    onQueue
-                                                </span>
-                                                (
-                                                <span className="code-string">
-                                                    'high-priority'
-                                                </span>
-                                                );
+                                                -&gt;pm_type );
                                                 <br />
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&#125;
                                                 <br />
