@@ -1,4 +1,4 @@
-# Mohamed Aslam - Senior Backend Engineer Portfolio
+# Mohamed Aslam - Software Engineer Portfolio
 
 A modern, performant portfolio website built with Laravel 12 and React 19, showcasing professional projects, technical expertise, and career achievements.
 

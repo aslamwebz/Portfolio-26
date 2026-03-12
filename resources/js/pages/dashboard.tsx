@@ -410,20 +410,12 @@ export default function Dashboard({
                     url: '/icons/perplexity.svg',
                 },
                 {
-                    name: 'OpenAI',
+                    name: 'Open Code',
                     url: '/icons/open-code.svg',
                 },
                 {
                     name: 'Ollama',
                     url: '/icons/ollama.svg',
-                },
-                {
-                    name: 'LRVL Boost',
-                    url: '/icons/lrvl-boost.svg',
-                },
-                {
-                    name: 'AI SDK',
-                    url: '/icons/ai-sdk.svg',
                 },
             ],
         },
@@ -473,40 +465,39 @@ export default function Dashboard({
 
     const experiences = [
         {
-            date: 'May 2021 - Present',
-            location: 'Remote, UK',
+            date: 'May 2021 – Present',
+            location: 'Remote, United Kingdom',
             isCurrent: true,
-            title: 'Senior Backend Engineer',
+            title: 'Software Engineer',
             company: 'Digital Egg Ltd / Fullstripe s.r.o',
             achievements: [
-                'Architected and scaled a Laravel multi-tenant SaaS for 50K+ users with robust RBAC and security audits',
-                'Maintained 15+ RESTful API endpoints using Laravel Sanctum/Passport with 100% test coverage',
-                'Optimized high-traffic payment billing flows (Stripe, PayPal) and real-time notification systems',
-                'Developed custom admin dashboards with Filament & Nova, reducing task completion time by 35%',
-                'Led refactoring that reduced production bugs by 40% and halved deployment rollback rates',
+                'Architected and scaled reactive web applications using the TALL Stack (Tailwind, Alpine.js, Laravel, Livewire), Vue, and InertiaJs supporting a global user base of 50,000+ active users with high-concurrency requirements.',
+                'Designed and documented 15+ RESTful API endpoints utilizing Laravel Sanctum, ensuring zero-friction integration for frontend and mobile teams.',
+                'Engineered robust Backend Architectures involving multi-tenancy, event-driven workflows, and complex API integrations (REST, OAuth 2.0, Stripe/PayPal), ensuring seamless data flow across microservices.',
+                'Optimized Platform Reliability to maintain 99.9% uptime by implementing advanced monitoring (Sentry, Telescope, LogRocket) and managing CI/CD pipelines via GitHub Actions for automated, zero-downtime deployments.',
+                'Accelerated Internal Productivity by 40% through the strategic implementation of Filament and Laravel Nova admin systems, automating manual operational workflows and data management tasks.',
+                'Drove Code Excellence by enforcing strict PSR-12 standards and a "test-first" culture using Pest and PHPUnit, successfully reducing production regressions and bug reports by 40%.',
             ],
         },
         {
-            date: 'July 2018 - Nov 2020',
+            date: 'Jul. 2018 – Nov. 2020',
             location: 'Remote, Sri Lanka',
             isCurrent: false,
-            title: 'Junior WordPress & PHP Developer',
+            title: 'WordPress and PHP Web Developer',
             company: 'Remote Office One',
             achievements: [
-                'Built 50+ WordPress sites and PHP web apps with clean, documented code and modern UI',
-                'Developed custom WP plugins and integrated external REST APIs, increasing platform flexibility',
-                'Contributed to internal knowledge base, improving developer onboarding speed',
+                'Built 50+ WordPress websites and PHP web applications from design mockups, writing clean, documented code.',
+                'Maintained project documentation and contributed to internal knowledge base.',
             ],
         },
         {
-            date: 'Dec 2012 - May 2018',
-            location: 'Qatar',
+            date: 'Dec. 2012 – May 2018',
+            location: 'Qatar and Sri Lanka',
             isCurrent: false,
             title: 'IT Infrastructure & Network Engineer',
-            company: 'Multiple Companies',
+            company: 'Multi-year background in IT infrastructure',
             achievements: [
-                'Managed enterprise server, network, and security infrastructure across multiple organizations',
-                'Expertise in Linux administration, deployments, and operations supporting backend work',
+                'Managed enterprise server, network, and security infrastructure across multiple organizations, providing a solid foundation administration, deployments, and operations that strengthens backend engineering work.',
             ],
         },
     ];
@@ -755,10 +746,10 @@ export default function Dashboard({
 
     return (
         <>
-            <Head title="Mohamed Aslam | Senior Backend Engineer">
+            <Head title="Mohamed Aslam | Software Engineer">
                 <meta
                     name="description"
-                    content="Senior Backend Engineer specializing in high-traffic applications, REST APIs, and the TALL stack."
+                    content="Software Engineer specializing in building scalable Laravel/PHP web applications and REST APIs."
                 />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
@@ -1173,7 +1164,7 @@ export default function Dashboard({
                                                 Current Role
                                             </div>
                                             <div className="font-semibold">
-                                                Senior Backend Engineer
+                                                Software Engineer
                                             </div>
                                         </div>
                                     </div>
@@ -1184,7 +1175,7 @@ export default function Dashboard({
                                                 Experience
                                             </span>
                                             <span className="text-primary-400">
-                                                12+ Years
+                                                4+ Years
                                             </span>
                                         </div>
                                         <div className="flex justify-between border-b border-white/5 py-2">
@@ -1197,14 +1188,14 @@ export default function Dashboard({
                                             <span className="text-slate-400">
                                                 Location
                                             </span>
-                                            <span>Lisbon, Portugal</span>
+                                            <span>Portugal</span>
                                         </div>
                                         <div className="flex justify-between border-b border-white/5 py-2">
                                             <span className="text-slate-400">
                                                 TRC Status
                                             </span>
                                             <span className="text-primary-400">
-                                                Portugal TRC
+                                                Portugal (EU TRC)
                                             </span>
                                         </div>
                                         <div className="flex justify-between py-2">
@@ -1238,40 +1229,47 @@ export default function Dashboard({
 
                                 <div className="space-y-4 leading-relaxed text-slate-400">
                                     <p>
-                                        My journey began in IT and Network
-                                        Administration, where I earned my{' '}
+                                        I am a{' '}
                                         <span className="font-medium text-white">
-                                            CCNA certification
+                                            Software Engineer
                                         </span>{' '}
-                                        and managed enterprise infrastructure.
-                                        This foundation gave me a deep
-                                        understanding of the "metal" that code
-                                        runs on—servers, networks, and security.
+                                        with 4+ years of experience building
+                                        high-performance Laravel applications
+                                        and REST APIs that serve over{' '}
+                                        <span className="font-medium text-emerald-400">
+                                            50,000+ active users
+                                        </span>
+                                        . My approach combines engineering
+                                        precision with a deep focus on code
+                                        quality, reliability, and
+                                        maintainability.
                                     </p>
 
                                     <p>
-                                        Transitioning to software engineering, I
-                                        brought that systems-thinking mindset
-                                        with me. I don't just write code; I{' '}
-                                        <span className="font-medium text-white">
-                                            architect systems
-                                        </span>{' '}
-                                        that handle scale, process payments
-                                        securely, and integrate complex
-                                        third-party services.
-                                    </p>
-
-                                    <p>
-                                        Today, I specialize in building
-                                        high-traffic applications using the{' '}
+                                        As a specialist in the{' '}
                                         <span className="font-medium text-white">
                                             TALL stack
                                         </span>{' '}
-                                        (Tailwind, Alpine, Laravel, Livewire).
-                                        My unique background in infrastructure
-                                        means I understand performance at every
-                                        layer—from database queries to server
-                                        configuration.
+                                        (Tailwind, Alpine, Laravel, Livewire), I
+                                        architect robust systems that scale
+                                        seamlessly. From complex multi-tenant
+                                        environments to event-driven workflows,
+                                        I ensure that the backend architecture
+                                        is as resilient as it is efficient.
+                                    </p>
+
+                                    <p>
+                                        My unique background in{' '}
+                                        <span className="font-medium text-white">
+                                            IT infrastructure and network
+                                            engineering
+                                        </span>{' '}
+                                        (informed by my Cisco CCNA foundation)
+                                        gives me a distinct advantage: I
+                                        understand the entire stack. I
+                                        don&apos;t just write code; I build
+                                        secure, high-uptime systems optimized
+                                        from the metal up to the browser.
                                     </p>
                                 </div>
 
@@ -1295,8 +1293,8 @@ export default function Dashboard({
                                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                         ></path>
                                     </svg>
-                                    Based in Lisbon, Portugal — Open to Global
-                                    Remote opportunities
+                                    Based in Portugal — Open to remote EU/Global
+                                    roles
                                 </div>
                             </motion.div>
                         </AnimatedSection>

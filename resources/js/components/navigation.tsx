@@ -62,9 +62,16 @@ export default function Navigation({ auth }: NavigationProps) {
                             </a>
                         ))}
                         <a
+                            href="/resume.pdf"
+                            download
+                            className="bg-primary-400/10 text-primary-400 border-primary-400/30 hover:bg-primary-400/20 rounded-lg border px-4 py-2 text-sm font-medium transition-all"
+                        >
+                            Download Resume
+                        </a>
+                        <a
                             href="#contact"
                             onClick={(e) => handleSmoothScroll(e, '#contact')}
-                            className="bg-primary-400/10 text-primary-400 border-primary-400/30 hover:bg-primary-400/20 rounded-lg border px-4 py-2 text-sm font-medium transition-all"
+                            className="px-4 py-2 text-sm font-medium text-slate-400 transition-all hover:text-white"
                         >
                             Contact
                         </a>
@@ -145,9 +152,16 @@ export default function Navigation({ auth }: NavigationProps) {
                         </a>
                     ))}
                     <a
+                        href="/resume.pdf"
+                        download
+                        className="text-primary-400 block"
+                    >
+                        Download Resume
+                    </a>
+                    <a
                         href="#contact"
                         onClick={(e) => handleSmoothScroll(e, '#contact')}
-                        className="text-primary-400 block"
+                        className="block text-slate-400 transition-colors hover:text-white"
                     >
                         Contact
                     </a>
