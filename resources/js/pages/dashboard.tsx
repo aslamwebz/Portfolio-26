@@ -12,6 +12,77 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 
+// ─── Typewriter Code Component ────────────────────────────────────────────────
+const PEST_TEST_CODE = `it('processes a stripe subscription', function () {
+    $user = User::factory()->create();
+    $plan = Plan::factory()->stripe()->create();
+
+    $order = app(PaymentService::class)
+        ->charge($user, $plan);
+
+    expect($order)->toBeInstanceOf(Order::class)
+        ->and($order->status)->toBe('active');
+});`;
+
+function TypewriterCode() {
+    const [displayed, setDisplayed] = useState('');
+    const [done, setDone] = useState(false);
+
+    useEffect(() => {
+        let i = 0;
+        setDisplayed('');
+        setDone(false);
+        const id = setInterval(() => {
+            i++;
+            setDisplayed(PEST_TEST_CODE.slice(0, i));
+            if (i >= PEST_TEST_CODE.length) {
+                clearInterval(id);
+                setDone(true);
+            }
+        }, 14);
+        return () => clearInterval(id);
+    }, []);
+
+    const highlight = (code: string) =>
+        code
+            .replace(
+                /(it|function|expect|class|new|app|return|true|false|null)(?=[\s\(])/g,
+                (m) => `<span class="code-keyword">${m}</span>`,
+            )
+            .replace(
+                /(&gt;|->)(\w+)/g,
+                (_, arrow, name) =>
+                    `${arrow}<span class="code-function">${name}</span>`,
+            )
+            .replace(
+                /(\$\w+)/g,
+                (m) => `<span class="code-variable">${m}</span>`,
+            )
+            .replace(
+                /('([^']*)')/g,
+                (m) => `<span class="code-string">${m}</span>`,
+            );
+
+    const escaped = displayed
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+    return (
+        <pre className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed tracking-wide text-slate-300">
+            <code
+                dangerouslySetInnerHTML={{
+                    __html:
+                        highlight(escaped) +
+                        (!done
+                            ? '<span class="animate-pulse text-emerald-400">█</span>'
+                            : '<span class="animate-pulse text-emerald-400">█</span>'),
+                }}
+            />
+        </pre>
+    );
+}
+
 interface DbProject {
     id: number;
     title: string;
@@ -988,104 +1059,10 @@ export default function Dashboard({
                                             <div className="h-3 w-3 rounded-full bg-green-500/80" />
                                         </div>
                                         <div className="font-mono text-[10px] tracking-wider text-slate-500">
-                                            PaymentService.php
+                                            PayoutTest.php
                                         </div>
                                     </div>
-                                    <div className="overflow-x-auto p-6 font-mono text-[13px] leading-relaxed tracking-wide text-slate-300">
-                                        <pre>
-                                            <code>
-                                                <span className="code-keyword">
-                                                    namespace
-                                                </span>{' '}
-                                                App\Services;
-                                                <br />
-                                                <br />
-                                                <span className="code-keyword">
-                                                    use
-                                                </span>{' '}
-                                                App\Models\Order;
-                                                <br />
-                                                <span className="code-keyword">
-                                                    use
-                                                </span>{' '}
-                                                Laravel\Cashier\Cashier;
-                                                <br />
-                                                <br />
-                                                <span className="code-keyword">
-                                                    final class
-                                                </span>{' '}
-                                                <span className="text-indigo-300">
-                                                    PaymentService
-                                                </span>
-                                                <br />
-                                                &#123;
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span className="code-keyword">
-                                                    public function
-                                                </span>{' '}
-                                                <span className="code-function">
-                                                    charge
-                                                </span>
-                                                (
-                                                <span className="code-variable">
-                                                    $user
-                                                </span>
-                                                ,{' '}
-                                                <span className="code-variable">
-                                                    $plan
-                                                </span>
-                                                ):{' '}
-                                                <span className="code-keyword">
-                                                    Order
-                                                </span>
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&#123;
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span className="code-comment">
-                                                    // Idempotent Stripe
-                                                    checkout
-                                                </span>
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span className="code-keyword">
-                                                    return
-                                                </span>{' '}
-                                                <span className="code-variable">
-                                                    $user
-                                                </span>
-                                                -&gt;
-                                                <span className="code-function">
-                                                    newSubscription
-                                                </span>
-                                                (<br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span className="code-string">
-                                                    'default'
-                                                </span>
-                                                ,{' '}
-                                                <span className="code-variable">
-                                                    $plan
-                                                </span>
-                                                -&gt;stripe_id
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)-&gt;
-                                                <span className="code-function">
-                                                    create
-                                                </span>
-                                                (
-                                                <span className="code-variable">
-                                                    $user
-                                                </span>
-                                                -&gt;pm_type );
-                                                <br />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&#125;
-                                                <br />
-                                                &#125;
-                                            </code>
-                                        </pre>
-                                    </div>
+                                    <TypewriterCode />
                                 </div>
                             </motion.div>
                         </div>
