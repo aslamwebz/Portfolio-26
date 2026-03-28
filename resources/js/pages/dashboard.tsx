@@ -9,15 +9,10 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from '@/components/ui/dialog';
 
 // ─── Typewriter Code Component ────────────────────────────────────────────────
-const PEST_TEST_CODE = `<?php
-
-use App\\Models\\{User, Plan, Order};
-use App\\Services\\PaymentService;
-
+const PEST_TEST_CODE = `
 beforeEach(function () {
     $this->user = User::factory()->create();
     $this->plan = Plan::factory()->stripe()->create();
@@ -33,16 +28,7 @@ it('processes a stripe subscription', function () {
         ->and($order->user_id)->toBe($this->user->id);
 });
 
-it('sends a welcome email after checkout', function () {
-    Mail::fake();
-
-    app(PaymentService::class)
-        ->charge($this->user, $this->plan);
-
-    Mail::assertSent(WelcomeMail::class, fn ($mail) =>
-        $mail->hasTo($this->user->email)
-    );
-});`;
+`;
 
 function TypewriterCode() {
     const [displayed, setDisplayed] = useState('');
@@ -565,12 +551,12 @@ export default function Dashboard({
             title: 'Software Engineer',
             company: 'Digital Egg Ltd / Fullstripe s.r.o',
             achievements: [
-                'Architected and scaled reactive web applications using the TALL Stack (Tailwind, Alpine.js, Laravel, Livewire), Vue, and InertiaJs supporting a global user base of 50,000+ active users with high-concurrency requirements.',
-                'Designed and documented 15+ RESTful API endpoints utilizing Laravel Sanctum, ensuring zero-friction integration for frontend and mobile teams.',
-                'Engineered robust Backend Architectures involving multi-tenancy, event-driven workflows, and complex API integrations (REST, OAuth 2.0, Stripe/PayPal), ensuring seamless data flow across microservices.',
-                'Optimized Platform Reliability to maintain 99.9% uptime by implementing advanced monitoring (Sentry, Telescope, LogRocket) and managing CI/CD pipelines via GitHub Actions for automated, zero-downtime deployments.',
-                'Accelerated Internal Productivity by 40% through the strategic implementation of Filament and Laravel Nova admin systems, automating manual operational workflows and data management tasks.',
-                'Drove Code Excellence by enforcing strict PSR-12 standards and a "test-first" culture using Pest and PHPUnit, successfully reducing production regressions and bug reports by 40%.',
+                'Built and maintained Laravel/PHP web applications supporting a global user base, handling high-concurrency requests with Vue.js, Inertia.js, and Livewire interfaces.',
+                'Designed and documented 15+ RESTful API endpoints using Laravel Sanctum, enabling clean integration for web and mobile clients.',
+                'Integrated payment and authentication flows using Stripe, PayPal, and OAuth 2.0, following security best practices and clean separation of concerns.',
+                'Established a test-first development culture using Pest and PHPUnit with PSR-12 standards, reducing production bugs and regressions by 40%.',
+                'Developed Filament and Laravel Nova admin systems that automated operational workflows, improving internal team productivity by 40%.',
+                'Designed backend architecture involving event-driven workflows, job queues, and multi-environment deployments across a growing product team.',
             ],
         },
         {
@@ -655,7 +641,7 @@ export default function Dashboard({
             ),
             title: 'Team Player',
             description:
-                'I mentor junior developers, conduct thorough code reviews, and communicate effectively with both technical and non-technical stakeholders.',
+                'I conduct thorough code reviews, and communicate effectively with both technical and non-technical stakeholders.',
         },
         {
             icon: (
@@ -1222,26 +1208,30 @@ export default function Dashboard({
                                     <p>
                                         I am a{' '}
                                         <span className="font-medium text-white">
-                                            Software Engineer
+                                            Laravel/PHP Developer
                                         </span>{' '}
-                                        with 4+ years of experience building
-                                        high-performance Laravel applications
-                                        and REST APIs that serve over{' '}
+                                        with 4+ years of production experience
+                                        building high-performance web
+                                        applications, REST APIs, and admin
+                                        systems that serve over{' '}
                                         <span className="font-medium text-emerald-400">
                                             50,000+ active users
                                         </span>
                                         . My approach combines engineering
-                                        precision with a deep focus on code
-                                        quality, reliability, and
-                                        maintainability.
+                                        precision with a strong focus on clean
+                                        code, automated testing, and reliable
+                                        CI/CD deployments.
                                     </p>
 
                                     <p>
-                                        As a specialist in the{' '}
+                                        As a specialist in backend architecture
+                                        and frontend integration, I am
+                                        proficient with the{' '}
                                         <span className="font-medium text-white">
                                             TALL stack
                                         </span>{' '}
-                                        (Tailwind, Alpine, Laravel, Livewire), I
+                                        (Tailwind, Alpine, Laravel, Livewire) as
+                                        well as Vue.js and Inertia.js. I
                                         architect robust systems that scale
                                         seamlessly. From complex multi-tenant
                                         environments to event-driven workflows,
