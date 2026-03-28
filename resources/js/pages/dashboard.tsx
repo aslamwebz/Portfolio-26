@@ -1204,59 +1204,117 @@ export default function Dashboard({
                                     </span>
                                 </h2>
 
-                                <div className="space-y-4 leading-relaxed text-slate-400">
+                                <div className="space-y-6 leading-relaxed text-slate-400">
                                     <p>
                                         I am a{' '}
                                         <span className="font-medium text-white">
                                             Laravel/PHP Developer
                                         </span>{' '}
-                                        with 4+ years of production experience
-                                        building high-performance web
-                                        applications, REST APIs, and admin
-                                        systems that serve over{' '}
-                                        <span className="font-medium text-emerald-400">
-                                            50,000+ active users
-                                        </span>
-                                        . My approach combines engineering
-                                        precision with a strong focus on clean
-                                        code, automated testing, and reliable
-                                        CI/CD deployments.
+                                        with 4+ years building web applications
+                                        and REST APIs in a live production
+                                        environment. I write clean, tested,
+                                        maintainable code — and I ship features
+                                        that work reliably.
                                     </p>
 
                                     <p>
-                                        As a specialist in backend architecture
-                                        and frontend integration, I am
-                                        proficient with the{' '}
-                                        <span className="font-medium text-white">
-                                            TALL stack
-                                        </span>{' '}
-                                        (Tailwind, Alpine, Laravel, Livewire) as
-                                        well as Vue.js and Inertia.js. I
-                                        architect robust systems that scale
-                                        seamlessly. From complex multi-tenant
-                                        environments to event-driven workflows,
-                                        I ensure that the backend architecture
-                                        is as resilient as it is efficient.
+                                        My day-to-day involves building and
+                                        maintaining Laravel applications:
+                                        designing RESTful API endpoints with
+                                        Sanctum, writing database schemas and
+                                        Eloquent relationships in MySQL,
+                                        building Livewire and Vue.js interfaces,
+                                        writing automated tests with Pest and
+                                        PHPUnit, and deploying via GitHub
+                                        Actions CI/CD pipelines.
                                     </p>
 
-                                    <p>
-                                        My unique background in{' '}
-                                        <span className="font-medium text-white">
-                                            IT infrastructure and network
-                                            engineering
-                                        </span>{' '}
-                                        (informed by my Cisco CCNA foundation)
-                                        gives me a distinct advantage: I
-                                        understand the entire stack. I
-                                        don&apos;t just write code; I build
-                                        secure, high-uptime systems optimized
-                                        from the metal up to the browser.
-                                    </p>
+                                    <div>
+                                        <h3 className="mb-3 text-sm font-semibold tracking-wider text-slate-300 uppercase">
+                                            Outcomes I&apos;m Proud Of
+                                        </h3>
+                                        <ul className="space-y-2 text-sm text-slate-400">
+                                            <li className="flex items-start">
+                                                <span className="mr-3 text-emerald-400">
+                                                    →
+                                                </span>
+                                                <span>
+                                                    40% fewer production bugs
+                                                    through test-first
+                                                    development (Pest, PHPUnit,
+                                                    PSR-12)
+                                                </span>
+                                            </li>
+                                            <li className="flex items-start">
+                                                <span className="mr-3 text-emerald-400">
+                                                    →
+                                                </span>
+                                                <span>
+                                                    40% productivity improvement
+                                                    via Filament/Nova admin
+                                                    systems
+                                                </span>
+                                            </li>
+                                            <li className="flex items-start">
+                                                <span className="mr-3 text-emerald-400">
+                                                    →
+                                                </span>
+                                                <span>
+                                                    Zero-downtime deployments
+                                                    using GitHub Actions CI/CD
+                                                </span>
+                                            </li>
+                                            <li className="flex items-start">
+                                                <span className="mr-3 text-emerald-400">
+                                                    →
+                                                </span>
+                                                <span>
+                                                    15+ RESTful API endpoints
+                                                    consumed by web and mobile
+                                                    clients
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="mb-3 text-sm font-semibold tracking-wider text-slate-300 uppercase">
+                                            Daily Stack
+                                        </h3>
+                                        <div className="flex flex-wrap gap-2">
+                                            {[
+                                                'Laravel',
+                                                'PHP 8.x',
+                                                'MySQL',
+                                                'REST APIs',
+                                                'Sanctum',
+                                                'Livewire',
+                                                'Inertia.js',
+                                                'Vue.js',
+                                                'Alpine.js',
+                                                'Tailwind CSS',
+                                                'Filament',
+                                                'PHPUnit',
+                                                'Pest',
+                                                'GitHub Actions',
+                                                'Docker',
+                                                'Sentry',
+                                                'Git',
+                                            ].map((tech) => (
+                                                <span
+                                                    key={tech}
+                                                    className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="mt-8 flex items-center gap-3 text-sm text-slate-500">
                                     <svg
-                                        className="text-primary-400 h-5 w-5"
+                                        className="h-5 w-5 text-emerald-400"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -1274,8 +1332,9 @@ export default function Dashboard({
                                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                         ></path>
                                     </svg>
-                                    Based in Portugal — Open to remote EU/Global
-                                    roles
+                                    Based in Portugal with EU TRC — no visa or
+                                    sponsorship needed. Available for remote
+                                    roles globally.
                                 </div>
                             </motion.div>
                         </AnimatedSection>
