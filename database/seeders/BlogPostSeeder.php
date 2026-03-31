@@ -42,6 +42,22 @@ class BlogPostSeeder extends Seeder
                 'created_at' => now()->subDays(2),
                 'updated_at' => now()->subDays(2),
             ],
+            [
+                'title' => 'Beyond the Big 6: Unions, CTEs, and Window Functions',
+                'slug' => 'beyond-the-big-6-unions-ctes-window-functions',
+                'excerpt' => 'When basic joins and groupings hit their limit, advanced SQL techniques like CTEs, Window Functions, and CASE statements are your strategic advantage for complex data reporting.',
+                'content' => $this->getBeyondBig6Article(),
+                'featured_image' => 'img/blog/beyond_big_6.png',
+                'category' => 'Database',
+                'tags' => json_encode(['SQL', 'Advanced', 'Data Analytics']),
+                'is_published' => true,
+                'published_at' => now()->subHours(12),
+                'author' => 'Mohamed Aslam',
+                'reading_time' => 12,
+                'sort_order' => 3,
+                'created_at' => now()->subHours(12),
+                'updated_at' => now()->subHours(12),
+            ],
         ];
 
         DB::table('blog_posts')->truncate();
@@ -160,6 +176,73 @@ GROUP BY department;</code></pre>
 
 <h2>Conclusion</h2>
 <p>While ORMs speed up development, the underlying SQL is the immutable engine of your application. When you intimately understand how Joins, Groupings, and Aggregates function natively, you become capable of architecting much faster, more reliable web applications.</p>
+HTML;
+    }
+
+    private function getBeyondBig6Article(): string
+    {
+        return <<<'HTML'
+<h2>When the Fundamentals Aren't Enough</h2>
+<p>We've already covered the foundational "Big 6" SQL clauses (<code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>HAVING</code>, <code>ORDER BY</code>) and how to navigate relational joins. For 80% of web development, that is all you will ever need.</p>
+<p>But then comes the other 20%. You will eventually face a reporting requirement that feels impossible using standard Eloquent methods or even basic SQL grouping. You need to rank items, stack disconnected tables together, or execute deeply nested logic within a single query. Welcome to intermediate/advanced SQL.</p>
+
+<h2>Stacking Results with UNIONs</h2>
+<p>While a <code>JOIN</code> combines columns from different tables horizontally, a <code>UNION</code> combines rows vertically.</p>
+<p>Imagine you have an <code>active_users</code> table and an <code>archived_users</code> table. If you want a unified list of all email addresses across both, a <code>JOIN</code> won’t help because the data doesn't share a relational bond — it shares a <em>structural</em> bond.</p>
+<pre><code>SELECT email, 'active' as status FROM active_users
+UNION
+SELECT email, 'archived' as status FROM archived_users;</code></pre>
+<p><strong>Note:</strong> <code>UNION</code> automatically removes duplicate rows. If you want absolutely every row, including duplicates, use <code>UNION ALL</code>, which is also significantly faster because the database skips the deduplication step.</p>
+
+<h2>Conditional Logic: The CASE Statement</h2>
+<p>Think of the <code>CASE</code> statement as an <code>if/else</code> or <code>switch</code> block running directly inside your database query. Instead of pulling raw data and running conditionally formatted maps in PHP, you can format the data at the source.</p>
+<pre><code>SELECT 
+    product_name,
+    stock,
+    CASE 
+        WHEN stock > 100 THEN 'In Stock'
+        WHEN stock > 0 THEN 'Low Stock'
+        ELSE 'Out of Stock'
+    END as availability_status
+FROM inventory;</code></pre>
+<p>As Laravel developers, combining <code>CASE</code> statements with <code>DB::raw()</code> allows you to create incredibly powerful custom accessors straight from the database, completely bypassing complex PHP logic.</p>
+
+<h2>Cleaner Queries with CTEs (Common Table Expressions)</h2>
+<p>A Common Table Expression, built using the `WITH` clause, allows you to create temporary, named result sets that exist only for the duration of a single query.</p>
+<p>Have you ever written a query with a massive, ugly subquery nested inside a <code>FROM</code> clause? CTEs fix this by letting you define the subquery first, making your code readable from top to bottom.</p>
+<pre><code>WITH HighValueCustomers AS (
+    SELECT user_id, SUM(total) as lifetime_value
+    FROM orders
+    GROUP BY user_id
+    HAVING lifetime_value > 1000
+)
+
+SELECT users.name, users.email, hvc.lifetime_value
+FROM users
+JOIN HighValueCustomers hvc ON users.id = hvc.user_id;</code></pre>
+<p>Not only are CTEs easier to read and debug, but modern databases also optimize them incredibly well.</p>
+
+<h2>The Holy Grail: Window Functions</h2>
+<p>Window functions are arguably the most powerful feature in modern SQL. They allow you to perform calculations across a set of rows (a "window") <strong>without grouping them into a single output row</strong>. This solves a massive problem: calculating aggregates while still keeping the detail rows.</p>
+<p>For example, if you want to show a list of employees, their salary, and the average salary of their specific department side-by-side:</p>
+<pre><code>SELECT 
+    name, 
+    department, 
+    salary,
+    AVG(salary) OVER (PARTITION BY department) as dept_avg_salary
+FROM employees;</code></pre>
+<p>Because there is no <code>GROUP BY</code> clause, all rows are returned, but the <code>OVER (PARTITION BY)</code> clause calculates the average strictly within that department's "window."</p>
+
+<h3>Ranking with Window Functions</h3>
+<p>Window functions are also the only clean way to create leaderboards or handle "Nth highest" queries using functions like <code>ROW_NUMBER()</code> or <code>RANK()</code>.</p>
+<pre><code>SELECT 
+    name, 
+    score,
+    RANK() OVER (ORDER BY score DESC) as player_rank
+FROM leaderboards;</code></pre>
+
+<h2>Bringing it Back to Laravel</h2>
+<p>Laravel's query builder natively supports CTEs, and you can inject Window functions seamlessly using raw expressions. However, knowing <em>when</em> to use them is the hardest part. If you ever find yourself iterating over thousands of loaded Eloquent models just to rank them, calculate running totals, or group them logically in memory — stop. Push that heavy lifting back to the database, where it belongs.</p>
 HTML;
     }
 }
