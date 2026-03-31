@@ -300,6 +300,15 @@
     .backdrop-blur-sm {
         transform: translateZ(0);
     }
+
+    /* Blog Prose Inline Code */
+    .blog-prose :not(pre) > code {
+        @apply rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-sm font-normal text-emerald-400;
+        &::before,
+        &::after {
+            content: '';
+        }
+    }
 }
 
 @keyframes fadeIn {

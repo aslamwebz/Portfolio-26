@@ -78,6 +78,15 @@ export default function CodeBlock({
                         textAlign: 'right',
                         userSelect: 'none',
                     }}
+                    codeTagProps={{
+                        style: {
+                            display: 'inherit',
+                            padding: 0,
+                            background: 'transparent',
+                            border: 'none',
+                            borderRadius: 0,
+                        },
+                    }}
                 >
                     {dedent(code)}
                 </SyntaxHighlighter>

@@ -141,7 +141,7 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
                 {/* Article Content */}
                 <article className="py-8 pb-16">
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-                        <div className="blog-prose prose max-w-none prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-slate-300 prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:rounded prose-code:border prose-code:border-white/10 prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:text-emerald-400 prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:border-none prose-pre:bg-transparent prose-pre:p-0 prose-ol:text-slate-300 prose-ul:text-slate-300 prose-li:marker:text-emerald-400">
+                        <div className="blog-prose prose max-w-none prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-slate-300 prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-pre:border-none prose-pre:bg-transparent prose-pre:p-0 prose-ol:text-slate-300 prose-ul:text-slate-300 prose-li:marker:text-emerald-400">
                             {parse(post.content, options)}
                         </div>
 
