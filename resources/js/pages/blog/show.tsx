@@ -52,7 +52,8 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
                 if (codeNode) {
                     const codeText = codeNode.children
                         .map((child: any) => child.data || '')
-                        .join('');
+                        .join('')
+                        .trim();
 
                     // Attempt to detect language from class
                     const className = codeNode.attribs?.class || '';

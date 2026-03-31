@@ -17,6 +17,25 @@ export default function CodeBlock({
     const displayHeader =
         filename || (language === 'php' ? 'index.php' : language.toUpperCase());
 
+    // Dedent function to remove common leading whitespace
+    const dedent = (text: string) => {
+        const lines = text.split('\n');
+        // Filter out empty lines to find the minimum indent
+        const minIndent = lines
+            .filter((line) => line.trim().length > 0)
+            .reduce((min, line) => {
+                const indent = line.match(/^\s*/)?.[0].length ?? 0;
+                return Math.min(min, indent);
+            }, Infinity);
+
+        if (minIndent === Infinity) return text.trim();
+
+        return lines
+            .map((line) => line.slice(minIndent))
+            .join('\n')
+            .trim();
+    };
+
     return (
         <div className="group my-8 overflow-hidden rounded-xl border border-white/10 bg-[#1E1E1E] shadow-2xl transition-all hover:border-emerald-500/30">
             {/* Header / Title Bar */}
@@ -60,7 +79,7 @@ export default function CodeBlock({
                         userSelect: 'none',
                     }}
                 >
-                    {code.trim()}
+                    {dedent(code)}
                 </SyntaxHighlighter>
             </div>
         </div>
