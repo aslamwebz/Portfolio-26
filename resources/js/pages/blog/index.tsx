@@ -1,5 +1,7 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import Navigation from '@/components/navigation';
+import { useState, useEffect, useCallback } from 'react';
+import debounce from 'lodash/debounce';
 
 interface BlogPost {
     id: number;
@@ -16,6 +18,11 @@ interface BlogPost {
 
 interface BlogIndexProps {
     posts: BlogPost[];
+    categories: string[];
+    filters: {
+        search: string | null;
+        category: string | null;
+    };
     auth?: {
         user?: {
             name: string;
@@ -25,13 +32,50 @@ interface BlogIndexProps {
     };
 }
 
-export default function BlogIndex({ posts, auth }: BlogIndexProps) {
+export default function BlogIndex({
+    posts,
+    categories,
+    filters,
+    auth,
+}: BlogIndexProps) {
+    const [search, setSearch] = useState(filters.search || '');
+    const [activeCategory, setActiveCategory] = useState(
+        filters.category || 'All',
+    );
+
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
         });
+    };
+
+    // Debounced search function
+    const debouncedSearch = useCallback(
+        debounce((query: string, category: string) => {
+            router.get(
+                '/blog',
+                { search: query, category: category !== 'All' ? category : '' },
+                { preserveState: true, preserveScroll: true, replace: true },
+            );
+        }, 300),
+        [],
+    );
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const query = e.target.value;
+        setSearch(query);
+        debouncedSearch(query, activeCategory);
+    };
+
+    const handleCategoryChange = (category: string) => {
+        setActiveCategory(category);
+        router.get(
+            '/blog',
+            { search: search, category: category !== 'All' ? category : '' },
+            { preserveState: true, preserveScroll: true },
+        );
     };
 
     return (
@@ -47,7 +91,7 @@ export default function BlogIndex({ posts, auth }: BlogIndexProps) {
                 <Navigation auth={auth} />
 
                 {/* Header */}
-                <section className="border-b border-white/5 bg-[#0A0A0A] pb-16 pt-32">
+                <section className="border-b border-white/5 bg-[#0A0A0A] pt-32 pb-16">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="text-center">
                             <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
@@ -61,6 +105,68 @@ export default function BlogIndex({ posts, auth }: BlogIndexProps) {
                                 Thoughts on Laravel, PHP, databases, and
                                 building reliable web applications.
                             </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Filters & Search */}
+                <section className="border-b border-white/5 py-8">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                            {/* Category Filters */}
+                            <div className="flex flex-wrap items-center gap-2">
+                                <button
+                                    onClick={() => handleCategoryChange('All')}
+                                    className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                                        activeCategory === 'All'
+                                            ? 'bg-emerald-500 text-white'
+                                            : 'border border-white/10 bg-white/5 text-slate-400 hover:bg-white/10'
+                                    }`}
+                                >
+                                    All
+                                </button>
+                                {categories.map((category) => (
+                                    <button
+                                        key={category}
+                                        onClick={() =>
+                                            handleCategoryChange(category)
+                                        }
+                                        className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                                            activeCategory === category
+                                                ? 'bg-emerald-500 text-white'
+                                                : 'border border-white/10 bg-white/5 text-slate-400 hover:bg-white/10'
+                                        }`}
+                                    >
+                                        {category}
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Search Bar */}
+                            <div className="relative w-full md:max-w-sm">
+                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <svg
+                                        className="h-4 w-4 text-slate-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <input
+                                    type="text"
+                                    value={search}
+                                    onChange={handleSearchChange}
+                                    placeholder="Search articles..."
+                                    className="block w-full rounded-full border border-white/10 bg-white/5 py-2.5 pr-4 pl-10 text-sm text-white placeholder-slate-500 backdrop-blur-sm transition-all focus:border-emerald-500/50 focus:bg-white/10 focus:ring-0 focus:outline-none"
+                                />
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -111,7 +217,7 @@ export default function BlogIndex({ posts, auth }: BlogIndexProps) {
                                                     </svg>
                                                 </div>
                                             )}
-                                            <div className="absolute left-3 top-3">
+                                            <div className="absolute top-3 left-3">
                                                 <span className="rounded-full border border-white/20 bg-black/60 px-2.5 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm">
                                                     {post.category}
                                                 </span>
@@ -143,8 +249,21 @@ export default function BlogIndex({ posts, auth }: BlogIndexProps) {
                         ) : (
                             <div className="py-24 text-center">
                                 <p className="text-lg text-slate-500">
-                                    No posts published yet. Check back soon!
+                                    {search || activeCategory !== 'All'
+                                        ? 'No posts found matching your search criteria.'
+                                        : 'No posts published yet. Check back soon!'}
                                 </p>
+                                {(search || activeCategory !== 'All') && (
+                                    <button
+                                        onClick={() => {
+                                            setSearch('');
+                                            handleCategoryChange('All');
+                                        }}
+                                        className="mt-4 text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                                    >
+                                        Clear all filters
+                                    </button>
+                                )}
                             </div>
                         )}
 

@@ -26,9 +26,33 @@ Route::get('/projects', function () {
     ]);
 })->name('projects');
 
-Route::get('/blog', function () {
+use Illuminate\Http\Request;
+
+Route::get('/blog', function (Request $request) {
+    $search = $request->input('search');
+    $category = $request->input('category');
+
+    $query = BlogPost::published();
+
+    if ($search) {
+        $query->where(function ($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+                ->orWhere('excerpt', 'like', "%{$search}%")
+                ->orWhere('content', 'like', "%{$search}%");
+        });
+    }
+
+    if ($category && $category !== 'All') {
+        $query->where('category', $category);
+    }
+
     return Inertia::render('blog/index', [
-        'posts' => BlogPost::published()->latest('published_at')->get(),
+        'posts' => $query->latest('published_at')->get(),
+        'filters' => [
+            'search' => $search,
+            'category' => $category,
+        ],
+        'categories' => BlogPost::published()->distinct()->pluck('category')->toArray(),
     ]);
 })->name('blog');
 
@@ -38,4 +62,4 @@ Route::get('/blog/{blogPost:slug}', function (BlogPost $blogPost) {
     ]);
 })->name('blog.show');
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

@@ -58,6 +58,22 @@ class BlogPostSeeder extends Seeder
                 'created_at' => now()->subHours(1),
                 'updated_at' => now()->subHours(1),
             ],
+            [
+                'title' => 'The Silent Killer: Understanding and Fixing N+1 Queries in Laravel',
+                'slug' => 'understanding-fixing-n-plus-one-queries-laravel',
+                'excerpt' => 'The N+1 query problem is one of the most common performance bottlenecks in Laravel applications. Learn how to identify, debug, and eliminate it using Eager Loading.',
+                'content' => $this->getNPlusOneArticle(),
+                'featured_image' => 'img/blog/n_plus_one.png',
+                'category' => 'Laravel',
+                'tags' => json_encode(['Laravel', 'Performance', 'Eloquent', 'Optimization']),
+                'is_published' => true,
+                'published_at' => now(),
+                'author' => 'Mohamed Aslam',
+                'reading_time' => 8,
+                'sort_order' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         DB::table('blog_posts')->truncate();
@@ -260,6 +276,70 @@ FROM leaderboards;</code></pre>
 
 <h2>Bringing it Back to Laravel</h2>
 <p>Laravel's query builder natively supports CTEs, and you can inject Window functions seamlessly using raw expressions. However, knowing <em>when</em> to use them is the hardest part. If you ever find yourself iterating over thousands of loaded Eloquent models just to rank them, calculate running totals, or group them logically in memory — stop. Push that heavy lifting back to the database, where it belongs.</p>
+HTML;
+    }
+
+    private function getNPlusOneArticle(): string
+    {
+        return <<<'HTML'
+<h2>What is the N+1 Query Problem?</h2>
+<p>In the world of ORMs (Object-Relational Mappers) like Eloquent, the N+1 query problem is a performance issue that occurs when your application executes one query to fetch a parent record (or multiple records) and then executes another query <em>for each</em> parent record to fetch its related children.</p>
+<p>If you have 50 users and you want to display their profiles, a poorly written loop will execute 1 query for the users and 50 individual queries for the profiles. That is 51 queries for a simple list. As your data grows, your database load explodes, and your page response time skyrockets.</p>
+
+<h2>Spotting the Problem</h2>
+<p>The danger of N+1 is that it is often invisible during development. On a local machine with 5 users, 6 queries feel instantaneous. But once you deploy to production with thousands of users, the application grinds to a halt.</p>
+<p>I recommend using tools like **Laravel Debugbar** or **Clockwork** during development. They will highlight duplicate queries and explicitly warn you about N+1 bottlenecks. If you prefer the command line, you can listen to database events directly in `AppServiceProvider`:</p>
+<pre><code>DB::listen(function ($query) {
+    logger($query->sql);
+});</code></pre>
+
+<h2>The Solution: Eager Loading</h2>
+<p>Laravel's answer to N+1 is **Eager Loading**. By using the <code>with()</code> method, you tell Eloquent to fetch the relationships at the same time as the primary records using a single `IN` query.</p>
+
+<h3>Before (The N+1 Way):</h3>
+<pre><code>$books = Book::all(); // 1 query
+
+foreach ($books as $book) {
+    echo $book->author->name; // 1 query per book (N queries)
+}</code></pre>
+
+<h3>After (The Eager Loaded Way):</h3>
+<pre><code>$books = Book::with('author')->get(); // 2 queries total
+
+foreach ($books as $book) {
+    echo $book->author->name; // No extra queries!
+}</code></pre>
+
+<h2>Advanced Eager Loading</h2>
+<p>Eager loading isn't limited to simple relationships. You can load multiple relationships, nested relationships, and even apply constraints:</p>
+<ul>
+<li><strong>Multiple:</strong> <code>Book::with(['author', 'publisher'])->get();</code></li>
+<li><strong>Nested:</strong> <code>Book::with('author.contacts')->get();</code></li>
+<li><strong>Constrained:</strong> 
+<pre><code>Book::with(['author' => function ($query) {
+    $query->where('active', true);
+}])->get();</code></pre>
+</li>
+</ul>
+
+<h3>Lazy Eager Loading</h3>
+<p>Sometimes you only realize you need a relationship <em>after</em> the model has already been retrieved. In these cases, use <code>load()</code>:</p>
+<pre><code>$books = Book::all();
+
+if ($showAuthors) {
+    $books->load('author');
+}</code></pre>
+
+<h2>Preventing N+1 Globally</h2>
+<p>Since Laravel 8, you can completely disable lazy loading during development. This is a game-changer. If you accidentally trigger an N+1 query, Laravel will throw an exception, forcing you to fix it before it ever hits production.</p>
+<p>In your <code>AppServiceProvider.php</code>:</p>
+<pre><code>public function boot()
+{
+    Model::preventLazyLoading(! app()->isProduction());
+}</code></pre>
+
+<h2>Conclusion</h2>
+<p>The N+1 query problem is a "silent killer" of performance, but it's one of the easiest to fix if you know what to look for. By mastering Eager Loading and enabling strict lazy loading prevention in your development environment, you ensure that your Laravel applications remain fast and efficient as they scale.</p>
 HTML;
     }
 }
