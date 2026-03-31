@@ -55,12 +55,19 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
                         .join('')
                         .trim();
 
-                    // Attempt to detect language from class
+                    // Attempt to detect language and filename from class/attribs
                     const className = codeNode.attribs?.class || '';
+                    const filename = codeNode.attribs?.['data-filename'];
                     const langMatch = className.match(/language-(\w+)/);
                     const language = langMatch ? langMatch[1] : 'php';
 
-                    return <CodeBlock code={codeText} language={language} />;
+                    return (
+                        <CodeBlock
+                            code={codeText}
+                            language={language}
+                            filename={filename}
+                        />
+                    );
                 }
             }
         },

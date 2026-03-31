@@ -15,7 +15,14 @@ export default function CodeBlock({
 }: CodeBlockProps) {
     // Determine the displayed filename or fallback to language
     const displayHeader =
-        filename || (language === 'php' ? 'index.php' : language.toUpperCase());
+        filename ||
+        (language === 'php'
+            ? 'index.php'
+            : language === 'sql'
+              ? 'query.sql'
+              : language === 'javascript' || language === 'js'
+                ? 'script.js'
+                : language.toUpperCase());
 
     // Dedent function to remove common leading whitespace
     const dedent = (text: string) => {
