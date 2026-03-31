@@ -207,9 +207,14 @@ SELECT email, 'archived' as status FROM archived_users;</code></pre>
 FROM inventory;</code></pre>
 <p>As Laravel developers, combining <code>CASE</code> statements with <code>DB::raw()</code> allows you to create incredibly powerful custom accessors straight from the database, completely bypassing complex PHP logic.</p>
 
-<h2>Cleaner Queries with CTEs (Common Table Expressions)</h2>
-<p>A Common Table Expression, built using the `WITH` clause, allows you to create temporary, named result sets that exist only for the duration of a single query.</p>
-<p>Have you ever written a query with a massive, ugly subquery nested inside a <code>FROM</code> clause? CTEs fix this by letting you define the subquery first, making your code readable from top to bottom.</p>
+<h2>Subqueries vs. CTEs (Common Table Expressions)</h2>
+<p>Every SQL developer eventually needs to query the result of another query. Traditionally, this is done with <strong>Subqueries</strong>—nesting a query inside another `FROM` or `WHERE` clause.</p>
+<pre><code>SELECT * FROM (
+    SELECT user_id, SUM(total) as lifetime_value
+    FROM orders GROUP BY user_id
+) as customer_totals
+WHERE lifetime_value > 1000;</code></pre>
+<p>While subqueries work, they make your code difficult to read because you have to read them from the inside-out. The modern solution is a <strong>CTE (Common Table Expression)</strong> using the `WITH` clause. A CTE allows you to create temporary, named result sets that exist only for the duration of a single query, making your code readable from top to bottom.</p>
 <pre><code>WITH HighValueCustomers AS (
     SELECT user_id, SUM(total) as lifetime_value
     FROM orders
@@ -233,13 +238,25 @@ JOIN HighValueCustomers hvc ON users.id = hvc.user_id;</code></pre>
 FROM employees;</code></pre>
 <p>Because there is no <code>GROUP BY</code> clause, all rows are returned, but the <code>OVER (PARTITION BY)</code> clause calculates the average strictly within that department's "window."</p>
 
-<h3>Ranking with Window Functions</h3>
-<p>Window functions are also the only clean way to create leaderboards or handle "Nth highest" queries using functions like <code>ROW_NUMBER()</code> or <code>RANK()</code>.</p>
+<h3>Ranking and Peeking with Window Functions</h3>
+<p>Window functions are also the only clean way to create leaderboards using functions like <code>ROW_NUMBER()</code> or <code>RANK()</code>. But another massive feature is the <code>LAG()</code> function, which allows you to look at data from the <em>previous</em> row without writing a complex self-join.</p>
 <pre><code>SELECT 
     name, 
     score,
-    RANK() OVER (ORDER BY score DESC) as player_rank
+    RANK() OVER (ORDER BY score DESC) as player_rank,
+    score - LAG(score) OVER (ORDER BY score DESC) as points_behind_next_player
 FROM leaderboards;</code></pre>
+
+<h2>Essential Functions (YEAR, FLOOR, REGEXP)</h2>
+<p>Beyond standard operators, databases ship with incredibly powerful functions built right in:</p>
+<ul>
+<li><strong><code>YEAR()</code>:</strong> Extracts the year from a date column. Instead of fetching the timestamp and formatting in Carbon, use <code>WHERE YEAR(created_at) = 2024</code>.</li>
+<li><strong><code>FLOOR()</code> & <code>CEIL()</code>:</strong> Perfect for rounding numeric aggregates down or up directly in your query.</li>
+<li><strong><code>REGEXP</code>:</strong> SQL isn't limited to <code>LIKE '%...%'</code>. Standard SQL engines support full Regular Expressions, allowing you to filter data dynamically (e.g., <code>WHERE email REGEXP '^[a-z]+@gmail\.com$'</code>).</li>
+</ul>
+
+<h2>Timing Queries: Does Performance Matter?</h2>
+<p>As you add CTEs and Window Functions, performance becomes critical. How do you know if your query is fast? Prefix any query with <code>EXPLAIN ANALYZE</code> (in MySQL/PostgreSQL). This powerful command doesn't just run the query—it returns a detailed execution plan showing exactly where the database spent its time and whether it used indexes.</p>
 
 <h2>Bringing it Back to Laravel</h2>
 <p>Laravel's query builder natively supports CTEs, and you can inject Window functions seamlessly using raw expressions. However, knowing <em>when</em> to use them is the hardest part. If you ever find yourself iterating over thousands of loaded Eloquent models just to rank them, calculate running totals, or group them logically in memory — stop. Push that heavy lifting back to the database, where it belongs.</p>
