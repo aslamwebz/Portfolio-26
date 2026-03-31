@@ -221,14 +221,14 @@ HTML;
 <h2>Stacking Results with UNIONs</h2>
 <p>While a <code>JOIN</code> combines columns from different tables horizontally, a <code>UNION</code> combines rows vertically.</p>
 <p>Imagine you have an <code>active_users</code> table and an <code>archived_users</code> table. If you want a unified list of all email addresses across both, a <code>JOIN</code> won’t help because the data doesn't share a relational bond — it shares a <em>structural</em> bond.</p>
-<pre><code>SELECT email, 'active' as status FROM active_users
+<pre><code class="language-php">SELECT email, 'active' as status FROM active_users
 UNION
 SELECT email, 'archived' as status FROM archived_users;</code></pre>
 <p><strong>Note:</strong> <code>UNION</code> automatically removes duplicate rows. If you want absolutely every row, including duplicates, use <code>UNION ALL</code>, which is also significantly faster because the database skips the deduplication step.</p>
 
 <h2>Conditional Logic: The CASE Statement</h2>
 <p>Think of the <code>CASE</code> statement as an <code>if/else</code> or <code>switch</code> block running directly inside your database query. Instead of pulling raw data and running conditionally formatted maps in PHP, you can format the data at the source.</p>
-<pre><code>SELECT 
+<pre><code class="language-php">SELECT 
     product_name,
     stock,
     CASE 
@@ -241,13 +241,13 @@ FROM inventory;</code></pre>
 
 <h2>Subqueries vs. CTEs (Common Table Expressions)</h2>
 <p>Every SQL developer eventually needs to query the result of another query. Traditionally, this is done with <strong>Subqueries</strong>—nesting a query inside another `FROM` or `WHERE` clause.</p>
-<pre><code>SELECT * FROM (
+<pre><code class="language-php">SELECT * FROM (
     SELECT user_id, SUM(total) as lifetime_value
     FROM orders GROUP BY user_id
 ) as customer_totals
 WHERE lifetime_value > 1000;</code></pre>
 <p>While subqueries work, they make your code difficult to read because you have to read them from the inside-out. The modern solution is a <strong>CTE (Common Table Expression)</strong> using the `WITH` clause. A CTE allows you to create temporary, named result sets that exist only for the duration of a single query, making your code readable from top to bottom.</p>
-<pre><code>WITH HighValueCustomers AS (
+<pre><code class="language-php">WITH HighValueCustomers AS (
     SELECT user_id, SUM(total) as lifetime_value
     FROM orders
     GROUP BY user_id
@@ -262,7 +262,7 @@ JOIN HighValueCustomers hvc ON users.id = hvc.user_id;</code></pre>
 <h2>The Holy Grail: Window Functions</h2>
 <p>Window functions are arguably the most powerful feature in modern SQL. They allow you to perform calculations across a set of rows (a "window") <strong>without grouping them into a single output row</strong>. This solves a massive problem: calculating aggregates while still keeping the detail rows.</p>
 <p>For example, if you want to show a list of employees, their salary, and the average salary of their specific department side-by-side:</p>
-<pre><code>SELECT 
+<pre><code class="language-php">SELECT 
     name, 
     department, 
     salary,
@@ -272,7 +272,7 @@ FROM employees;</code></pre>
 
 <h3>Ranking and Peeking with Window Functions</h3>
 <p>Window functions are also the only clean way to create leaderboards using functions like <code>ROW_NUMBER()</code> or <code>RANK()</code>. But another massive feature is the <code>LAG()</code> function, which allows you to look at data from the <em>previous</em> row without writing a complex self-join.</p>
-<pre><code>SELECT 
+<pre><code class="language-php">SELECT 
     name, 
     score,
     RANK() OVER (ORDER BY score DESC) as player_rank,
@@ -305,7 +305,7 @@ HTML;
 <h2>Spotting the Problem</h2>
 <p>The danger of N+1 is that it is often invisible during development. On a local machine with 5 users, 6 queries feel instantaneous. But once you deploy to production with thousands of users, the application grinds to a halt.</p>
 <p>I recommend using tools like **Laravel Debugbar** or **Clockwork** during development. They will highlight duplicate queries and explicitly warn you about N+1 bottlenecks. If you prefer the command line, you can listen to database events directly in `AppServiceProvider`:</p>
-<pre><code>DB::listen(function ($query) {
+<pre><code class="language-php">DB::listen(function ($query) {
     logger($query->sql);
 });</code></pre>
 
@@ -313,14 +313,14 @@ HTML;
 <p>Laravel's answer to N+1 is **Eager Loading**. By using the <code>with()</code> method, you tell Eloquent to fetch the relationships at the same time as the primary records using a single `IN` query.</p>
 
 <h3>Before (The N+1 Way):</h3>
-<pre><code>$books = Book::all(); // 1 query
+<pre><code class="language-php">$books = Book::all(); // 1 query
 
 foreach ($books as $book) {
     echo $book->author->name; // 1 query per book (N queries)
 }</code></pre>
 
 <h3>After (The Eager Loaded Way):</h3>
-<pre><code>$books = Book::with('author')->get(); // 2 queries total
+<pre><code class="language-php">$books = Book::with('author')->get(); // 2 queries total
 
 foreach ($books as $book) {
     echo $book->author->name; // No extra queries!
@@ -332,7 +332,7 @@ foreach ($books as $book) {
 <li><strong>Multiple:</strong> <code>Book::with(['author', 'publisher'])->get();</code></li>
 <li><strong>Nested:</strong> <code>Book::with('author.contacts')->get();</code></li>
 <li><strong>Constrained:</strong> 
-<pre><code>Book::with(['author' => function ($query) {
+<pre><code class="language-php">Book::with(['author' => function ($query) {
     $query->where('active', true);
 }])->get();</code></pre>
 </li>
@@ -340,7 +340,7 @@ foreach ($books as $book) {
 
 <h3>Lazy Eager Loading</h3>
 <p>Sometimes you only realize you need a relationship <em>after</em> the model has already been retrieved. In these cases, use <code>load()</code>:</p>
-<pre><code>$books = Book::all();
+<pre><code class="language-php">$books = Book::all();
 
 if ($showAuthors) {
     $books->load('author');
@@ -349,7 +349,7 @@ if ($showAuthors) {
 <h2>Preventing N+1 Globally</h2>
 <p>Since Laravel 8, you can completely disable lazy loading during development. This is a game-changer. If you accidentally trigger an N+1 query, Laravel will throw an exception, forcing you to fix it before it ever hits production.</p>
 <p>In your <code>AppServiceProvider.php</code>:</p>
-<pre><code>public function boot()
+<pre><code class="language-php">public function boot()
 {
     Model::preventLazyLoading(! app()->isProduction());
 }</code></pre>
@@ -368,7 +368,7 @@ HTML;
 <h2>The Power of Indexing</h2>
 <p>Think of an <strong>Index</strong> as the table of contents for a book. Instead of scanning every single page (a "Full Table Scan"), the database looks up the index and jumps directly to the correct location.</p>
 <p>In Laravel, you add indexes via migrations:</p>
-<pre><code>$table->index('email'); // Standard Index
+<pre><code class="language-php">$table->index('email'); // Standard Index
 $table->unique('username'); // Unique Index
 $table->fulltext('description'); // Fulltext search index</code></pre>
 
@@ -386,11 +386,11 @@ $table->fulltext('description'); // Fulltext search index</code></pre>
 
 <h3>1. Avoid `SELECT *`</h3>
 <p>Fetching every column increases memory usage and prevents the database from using "Covering Indexes" (indexes that contain all the necessary data for a query). Always specify the columns you need:</p>
-<pre><code>User::select('id', 'name', 'email')->get();</code></pre>
+<pre><code class="language-php">User::select('id', 'name', 'email')->get();</code></pre>
 
 <h3>2. Use Fulltext Search for Text-Heavy Queries</h3>
 <p>Using <code>LIKE '%keyword%'</code> is extremely slow on large datasets because it cannot use a standard B-Tree index. For searching through blog posts or product descriptions, use <strong>Fulltext Indexes</strong>:</p>
-<pre><code>$table->fulltext(['title', 'content']);
+<pre><code class="language-php">$table->fulltext(['title', 'content']);
 // In query:
 WHERE MATCH(title, content) AGAINST('laravel optimization');</code></pre>
 

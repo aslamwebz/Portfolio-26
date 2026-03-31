@@ -26,6 +26,9 @@ interface BlogShowProps {
     };
 }
 
+import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
+import CodeBlock from '@/components/CodeBlock';
+
 export default function BlogShow({ post, auth }: BlogShowProps) {
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('en-US', {
@@ -37,6 +40,31 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
 
     const tags = Array.isArray(post.tags) ? post.tags : [];
 
+    // Parser options to replace <pre> with <CodeBlock />
+    const options: HTMLReactParserOptions = {
+        replace: (domNode) => {
+            if (domNode instanceof Element && domNode.name === 'pre') {
+                const codeNode = domNode.children.find(
+                    (child) =>
+                        child instanceof Element && child.name === 'code',
+                ) as Element;
+
+                if (codeNode) {
+                    const codeText = codeNode.children
+                        .map((child: any) => child.data || '')
+                        .join('');
+
+                    // Attempt to detect language from class
+                    const className = codeNode.attribs?.class || '';
+                    const langMatch = className.match(/language-(\w+)/);
+                    const language = langMatch ? langMatch[1] : 'php';
+
+                    return <CodeBlock code={codeText} language={language} />;
+                }
+            }
+        },
+    };
+
     return (
         <>
             <Head title={`${post.title} | Mohamed Aslam`}>
@@ -47,7 +75,7 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
                 <Navigation auth={auth} />
 
                 {/* Article Header */}
-                <section className="border-b border-white/5 bg-[#0A0A0A] pb-12 pt-32">
+                <section className="border-b border-white/5 bg-[#0A0A0A] pt-32 pb-12">
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
                         <Link
                             href="/blog"
@@ -78,7 +106,7 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
                             </span>
                         </div>
 
-                        <h1 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+                        <h1 className="mb-6 text-3xl leading-tight font-bold sm:text-4xl lg:text-5xl">
                             {post.title}
                         </h1>
 
@@ -112,17 +140,14 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
                 {/* Article Content */}
                 <article className="py-8 pb-16">
                     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-                        <div
-                            className="blog-prose prose prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-slate-300 prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:rounded prose-code:border prose-code:border-white/10 prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:text-emerald-400 prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:rounded-xl prose-pre:border prose-pre:border-white/10 prose-pre:bg-[#050505] prose-ol:text-slate-300 prose-ul:text-slate-300 prose-li:marker:text-emerald-400 max-w-none"
-                            dangerouslySetInnerHTML={{
-                                __html: post.content,
-                            }}
-                        />
+                        <div className="blog-prose prose max-w-none prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-p:leading-relaxed prose-p:text-slate-300 prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:rounded prose-code:border prose-code:border-white/10 prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:text-emerald-400 prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:border-none prose-pre:bg-transparent prose-pre:p-0 prose-ol:text-slate-300 prose-ul:text-slate-300 prose-li:marker:text-emerald-400">
+                            {parse(post.content, options)}
+                        </div>
 
                         {/* Tags */}
                         {tags.length > 0 && (
                             <div className="mt-12 border-t border-white/5 pt-8">
-                                <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-300">
+                                <h3 className="mb-4 text-sm font-semibold tracking-wider text-slate-300 uppercase">
                                     Tags
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
