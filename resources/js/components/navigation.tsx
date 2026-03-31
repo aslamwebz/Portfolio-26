@@ -19,6 +19,7 @@ export default function Navigation({ auth }: NavigationProps) {
         { href: '#stack', label: 'Stack' },
         { href: '#experience', label: 'Experience' },
         { href: '#projects', label: 'Projects' },
+        { href: '/blog', label: 'Blog', isRoute: true },
     ];
 
     const handleSmoothScroll = (
@@ -34,7 +35,7 @@ export default function Navigation({ auth }: NavigationProps) {
     };
 
     return (
-        <nav className="fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-[#0A0A0A]/80 backdrop-blur-md">
+        <nav className="fixed left-0 right-0 top-0 z-50 border-b border-white/5 bg-[#0A0A0A]/80 backdrop-blur-md">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
@@ -49,18 +50,28 @@ export default function Navigation({ auth }: NavigationProps) {
 
                     {/* Desktop Navigation */}
                     <div className="hidden items-center space-x-8 md:flex">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.href}
-                                href={link.href}
-                                onClick={(e) =>
-                                    handleSmoothScroll(e, link.href)
-                                }
-                                className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
-                            >
-                                {link.label}
-                            </a>
-                        ))}
+                        {navLinks.map((link) =>
+                            link.isRoute ? (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
+                                >
+                                    {link.label}
+                                </Link>
+                            ) : (
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={(e) =>
+                                        handleSmoothScroll(e, link.href)
+                                    }
+                                    className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
+                                >
+                                    {link.label}
+                                </a>
+                            ),
+                        )}
                         <a
                             href="/resume.pdf"
                             download
@@ -141,16 +152,28 @@ export default function Navigation({ auth }: NavigationProps) {
                 }`}
             >
                 <div className="space-y-3 px-4 py-4">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.href}
-                            href={link.href}
-                            onClick={(e) => handleSmoothScroll(e, link.href)}
-                            className="block text-slate-400 transition-colors hover:text-white"
-                        >
-                            {link.label}
-                        </a>
-                    ))}
+                    {navLinks.map((link) =>
+                        link.isRoute ? (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="block text-slate-400 transition-colors hover:text-white"
+                            >
+                                {link.label}
+                            </Link>
+                        ) : (
+                            <a
+                                key={link.href}
+                                href={link.href}
+                                onClick={(e) =>
+                                    handleSmoothScroll(e, link.href)
+                                }
+                                className="block text-slate-400 transition-colors hover:text-white"
+                            >
+                                {link.label}
+                            </a>
+                        ),
+                    )}
                     <a
                         href="/resume.pdf"
                         download

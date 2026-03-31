@@ -115,6 +115,16 @@ interface DbCertification {
     sort_order: number;
 }
 
+interface DbBlogPost {
+    id: number;
+    title: string;
+    slug: string;
+    excerpt: string;
+    category: string;
+    published_at: string;
+    reading_time: number;
+}
+
 // Framer Motion Variants
 const containerVariants: Variants = {
     hidden: {},
@@ -195,9 +205,11 @@ function AnimatedSection({
 export default function Dashboard({
     dbProjects = [],
     dbCertifications = [],
+    dbBlogPosts = [],
 }: {
     dbProjects?: DbProject[];
     dbCertifications?: DbCertification[];
+    dbBlogPosts?: DbBlogPost[];
 }) {
     const { auth } = usePage().props;
     const heroContentRef = useRef<HTMLDivElement>(null);
@@ -869,7 +881,7 @@ export default function Dashboard({
                                 className="relative h-full w-[1px] bg-slate-800"
                             >
                                 <div
-                                    className="animate-beam absolute top-0 left-0 h-32 w-full bg-gradient-to-b from-transparent via-indigo-500 to-transparent"
+                                    className="animate-beam absolute left-0 top-0 h-32 w-full bg-gradient-to-b from-transparent via-indigo-500 to-transparent"
                                     style={{
                                         animationDelay: `${i * 1.5}s`,
                                         opacity: i % 2 === 0 ? 0.6 : 0.3,
@@ -897,7 +909,7 @@ export default function Dashboard({
                                     duration: 0.8,
                                     ease: [0.22, 1, 0.36, 1],
                                 }}
-                                className="mb-8 inline-flex items-center gap-3 self-start rounded-full border border-white/5 bg-white/5 px-4 py-2 text-xs font-semibold tracking-widest text-slate-300 uppercase backdrop-blur-md"
+                                className="mb-8 inline-flex items-center gap-3 self-start rounded-full border border-white/5 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-300 backdrop-blur-md"
                             >
                                 <span className="relative flex h-2 w-2">
                                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
@@ -914,7 +926,7 @@ export default function Dashboard({
                                     delay: 0.1,
                                     ease: 'easeOut',
                                 }}
-                                className="text-[3.5rem] leading-[1.05] font-black tracking-tight text-white sm:text-[4.5rem] md:text-[5.5rem]"
+                                className="text-[3.5rem] font-black leading-[1.05] tracking-tight text-white sm:text-[4.5rem] md:text-[5.5rem]"
                             >
                                 Building the
                                 <br />
@@ -932,7 +944,7 @@ export default function Dashboard({
                                     delay: 0.2,
                                     ease: 'easeOut',
                                 }}
-                                className="mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-400 sm:text-xl"
+                                className="mt-8 max-w-xl text-lg font-light leading-relaxed text-slate-400 sm:text-xl"
                             >
                                 4+ years turning ideas into polished, reliable
                                 products using{' '}
@@ -1005,9 +1017,9 @@ export default function Dashboard({
                                     delay: 0.5,
                                     ease: 'easeOut',
                                 }}
-                                className="absolute top-4 -left-4 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-left-12 lg:top-12"
+                                className="absolute -left-4 top-4 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-left-12 lg:top-12"
                             >
-                                <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+                                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400">
                                     Apps Shipped
                                 </div>
                                 <div className="text-3xl font-black text-indigo-400">
@@ -1030,7 +1042,7 @@ export default function Dashboard({
                                 }}
                                 className="absolute -right-4 bottom-12 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-right-8"
                             >
-                                <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+                                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400">
                                     Test Coverage
                                 </div>
                                 <div className="text-3xl font-black text-emerald-400">
@@ -1085,7 +1097,7 @@ export default function Dashboard({
                         className="absolute bottom-6 left-1/2 -translate-x-1/2"
                     >
                         <div className="flex flex-col items-center gap-2 mix-blend-difference">
-                            <span className="text-[10px] font-medium tracking-[0.2em] text-slate-400 uppercase">
+                            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400">
                                 Explore
                             </span>
                             <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-600 p-1.5">
@@ -1230,7 +1242,7 @@ export default function Dashboard({
                                     </p>
 
                                     <div>
-                                        <h3 className="mb-3 text-sm font-semibold tracking-wider text-slate-300 uppercase">
+                                        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">
                                             Outcomes I&apos;m Proud Of
                                         </h3>
                                         <ul className="space-y-2 text-sm text-slate-400">
@@ -1278,7 +1290,7 @@ export default function Dashboard({
                                     </div>
 
                                     <div>
-                                        <h3 className="mb-3 text-sm font-semibold tracking-wider text-slate-300 uppercase">
+                                        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">
                                             Daily Stack
                                         </h3>
                                         <div className="flex flex-wrap gap-2">
@@ -1369,7 +1381,7 @@ export default function Dashboard({
                                     key={index}
                                     delay={index as 0 | 1 | 2 | 3}
                                 >
-                                    <div className="card-hover group hover:border-primary-400/30 h-full rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
+                                    <div className="card-hover hover:border-primary-400/30 group h-full rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
                                         <div className="bg-primary-400/10 text-primary-400 mb-4 flex h-12 w-12 items-center justify-center rounded-lg transition-transform group-hover:scale-110">
                                             {item.icon}
                                         </div>
@@ -1414,7 +1426,7 @@ export default function Dashboard({
                                         <div className="hover:border-primary-400/30 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-xl backdrop-blur-md transition-all hover:scale-110">
                                             {category.icon}
                                         </div>
-                                        <h3 className="text-primary-400 text-xs font-bold tracking-[0.2em] uppercase">
+                                        <h3 className="text-primary-400 text-xs font-bold uppercase tracking-[0.2em]">
                                             {category.title}
                                         </h3>
                                     </div>
@@ -1497,7 +1509,7 @@ export default function Dashboard({
                                             onClick={() =>
                                                 setSelectedProjectIndex(index)
                                             }
-                                            className="group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all"
+                                            className="hover:border-primary-400/30 group cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all"
                                         >
                                             <div className="relative h-48 overflow-hidden">
                                                 <img
@@ -1505,7 +1517,7 @@ export default function Dashboard({
                                                     alt={project.title}
                                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                 />
-                                                <div className="absolute top-4 left-4">
+                                                <div className="absolute left-4 top-4">
                                                     <span className="text-primary-400 border-primary-400/20 rounded-full border bg-black/60 px-3 py-1 text-[10px] font-bold backdrop-blur-md">
                                                         {project.category}
                                                     </span>
@@ -1596,7 +1608,7 @@ export default function Dashboard({
 
                         <div className="relative">
                             {/* Timeline Line */}
-                            <div className="from-primary-400/40 absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b via-white/10 to-transparent md:block" />
+                            <div className="from-primary-400/40 absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b via-white/10 to-transparent md:block" />
 
                             {/* MBA - Current */}
                             <Reveal>
@@ -1756,7 +1768,7 @@ export default function Dashboard({
                                             onClick={() =>
                                                 setSelectedCertIndex(index)
                                             }
-                                            className="card-hover group hover:border-primary-400/30 cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 p-0 backdrop-blur-md transition-all hover:bg-white/10"
+                                            className="card-hover hover:border-primary-400/30 group cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 p-0 backdrop-blur-md transition-all hover:bg-white/10"
                                         >
                                             <div className="relative h-48 w-full overflow-hidden bg-[#0A0A0A]">
                                                 <img
@@ -1814,7 +1826,7 @@ export default function Dashboard({
                                                 {/* Navigation Buttons */}
                                                 <button
                                                     onClick={prevProject}
-                                                    className="absolute top-1/2 left-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -1832,7 +1844,7 @@ export default function Dashboard({
                                                 </button>
                                                 <button
                                                     onClick={nextProject}
-                                                    className="absolute top-1/2 right-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -1986,7 +1998,7 @@ export default function Dashboard({
                                                 {/* Navigation Buttons */}
                                                 <button
                                                     onClick={prevCert}
-                                                    className="absolute top-1/2 left-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -2004,7 +2016,7 @@ export default function Dashboard({
                                                 </button>
                                                 <button
                                                     onClick={nextCert}
-                                                    className="absolute top-1/2 right-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -2055,7 +2067,7 @@ export default function Dashboard({
                                                                 ].name
                                                             }
                                                         </DialogTitle>
-                                                        <p className="text-primary-400 mt-2 font-mono text-sm tracking-widest uppercase">
+                                                        <p className="text-primary-400 mt-2 font-mono text-sm uppercase tracking-widest">
                                                             {
                                                                 displayCertifications[
                                                                     selectedCertIndex
@@ -2146,9 +2158,9 @@ export default function Dashboard({
                                     key={index}
                                     className="relative pl-8 sm:pl-0"
                                 >
-                                    <div className="absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-white/10 sm:block"></div>
+                                    <div className="absolute bottom-0 left-1/2 top-0 hidden w-px -translate-x-1/2 bg-white/10 sm:block"></div>
                                     <div
-                                        className={`absolute top-6 left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-4 border-[#0A0A0A] sm:flex ${
+                                        className={`absolute left-1/2 top-6 hidden h-4 w-4 -translate-x-1/2 rounded-full border-4 border-[#0A0A0A] sm:flex ${
                                             exp.isCurrent
                                                 ? 'bg-primary-400'
                                                 : 'bg-white/20'
@@ -2219,6 +2231,109 @@ export default function Dashboard({
                         </div>
                     </div>
                 </section>
+
+                {/* Latest from the Blog */}
+                {dbBlogPosts.length > 0 && (
+                    <section className="border-t border-white/5 bg-[#050505] py-24">
+                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                            <Reveal>
+                                <div className="mb-16 text-center">
+                                    <div className="mb-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-slate-400 backdrop-blur-sm">
+                                        BLOG
+                                    </div>
+                                    <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+                                        Latest Articles
+                                    </h2>
+                                </div>
+                            </Reveal>
+
+                            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                                {dbBlogPosts.map((post, index) => (
+                                    <Reveal
+                                        key={post.id}
+                                        delay={(index % 3) as 0 | 1 | 2}
+                                    >
+                                        <a
+                                            href={`/blog/${post.slug}`}
+                                            className="group block overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-md transition-all hover:border-emerald-400/30 hover:bg-white/10"
+                                        >
+                                            <div className="relative flex h-48 items-center justify-center bg-gradient-to-br from-emerald-500/10 to-blue-500/10">
+                                                <svg
+                                                    className="h-12 w-12 text-slate-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={1.5}
+                                                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                                                    />
+                                                </svg>
+                                                <div className="absolute left-3 top-3">
+                                                    <span className="rounded-full border border-white/20 bg-black/60 px-2.5 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm">
+                                                        {post.category}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="p-6">
+                                                <h3 className="mb-2 text-lg font-semibold transition-colors group-hover:text-white">
+                                                    {post.title}
+                                                </h3>
+                                                <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-400">
+                                                    {post.excerpt}
+                                                </p>
+                                                <div className="flex items-center justify-between text-xs text-slate-500">
+                                                    <span>
+                                                        {new Date(
+                                                            post.published_at,
+                                                        ).toLocaleDateString(
+                                                            'en-US',
+                                                            {
+                                                                year: 'numeric',
+                                                                month: 'long',
+                                                                day: 'numeric',
+                                                            },
+                                                        )}
+                                                    </span>
+                                                    <span>
+                                                        {post.reading_time} min
+                                                        read
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </Reveal>
+                                ))}
+                            </div>
+
+                            <Reveal>
+                                <div className="mt-12 text-center">
+                                    <a
+                                        href="/blog"
+                                        className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-slate-300 backdrop-blur-sm transition-all hover:border-emerald-400/30 hover:bg-white/10 hover:text-white"
+                                    >
+                                        View All Articles
+                                        <svg
+                                            className="h-4 w-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                            />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </Reveal>
+                        </div>
+                    </section>
+                )}
 
                 {/* Contact / Footer Section */}
                 <section

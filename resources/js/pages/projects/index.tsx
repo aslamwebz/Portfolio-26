@@ -139,7 +139,7 @@ export default function Projects({ auth }: ProjectsProps) {
                 <Navigation auth={auth} />
 
                 {/* Header */}
-                <section className="border-b border-slate-800 bg-slate-900 pt-32 pb-16">
+                <section className="border-b border-slate-800 bg-slate-900 pb-16 pt-32">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="text-center">
                             <div className="bg-primary-400/10 border-primary-400/30 text-primary-400 mb-6 inline-flex items-center rounded-full border px-3 py-1 font-mono text-xs">
