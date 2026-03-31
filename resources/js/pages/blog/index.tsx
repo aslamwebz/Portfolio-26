@@ -33,9 +33,9 @@ interface BlogIndexProps {
 }
 
 export default function BlogIndex({
-    posts,
-    categories,
-    filters,
+    posts = [],
+    categories = [],
+    filters = { search: '', category: 'All' },
     auth,
 }: BlogIndexProps) {
     const [search, setSearch] = useState(filters.search || '');
@@ -55,7 +55,7 @@ export default function BlogIndex({
     const debouncedSearch = useCallback(
         debounce((query: string, category: string) => {
             router.get(
-                '/blog',
+                window.location.pathname,
                 { search: query, category: category !== 'All' ? category : '' },
                 { preserveState: true, preserveScroll: true, replace: true },
             );
@@ -72,7 +72,7 @@ export default function BlogIndex({
     const handleCategoryChange = (category: string) => {
         setActiveCategory(category);
         router.get(
-            '/blog',
+            window.location.pathname,
             { search: search, category: category !== 'All' ? category : '' },
             { preserveState: true, preserveScroll: true },
         );
@@ -125,7 +125,7 @@ export default function BlogIndex({
                                 >
                                     All
                                 </button>
-                                {categories.map((category) => (
+                                {categories?.map((category) => (
                                     <button
                                         key={category}
                                         onClick={() =>

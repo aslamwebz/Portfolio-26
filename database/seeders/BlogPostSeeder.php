@@ -74,6 +74,22 @@ class BlogPostSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'title' => 'Mastering SQL: Query Optimization & Indexing in Laravel',
+                'slug' => 'mastering-sql-query-optimization-indexing-laravel',
+                'excerpt' => 'Indexes are the difference between a high-performance application and a sluggish one. Learn how to architect your database for speed using indexes, types, and optimization strategies.',
+                'content' => $this->getOptimizationArticle(),
+                'featured_image' => 'img/blog/optimization.png',
+                'category' => 'Database',
+                'tags' => json_encode(['SQL', 'Indexing', 'Performance', 'Database Design']),
+                'is_published' => true,
+                'published_at' => now(),
+                'author' => 'Mohamed Aslam',
+                'reading_time' => 10,
+                'sort_order' => 5,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         DB::table('blog_posts')->truncate();
@@ -340,6 +356,49 @@ if ($showAuthors) {
 
 <h2>Conclusion</h2>
 <p>The N+1 query problem is a "silent killer" of performance, but it's one of the easiest to fix if you know what to look for. By mastering Eager Loading and enabling strict lazy loading prevention in your development environment, you ensure that your Laravel applications remain fast and efficient as they scale.</p>
+HTML;
+    }
+
+    private function getOptimizationArticle(): string
+    {
+        return <<<'HTML'
+<h2>Why Optimization Matters</h2>
+<p>In the early stages of a project, any query feels fast. But as your tables grow from hundreds to millions of rows, "deceptively simple" queries become performance bottlenecks. Optimizing SQL isn't just about writing cleaner code; it's about understanding how the database engine actually retrieves data.</p>
+
+<h2>The Power of Indexing</h2>
+<p>Think of an <strong>Index</strong> as the table of contents for a book. Instead of scanning every single page (a "Full Table Scan"), the database looks up the index and jumps directly to the correct location.</p>
+<p>In Laravel, you add indexes via migrations:</p>
+<pre><code>$table->index('email'); // Standard Index
+$table->unique('username'); // Unique Index
+$table->fulltext('description'); // Fulltext search index</code></pre>
+
+<h2>Types of Indexes and When to Use Them</h2>
+<ul>
+    <li><strong>Standard Index:</strong> Best for columns frequently used in `WHERE`, `ORDER BY`, and `JOIN` clauses.</li>
+    <li><strong>Unique Index:</strong> Ensures data integrity and speeds up lookups simultaneously.</li>
+    <li><strong>Composite Index:</strong> An index on multiple columns (e.g., `email` and `status`). <strong>Crucial Rule:</strong> The order of columns matters! An index on `(a, b)` can optimize a query on `a` or `a and b`, but <em>not</em> on `b` alone.</li>
+</ul>
+
+<h2>Effective Query Auditing</h2>
+<p>As we discussed in the "Beyond the Big 6" guide, <code>EXPLAIN ANALYZE</code> is your best friend. It reveals if your indexes are actually being used. If you see "Using where; Using filesort," it often means an index is missing or your query structure is preventing it from being utilized.</p>
+
+<h2>Advanced Optimization Tips</h2>
+
+<h3>1. Avoid `SELECT *`</h3>
+<p>Fetching every column increases memory usage and prevents the database from using "Covering Indexes" (indexes that contain all the necessary data for a query). Always specify the columns you need:</p>
+<pre><code>User::select('id', 'name', 'email')->get();</code></pre>
+
+<h3>2. Use Fulltext Search for Text-Heavy Queries</h3>
+<p>Using <code>LIKE '%keyword%'</code> is extremely slow on large datasets because it cannot use a standard B-Tree index. For searching through blog posts or product descriptions, use <strong>Fulltext Indexes</strong>:</p>
+<pre><code>$table->fulltext(['title', 'content']);
+// In query:
+WHERE MATCH(title, content) AGAINST('laravel optimization');</code></pre>
+
+<h3>3. Be Careful with Large Joins</h3>
+<p>While JOINS are powerful, joining four or five massive tables can be devastating without proper indexing on the foreign keys. Ensure every column you join on has an index.</p>
+
+<h2>Conclusion</h2>
+<p>Indexing and optimization are the final frontiers of database mastery. By architecting your database with performance as a first-class citizen, you ensure that your Laravel applications remain lightning fast regardless of how many millions of users you serve.</p>
 HTML;
     }
 }
