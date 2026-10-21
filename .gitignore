@@ -26,3 +26,17 @@ yarn-error.log
 /.vscode
 /.zed
 index.html
+
+# AI tool configurations and prompt files
+.claude/
+.cursor/
+.junie/
+.opencode/
+opencode.js
+opencode.json
+.mcp.json
+CLAUDE.md
+AGENTS.md
+
+# Log files
+*.log
