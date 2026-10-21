@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\BlogPost;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -45,7 +44,7 @@ class BlogTest extends TestCase
         ]);
 
         // Act
-        $response = $this->get('/blog/' . $post->slug);
+        $response = $this->get('/blog/'.$post->slug);
 
         // Assert
         $response->assertStatus(200);

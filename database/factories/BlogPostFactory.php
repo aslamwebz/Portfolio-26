@@ -23,7 +23,7 @@ class BlogPostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'excerpt' => fake()->paragraph(),
-            'content' => '<p>' . implode('</p><p>', fake()->paragraphs(3)) . '</p>',
+            'content' => '<p>'.implode('</p><p>', fake()->paragraphs(3)).'</p>',
             'featured_image' => null,
             'category' => fake()->randomElement(['Laravel', 'PHP', 'Database', 'DevOps', 'Frontend', 'Career', 'General']),
             'tags' => ['Tech', 'Coding'],
