@@ -1,4 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
+import type { HTMLReactParserOptions } from 'html-react-parser';
+import parse, { Element, Text } from 'html-react-parser';
+import CodeBlock from '@/components/CodeBlock';
 import Navigation from '@/components/navigation';
 
 interface BlogPost {
@@ -26,9 +29,6 @@ interface BlogShowProps {
     };
 }
 
-import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
-import CodeBlock from '@/components/CodeBlock';
-
 export default function BlogShow({ post, auth }: BlogShowProps) {
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('en-US', {
@@ -51,7 +51,9 @@ export default function BlogShow({ post, auth }: BlogShowProps) {
 
                 if (codeNode) {
                     const codeText = codeNode.children
-                        .map((child: any) => child.data || '')
+                        .map((child) =>
+                            child instanceof Text ? child.data : '',
+                        )
                         .join('')
                         .trim();
 

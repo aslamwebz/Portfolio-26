@@ -1,7 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
-import Navigation from '@/components/navigation';
-import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
+import { useState, useEffect, useMemo } from 'react';
+import Navigation from '@/components/navigation';
 
 interface BlogPost {
     id: number;
@@ -52,16 +52,30 @@ export default function BlogIndex({
     };
 
     // Debounced search function
-    const debouncedSearch = useCallback(
-        debounce((query: string, category: string) => {
-            router.get(
-                window.location.pathname,
-                { search: query, category: category !== 'All' ? category : '' },
-                { preserveState: true, preserveScroll: true, replace: true },
-            );
-        }, 300),
+    const debouncedSearch = useMemo(
+        () =>
+            debounce((query: string, category: string) => {
+                router.get(
+                    window.location.pathname,
+                    {
+                        search: query,
+                        category: category !== 'All' ? category : '',
+                    },
+                    {
+                        preserveState: true,
+                        preserveScroll: true,
+                        replace: true,
+                    },
+                );
+            }, 300),
         [],
     );
+
+    useEffect(() => {
+        return () => {
+            debouncedSearch.cancel();
+        };
+    }, [debouncedSearch]);
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value;

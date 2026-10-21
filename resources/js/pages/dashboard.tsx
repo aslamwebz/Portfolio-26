@@ -52,7 +52,7 @@ function TypewriterCode() {
     const highlight = (code: string) =>
         code
             .replace(
-                /(it|function|expect|class|new|app|return|true|false|null)(?=[\s\(])/g,
+                /(it|function|expect|class|new|app|return|true|false|null)(?=[\s(])/g,
                 (m) => `<span class="code-keyword">${m}</span>`,
             )
             .replace(
@@ -881,7 +881,7 @@ export default function Dashboard({
                                 className="relative h-full w-[1px] bg-slate-800"
                             >
                                 <div
-                                    className="animate-beam absolute left-0 top-0 h-32 w-full bg-gradient-to-b from-transparent via-indigo-500 to-transparent"
+                                    className="animate-beam absolute top-0 left-0 h-32 w-full bg-gradient-to-b from-transparent via-indigo-500 to-transparent"
                                     style={{
                                         animationDelay: `${i * 1.5}s`,
                                         opacity: i % 2 === 0 ? 0.6 : 0.3,
@@ -909,7 +909,7 @@ export default function Dashboard({
                                     duration: 0.8,
                                     ease: [0.22, 1, 0.36, 1],
                                 }}
-                                className="mb-8 inline-flex items-center gap-3 self-start rounded-full border border-white/5 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-300 backdrop-blur-md"
+                                className="mb-8 inline-flex items-center gap-3 self-start rounded-full border border-white/5 bg-white/5 px-4 py-2 text-xs font-semibold tracking-widest text-slate-300 uppercase backdrop-blur-md"
                             >
                                 <span className="relative flex h-2 w-2">
                                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
@@ -926,7 +926,7 @@ export default function Dashboard({
                                     delay: 0.1,
                                     ease: 'easeOut',
                                 }}
-                                className="text-[3.5rem] font-black leading-[1.05] tracking-tight text-white sm:text-[4.5rem] md:text-[5.5rem]"
+                                className="text-[3.5rem] leading-[1.05] font-black tracking-tight text-white sm:text-[4.5rem] md:text-[5.5rem]"
                             >
                                 Building the
                                 <br />
@@ -944,7 +944,7 @@ export default function Dashboard({
                                     delay: 0.2,
                                     ease: 'easeOut',
                                 }}
-                                className="mt-8 max-w-xl text-lg font-light leading-relaxed text-slate-400 sm:text-xl"
+                                className="mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-400 sm:text-xl"
                             >
                                 4+ years turning ideas into polished, reliable
                                 products using{' '}
@@ -1017,9 +1017,9 @@ export default function Dashboard({
                                     delay: 0.5,
                                     ease: 'easeOut',
                                 }}
-                                className="absolute -left-4 top-4 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-left-12 lg:top-12"
+                                className="absolute top-4 -left-4 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-left-12 lg:top-12"
                             >
-                                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                                <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
                                     Apps Shipped
                                 </div>
                                 <div className="text-3xl font-black text-indigo-400">
@@ -1042,7 +1042,7 @@ export default function Dashboard({
                                 }}
                                 className="absolute -right-4 bottom-12 z-20 flex flex-col gap-2 rounded-2xl border border-white/10 bg-black/60 p-4 shadow-2xl backdrop-blur-xl md:-right-8"
                             >
-                                <div className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                                <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
                                     Test Coverage
                                 </div>
                                 <div className="text-3xl font-black text-emerald-400">
@@ -1097,7 +1097,7 @@ export default function Dashboard({
                         className="absolute bottom-6 left-1/2 -translate-x-1/2"
                     >
                         <div className="flex flex-col items-center gap-2 mix-blend-difference">
-                            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-400">
+                            <span className="text-[10px] font-medium tracking-[0.2em] text-slate-400 uppercase">
                                 Explore
                             </span>
                             <div className="flex h-10 w-6 items-start justify-center rounded-full border border-slate-600 p-1.5">
@@ -1242,7 +1242,7 @@ export default function Dashboard({
                                     </p>
 
                                     <div>
-                                        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">
+                                        <h3 className="mb-3 text-sm font-semibold tracking-wider text-slate-300 uppercase">
                                             Outcomes I&apos;m Proud Of
                                         </h3>
                                         <ul className="space-y-2 text-sm text-slate-400">
@@ -1290,7 +1290,7 @@ export default function Dashboard({
                                     </div>
 
                                     <div>
-                                        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">
+                                        <h3 className="mb-3 text-sm font-semibold tracking-wider text-slate-300 uppercase">
                                             Daily Stack
                                         </h3>
                                         <div className="flex flex-wrap gap-2">
@@ -1426,7 +1426,7 @@ export default function Dashboard({
                                         <div className="hover:border-primary-400/30 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-xl backdrop-blur-md transition-all hover:scale-110">
                                             {category.icon}
                                         </div>
-                                        <h3 className="text-primary-400 text-xs font-bold uppercase tracking-[0.2em]">
+                                        <h3 className="text-primary-400 text-xs font-bold tracking-[0.2em] uppercase">
                                             {category.title}
                                         </h3>
                                     </div>
@@ -1517,7 +1517,7 @@ export default function Dashboard({
                                                     alt={project.title}
                                                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                 />
-                                                <div className="absolute left-4 top-4">
+                                                <div className="absolute top-4 left-4">
                                                     <span className="text-primary-400 border-primary-400/20 rounded-full border bg-black/60 px-3 py-1 text-[10px] font-bold backdrop-blur-md">
                                                         {project.category}
                                                     </span>
@@ -1608,7 +1608,7 @@ export default function Dashboard({
 
                         <div className="relative">
                             {/* Timeline Line */}
-                            <div className="from-primary-400/40 absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b via-white/10 to-transparent md:block" />
+                            <div className="from-primary-400/40 absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b via-white/10 to-transparent md:block" />
 
                             {/* MBA - Current */}
                             <Reveal>
@@ -1826,7 +1826,7 @@ export default function Dashboard({
                                                 {/* Navigation Buttons */}
                                                 <button
                                                     onClick={prevProject}
-                                                    className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute top-1/2 left-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -1844,7 +1844,7 @@ export default function Dashboard({
                                                 </button>
                                                 <button
                                                     onClick={nextProject}
-                                                    className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute top-1/2 right-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -1998,7 +1998,7 @@ export default function Dashboard({
                                                 {/* Navigation Buttons */}
                                                 <button
                                                     onClick={prevCert}
-                                                    className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute top-1/2 left-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -2016,7 +2016,7 @@ export default function Dashboard({
                                                 </button>
                                                 <button
                                                     onClick={nextCert}
-                                                    className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
+                                                    className="absolute top-1/2 right-4 z-50 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white/50 backdrop-blur-md transition-all hover:bg-white/20 hover:text-white"
                                                 >
                                                     <svg
                                                         className="h-6 w-6"
@@ -2067,7 +2067,7 @@ export default function Dashboard({
                                                                 ].name
                                                             }
                                                         </DialogTitle>
-                                                        <p className="text-primary-400 mt-2 font-mono text-sm uppercase tracking-widest">
+                                                        <p className="text-primary-400 mt-2 font-mono text-sm tracking-widest uppercase">
                                                             {
                                                                 displayCertifications[
                                                                     selectedCertIndex
@@ -2158,9 +2158,9 @@ export default function Dashboard({
                                     key={index}
                                     className="relative pl-8 sm:pl-0"
                                 >
-                                    <div className="absolute bottom-0 left-1/2 top-0 hidden w-px -translate-x-1/2 bg-white/10 sm:block"></div>
+                                    <div className="absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-white/10 sm:block"></div>
                                     <div
-                                        className={`absolute left-1/2 top-6 hidden h-4 w-4 -translate-x-1/2 rounded-full border-4 border-[#0A0A0A] sm:flex ${
+                                        className={`absolute top-6 left-1/2 hidden h-4 w-4 -translate-x-1/2 rounded-full border-4 border-[#0A0A0A] sm:flex ${
                                             exp.isCurrent
                                                 ? 'bg-primary-400'
                                                 : 'bg-white/20'
@@ -2271,7 +2271,7 @@ export default function Dashboard({
                                                         d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
                                                     />
                                                 </svg>
-                                                <div className="absolute left-3 top-3">
+                                                <div className="absolute top-3 left-3">
                                                     <span className="rounded-full border border-white/20 bg-black/60 px-2.5 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm">
                                                         {post.category}
                                                     </span>
