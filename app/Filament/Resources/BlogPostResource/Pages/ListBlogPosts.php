@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\BlogPostResource\Pages;
 
 use App\Filament\Resources\BlogPostResource;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListBlogPosts extends ListRecords
@@ -12,7 +13,7 @@ class ListBlogPosts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }
