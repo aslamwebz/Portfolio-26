@@ -26,6 +26,17 @@ Route::get('/projects', function () {
     ]);
 })->name('projects');
 
+Route::get('/new', function () {
+    return Inertia::render('new', [
+        'dbProjects' => Project::orderBy('sort_order')->get(),
+        'dbCertifications' => Certification::orderBy('sort_order')->get(),
+        'dbBlogPosts' => BlogPost::published()
+            ->select(['id', 'title', 'slug', 'excerpt', 'category', 'published_at', 'reading_time'])
+            ->latest('published_at')
+            ->get(),
+    ]);
+})->name('new');
+
 use Illuminate\Http\Request;
 
 Route::get('/blog', function (Request $request) {
@@ -62,4 +73,4 @@ Route::get('/blog/{blogPost:slug}', function (BlogPost $blogPost) {
     ]);
 })->name('blog.show');
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';
