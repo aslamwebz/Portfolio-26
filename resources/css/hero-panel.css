@@ -1,0 +1,206 @@
+.system-scene {
+    position: relative;
+    min-width: 0;
+    padding-block: 2.7rem;
+}
+.system-window {
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line));
+    border-radius: 15px;
+    background: var(--surface);
+    box-shadow: 0 24px 64px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.window-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 48px;
+    padding-inline: 1.1rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: var(--muted-text);
+}
+.window-dots {
+    display: flex;
+    gap: 5px;
+}
+.window-dots i {
+    display: block;
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+}
+.window-dots i:nth-child(2) {
+    opacity: 0.3;
+}
+.window-dots i:nth-child(3) {
+    opacity: 0.15;
+}
+.window-kind {
+    margin-left: auto;
+}
+.system-window-body {
+    padding: 1.8rem 1.6rem 1.5rem;
+}
+.system-window-body .system-comment {
+    font-size: 0.6rem;
+    line-height: 1.8;
+    color: var(--muted-text);
+}
+.system-window-body .system-thesis {
+    margin-top: 1.1rem;
+    color: var(--foreground);
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+}
+.system-thesis strong {
+    color: var(--accent);
+    font-weight: 550;
+}
+.system-flow {
+    margin-top: 1.6rem;
+    text-align: center;
+}
+.flow-input,
+.flow-core,
+.flow-services > div {
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 0.8rem 0.4rem;
+    background: var(--background);
+}
+.flow-input {
+    width: 62%;
+    margin-inline: auto;
+}
+.flow-input > span,
+.flow-core > span,
+.flow-services span {
+    display: block;
+    font-size: 0.73rem;
+    color: var(--foreground);
+}
+.flow-input small,
+.flow-core small,
+.flow-services small {
+    display: block;
+    margin-top: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.53rem;
+    color: var(--muted-text);
+}
+.flow-connector {
+    display: block;
+    height: 20px;
+    width: 1px;
+    margin-inline: auto;
+    background: var(--accent);
+}
+.flow-core {
+    width: 84%;
+    margin-inline: auto;
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, var(--background));
+}
+.flow-core > span {
+    color: var(--accent);
+    font-weight: 550;
+}
+.flow-branches {
+    position: relative;
+    height: 25px;
+    margin-inline: 16%;
+    border-bottom: 1px solid var(--line);
+}
+.flow-branches::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 50%;
+    width: 1px;
+    background: var(--accent);
+}
+.flow-services {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    padding-top: 18px;
+}
+.flow-services > div {
+    position: relative;
+}
+.flow-services > div::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 18px;
+    background: var(--line);
+    left: 50%;
+    bottom: 100%;
+}
+.system-window-body .system-boundary {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    color: var(--muted-text);
+}
+.system-boundary > span {
+    color: var(--accent);
+    padding-inline: 0.4rem;
+}
+.window-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.7rem;
+    padding: 0.9rem 1.1rem;
+    border-top: 1px solid var(--line);
+}
+.window-footer .mono {
+    color: var(--muted-text);
+    font-size: 0.51rem;
+}
+.window-footer a {
+    font-size: 0.61rem;
+    color: var(--accent);
+}
+.system-tag {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--raised);
+    box-shadow: 0 10px 30px #00000015;
+}
+.system-tag-backend {
+    top: 0;
+    left: -1.2rem;
+}
+.system-tag-ai {
+    bottom: 0;
+    right: -0.75rem;
+}
+.system-tag .tag-symbol {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+}
+.system-tag strong {
+    display: block;
+    color: var(--foreground);
+    font-size: 0.67rem;
+    font-weight: 550;
+}
+.system-tag div > span {
+    display: block;
+    color: var(--muted-text);
+    font-family: var(--font-mono);
+    font-size: 0.53rem;
+    margin-top: 0.2rem;
+}

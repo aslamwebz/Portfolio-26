@@ -35,6 +35,7 @@ class PublicPortfolio
             'description' => $project->description, 'slug' => $project->slug, 'is_flagship' => $project->is_flagship,
             'technologies' => $project->technologies ?? [], 'category' => $project->category,
             'repo_url' => self::webUrl($project->repo_url), 'demo_url' => self::webUrl($project->demo_url),
+            'image' => self::mediaImage($project->image),
         ];
     }
 
@@ -55,6 +56,10 @@ class PublicPortfolio
             return null;
         }
 
+        if (str_starts_with($path, 'img/projects/')) {
+            return '/'.$path;
+        }
+
         return str_starts_with($path, '/') ? $path : '/storage/'.$path;
     }
 
@@ -70,6 +75,14 @@ class PublicPortfolio
         $file = realpath($stored ? Storage::disk('public')->path(substr($url, 9)) : public_path(ltrim($url, '/')));
         if (! $root || ! $file || ! is_file($file) || ! str_starts_with($file, $root.DIRECTORY_SEPARATOR)) {
             return null;
+        }
+        if (str_starts_with($url, '/img/projects/') && ! str_starts_with($url, '/img/projects/optimized/')) {
+            $previewUrl = '/img/projects/optimized/'.Str::slug(pathinfo($file, PATHINFO_FILENAME)).'.webp';
+            $previewFile = realpath(public_path(ltrim($previewUrl, '/')));
+            if ($previewFile && is_file($previewFile) && str_starts_with($previewFile, $root.DIRECTORY_SEPARATOR)) {
+                $url = $previewUrl;
+                $file = $previewFile;
+            }
         }
         try {
             $size = getimagesize($file);

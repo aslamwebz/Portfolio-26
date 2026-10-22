@@ -1,6 +1,6 @@
 .timeline {
     display: grid;
-    gap: 2.5rem;
+    gap: 1.5rem;
 }
 .timeline-entry {
     display: grid;
@@ -9,7 +9,15 @@
 }
 .timeline-entry > p {
     font-size: 0.69rem;
-    padding-top: 0.25rem;
+    padding-top: 1.6rem;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--accent);
+}
+.timeline-entry > div {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 1.6rem 1.8rem;
 }
 .timeline-entry h3 {
     font-size: 1.3rem;
@@ -30,7 +38,8 @@
 .background-details {
     margin-top: 2.5rem;
     border: 1px solid var(--line);
-    border-radius: 5px;
+    border-radius: 10px;
+    background: var(--surface);
 }
 .background-details summary {
     padding: 1rem 1.3rem;
@@ -64,7 +73,57 @@
 .stack-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2rem;
+    gap: 1rem;
+}
+.stack-grid > div {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 1.4rem;
+}
+.credential-preview {
+    margin-top: 3rem;
+}
+.credential-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.7rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+.credential-heading h3 {
+    font-size: 1.1rem;
+}
+.credential-heading p {
+    font-size: 0.7rem;
+}
+.credential-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+.credential-card {
+    position: relative;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+.credential-mark {
+    display: block;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+}
+.credential-card .mono {
+    font-size: 0.64rem;
+}
+.credential-card h4 {
+    font-size: 0.86rem;
+    color: var(--foreground);
+    font-weight: 550;
+    line-height: 1.6;
+    margin-top: 0.45rem;
 }
 .stack-grid h3 {
     font-family: var(--font-mono);
@@ -104,4 +163,15 @@
 .writing-list article > p {
     max-width: 48rem;
     font-size: 0.9rem;
+}
+@media (max-width: 600px) {
+    .credential-grid {
+        grid-template-columns: 1fr;
+    }
+    .timeline-entry > div {
+        padding: 1.3rem;
+    }
+    .timeline-entry > p {
+        padding-top: 0.3rem;
+    }
 }

@@ -1,3 +1,4 @@
+import CertificatePreview from '@/components/home/certificate-preview';
 import SectionHeading from '@/components/home/section-heading';
 import type { Certification } from '@/types/portfolio';
 
@@ -58,6 +59,7 @@ export default function Experience({
                     </div>
                 </article>
             </div>
+            <CertificatePreview certifications={certifications} />
             <details className="background-details">
                 <summary>Education &amp; certificates</summary>
                 <div className="background-content">

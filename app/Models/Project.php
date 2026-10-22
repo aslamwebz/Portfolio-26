@@ -11,7 +11,7 @@ class Project extends Model
     /** @use HasFactory<ProjectFactory> */
     use HasFactory;
 
-    public const SUMMARY_FIELDS = ['id', 'title', 'slug', 'description', 'is_flagship', 'technologies', 'category', 'repo_url', 'demo_url'];
+    public const SUMMARY_FIELDS = ['id', 'title', 'slug', 'description', 'image', 'is_flagship', 'technologies', 'category', 'repo_url', 'demo_url'];
 
     protected $fillable = [
         'title', 'description', 'image', 'link', 'github', 'technologies', 'category', 'sort_order', 'is_featured',

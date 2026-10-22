@@ -23,26 +23,50 @@ export default function CaseStudies({
             <div className="case-list">
                 {projects.map((project) => (
                     <article className="case-card" key={project.id}>
-                        <div className="case-sketch" aria-hidden="true">
-                            <span className="mono">{project.category}</span>
-                            <div className="sketch-node">{project.title}</div>
-                            <div className="sketch-line" />
-                            <div className="sketch-branches">
-                                <span>
-                                    {project.slug === 'freya'
-                                        ? 'Memory'
-                                        : project.slug === 'forge'
-                                          ? 'Agents'
-                                          : 'Documents'}
-                                </span>
-                                <span>
-                                    {project.slug === 'freya'
-                                        ? 'Guard'
-                                        : project.slug === 'forge'
-                                          ? 'Worktrees'
-                                          : 'AI services'}
-                                </span>
-                            </div>
+                        <div
+                            className={
+                                'case-sketch' +
+                                (project.image ? ' case-image' : '')
+                            }
+                            aria-hidden="true"
+                        >
+                            {project.image ? (
+                                <img
+                                    src={project.image.url}
+                                    width={project.image.width}
+                                    height={project.image.height}
+                                    alt=""
+                                    loading="lazy"
+                                    decoding="async"
+                                    fetchPriority="low"
+                                />
+                            ) : (
+                                <>
+                                    <span className="mono">
+                                        {project.category}
+                                    </span>
+                                    <div className="sketch-node">
+                                        {project.title}
+                                    </div>
+                                    <div className="sketch-line" />
+                                    <div className="sketch-branches">
+                                        <span>
+                                            {project.slug === 'freya'
+                                                ? 'Memory'
+                                                : project.slug === 'forge'
+                                                  ? 'Agents'
+                                                  : 'Documents'}
+                                        </span>
+                                        <span>
+                                            {project.slug === 'freya'
+                                                ? 'Guard'
+                                                : project.slug === 'forge'
+                                                  ? 'Worktrees'
+                                                  : 'AI services'}
+                                        </span>
+                                    </div>
+                                </>
+                            )}
                         </div>
                         <div className="case-copy">
                             <p className="eyebrow">{project.category}</p>

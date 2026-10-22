@@ -11,6 +11,7 @@ export type Site = {
     year: number;
 };
 export type ProjectSummary = {
+    image: { url: string; width: number; height: number } | null;
     id: number;
     title: string;
     slug: string | null;

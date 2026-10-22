@@ -23,10 +23,10 @@ export default function PublicLayout({
                     <Link
                         href={home()}
                         className="brand"
-                        aria-label="ma. — Mohamed Aslam home"
+                        aria-label="<MA/> — Mohamed Aslam home"
                     >
                         <span className="monogram" aria-hidden="true">
-                            ma.
+                            {'<MA/>'}
                         </span>
                         <span className="brand-name">Mohamed Aslam</span>
                     </Link>

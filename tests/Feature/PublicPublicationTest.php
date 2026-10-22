@@ -2,7 +2,30 @@
 
 use App\Models\BlogPost;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
+
+test('project summaries expose dimensions only for a real local screenshot', function () {
+    Storage::fake('public');
+    Storage::disk('public')->put('projects/example.png', base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jP1kAAAAASUVORK5CYII='));
+    $project = Project::factory()->create(['is_flagship' => true, 'image' => 'projects/example.png']);
+    $this->get('/')->assertInertia(fn (Assert $page) => $page->where('flagships.0.image.url', '/storage/projects/example.png')->where('flagships.0.image.width', 1)->where('flagships.0.image.height', 1)->missing('flagships.0.body'));
+    $this->get('/projects')->assertInertia(fn (Assert $page) => $page->where('projects.0.image.width', 1));
+    $this->get('/projects/'.$project->slug)->assertInertia(fn (Assert $page) => $page->where('project.image.url', '/storage/projects/example.png'));
+});
+
+test('unsafe and missing project screenshots produce a diagram fallback', function (string $image) {
+    Project::factory()->create(['is_flagship' => true, 'image' => $image]);
+    $this->get('/')->assertInertia(fn (Assert $page) => $page->where('flagships.0.image', null));
+})->with(['projects/absent.webp', 'https://external.example/track.png', '../../.env']);
+
+test('legacy screenshots use sized WebP previews while originals remain available', function () {
+    $size = getimagesize(public_path('img/projects/optimized/hiareai.webp'));
+    Project::factory()->create(['is_flagship' => true, 'image' => 'img/projects/hiareai.png']);
+    $this->get('/')->assertInertia(fn (Assert $page) => $page->where('flagships.0.image.url', '/img/projects/optimized/hiareai.webp')->where('flagships.0.image.width', $size[0])->where('flagships.0.image.height', $size[1]));
+    expect($size[0])->toBeLessThanOrEqual(1280)
+        ->and(filesize(public_path('img/projects/optimized/hiareai.webp')))->toBeLessThan(filesize(public_path('img/projects/hiareai.png')));
+});
 
 test('drafts and future posts are excluded from every public surface', function () {
     $published = BlogPost::factory()->create(['title' => 'Visible note', 'is_published' => true, 'published_at' => now()->subDay()]);

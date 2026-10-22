@@ -1,20 +1,22 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
 @import './portfolio.css';
 @import './hero.css';
+@import './hero-panel.css';
 @import './background.css';
+@import './work.css';
 @import './sections.css';
 @import './article.css';
 
 @font-face {
     font-family: 'Inter Variable';
     font-style: normal;
-    font-weight: 100 900;
+    font-weight: 400 700;
     font-display: optional;
-    src: url('../../vendor/filament/filament/dist/fonts/inter/inter-latin-wght-normal-DIHYUR35.woff2')
-        format('woff2');
+    src: url('../fonts/Inter-Portfolio.woff2') format('woff2');
 }
 
 @source '../views';
+@source '../js';
 @custom-variant dark (&:is(.dark *));
 @theme {
     --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, sans-serif;
@@ -53,26 +55,26 @@
 }
 :root {
     color-scheme: light;
-    --background: #f7f9fc;
-    --surface: #edf2f9;
+    --background: #f8f7fb;
+    --surface: #efecf6;
     --raised: #ffffff;
-    --foreground: #152238;
-    --muted-text: #526178;
-    --line: #cbd5e4;
-    --accent: #1b56b6;
+    --foreground: #211e31;
+    --muted-text: #605a70;
+    --line: #d6d0e4;
+    --accent: #6340ad;
     --accent-ink: #ffffff;
     --radius: 0.5rem;
 }
 :root.dark {
     color-scheme: dark;
-    --background: #0c1422;
-    --surface: #111e31;
-    --raised: #16263c;
-    --foreground: #edf3ff;
-    --muted-text: #adbbd0;
-    --line: #2b3c55;
-    --accent: #91bcff;
-    --accent-ink: #0c1422;
+    --background: #0b0c12;
+    --surface: #13141e;
+    --raised: #1b1b29;
+    --foreground: #f3f2f8;
+    --muted-text: #b6b3c6;
+    --line: #303044;
+    --accent: #b9a4ff;
+    --accent-ink: #151020;
 }
 @layer base {
     * {

@@ -12,6 +12,18 @@ export default function OtherWork({
             <div className="other-grid">
                 {projects.map((project) => (
                     <article className="other-card" key={project.id}>
+                        {project.image && (
+                            <img
+                                className="other-preview"
+                                src={project.image.url}
+                                width={project.image.width}
+                                height={project.image.height}
+                                alt=""
+                                loading="lazy"
+                                decoding="async"
+                                fetchPriority="low"
+                            />
+                        )}
                         <h3>{project.title}</h3>
                         <p>{project.description}</p>
                         <p className="mono tech-line">

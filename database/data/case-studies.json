@@ -29,7 +29,7 @@
     "problem": "Parallel coding agents need isolated checkouts, controllable terminal sessions and a way to inspect work before integration. A window closing should not be the same thing as a terminal task ending.",
     "repo_url": "https://github.com/aslamwebz/forge",
     "decisions": [
-      {"title": "Isolate each agent's working tree", "decision": "Each agent operates in its own branch and Git worktree.", "tradeoff": "TODO-VERIFY: confirm the design rationale. Isolation avoids competing edits in one checkout, but integration and worktree cleanup still need review."},
+      {"title": "Isolate each agent's working tree", "decision": "In worktree-isolation mode, agents can use separate branches and Git worktrees.", "tradeoff": "TODO-VERIFY: confirm the mode's behavior and design rationale. Isolation avoids competing edits in one checkout, but integration and worktree cleanup still need review."},
       {"title": "Separate engine and window lifetimes", "decision": "A background engine hosts real terminal sessions using node-pty and headless xterm; the UI attaches to that engine.", "tradeoff": "TODO-VERIFY: confirm recovery guarantees. A persistent engine introduces ownership, reconnection and orphan-process concerns."},
       {"title": "Require explicit execution", "decision": "Agents start or resume explicitly. Local IPC uses an owner card and token; the CLI exposes start, send, read, wait and stop operations.", "tradeoff": "TODO-VERIFY: verify the precise threat model. Explicit control adds user steps, while local credentials require lifecycle management."},
       {"title": "Make review a separate workflow", "decision": "The documented review flow separates checks, auditors and a verifier. Lead MCP relies on host-provided security.", "tradeoff": "TODO-VERIFY: explain the implemented handoff and its limits. More reviewers add time and do not guarantee correctness."}
@@ -43,6 +43,7 @@
   {
     "title": "HireAI",
     "slug": "hireai",
+    "image": "img/projects/hiareai.png",
     "description": "A job-application app for building résumés, drafting cover letters and preparing for interviews with AI assistance.",
     "technologies": ["Laravel", "PHP", "Livewire", "Prism", "Queues", "MySQL"],
     "category": "Applied AI",

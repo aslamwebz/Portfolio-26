@@ -3,6 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "prebuild": "php resources/scripts/optimize-project-images.php",
+        "prebuild:ssr": "php resources/scripts/optimize-project-images.php",
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",

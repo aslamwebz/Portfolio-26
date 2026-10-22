@@ -33,12 +33,12 @@ class SocialImageController extends Controller
         abort_unless(extension_loaded('gd'), 503);
         $font = resource_path('fonts/Inter.ttf');
         $canvas = imagecreatetruecolor(1200, 630);
-        $background = imagecolorallocate($canvas, 12, 20, 34);
-        $surface = imagecolorallocate($canvas, 17, 30, 49);
-        $line = imagecolorallocate($canvas, 43, 60, 85);
-        $ink = imagecolorallocate($canvas, 237, 243, 255);
-        $muted = imagecolorallocate($canvas, 173, 187, 208);
-        $blue = imagecolorallocate($canvas, 145, 188, 255);
+        $background = imagecolorallocate($canvas, 11, 12, 18);
+        $surface = imagecolorallocate($canvas, 19, 20, 30);
+        $line = imagecolorallocate($canvas, 48, 48, 68);
+        $ink = imagecolorallocate($canvas, 243, 242, 248);
+        $muted = imagecolorallocate($canvas, 182, 179, 198);
+        $blue = imagecolorallocate($canvas, 185, 164, 255);
         imagefill($canvas, 0, 0, $background);
         imagefilledrectangle($canvas, 0, 0, 10, 630, $blue);
         imagettftext($canvas, 18, 0, 70, 80, $muted, $font, 'Mohamed Aslam / Software engineer');
