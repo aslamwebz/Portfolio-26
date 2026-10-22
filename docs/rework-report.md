@@ -30,6 +30,10 @@ All eight required checks passed on the final source:
 
 The separate final `npm audit` reports zero vulnerabilities. Feature coverage includes route/component props, permanent redirect, disabled registration, guest/non-owner/owner admin access, stored case decisions/results, safe HTML/media, CV existence/traversal, publication restrictions, feeds/sitemap/social images, headers and safe/idempotent seeding. Image regressions were reproduced before implementation; the final image tests pass without relaxing assertions.
 
+### Clean-checkout CI follow-up
+
+The first GitHub test job passed, but read-only lint exposed 20 import-order errors in freshly generated Wayfinder helpers. Raw generation followed by read-only lint reproduced the failure locally. The shared route generator now runs Artisan, then applies the existing ESLint/Prettier rules only to generated actions/routes/helpers. Vite and CI use the same preparation. Authored application code still receives the unchanged read-only CI lint check; no rule was disabled or suppressed. Fresh generation followed by read-only lint and formatting passes locally. All eight checks passed again, and read-only lint/format checks also passed after both builds finished. The client asset hashes and 122,397-byte JavaScript budget are unchanged. GitHub CI must also pass before release.
+
 Browser checks: real SSR content appears in initial HTML; client hydration and page navigation have no observed CSP or hydration errors. The final browser console check contains no warnings/errors. Dark/light themes, skip link and visible keyboard focus were checked. Local SSR binds only to `127.0.0.1:13714`. This does not establish that production SSR is available.
 
 ## Lighthouse before and after

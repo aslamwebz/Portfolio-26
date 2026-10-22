@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "routes:generate": "node resources/scripts/generate-routes.mjs --with-form",
         "prebuild": "php resources/scripts/optimize-project-images.php",
         "prebuild:ssr": "php resources/scripts/optimize-project-images.php",
         "build": "vite build",

@@ -115,7 +115,7 @@ Build tools and type packages now live in devDependencies; HTML parsing and high
 10. **Lucide 1 / HTML parser 6 / concurrently 10:** check retained imports, parser output and build/development scripts. Highlight only the limited languages needed by article pages, in a post-only chunk.
 11. **Motion:** choose CSS reveals and restrained hover transitions instead of upgrading Framer. No ongoing particles, typing timer or animation dependency remains.
 12. **Platform binaries:** remove old rollup/oxide/lightningcss optional pins. npm chooses binaries for each platform; the clean install completed without forced peer resolution.
-13. **CI / deployment:** checkout 7.0.1, setup-node 7.1.0, cache 6.1.0, setup-php 2.40.0. Generate Wayfinder types before static checks on a fresh checkout. Deployment builds SSR, checks PHP requirements and owner readiness, rejects stale SSR health and verifies the replacement process.
+13. **CI / deployment:** checkout 7.0.1, setup-node 7.1.0, cache 6.1.0, setup-php 2.40.0. Generate Wayfinder types before static checks on a fresh checkout. A shared generator normalizes only generated helpers using the existing lint/format rules, fixing the reproduced clean-checkout import-order failure; authored-code CI lint remains read-only. Deployment builds SSR, checks PHP requirements and owner readiness, rejects stale SSR health and verifies the replacement process.
 
 ## Holdbacks and deployment limits
 

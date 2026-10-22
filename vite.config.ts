@@ -16,6 +16,7 @@ export default defineConfig({
         babel({ presets: [reactCompilerPreset()] }),
         tailwindcss(),
         wayfinder({
+            command: 'node resources/scripts/generate-routes.mjs',
             formVariants: true,
         }),
     ],

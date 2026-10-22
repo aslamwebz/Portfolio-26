@@ -35,7 +35,7 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
       - name: Generate route types before static checks
-        run: php artisan wayfinder:generate --with-form --no-interaction
+        run: npm run routes:generate
       - name: PHP style
         run: php vendor/bin/pint --test
       - name: JavaScript lint (read only)

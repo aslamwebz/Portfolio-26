@@ -57,7 +57,7 @@ All `TODO:` and `TODO-VERIFY:` items are deliberate factual review markers, list
 composer test
 php vendor/bin/pint --test
 composer audit
-php artisan wayfinder:generate --with-form
+npm run routes:generate
 npm run lint
 npm run types
 npm run format:check
@@ -66,7 +66,7 @@ npm run build:ssr
 npm audit --audit-level=high
 ```
 
-Wayfinder generation is needed before static checks in a clean checkout. Both CI workflows use Node from `.nvmrc` and PHP 8.4. CI lint does not modify files.
+Wayfinder generation is needed before static checks in a clean checkout. The shared generator applies ESLint/Prettier only to generated route helpers, so fresh outputs satisfy the same import/format rules as application code. Vite uses the same preparation. Both CI workflows use Node from `.nvmrc` and PHP 8.4; the subsequent CI lint check is read-only.
 
 For a production-style local preview, build SSR, start `php artisan inertia:start-ssr` in a separate terminal, then serve Laravel and verify `php artisan inertia:check-ssr`. The renderer binds to `127.0.0.1:13714`. The [measurement report](docs/rework-report.md) distinguishes plain PHP serving from a compressed OPcache preview; local scores do not certify production hosting.
 
