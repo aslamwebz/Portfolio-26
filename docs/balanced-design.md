@@ -48,3 +48,16 @@ The page reads as one visual identity, communicates backend/AI work immediately,
 ## Verification result
 
 The approved visual blend is implemented and inspected in both themes. All eight source checks pass. Responsive evidence and actual performance results are in [rework-report.md](rework-report.md); mobile home and Freya LCP still exceed the strict two-second target. This remains a review branch with visible factual placeholders.
+
+## Approved hero motion follow-up
+
+The user approved **Flow + subtle float** on 22 October 2026. This supersedes the static-only treatment for the right-hand hero sketch. The left-hand headline, summary and actions remain stationary.
+
+**Design:** a slow repeating signal travels from User intent into Application core, then highlights Model, Memory and Tools in sequence. The window and two existing badges drift vertically by a few pixels. Keep the engineering-sketch label and all existing factual content. Add a keyboard-accessible pause/play control. Reduced-motion preferences produce the original static composition; the existing narrow-screen omission remains.
+
+**Implementation plan:** execute this single, tightly coupled presentation task inline on the existing review branch. No new dependency or animation framework; use CSS opacity/transform animations and one local React pause state.
+
+- [ ] Add the pause/play control and paused scene class in `system-panel.tsx`; keep initial SSR/client state identical.
+- [ ] Add scoped node/connector effects and pause-control styles in `hero-panel.css`. Put media-gated keyframes and timing in a separate `hero-motion.css` imported by `app.css`, keeping files below approximately 300 lines.
+- [ ] Verify in the browser that flow/float move, pause/play freezes and resumes them, the left text has no animation, keyboard focus works, and reduced-motion mode has no running animation. Inspect both themes and the narrow layout.
+- [ ] Run all eight original checks, remeasure the changed home page and gzip budget, record actual results, then update the existing draft PR without merging or deploying.
