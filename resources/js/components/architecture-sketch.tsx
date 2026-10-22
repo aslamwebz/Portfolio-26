@@ -40,7 +40,9 @@ export default function ArchitectureSketch({
             role="img"
             aria-labelledby={slug + '-diagram-title ' + slug + '-diagram-desc'}
         >
-            <title id={slug + '-diagram-title'}>{title} system sketch</title>
+            <title id={slug + '-diagram-title'}>
+                {title + ' system sketch'}
+            </title>
             <desc id={slug + '-diagram-desc'}>
                 {nodes
                     .map((node) => node.title + ': ' + node.detail)

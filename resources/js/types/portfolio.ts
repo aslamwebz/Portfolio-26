@@ -24,6 +24,8 @@ export type ProjectSummary = {
 export type Decision = { title: string; decision: string; tradeoff: string };
 export type Result = { label: string; value: string };
 export type CaseStudy = ProjectSummary & {
+    architecture_width: number | null;
+    architecture_height: number | null;
     role: string;
     problem: string;
     decisions: Decision[];
@@ -56,4 +58,13 @@ export type Pagination<T> = {
     last_page: number;
     total: number;
     links: { url: string | null; label: string; active: boolean }[];
+};
+
+export type SeoMetadata = {
+    title: string;
+    description: string;
+    canonical: string;
+    image: string;
+    schema: Record<string, unknown> | null;
+    noindex: boolean;
 };

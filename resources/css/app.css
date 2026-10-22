@@ -1,11 +1,19 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import '../../vendor/filament/filament/dist/fonts/inter/index.css';
 @import './portfolio.css';
 @import './hero.css';
 @import './background.css';
 @import './sections.css';
 @import './article.css';
+
+@font-face {
+    font-family: 'Inter Variable';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url('../../vendor/filament/filament/dist/fonts/inter/inter-latin-wght-normal-DIHYUR35.woff2')
+        format('woff2');
+}
 
 @source '../views';
 @custom-variant dark (&:is(.dark *));

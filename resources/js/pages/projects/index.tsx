@@ -1,6 +1,6 @@
-import { Head } from '@inertiajs/react';
 import CaseStudies from '@/components/home/case-studies';
 import OtherWork from '@/components/home/other-work';
+import SeoHead from '@/components/seo-head';
 import PublicLayout from '@/layouts/public-layout';
 import type { ProjectSummary, Site } from '@/types/portfolio';
 
@@ -13,7 +13,7 @@ export default function Projects({
 }) {
     return (
         <PublicLayout site={site}>
-            <Head title="Projects" />
+            <SeoHead />
             <div className="page-intro page-width">
                 <p className="eyebrow">Selected work</p>
                 <h1>

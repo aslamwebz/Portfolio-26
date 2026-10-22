@@ -25,8 +25,13 @@ return new class extends Migration
         });
 
         foreach (DB::table('projects')->orderBy('id')->lazyById() as $project) {
-            $base = Str::slug($project->title) ?: 'project';
-            $slug = DB::table('projects')->where('slug', $base)->exists() ? $base.'-'.$project->id : $base;
+            $base = Str::limit(Str::slug($project->title) ?: 'project', 200, '');
+            $slug = $base;
+            $suffix = 0;
+            while (DB::table('projects')->where('slug', $slug)->exists()) {
+                $slug = $base.'-'.$project->id.($suffix ? '-'.$suffix : '');
+                $suffix++;
+            }
             DB::table('projects')->where('id', $project->id)->update([
                 'slug' => $slug, 'repo_url' => $project->github, 'demo_url' => $project->link,
             ]);

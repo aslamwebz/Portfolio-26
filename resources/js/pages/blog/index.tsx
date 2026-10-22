@@ -1,5 +1,6 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { postDate } from '@/components/home/writing';
+import SeoHead from '@/components/seo-head';
 import PublicLayout from '@/layouts/public-layout';
 import { blog } from '@/routes';
 import type { Pagination, PostSummary, Site } from '@/types/portfolio';
@@ -14,7 +15,7 @@ export default function Blog({ site, posts, filters, categories }: Props) {
     const { errors } = usePage().props;
     return (
         <PublicLayout site={site}>
-            <Head title="Writing" />
+            <SeoHead />
             <section className="page-intro page-width">
                 <p className="eyebrow">Engineering notes</p>
                 <h1>

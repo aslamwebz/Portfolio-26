@@ -239,3 +239,22 @@
         padding-block: 2.5rem;
     }
 }
+
+.article-body .token.comment,
+.article-body .token.prolog,
+.article-body .token.doctype {
+    color: var(--muted-text);
+    font-style: italic;
+}
+.article-body .token.keyword,
+.article-body .token.operator,
+.article-body .token.boolean,
+.article-body .token.function,
+.article-body .token.class-name {
+    color: var(--accent);
+}
+.article-body .token.string,
+.article-body .token.number,
+.article-body .token.variable {
+    color: var(--foreground);
+}

@@ -49,3 +49,10 @@ test('theme defaults to dark and honors only valid explicit preferences', functi
     $response = $this->withUnencryptedCookie('appearance', 'invalid')->get('/')->assertOk();
     expect(preg_match('/<html[^>]+class="[^"]*\bdark\b/', $response->getContent()))->toBe(1);
 });
+
+test('deployment readiness requires an explicitly authorized owner', function () {
+    $this->artisan('portfolio:grant-admin', ['--check' => true])->assertFailed();
+    $owner = User::factory()->create();
+    $owner->forceFill(['is_admin' => true])->save();
+    $this->artisan('portfolio:grant-admin', ['--check' => true])->assertSuccessful();
+});

@@ -10,6 +10,17 @@ class BlogPost extends Model
 {
     use HasFactory;
 
+    public const SUMMARY_FIELDS = ['id', 'title', 'slug', 'excerpt', 'category', 'published_at', 'reading_time', 'author'];
+
+    protected static function booted(): void
+    {
+        static::saving(function (BlogPost $post): void {
+            if ($post->isDirty('content')) {
+                $post->reading_time = max(1, (int) ceil(str_word_count(strip_tags($post->content ?? '')) / 200));
+            }
+        });
+    }
+
     protected $fillable = [
         'title',
         'slug',

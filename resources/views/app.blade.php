@@ -7,10 +7,11 @@
         const appearance = @json($appearance ?? 'dark');
         document.documentElement.classList.toggle('dark', appearance === 'dark' || (appearance === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches));
     </script>
-    <title data-inertia>Mohamed Aslam</title>
-    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/favicon.png">
     <link rel="alternate" type="application/rss+xml" title="Mohamed Aslam — Writing" href="/feed.xml">
+    <meta property="csp-nonce" nonce="{{ \Illuminate\Support\Facades\Vite::cspNonce() }}">
     @viteReactRefresh
     @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
     @inertiaHead

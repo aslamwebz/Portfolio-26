@@ -5,10 +5,12 @@ import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import '../css/app.css';
 import { initializeTheme } from './hooks/use-appearance';
+import { documentNonce } from './lib/csp';
 
 const appName = 'Mohamed Aslam';
 
 createInertiaApp({
+    nonce: documentNonce(),
     title: (title) => (title ? `${title} - ${appName}` : appName),
     resolve: async (name) => {
         const page = await resolvePageComponent<{ default: ResolvedComponent }>(

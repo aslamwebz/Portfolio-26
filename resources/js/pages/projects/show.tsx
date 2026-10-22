@@ -1,6 +1,7 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import parse from 'html-react-parser';
 import ArchitectureSketch from '@/components/architecture-sketch';
+import SeoHead from '@/components/seo-head';
 import PublicLayout from '@/layouts/public-layout';
 import { projects } from '@/routes';
 import type { CaseStudy, Site } from '@/types/portfolio';
@@ -14,7 +15,7 @@ export default function ProjectCaseStudy({
 }) {
     return (
         <PublicLayout site={site}>
-            <Head title={project.title + ' — Case study'} />
+            <SeoHead />
             <article className="case-study page-width">
                 <header className="page-intro">
                     <Link className="text-link" href={projects()}>
@@ -54,8 +55,8 @@ export default function ProjectCaseStudy({
                             <img
                                 src={project.architecture_image}
                                 alt={project.title + ' architecture'}
-                                width="760"
-                                height="960"
+                                width={project.architecture_width || 760}
+                                height={project.architecture_height || 960}
                                 loading="lazy"
                                 decoding="async"
                             />

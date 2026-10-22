@@ -5,8 +5,24 @@ use App\Models\Project;
 use App\Models\SiteSetting;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
+
+test('the additive migration preserves legacy rows with colliding title suffixes', function () {
+    $migration = require database_path('migrations/2026_10_22_164403_add_case_studies_to_projects_table.php');
+    $migration->down();
+    foreach (['foo-3', 'foo', 'foo'] as $index => $title) {
+        DB::table('projects')->insert(['id' => $index + 1, 'title' => $title, 'description' => 'Legacy description', 'github' => 'https://example.com/repo', 'link' => 'https://example.com/demo', 'created_at' => now(), 'updated_at' => now()]);
+    }
+    $migration->up();
+    $rows = DB::table('projects')->orderBy('id')->get();
+    expect($rows)->toHaveCount(3)
+        ->and($rows->pluck('slug')->unique())->toHaveCount(3)
+        ->and($rows->pluck('title')->all())->toBe(['foo-3', 'foo', 'foo'])
+        ->and($rows->pluck('description')->unique()->all())->toBe(['Legacy description'])
+        ->and($rows->pluck('repo_url')->unique()->all())->toBe(['https://example.com/repo']);
+});
 
 test('flagship pages render editable decisions and results from storage', function () {
     $project = Project::factory()->create(['is_flagship' => true, 'slug' => 'example-system', 'decisions' => [['title' => 'Isolation', 'decision' => 'Separate workers', 'tradeoff' => 'More coordination']], 'results' => [['label' => 'Outcome', 'value' => 'TODO: measured result']]]);

@@ -1,8 +1,8 @@
-import { Head } from '@inertiajs/react';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 import parse, { Element, Text } from 'html-react-parser';
 import CodeBlock from '@/components/CodeBlock';
 import { postDate } from '@/components/home/writing';
+import SeoHead from '@/components/seo-head';
 import PublicLayout from '@/layouts/public-layout';
 import type { Post, Site } from '@/types/portfolio';
 
@@ -34,7 +34,7 @@ export default function BlogPost({ site, post }: { site: Site; post: Post }) {
     };
     return (
         <PublicLayout site={site}>
-            <Head title={post.title} />
+            <SeoHead />
             <article className="article page-width">
                 <header className="page-intro">
                     <a className="text-link" href="/blog">

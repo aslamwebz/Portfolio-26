@@ -1,4 +1,3 @@
-import { Head } from '@inertiajs/react';
 import CaseStudies from '@/components/home/case-studies';
 import Contact from '@/components/home/contact';
 import Experience from '@/components/home/experience';
@@ -6,6 +5,7 @@ import Hero from '@/components/home/hero';
 import OtherWork from '@/components/home/other-work';
 import Stack from '@/components/home/stack';
 import Writing from '@/components/home/writing';
+import SeoHead from '@/components/seo-head';
 import PublicLayout from '@/layouts/public-layout';
 import type {
     Certification,
@@ -30,7 +30,7 @@ export default function Home({
 }: Props) {
     return (
         <PublicLayout site={site}>
-            <Head title="Backend & AI systems" />
+            <SeoHead />
             <Hero site={site} />
             <CaseStudies projects={flagships} />
             <OtherWork projects={otherWork} />
