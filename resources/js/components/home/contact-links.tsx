@@ -19,7 +19,7 @@ export default function ContactLinks({ site }: { site: Site }) {
                 Email me <span aria-hidden="true">↗</span>
             </a>
             {site.github_url && (
-                <a className="text-link" href={site.github_url}>
+                <a className="button button-quiet" href={site.github_url}>
                     GitHub <span aria-hidden="true">↗</span>
                 </a>
             )}

@@ -40,3 +40,12 @@ test('owner bootstrap grants an existing account without creating or changing ot
     $this->artisan('portfolio:grant-admin', ['email' => 'absent@example.com'])->assertFailed();
     expect(User::count())->toBe(2);
 });
+
+test('theme defaults to dark and honors only valid explicit preferences', function () {
+    $response = $this->get('/')->assertOk();
+    expect(preg_match('/<html[^>]+class="[^"]*\bdark\b/', $response->getContent()))->toBe(1);
+    $response = $this->withUnencryptedCookie('appearance', 'light')->get('/')->assertOk();
+    expect(preg_match('/<html[^>]+class="[^"]*\bdark\b/', $response->getContent()))->toBe(0);
+    $response = $this->withUnencryptedCookie('appearance', 'invalid')->get('/')->assertOk();
+    expect(preg_match('/<html[^>]+class="[^"]*\bdark\b/', $response->getContent()))->toBe(1);
+});

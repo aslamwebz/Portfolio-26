@@ -23,7 +23,7 @@ export default function PublicLayout({
                     <Link
                         href={home()}
                         className="brand"
-                        aria-label="Mohamed Aslam home"
+                        aria-label="ma. — Mohamed Aslam home"
                     >
                         <span className="monogram" aria-hidden="true">
                             ma.

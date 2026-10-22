@@ -6,7 +6,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import '../css/app.css';
 import { initializeTheme } from './hooks/use-appearance';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = 'Mohamed Aslam';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
