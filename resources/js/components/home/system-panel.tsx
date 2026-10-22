@@ -1,7 +1,13 @@
+import { useState } from 'react';
+
 export default function SystemPanel() {
+    const [motionPaused, setMotionPaused] = useState(false);
+
     return (
         <aside
-            className="system-scene"
+            className={
+                motionPaused ? 'system-scene is-motion-paused' : 'system-scene'
+            }
             aria-label="How I approach AI applications"
         >
             <div className="system-window">
@@ -13,10 +19,37 @@ export default function SystemPanel() {
                     </span>
                     <span>system-design</span>
                     <span className="window-kind">Engineering sketch</span>
+                    <button
+                        className="panel-motion-toggle"
+                        type="button"
+                        onClick={() => setMotionPaused(!motionPaused)}
+                        aria-label={
+                            motionPaused
+                                ? 'Play panel animation'
+                                : 'Pause panel animation'
+                        }
+                        title={
+                            motionPaused ? 'Play animation' : 'Pause animation'
+                        }
+                    >
+                        <svg
+                            viewBox="0 0 16 16"
+                            width="12"
+                            height="12"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            {motionPaused ? (
+                                <path d="M4 2.5v11L13 8z" />
+                            ) : (
+                                <path d="M4 3h3v10H4zm5 0h3v10H9z" />
+                            )}
+                        </svg>
+                    </button>
                 </div>
                 <div className="system-window-body">
                     <p className="mono system-comment">
-                        // The model is one part of the application.
+                        {'// The model is one part of the application.'}
                     </p>
                     <p className="system-thesis">
                         Reasoning needs

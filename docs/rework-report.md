@@ -32,7 +32,7 @@ The separate final `npm audit` reports zero vulnerabilities. Feature coverage in
 
 ### Clean-checkout CI follow-up
 
-The first GitHub test job passed, but read-only lint exposed 20 import-order errors in freshly generated Wayfinder helpers. Raw generation followed by read-only lint reproduced the failure locally. The shared route generator now runs Artisan, then applies the existing ESLint/Prettier rules only to generated actions/routes/helpers. Vite and CI use the same preparation. Authored application code still receives the unchanged read-only CI lint check; no rule was disabled or suppressed. Fresh generation followed by read-only lint and formatting passes locally. All eight checks passed again, and read-only lint/format checks also passed after both builds finished. The client asset hashes and 122,397-byte JavaScript budget are unchanged. GitHub CI must also pass before release.
+The first GitHub test job passed, but read-only lint exposed 20 import-order errors in freshly generated Wayfinder helpers. Raw generation followed by read-only lint reproduced the failure locally. The shared route generator now runs Artisan, then applies the existing ESLint/Prettier rules only to generated actions/routes/helpers. Vite and CI use the same preparation. Authored application code still receives the unchanged read-only CI lint check; no rule was disabled or suppressed. Fresh generation followed by read-only lint and formatting passes locally. All eight checks passed again, and read-only lint/format checks also passed after both builds finished. At that CI-only checkpoint, client asset hashes and the 122,397-byte JavaScript budget were unchanged; both GitHub checks subsequently passed. The later hero-motion update is measured below.
 
 Browser checks: real SSR content appears in initial HTML; client hydration and page navigation have no observed CSP or hydration errors. The final browser console check contains no warnings/errors. Dark/light themes, skip link and visible keyboard focus were checked. Local SSR binds only to `127.0.0.1:13714`. This does not establish that production SSR is available.
 
@@ -50,18 +50,18 @@ Chrome with Lighthouse 13.5.0, production client/SSR builds, default simulated m
 | Before `/projects` | Desktop | 96 | 81 | 100 | 100 | 1.283 s | 0 |
 | Before `/blog` | Mobile | 69 | 92 | 100 | 100 | 6.784 s | 0 |
 | Before `/blog` | Desktop | 94 | 89 | 100 | 100 | 1.281 s | 0 |
-| After `/` | Mobile | 97 | 100 | 100 | 100 | **2.491 s** | 0 |
-| After `/` | Desktop | 100 | 100 | 100 | 100 | 0.597 s | 0 |
+| After `/` | Mobile | 97 | 100 | 100 | 100 | **2.490 s** | 0 |
+| After `/` | Desktop | 100 | 100 | 100 | 100 | 0.600 s | 0 |
 | After `/projects/freya` | Mobile | 98 | 100 | 100 | 100 | **2.217 s** | 0 |
 | After `/projects/freya` | Desktop | 100 | 100 | 100 | 100 | 0.462 s | 0 |
 | After `/blog` | Mobile | 99 | 100 | 100 | 100 | 1.987 s | 0 |
 | After `/blog` | Desktop | 100 | 100 | 100 | 100 | 0.514 s | 0 |
 
-The flagship page did not exist before; the original projects index is contextual baseline data, not the same page. All final mobile category scores meet 95 and all CLS values meet 0.05. **The strict mobile LCP <2 s bar remains unmet on home and Freya.** Blog only narrowly meets it. Do not mark that bar complete or merge on a claim that all performance targets pass. A script-priority experiment changed home LCP only marginally and was reverted; the table uses the verified normal-loading build. Remeasure on the intended production-equivalent server and address server response/critical rendering before release.
+The flagship page did not exist before; the original projects index is contextual baseline data, not the same page. Home was remeasured after the approved hero-motion follow-up; flagship/blog rows are the preceding balanced-build measurements. All recorded mobile category scores meet 95 and all CLS values meet 0.05. **The strict mobile LCP <2 s bar remains unmet on home and Freya.** Blog only narrowly meets it. Do not mark that bar complete or merge on a claim that all performance targets pass. A script-priority experiment changed home LCP only marginally and was reverted; the table uses normal-loading builds. Remeasure on the intended production-equivalent server and address server response/critical rendering before release.
 
 ### Payloads and media
 
-- Home entry plus all recursive static JavaScript imports, each gzipped once: **122,397 bytes**, below the 150,000-byte budget. This is the home bundle graph, not every route's JavaScript.
+- Home entry plus all recursive static JavaScript imports, each gzipped once: **122,811 bytes**, below the 150,000-byte budget. The approved hero-motion control adds 414 gzip bytes to the preceding build. This is the home bundle graph, not every route's JavaScript.
 - Admin/public pages and the article-only syntax highlighter are separate build paths/chunks. No highlighter is loaded by the home page.
 - The local Inter subset is **29,660 bytes**, with weights 400–700 and `font-display: optional`; its OFL/provenance remains in the repository.
 - Eight faithful WebP previews total **267,790 bytes**. Original project images are retained. Both client and SSR builds regenerate previews; PHP GD/WebP is required.
@@ -79,6 +79,14 @@ The production build was inspected/captured at the requested viewport widths. Ea
 - [Mobile first fold](screenshots/hero-mobile.jpg)
 
 No horizontal overflow was observed. A DOM check in the final desktop preview found one h1 and matching client/scroll widths. The large hero sketch is intentionally omitted on small screens. Browser keyboard/theme checks supplement the automated accessibility result; this is not an independent accessibility certification.
+
+### Approved right-hand hero motion
+
+The user approved a slow flow/glow sequence through User intent, Application core, Model, Memory and Tools, plus a six-pixel float for the panel and badges. The left-hand hero content remains stationary. CSS animates only opacity and transforms; no animation dependency, timer loop or inline style was added. A keyboard-accessible pause/play control freezes all panel, badge and pseudo-element animations.
+
+Browser checks confirmed identical paused panel coordinates across separate observations, successful keyboard resume, stationary left-text coordinates, visible focus, working light/dark themes, and no horizontal overflow at 360 px. The narrow layout still hides the panel. Reduced-motion media rules suppress the motion and its control; a separate Chrome run using the [upstream reduced-motion switch](https://chromium.googlesource.com/chromium/src/+/master/ui/gfx/switches.cc) captured the static layout and scored 100 for accessibility. See [reduced-motion capture](screenshots/hero-reduced-motion.webp).
+
+All eight required checks pass on this update: 65 tests / 488 assertions. The refreshed home measurements are 97/100/100/100 mobile and 100/100/100/100 desktop, with zero CLS. The desktop/mobile first-fold screenshots above are current; the four full-page width captures document the earlier balanced composition. The remaining LCP and factual/hosting release blockers are unchanged.
 
 ## Data, confidentiality and deployment boundaries
 

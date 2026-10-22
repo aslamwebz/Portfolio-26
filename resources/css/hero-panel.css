@@ -42,6 +42,22 @@
 .window-kind {
     margin-left: auto;
 }
+.panel-motion-toggle {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted-text);
+    background: var(--background);
+}
+.panel-motion-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
 .system-window-body {
     padding: 1.8rem 1.6rem 1.5rem;
 }
@@ -68,6 +84,7 @@
 .flow-input,
 .flow-core,
 .flow-services > div {
+    position: relative;
     border: 1px solid var(--line);
     border-radius: 7px;
     padding: 0.8rem 0.4rem;
@@ -94,6 +111,7 @@
     color: var(--muted-text);
 }
 .flow-connector {
+    position: relative;
     display: block;
     height: 20px;
     width: 1px;

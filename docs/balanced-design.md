@@ -57,7 +57,8 @@ The user approved **Flow + subtle float** on 22 October 2026. This supersedes th
 
 **Implementation plan:** execute this single, tightly coupled presentation task inline on the existing review branch. No new dependency or animation framework; use CSS opacity/transform animations and one local React pause state.
 
-- [ ] Add the pause/play control and paused scene class in `system-panel.tsx`; keep initial SSR/client state identical.
-- [ ] Add scoped node/connector effects and pause-control styles in `hero-panel.css`. Put media-gated keyframes and timing in a separate `hero-motion.css` imported by `app.css`, keeping files below approximately 300 lines.
-- [ ] Verify in the browser that flow/float move, pause/play freezes and resumes them, the left text has no animation, keyboard focus works, and reduced-motion mode has no running animation. Inspect both themes and the narrow layout.
-- [ ] Run all eight original checks, remeasure the changed home page and gzip budget, record actual results, then update the existing draft PR without merging or deploying.
+- [x] Add the pause/play control and paused scene class in `system-panel.tsx`; keep initial SSR/client state identical.
+- [x] Add scoped node/connector effects and pause-control styles in `hero-panel.css`. Put media-gated keyframes and timing in a separate `hero-motion.css` imported by `app.css`, keeping files below approximately 300 lines.
+- [x] Verify in the browser that flow/float move, pause/play freezes and resumes them, the left text has no animation, keyboard focus works, and reduced-motion mode has no running animation. Inspect both themes and the narrow layout.
+- [x] Run all eight original checks, remeasure the changed home page and gzip budget, and record actual results.
+- [ ] Update the existing draft PR without merging or deploying.

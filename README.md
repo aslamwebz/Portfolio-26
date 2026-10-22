@@ -6,6 +6,8 @@ A hiring portfolio for PHP/Laravel backend work and applied AI projects. It lead
 
 The `rework/portfolio` branch combines the earlier site's bold violet styling with the newer system diagrams and case-study structure. It is a review branch; publishing requires the content and hosting checks in the [rework report](docs/rework-report.md).
 
+The right-hand hero panel animates the flow through the system with subtle floating movement. Its pause/play control works with the keyboard; reduced-motion mode keeps it static. The left-hand introduction stays still.
+
 | Desktop | Mobile |
 | --- | --- |
 | ![Desktop portfolio hero](docs/screenshots/hero-desktop.jpg) | ![Mobile portfolio hero](docs/screenshots/hero-mobile.jpg) |
