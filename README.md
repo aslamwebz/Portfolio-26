@@ -1,267 +1,85 @@
-# Mohamed Aslam - Software Engineer Portfolio
+# Mohamed Aslam — backend and AI systems
 
-A modern, performant portfolio website built with Laravel 12 and React 19, showcasing professional projects, technical expertise, and career achievements.
+A hiring portfolio for PHP/Laravel backend work and applied AI projects. It leads from a concise introduction to three editable case studies: Freya-v1, Forge and HireAI.
 
-## 🚀 Features
+[Live website](https://mohamedaslam.dev/) · [GitHub](https://github.com/aslamwebz) · [LinkedIn](https://www.linkedin.com/in/aslamwebz/)
 
-- **Modern Dark Theme**: Sleek, professional design with smooth animations and particle effects
-- **Interactive Terminal**: Animated terminal showcasing technical skills and commands
-- **Project Showcase**: Filterable portfolio with live demos and GitHub links
-- **Experience Timeline**: Professional history with achievements and metrics
-- **Tech Stack Display**: Visual representation of technical expertise
-- **Responsive Design**: Optimized for all devices using Tailwind CSS
-- **Authentication**: User authentication system powered by Laravel Fortify
-- **TypeScript**: Full type safety across the frontend
-- **SEO Optimized**: Meta tags and structured data for search engines
+The `rework/portfolio` branch combines the earlier site's bold violet styling with the newer system diagrams and case-study structure. It is a review branch; publishing requires the content and hosting checks in the [rework report](docs/rework-report.md).
 
-## 🛠️ Tech Stack
+| Desktop | Mobile |
+| --- | --- |
+| ![Desktop portfolio hero](docs/screenshots/hero-desktop.jpg) | ![Mobile portfolio hero](docs/screenshots/hero-mobile.jpg) |
 
-### Backend
+[All four responsive screenshots](docs/screenshots/) · [Approved design](docs/balanced-design.md)
 
-- **Laravel 12** - PHP framework
-- **PHP 8.2+** - Backend language
-- **Laravel Fortify** - Authentication scaffolding
-- **Laravel Wayfinder** - Route generation
-- **MySQL** - Database
-- **Pest 4** - PHP testing framework
+## Stack
 
-### Frontend
+| Layer | Version |
+| --- | --- |
+| PHP | `~8.4.27 \|\| ^8.5.12`; Composer platform `8.4.27` |
+| Laravel / Fortify / Filament | 13.38.0 / 1.41.0 / 5.10.3 |
+| Inertia PHP / React adapter | 3.5.2 / 3.9.1 |
+| React | 19.3.1 |
+| TypeScript | 6.0.3; 7 held back until the required ESLint integration supports it |
+| Tailwind / Vite | 4.3.3 / 8.3.5 |
+| Pest / Laravel plugin | 5.3.3 / 5.0.1 |
+| Node | 24.22.1 LTS |
 
-- **React 19** - UI library with latest features
-- **TypeScript** - Type-safe JavaScript
-- **Inertia.js v2** - SPA-like experience without API complexity
-- **Tailwind CSS v4** - Utility-first CSS framework
-- **shadcn/ui** - Modern component library
-- **Radix UI** - Accessible component primitives
-- **Vite** - Fast build tool and dev server
+See the [complete before/after dependency table and migration notes](docs/dependency-upgrades.md).
 
-### Development Tools
+## Fresh local setup
 
-- **Laravel Pint** - PHP code formatting
-- **ESLint** - JavaScript linting
-- **Prettier** - Code formatting
-- **Laravel Boost** - Development productivity tools
+Requires the PHP extensions checked by Composer, PHP GD with WebP support, Composer, Node 24.22.1+ within 24.x, and npm. These commands are for a new checkout; do not run setup against an existing production environment.
 
-## 📦 Installation
-
-### Prerequisites
-
-- PHP 8.2 or higher
-- Composer
-- Node.js 18 or higher
-- npm or yarn
-- MySQL or compatible database
-
-### Setup Steps
-
-1. **Clone the repository**
-
-```bash
-git clone https://github.com/your-username/portfolio-26.git
-cd portfolio-26
-```
-
-2. **Install dependencies**
-
-```bash
-# Install PHP dependencies
-composer install
-
-# Install Node.js dependencies
-npm install
-```
-
-3. **Environment setup**
-
-```bash
-# Copy environment file
-cp .env.example .env
-
-# Generate application key
-php artisan key:generate
-```
-
-4. **Database setup**
-
-```bash
-# Create database and run migrations
-php artisan migrate
-```
-
-5. **Build assets**
-
-```bash
-npm run build
-```
-
-6. **Start development server**
-
-```bash
-# Using Laravel Herd (recommended)
-# The site will be available at https://portfolio-26.test
-
-# Or using artisan serve
-php artisan serve
-```
-
-## 🎯 Usage
-
-### Development
-
-```bash
-# Start all development services (server, queue, vite)
+```sh
+git clone https://github.com/aslamwebz/Portfolio-26.git
+cd Portfolio-26
+composer run setup
+php artisan db:seed
 composer run dev
-
-# Start with SSR support
-composer run dev:ssr
-
-# Run tests
-composer run test
-
-# Code formatting
-composer run lint
-npm run format
 ```
 
-### Production Deployment
+The example configuration uses SQLite. Setup creates the environment/key and migrates the database; seeders add initial projects and draft articles without truncating existing rows. Subsequent project seeding preserves owner edits and deletions. New sample articles are drafts.
 
-```bash
-# Optimize for production
-composer install --optimize-autoloader --no-dev
+For a fresh local admin, create your own account interactively with `php artisan make:filament-user`, then grant that exact account access with `php artisan portfolio:grant-admin your-email@example.com`. The command never creates accounts or guesses credentials. Registration is disabled; the admin is at `/admin`.
+
+## Content editing
+
+Filament edits projects, certificates, articles and site settings. Case studies support decisions/trade-offs, results, markdown, a local architecture image, repository/demo/video links and a flagship flag.
+
+Site settings control the CV path, contact/social links, availability, location and time zone. The default CV is the existing `public/Resume.pdf`; review or replace it before publishing this rework. Missing CVs remove the download button gracefully. Existing project images use smaller WebP previews when available, with the originals retained; missing images use diagrams. Client and SSR builds regenerate the legacy previews automatically, and the local Inter web-font subset retains the weights used by the design.
+
+All `TODO:` and `TODO-VERIFY:` items are deliberate factual review markers, listed in the report. Employer projects remain anonymous. Only the public Freya-v1 repository is linked; private continuation features are not silently attributed to it.
+
+## Verification
+
+```sh
+composer test
+php vendor/bin/pint --test
+composer audit
+php artisan wayfinder:generate --with-form
+npm run lint
+npm run types
+npm run format:check
 npm run build
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+npm run build:ssr
+npm audit --audit-level=high
 ```
 
-## 📁 Project Structure
+Wayfinder generation is needed before static checks in a clean checkout. Both CI workflows use Node from `.nvmrc` and PHP 8.4. CI lint does not modify files.
 
-```
-├── app/
-│   ├── Actions/           # Laravel action classes
-│   ├── Http/             # Controllers and middleware
-│   ├── Models/           # Eloquent models
-│   └── Providers/        # Service providers
-├── resources/
-│   ├── js/
-│   │   ├── components/   # React components
-│   │   ├── pages/        # Inertia page components
-│   │   ├── layouts/      # Layout components
-│   │   └── hooks/        # Custom React hooks
-│   └── views/            # Blade views (minimal)
-├── routes/
-│   ├── web.php           # Web routes
-│   └── api.php           # API routes
-├── database/
-│   ├── migrations/       # Database migrations
-│   └── seeders/          # Database seeders
-└── tests/
-    ├── Feature/          # Feature tests
-    └── Unit/             # Unit tests
-```
+For a production-style local preview, build SSR, start `php artisan inertia:start-ssr` in a separate terminal, then serve Laravel and verify `php artisan inertia:check-ssr`. The renderer binds to `127.0.0.1:13714`. The [measurement report](docs/rework-report.md) distinguishes plain PHP serving from a compressed OPcache preview; local scores do not certify production hosting.
 
-## 🎨 Customization
+## Deployment
 
-### Personal Information
+The document root is `public/`. After review, use `deploy.sh` in an environment with a compatible PHP runtime, Node 24, `proc_open`, and persistent SSR process support. The script checks platform requirements, builds client/SSR assets, applies additive migrations, requires an authorized owner, seeds initial case content once, refreshes caches and verifies the replacement SSR process before leaving maintenance mode.
 
-Edit the following files to customize the portfolio:
+The first rollout needs a controlled owner bootstrap: apply the additive migrations, authorize the exact existing owner account, and confirm `php artisan portfolio:grant-admin --check` succeeds. The script intentionally fails if no owner is authorized. Back up the database before any production migration. Use a process supervisor for reliable SSR restarts.
 
-- **`resources/js/pages/welcome.tsx`** - Main portfolio content, projects, and experience
-- **`resources/js/pages/projects/index.tsx`** - Projects showcase
-- **`resources/js/components/terminal.tsx`** - Terminal animation content
-- **`resources/js/components/navigation.tsx`** - Navigation menu
+Apache/LiteSpeed rules request text compression and immutable caching for fingerprinted assets. Confirm those headers on the actual host. Confirm Hostinger's displayed vendor-patched PHP build satisfies the unchanged Composer security floor; do not bypass platform checks.
 
-### Styling
+This branch must not be merged or deployed until the factual placeholders, CV and hosting prerequisites have been reviewed.
 
-- **`tailwind.config.js`** - Tailwind configuration
-- **`resources/css/app.css`** - Global styles
-- Component-specific styles are handled via Tailwind classes
+## License
 
-### Adding New Projects
-
-1. Add project data to `resources/js/pages/welcome.tsx` and `resources/js/pages/projects/index.tsx`
-2. Add project screenshots to `public/img/`
-3. Update technologies array as needed
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-php artisan test
-
-# Run specific test file
-php artisan test --filter PortfolioTest
-
-# Run with coverage
-php artisan test --coverage
-```
-
-## 📊 Performance
-
-- **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
-- **Core Web Vitals**: Optimized for fast loading
-- **Bundle Size**: Optimized with Vite's tree-shaking
-- **Image Optimization**: Lazy loading and WebP support
-
-## 🔒 Security
-
-- Laravel's built-in CSRF protection
-- Input validation and sanitization
-- Secure authentication with Laravel Fortify
-- Environment-based configuration
-- Regular security updates via Composer
-
-## 🚀 Deployment
-
-### Heroku
-
-```bash
-heroku create your-app-name
-heroku buildpacks:add heroku/php
-heroku buildpacks:add heroku/nodejs
-git push heroku main
-```
-
-### DigitalOcean App Platform
-
-1. Connect repository
-2. Set environment variables
-3. Deploy automatically on push
-
-### Traditional Hosting
-
-1. Upload files to server
-2. Install dependencies
-3. Set up web server (Nginx/Apache)
-4. Configure SSL certificate
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📧 Contact
-
-- **Portfolio**: https://your-portfolio-url.com
-- **GitHub**: https://github.com/your-username
-- **LinkedIn**: https://linkedin.com/in/your-profile
-- **Email**: your.email@example.com
-
-## 🙏 Acknowledgments
-
-- [Laravel](https://laravel.com) - The PHP framework for web artisans
-- [React](https://reactjs.org) - The JavaScript library for building user interfaces
-- [Inertia.js](https://inertiajs.com) - The modern monolith for building SPAs
-- [Tailwind CSS](https://tailwindcss.com) - A utility-first CSS framework
-- [shadcn/ui](https://ui.shadcn.com) - Beautifully designed components
-
----
-
-**Built with ❤️ using modern web technologies**
+Application code is MIT licensed; see [LICENSE](LICENSE). Personal CV/certificate/photo assets are not relicensed by that software license. Bundled Inter font software retains its [SIL Open Font License](resources/fonts/OFL.txt).

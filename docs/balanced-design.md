@@ -31,15 +31,20 @@
 
 ## Task: deliver the coherent blended presentation
 
-- [ ] Extend `tests/Feature/PublicPublicationTest.php` with stored screenshot metadata and missing/unsafe image coverage. Run the focused tests before implementation and confirm the missing image props fail.
-- [ ] Add `image` to `Project::SUMMARY_FIELDS`; map it through `PublicPortfolio::mediaImage()` as `{url, width, height} | null`. Extend `ProjectSummary` with the same nullable shape. Keep article bodies out of summaries.
-- [ ] Modify `hero.tsx` and add `system-panel.tsx`; preserve the exact substantive headline and existing contact/availability data. Add focused `hero-panel.css`; update the existing hero CSS and public color tokens.
-- [ ] Update the shared header, case cards, compact other-work cards, timeline, certificate previews and stack surfaces. Keep components and CSS near/below 300 lines by responsibility.
-- [ ] Align the favicon and generated social-card palette. Preserve publication guards and social-image dimensions.
-- [ ] Run focused image tests, all eight checks, and dependency audits. Review browser console for hydration/CSP errors after reload and client navigation.
-- [ ] Inspect dark/light layouts and keyboard operation; capture 360/768/1280/1920 screenshots and verify no horizontal overflow. Measure actual mobile performance, LCP, CLS and gzip JavaScript; report plain PHP and production-transport conditions separately.
-- [ ] Review the final source diff and factual placeholders; commit the verified visual step. Complete the original report/README/PR work with the new screenshots and measurements; never merge or deploy.
+- [x] Extend `tests/Feature/PublicPublicationTest.php` with stored screenshot metadata and missing/unsafe image coverage. Run the focused tests before implementation and confirm the missing image props fail.
+- [x] Add `image` to `Project::SUMMARY_FIELDS`; map it through `PublicPortfolio::mediaImage()` as `{url, width, height} | null`. Extend `ProjectSummary` with the same nullable shape. Keep article bodies out of summaries.
+- [x] Modify `hero.tsx` and add `system-panel.tsx`; preserve the exact substantive headline and existing contact/availability data. Add focused `hero-panel.css`; update the existing hero CSS and public color tokens.
+- [x] Update the shared header, case cards, compact other-work cards, timeline, certificate previews and stack surfaces. Keep components and CSS near/below 300 lines by responsibility.
+- [x] Align the favicon and generated social-card palette. Preserve publication guards and social-image dimensions.
+- [x] Run focused image tests, all eight checks, and dependency audits. Review browser console for hydration/CSP errors after reload and client navigation.
+- [x] Inspect dark/light layouts and keyboard operation; capture 360/768/1280/1920 screenshots and verify no horizontal overflow. Measure actual mobile performance, LCP, CLS and gzip JavaScript; report plain PHP and production-transport conditions separately.
+- [x] Review the final source diff and factual placeholders; commit the verified visual step. Complete the report and README with the new screenshots and actual measurements.
+- [ ] Push the review branch and open the draft PR; never merge or deploy.
 
 ## Acceptance
 
 The page reads as one visual identity, communicates backend/AI work immediately, and leads directly to verifiable case studies and contact actions. The legacy visual treatment returns through composition and surfaces, while all completed security, data-preservation and publication work remains intact.
+
+## Verification result
+
+The approved visual blend is implemented and inspected in both themes. All eight source checks pass. Responsive evidence and actual performance results are in [rework-report.md](rework-report.md); mobile home and Freya LCP still exceed the strict two-second target. This remains a review branch with visible factual placeholders.

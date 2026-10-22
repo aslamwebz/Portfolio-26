@@ -79,7 +79,7 @@ The initial test suite passed **44 tests / 165 assertions**. All eight checks pa
 
 ## Decisions and trade-offs
 
-1. **One calm technical design:** slate surfaces, a single blue accent, Inter for text/display, system mono for code; dark first with a true light palette. The distinctive proof is a small system sketch for each project, not animated statistics.
+1. **One coherent technical design:** neutral surfaces, a single violet accent, Inter for text/display, system mono for code; dark first with a true light palette. This palette incorporates the later approved balanced blend in `balanced-design.md`. The distinctive proof is a small system sketch for each project, not animated statistics.
 2. **CSS over Framer Motion:** static first paint; only optional subtle scroll reveal with reduced-motion handling. Remove the animation package after replacing its consumers.
 3. **Server ownership of public data:** controllers/DTOs select summary fields; no full article bodies on indexes. Blog search/pagination remains progressively usable through ordinary forms and links.
 4. **Additive content model:** Project gets slug, flagship/role/problem, decisions/results JSON, architecture/repository/demo/video fields and markdown body. Backfill links/slugs without deleting rows. A singleton settings record owns CV, availability and social links; initial-content seeding is recorded so repeat seeding cannot overwrite editor changes.
@@ -101,7 +101,7 @@ The initial test suite passed **44 tests / 165 assertions**. All eight checks pa
 - [x] TypeScript 7 is held back: verified typescript-eslint support is `>=4.8.4 <6.1.0`. Use stable 6.0.3 while the native compiler remains unsupported by the required linter.
 - [x] Replace ESLint React/import plugins if their published peers prevent ESLint 10; retain equivalent/stronger checks, never force incompatible peers or disable checks to obtain a pass.
 - [x] Node 24.22.1 LTS, `.nvmrc`, engines and current stable Actions. Remove hard-pinned platform binaries.
-- [ ] Record before/after direct versions, breaking changes, holdbacks and every suite result.
+- [x] Record before/after direct versions, breaking changes, holdbacks and every suite result.
 
 ### 1. Audit checkpoint
 
@@ -113,51 +113,51 @@ The initial test suite passed **44 tests / 165 assertions**. All eight checks pa
 
 Files: `routes/web.php`, new public controllers and `resources/js/types/portfolio.ts`; `pages/home.tsx`, `components/home/*`, public layout; Fortify configuration, User panel contract and additive admin flag migration.
 
-- [ ] Write failing feature tests for home props, `/new` 301, removed dashboard/settings routes, registration denial, guest admin redirect and non-owner 403.
-- [ ] Add controllers, explicit summary payloads and one homepage; preserve existing data-backed content until the case-study migration.
-- [ ] Keep authentication recovery/challenge pages and Filament resources; add an explicit owner bootstrap path without guessed credentials.
-- [ ] Remove requested unused logs/root index and confirmed unreachable starter code. Run the complete suite and commit.
+- [x] Write failing feature tests for home props, `/new` 301, removed dashboard/settings routes, registration denial, guest admin redirect and non-owner 403.
+- [x] Add controllers, explicit summary payloads and one homepage; preserve existing data-backed content until the case-study migration.
+- [x] Keep authentication recovery/challenge pages and Filament resources; add an explicit owner bootstrap path without guessed credentials.
+- [x] Remove requested unused logs/root index and confirmed unreachable starter code. Run the complete suite and commit.
 
 ### 3. Content and admin editing
 
 Files: additive Project/settings migrations; `Project`, `SiteSetting`, factories and safe seeders; Project/settings Filament forms; `ProjectController::show`; `pages/projects/show.tsx` and architecture component.
 
-- [ ] Write failing tests for stored decisions/results, non-flagship 404, safe markdown/media, missing CV and idempotent seeders preserving arbitrary pre-existing records and editor changes.
-- [ ] Introduce case-study and settings fields; backfill only new fields on old records.
-- [ ] Seed three source-backed flagship drafts and six plain-language other projects, with an initialization marker protecting subsequent admin edits.
-- [ ] Build scannable case pages with problem, role, stack, architecture, decisions/trade-offs, hard problems, results placeholders, next steps and verified links.
-- [ ] Implement all requested homepage sections; use mailto instead of the current unsent form. Run the complete suite and commit.
+- [x] Write failing tests for stored decisions/results, non-flagship 404, safe markdown/media, missing CV and idempotent seeders preserving arbitrary pre-existing records and editor changes.
+- [x] Introduce case-study and settings fields; backfill only new fields on old records.
+- [x] Seed three source-backed flagship drafts and six plain-language other projects, with an initialization marker protecting subsequent admin edits.
+- [x] Build scannable case pages with problem, role, stack, architecture, decisions/trade-offs, hard problems, results placeholders, next steps and verified links.
+- [x] Implement all requested homepage sections; use mailto instead of the current unsent form. Run the complete suite and commit.
 
 ### 4. Design and responsive verification
 
-- [ ] Apply shared CSS tokens, typography and responsive layout across all public pages; keep source files near/below 300 lines.
-- [ ] Provide working light/dark modes, visible keyboard focus, skip link, labelled menu/theme/search controls, useful image text and reduced motion.
-- [ ] Remove simulated terminal/particle work and Framer consumers. Preserve useful certificate viewing and background content.
-- [ ] Inspect 360, 768, 1280 and 1920 px layouts, keyboard operation, both themes and horizontal overflow. Capture screenshots for the PR.
-- [ ] Run the complete suite and commit.
+- [x] Apply shared CSS tokens, typography and responsive layout across all public pages; keep source files near/below 300 lines.
+- [x] Provide working light/dark modes, visible keyboard focus, skip link, labelled menu/theme/search controls, useful image text and reduced motion.
+- [x] Remove simulated terminal/particle work and Framer consumers. Preserve useful certificate viewing and background content.
+- [x] Inspect 360, 768, 1280 and 1920 px layouts, keyboard operation, both themes and horizontal overflow. Capture screenshots for the PR.
+- [x] Run the complete suite and commit.
 
 ### 5. Publication, metadata and performance
 
 Files: security middleware, publication-aware Blog/Feed/Sitemap/OG controllers, safe content/CV services, public metadata component, RSS/XML views and deployment script.
 
-- [ ] Write failing tests for draft/future post access, escaped/validated search, pagination, publication-only feeds/sitemap/images, metadata/headers and CV traversal/missing files.
-- [ ] Sanitize editor HTML; calculate reading time. Keep highlighting in a separate article-only chunk.
-- [ ] Add canonical/title/description, social cards/images, JSON-LD, sitemap, robots and RSS.
-- [ ] Configure SSR, client hydration and build/start/restart/health-check deployment steps; validate actual local rendered HTML rather than only the config flag.
-- [ ] Measure mobile `/`, `/projects/freya` and `/blog`: target 95+ in all categories, LCP <2 s, CLS <0.05, home JS <150 KB gzip. Report actual misses; do not fabricate passing results.
-- [ ] Run the complete suite and commit.
+- [x] Write failing tests for draft/future post access, escaped/validated search, pagination, publication-only feeds/sitemap/images, metadata/headers and CV traversal/missing files.
+- [x] Sanitize editor HTML; calculate reading time. Keep highlighting in a separate article-only chunk.
+- [x] Add canonical/title/description, social cards/images, JSON-LD, sitemap, robots and RSS.
+- [x] Configure SSR, client hydration and build/start/restart/health-check deployment steps; validate actual local rendered HTML rather than only the config flag.
+- [x] Measure mobile `/`, `/projects/freya` and `/blog`: target 95+ in all categories, LCP <2 s, CLS <0.05, home JS <150 KB gzip. Report actual misses; do not fabricate passing results.
+- [x] Run the complete suite and commit.
 
 ### 6. Regression and final cleanup
 
-- [ ] Exercise all requested feature-level behaviors, including owner/non-owner admin access, registration, feeds, draft 404s, security headers, CV availability and DB case-study payloads.
-- [ ] Trace retained imports, remove only unused dependencies, verify safe absolute deletion targets, delete `node_modules` and the lockfile once, reinstall and audit.
-- [ ] Run all required checks after cleanup, verify the rebuilt SSR pages and repeat measurements only when changed code invalidates them.
+- [x] Exercise all requested feature-level behaviors, including owner/non-owner admin access, registration, feeds, draft 404s, security headers, CV availability and DB case-study payloads.
+- [x] Trace retained imports, remove only unused dependencies, verify safe absolute deletion targets, delete `node_modules` and the lockfile once, reinstall and audit.
+- [x] Run all required checks after cleanup, verify the rebuilt SSR pages and repeat measurements only when changed code invalidates them.
 
 ### 7–8. Documentation and delivery
 
-- [ ] Rewrite README with the verified live URL, actual versions, screenshots, correct clone URL, setup/test/deploy steps and PHP security requirement. Add a license if absent.
-- [ ] Produce full direct-dependency and before/after Lighthouse tables, screenshots, breaking changes, justified holdbacks and the complete TODO list.
-- [ ] Review the diff and commit messages for secrets, accidental data/environment changes and forbidden attribution trailers.
+- [x] Rewrite README with the verified live URL, actual versions, screenshots, correct clone URL, setup/test/deploy steps and PHP security requirement. Add a license if absent.
+- [x] Produce full direct-dependency and before/after Lighthouse tables, screenshots, breaking changes, justified holdbacks and the complete TODO list.
+- [x] Review the diff and commit messages for secrets, accidental data/environment changes and forbidden attribution trailers.
 - [ ] Push only `rework/portfolio`, create and attach a PR to `main`, and leave it unmerged. If CLI authentication fails, use a supported authenticated alternative or report the precise remaining sign-in step; never claim a PR exists without its URL.
 
 ## Content confirmation register
@@ -183,4 +183,8 @@ Files: security middleware, publication-aware Blog/Feed/Sitemap/OG controllers, 
 - Public project READMEs: [Freya-v1](https://github.com/aslamwebz/Freya-v1), [Forge](https://github.com/aslamwebz/forge), [HireAI](https://github.com/aslamwebz/HireAI).
 
 Laravel Boost is installed in the project but its MCP tools are not connected in this chat. Official upstream documentation and the supported Artisan CLI are used instead. Chrome and Lighthouse are available. GitHub CLI is installed, but its stored token was reported invalid during preflight; PR creation must be verified separately at delivery.
+
+## Final implementation status
+
+The implementation and measurements above are recorded in [rework-report.md](rework-report.md). All eight checks pass; 65 tests contain 488 assertions. The completed measurement checkpoint does **not** mean every performance bar passed: mobile home LCP is 2.491 s and Freya is 2.217 s, so the strict under-two-second target remains open. Keep delivery in draft until that target, factual content, CV and hosting prerequisites are resolved.
 
