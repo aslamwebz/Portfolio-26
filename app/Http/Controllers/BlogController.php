@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogSearchRequest;
 use App\Models\BlogPost;
 use App\Support\PublicPortfolio;
+use App\Support\SafeContent;
 use Illuminate\Database\Eloquent\Builder;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -35,7 +36,7 @@ class BlogController extends Controller
 
         return Inertia::render('blog/show', [
             'site' => PublicPortfolio::site(),
-            'post' => [...PublicPortfolio::post($blogPost), 'content' => $blogPost->content, 'tags' => $blogPost->tags ?? []],
+            'post' => [...PublicPortfolio::post($blogPost), 'content' => SafeContent::html($blogPost->content), 'tags' => $blogPost->tags ?? []],
         ]);
     }
 }

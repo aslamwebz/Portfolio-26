@@ -6,6 +6,8 @@ use App\Filament\Resources\ProjectResource\Pages;
 use App\Models\Project;
 use Filament\Actions;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
@@ -36,12 +38,20 @@ class ProjectResource extends Resource
                         TextInput::make('title')
                             ->required()
                             ->maxLength(255),
+                        TextInput::make('slug')->required()->maxLength(255)->unique(ignoreRecord: true)
+                            ->regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')->helperText('The stable identifier used in this project’s URL.'),
+                        Toggle::make('is_flagship')->label('Flagship case study')->default(false),
                         Textarea::make('description')
                             ->required()
                             ->rows(4)
                             ->columnSpanFull(),
                         Select::make('category')
                             ->options([
+                                'Desktop agent' => 'Desktop agent',
+                                'Agent coordination' => 'Agent coordination',
+                                'Applied AI' => 'Applied AI',
+                                'Frontend' => 'Frontend',
+                                'Backend' => 'Backend',
                                 'React' => 'React',
                                 'Vue' => 'Vue',
                                 'AI' => 'AI',
@@ -58,15 +68,34 @@ class ProjectResource extends Resource
 
                 Section::make('Links')
                     ->schema([
-                        TextInput::make('link')
+                        TextInput::make('demo_url')
                             ->label('Live Demo URL')
                             ->url()
                             ->maxLength(255),
-                        TextInput::make('github')
+                        TextInput::make('repo_url')
                             ->label('GitHub URL')
                             ->url()
                             ->maxLength(255),
+                        TextInput::make('video_url')->label('Walkthrough video URL')->url()->maxLength(255),
                     ])->columns(2),
+
+                Section::make('Case study')->schema([
+                    Textarea::make('problem')->rows(4)->columnSpanFull(),
+                    Textarea::make('role')->rows(3)->columnSpanFull(),
+                    Repeater::make('decisions')->schema([
+                        TextInput::make('title')->required(),
+                        Textarea::make('decision')->required(),
+                        Textarea::make('tradeoff')->required(),
+                    ])->defaultItems(0)->collapsible()->columnSpanFull(),
+                    Repeater::make('results')->schema([
+                        TextInput::make('label')->required(),
+                        Textarea::make('value')->required(),
+                    ])->defaultItems(0)->columnSpanFull(),
+                    FileUpload::make('architecture_image')->disk('public')->directory('architecture')
+                        ->image()->acceptedFileTypes(['image/png', 'image/jpeg', 'image/webp', 'image/avif'])
+                        ->helperText('Optional replacement for the built-in system sketch.')->columnSpanFull(),
+                    MarkdownEditor::make('body')->label('Hard problems, next steps and supporting detail')->columnSpanFull(),
+                ]),
 
                 Section::make('Media & Settings')
                     ->schema([
@@ -78,7 +107,8 @@ class ProjectResource extends Resource
                             ->numeric()
                             ->default(0),
                         Toggle::make('is_featured')
-                            ->label('Featured on Homepage')
+                            ->label('Legacy featured flag')
+                            ->helperText('Use Flagship case study to control the selected case studies.')
                             ->default(false),
                     ])->columns(2),
             ]);

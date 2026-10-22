@@ -1,0 +1,63 @@
+[
+  {
+    "title": "Freya",
+    "slug": "freya",
+    "description": "A desktop AI agent with a persistent core, long-term memory and permission-controlled tools.",
+    "technologies": ["Electron", "TypeScript", "LLM tool use", "SQLCipher"],
+    "category": "Desktop agent",
+    "role": "Independent project: system design, AI-assisted implementation and review. TODO-VERIFY: confirm the scope of my ownership in the public v1 snapshot.",
+    "problem": "An assistant that can act on a computer needs a reliable boundary between reasoning, stored context and real-world actions. Freya explores that boundary without tying the agent's lifetime to a single window.",
+    "repo_url": "https://github.com/aslamwebz/Freya-v1",
+    "decisions": [
+      {"title": "Keep the core independent of the interface", "decision": "The public architecture gives the Core ownership of identity, memory, missions and authority; UI bodies communicate through typed protocols.", "tradeoff": "TODO-VERIFY: confirm that continuity across UI restarts was the original motivation. This boundary also adds IPC and lifecycle complexity."},
+      {"title": "Put permission checks before tool execution", "decision": "Scoped browser, file and application tools sit behind Guard/Governor controls, with cancellation and activity records.", "tradeoff": "TODO-VERIFY: review the exact enforcement coverage in v1. Explicit approval adds friction to otherwise automatic work."},
+      {"title": "Keep local memory encrypted", "decision": "The public README describes a SQLCipher-backed local vault and a separate model gateway.", "tradeoff": "TODO-VERIFY: verify key storage, recovery and model-boundary behavior against the public snapshot; encrypted storage still needs careful key handling."}
+    ],
+    "results": [
+      {"label": "Public artifact", "value": "Freya-v1 is the public snapshot. Later private development is a separate version."},
+      {"label": "Measured outcomes", "value": "TODO: add reproducible task completion, cancellation, latency and cost measurements for this exact version."}
+    ],
+    "body": "## Hard problems\n\nThe design separates persistent agent state from disposable interfaces, routes tool actions through permission boundaries, and exposes cancellation and activity records.\n\nTODO-VERIFY: describe one implemented failure-and-recovery path, including what happens if a tool process stops mid-task. The README alone does not prove that every boundary is enforced.\n\n## Version boundary\n\nThis page links only to Freya-v1. TODO-VERIFY: establish which version includes DeepSeek, AES-256-GCM key handling, sealed backups, multi-agent workers and cost controls before attributing those details to this public repository. No private-version benchmark is presented as a v1 result.\n\n## What I would do next\n\nTODO-VERIFY: proposed next work is a repeatable task evaluation set, failure injection around cancellation, and an explicit audit of tool permissions. Confirm this reflects the current roadmap."
+  },
+  {
+    "title": "Forge",
+    "slug": "forge",
+    "description": "A terminal workspace for coordinating coding agents in separate Git worktrees, with persistent sessions and a CLI.",
+    "technologies": ["Electron", "TypeScript", "node-pty", "Git worktrees", "MCP"],
+    "category": "Agent coordination",
+    "role": "Independent project: workflow design, AI-assisted implementation and review. TODO-VERIFY: confirm ownership wording and current release status.",
+    "problem": "Parallel coding agents need isolated checkouts, controllable terminal sessions and a way to inspect work before integration. A window closing should not be the same thing as a terminal task ending.",
+    "repo_url": "https://github.com/aslamwebz/forge",
+    "decisions": [
+      {"title": "Isolate each agent's working tree", "decision": "Each agent operates in its own branch and Git worktree.", "tradeoff": "TODO-VERIFY: confirm the design rationale. Isolation avoids competing edits in one checkout, but integration and worktree cleanup still need review."},
+      {"title": "Separate engine and window lifetimes", "decision": "A background engine hosts real terminal sessions using node-pty and headless xterm; the UI attaches to that engine.", "tradeoff": "TODO-VERIFY: confirm recovery guarantees. A persistent engine introduces ownership, reconnection and orphan-process concerns."},
+      {"title": "Require explicit execution", "decision": "Agents start or resume explicitly. Local IPC uses an owner card and token; the CLI exposes start, send, read, wait and stop operations.", "tradeoff": "TODO-VERIFY: verify the precise threat model. Explicit control adds user steps, while local credentials require lifecycle management."},
+      {"title": "Make review a separate workflow", "decision": "The documented review flow separates checks, auditors and a verifier. Lead MCP relies on host-provided security.", "tradeoff": "TODO-VERIFY: explain the implemented handoff and its limits. More reviewers add time and do not guarantee correctness."}
+    ],
+    "results": [
+      {"label": "Public artifact", "value": "Open-source workspace and CLI for real coding-agent terminals; the README describes Windows and Linux build checks."},
+      {"label": "Measured outcomes", "value": "TODO: add a reproducible session-recovery demonstration and measured coordination overhead. No adoption or productivity figures are claimed."}
+    ],
+    "body": "## Hard problems\n\nForge brings terminal lifetime, agent isolation and review into one workflow. The engine-to-window boundary and explicit agent start/stop controls are central to the design.\n\nTODO-VERIFY: document one tested reconnect sequence and how a stopped or crashed agent's work is recovered.\n\n## What I would do next\n\nTODO-VERIFY: proposed next work is a documented recovery matrix, reproducible multi-agent integration examples and tighter visibility into session ownership. Confirm against the repository's current roadmap."
+  },
+  {
+    "title": "HireAI",
+    "slug": "hireai",
+    "description": "A job-application app for building résumés, drafting cover letters and preparing for interviews with AI assistance.",
+    "technologies": ["Laravel", "PHP", "Livewire", "Prism", "Queues", "MySQL"],
+    "category": "Applied AI",
+    "role": "Independent project: application architecture, Laravel development and AI-assisted implementation. TODO-VERIFY: approve ownership wording and public release scope.",
+    "problem": "A job application spans several documents and preparation tasks. HireAI brings résumé editing, cover letters, interview preparation and application tracking into one Laravel application.",
+    "repo_url": "https://github.com/aslamwebz/HireAI",
+    "decisions": [
+      {"title": "Keep AI inside an application workflow", "decision": "Laravel, Livewire and Prism connect AI features to document editing, account limits and application tracking.", "tradeoff": "TODO-VERIFY: confirm the original rationale. This keeps product rules close to the backend, but couples interactive flows to server state."},
+      {"title": "Treat extraction as structured data", "decision": "Résumé extraction uses structured LLM output with a local heuristic fallback; editing includes history restoration and PDF export.", "tradeoff": "TODO-VERIFY: document validation and fallback coverage. A fallback can preserve a usable flow, but cannot guarantee semantic accuracy."},
+      {"title": "Support streaming and queued generation", "decision": "The README describes streaming preparation features, background jobs and per-account quotas.", "tradeoff": "TODO-VERIFY: identify the exact flows using each mode. Streaming and queued paths require separate failure handling; automatic fallback between them is not claimed."}
+    ],
+    "results": [
+      {"label": "Public artifact", "value": "A Laravel application covering résumé history, PDF export, AI document assistance and application tracking."},
+      {"label": "Measured outcomes", "value": "TODO: add extraction accuracy, generation latency, cost and task completion measurements using a documented evaluation set."}
+    ],
+    "body": "## Hard problems\n\nThe product combines editable documents and AI generation with background work and account limits. Structured extraction and a local fallback make model output part of a broader backend flow.\n\nTODO-VERIFY: explain the validation rules and one implemented provider failure path. No claim is made about guaranteed ATS results, employer-side recruitment or automatic streaming-to-queue fallback.\n\n## What I would do next\n\nTODO-VERIFY: proposed next work is an evaluation set for résumé extraction, measured generation costs and documented recovery behavior for failed jobs. Confirm the current implementation and roadmap."
+  }
+]
