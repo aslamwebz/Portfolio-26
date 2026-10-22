@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" href="{{ \Illuminate\Support\Facades\Vite::asset('vendor/filament/filament/dist/fonts/inter/inter-latin-wght-normal-DIHYUR35.woff2') }}" as="font" type="font/woff2" crossorigin>
     <script nonce="{{ \Illuminate\Support\Facades\Vite::cspNonce() }}">
         const appearance = @json($appearance ?? 'dark');
         document.documentElement.classList.toggle('dark', appearance === 'dark' || (appearance === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches));

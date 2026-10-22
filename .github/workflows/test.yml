@@ -1,60 +1,49 @@
 name: Tests
-
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-
+    branches: [main]
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v7.0.1
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@2.40.0
+      - uses: actions/checkout@v7.0.1
+      - uses: shivammathur/setup-php@2.40.0
         with:
           php-version: '8.4'
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, intl, gd, exif, iconv
           coverage: none
-
-      - name: Setup Node
-        uses: actions/setup-node@v7.1.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: '.nvmrc'
           cache: npm
-
-      - name: Cache Composer downloads
-        uses: actions/cache@v6.1.0
+      - uses: actions/cache@v6.1.0
         with:
           path: ~/.cache/composer/files
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install Composer Dependencies
-        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-      - name: Install NPM Dependencies
-        run: npm ci
-
-      - name: Build Assets
-        run: npm run build
-
-      - name: Prepare Application
+      - name: Install Composer dependencies
+        run: composer install --no-ansi --no-interaction --no-progress --prefer-dist
+      - name: Prepare isolated application
         run: |
           cp .env.example .env
           php artisan key:generate
-
-      - name: Create SQLite Database
-        run: |
-          mkdir -p database
           touch database/database.sqlite
-
-      - name: Run Tests
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Composer security audit
+        run: composer audit
+      - name: Node security audit
+        run: npm audit --audit-level=high
+      - name: Client production build
+        run: npm run build
+      - name: SSR production build
+        run: npm run build:ssr
+      - name: PHP feature suite
         env:
           DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
-        run: php artisan test
+          DB_DATABASE: ':memory:'
+        run: composer test
