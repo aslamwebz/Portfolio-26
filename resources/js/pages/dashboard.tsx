@@ -36,8 +36,6 @@ function TypewriterCode() {
 
     useEffect(() => {
         let i = 0;
-        setDisplayed('');
-        setDone(false);
         const id = setInterval(() => {
             i++;
             setDisplayed(PEST_TEST_CODE.slice(0, i));
