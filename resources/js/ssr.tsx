@@ -1,3 +1,4 @@
+import type { ResolvedComponent } from '@inertiajs/react';
 import { createInertiaApp } from '@inertiajs/react';
 import createServer from '@inertiajs/react/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -10,11 +11,18 @@ createServer((page) =>
         page,
         render: ReactDOMServer.renderToString,
         title: (title) => (title ? `${title} - ${appName}` : appName),
-        resolve: (name) =>
-            resolvePageComponent(
+        resolve: async (name) => {
+            const page = await resolvePageComponent<{
+                default: ResolvedComponent;
+            }>(
                 `./pages/${name}.tsx`,
-                import.meta.glob('./pages/**/*.tsx'),
-            ),
+                import.meta.glob<{ default: ResolvedComponent }>(
+                    './pages/**/*.tsx',
+                ),
+            );
+
+            return page.default;
+        },
         setup: ({ App, props }) => {
             return <App {...props} />;
         },
