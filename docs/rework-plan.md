@@ -158,7 +158,7 @@ Files: security middleware, publication-aware Blog/Feed/Sitemap/OG controllers, 
 - [x] Rewrite README with the verified live URL, actual versions, screenshots, correct clone URL, setup/test/deploy steps and PHP security requirement. Add a license if absent.
 - [x] Produce full direct-dependency and before/after Lighthouse tables, screenshots, breaking changes, justified holdbacks and the complete TODO list.
 - [x] Review the diff and commit messages for secrets, accidental data/environment changes and forbidden attribution trailers.
-- [ ] Push only `rework/portfolio`, create and attach a PR to `main`, and leave it unmerged. If CLI authentication fails, use a supported authenticated alternative or report the precise remaining sign-in step; never claim a PR exists without its URL.
+- [x] Push only `rework/portfolio`, create and attach a PR to `main`, and leave it unmerged. If CLI authentication fails, use a supported authenticated alternative or report the precise remaining sign-in step; never claim a PR exists without its URL.
 
 ## Content confirmation register
 
@@ -187,4 +187,3 @@ Laravel Boost is installed in the project but its MCP tools are not connected in
 ## Final implementation status
 
 The implementation and measurements above are recorded in [rework-report.md](rework-report.md). All eight checks pass; 65 tests contain 488 assertions. The completed measurement checkpoint does **not** mean every performance bar passed: mobile home LCP is 2.491 s and Freya is 2.217 s, so the strict under-two-second target remains open. Keep delivery in draft until that target, factual content, CV and hosting prerequisites are resolved.
-

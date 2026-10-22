@@ -143,3 +143,6 @@ Suggested topics: `portfolio`, `laravel`, `php`, `inertiajs`, `react`, `ai-agent
 
 These are suggestions only; repository settings were not changed. Keep the pull request in draft until factual review, CV, hosting prerequisites and the outstanding LCP target are resolved. Do not merge or deploy automatically.
 
+## Delivery
+
+[Draft pull request #1](https://github.com/aslamwebz/Portfolio-26/pull/1) targets main from rework/portfolio. Only the review branch was pushed; main and production remain unchanged. Outstanding LCP, factual, CV and hosting checks remain release blockers.

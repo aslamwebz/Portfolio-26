@@ -39,7 +39,7 @@
 - [x] Run focused image tests, all eight checks, and dependency audits. Review browser console for hydration/CSP errors after reload and client navigation.
 - [x] Inspect dark/light layouts and keyboard operation; capture 360/768/1280/1920 screenshots and verify no horizontal overflow. Measure actual mobile performance, LCP, CLS and gzip JavaScript; report plain PHP and production-transport conditions separately.
 - [x] Review the final source diff and factual placeholders; commit the verified visual step. Complete the report and README with the new screenshots and actual measurements.
-- [ ] Push the review branch and open the draft PR; never merge or deploy.
+- [x] Push the review branch and open the draft PR; never merge or deploy.
 
 ## Acceptance
 
