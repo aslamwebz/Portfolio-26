@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\BlogPost;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class BlogPostSeeder extends Seeder
 {
@@ -92,8 +92,12 @@ class BlogPostSeeder extends Seeder
             ],
         ];
 
-        DB::table('blog_posts')->truncate();
-        DB::table('blog_posts')->insert($posts);
+        foreach ($posts as $post) {
+            $post['tags'] = json_decode($post['tags'], true);
+            $post['is_published'] = false;
+            $post['published_at'] = null;
+            BlogPost::firstOrCreate(['slug' => $post['slug']], $post);
+        }
     }
 
     private function getSqlArticle(): string

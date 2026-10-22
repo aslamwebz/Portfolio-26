@@ -9,6 +9,10 @@
 /resources/js/routes
 /resources/js/wayfinder
 /vendor
+/build_output.log
+/test_output.log
+/tmptest_output.log
+/index.html
 .DS_Store
 .env
 .env.backup

@@ -1,103 +1,84 @@
-import { useCallback, useMemo, useSyncExternalStore } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 export type ResolvedAppearance = 'light' | 'dark';
 export type Appearance = ResolvedAppearance | 'system';
-
 export type UseAppearanceReturn = {
     readonly appearance: Appearance;
     readonly resolvedAppearance: ResolvedAppearance;
     readonly updateAppearance: (mode: Appearance) => void;
 };
-
 const listeners = new Set<() => void>();
-let currentAppearance: Appearance = 'system';
-
-const prefersDark = (): boolean => {
-    if (typeof window === 'undefined') return false;
-
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-};
-
-const setCookie = (name: string, value: string, days = 365): void => {
-    if (typeof document === 'undefined') return;
-    const maxAge = days * 24 * 60 * 60;
-    document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`;
-};
-
-const getStoredAppearance = (): Appearance => {
-    if (typeof window === 'undefined') return 'system';
-
-    return (localStorage.getItem('appearance') as Appearance) || 'system';
-};
-
-const isDarkMode = (appearance: Appearance): boolean => {
-    return appearance === 'dark' || (appearance === 'system' && prefersDark());
-};
-
-const applyTheme = (appearance: Appearance): void => {
-    if (typeof document === 'undefined') return;
-
-    const isDark = isDarkMode(appearance);
-
-    document.documentElement.classList.toggle('dark', isDark);
-    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
-};
-
+let currentAppearance: Appearance = 'dark';
+const valid = (value: string | null | undefined): value is Appearance =>
+    value === 'light' || value === 'dark' || value === 'system';
+const prefersDark = () =>
+    typeof window === 'undefined' ||
+    window.matchMedia('(prefers-color-scheme: dark)').matches;
+const resolve = (mode: Appearance): ResolvedAppearance =>
+    mode === 'dark' || (mode === 'system' && prefersDark()) ? 'dark' : 'light';
+const notify = () => listeners.forEach((listener) => listener());
 const subscribe = (callback: () => void) => {
     listeners.add(callback);
-
-    return () => listeners.delete(callback);
+    return () => {
+        listeners.delete(callback);
+    };
 };
-
-const notify = (): void => listeners.forEach((listener) => listener());
-
-const mediaQuery = (): MediaQueryList | null => {
-    if (typeof window === 'undefined') return null;
-
-    return window.matchMedia('(prefers-color-scheme: dark)');
+const applyTheme = () =>
+    document.documentElement.classList.toggle(
+        'dark',
+        resolve(currentAppearance) === 'dark',
+    );
+const saveCookie = (mode: Appearance) => {
+    document.cookie =
+        'appearance=' + mode + ';path=/;max-age=31536000;SameSite=Lax';
 };
-
-const handleSystemThemeChange = (): void => applyTheme(currentAppearance);
-
-export function initializeTheme(): void {
-    if (typeof window === 'undefined') return;
-
-    if (!localStorage.getItem('appearance')) {
-        localStorage.setItem('appearance', 'system');
-        setCookie('appearance', 'system');
-    }
-
-    currentAppearance = getStoredAppearance();
-    applyTheme(currentAppearance);
-
-    // Set up system theme change listener
-    mediaQuery()?.addEventListener('change', handleSystemThemeChange);
-}
-
-export function useAppearance(): UseAppearanceReturn {
-    const appearance: Appearance = useSyncExternalStore(
-        subscribe,
-        () => currentAppearance,
-        () => 'system',
-    );
-
-    const resolvedAppearance: ResolvedAppearance = useMemo(
-        () => (isDarkMode(appearance) ? 'dark' : 'light'),
-        [appearance],
-    );
-
-    const updateAppearance = useCallback((mode: Appearance): void => {
-        currentAppearance = mode;
-
-        // Store in localStorage for client-side persistence...
+const savePreference = (mode: Appearance) => {
+    try {
         localStorage.setItem('appearance', mode);
-
-        // Store in cookie for SSR...
-        setCookie('appearance', mode);
-
-        applyTheme(mode);
+    } catch {
+        /* Theme changes still work when browser storage is unavailable. */
+    }
+    saveCookie(mode);
+};
+export function initializeTheme(): void {
+    let stored: string | null = null;
+    try {
+        stored = localStorage.getItem('appearance');
+    } catch {
+        /* Use the server cookie instead. */
+    }
+    const cookie = document.cookie
+        .split('; ')
+        .find((item) => item.startsWith('appearance='))
+        ?.split('=')[1];
+    currentAppearance = valid(stored)
+        ? stored
+        : valid(cookie)
+          ? cookie
+          : 'dark';
+    applyTheme();
+    window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', () => {
+            applyTheme();
+            notify();
+        });
+}
+export function useAppearance(): UseAppearanceReturn {
+    const snapshot = useSyncExternalStore(
+        subscribe,
+        () => currentAppearance + ':' + resolve(currentAppearance),
+        () => 'dark:dark',
+    );
+    const [appearance, resolvedAppearance] = snapshot.split(':') as [
+        Appearance,
+        ResolvedAppearance,
+    ];
+    const updateAppearance = useCallback((mode: Appearance) => {
+        currentAppearance = mode;
+        savePreference(mode);
+        applyTheme();
         notify();
     }, []);
-
-    return { appearance, resolvedAppearance, updateAppearance } as const;
+    return { appearance, resolvedAppearance, updateAppearance };
 }

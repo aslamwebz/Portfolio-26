@@ -1,0 +1,177 @@
+.timeline {
+    display: grid;
+    gap: 1.5rem;
+}
+.timeline-entry {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 3rem;
+}
+.timeline-entry > p {
+    font-size: 0.69rem;
+    padding-top: 1.6rem;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--accent);
+}
+.timeline-entry > div {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 1.6rem 1.8rem;
+}
+.timeline-entry h3 {
+    font-size: 1.3rem;
+}
+.timeline-entry .organization {
+    margin-block: 0.5rem 1rem;
+    font-size: 0.84rem;
+}
+.timeline-entry ul {
+    padding-left: 1.1rem;
+    list-style: disc;
+    color: var(--muted-text);
+    font-size: 0.9rem;
+}
+.timeline-entry li + li {
+    margin-top: 0.6rem;
+}
+.background-details {
+    margin-top: 2.5rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+}
+.background-details summary {
+    padding: 1rem 1.3rem;
+    font-size: 0.85rem;
+}
+.background-content {
+    padding: 0.5rem 1.3rem 1.5rem;
+}
+.background-content h3 {
+    font-size: 1rem;
+    margin-block: 1.2rem 0.8rem;
+}
+.background-content p,
+.background-content li {
+    color: var(--muted-text);
+    font-size: 0.8rem;
+}
+.background-content ul {
+    display: grid;
+    gap: 0.55rem;
+    list-style: disc;
+    padding-left: 1.1rem;
+}
+.background-content a {
+    text-decoration: underline;
+}
+.background-content > .caption {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+}
+.stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+.stack-grid > div {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 1.4rem;
+}
+.credential-preview {
+    margin-top: 3rem;
+}
+.credential-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.7rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+.credential-heading h3 {
+    font-size: 1.1rem;
+}
+.credential-heading p {
+    font-size: 0.7rem;
+}
+.credential-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+.credential-card {
+    position: relative;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+.credential-mark {
+    display: block;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+}
+.credential-card .mono {
+    font-size: 0.64rem;
+}
+.credential-card h4 {
+    font-size: 0.86rem;
+    color: var(--foreground);
+    font-weight: 550;
+    line-height: 1.6;
+    margin-top: 0.45rem;
+}
+.stack-grid h3 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+.stack-grid ul {
+    display: grid;
+    gap: 0.45rem;
+    color: var(--muted-text);
+    font-size: 0.85rem;
+}
+.writing-list {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.writing-list article {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+}
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+    color: var(--muted-text);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+}
+.writing-list h2,
+.writing-list h3 {
+    font-size: 1.45rem;
+    margin-block: 0.6rem;
+}
+.writing-list article > p {
+    max-width: 48rem;
+    font-size: 0.9rem;
+}
+@media (max-width: 600px) {
+    .credential-grid {
+        grid-template-columns: 1fr;
+    }
+    .timeline-entry > div {
+        padding: 1.3rem;
+    }
+    .timeline-entry > p {
+        padding-top: 0.3rem;
+    }
+}

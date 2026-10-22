@@ -1,0 +1,260 @@
+.article {
+    max-width: 850px;
+}
+.article .page-intro h1 {
+    max-width: 21ch;
+    font-size: clamp(2.3rem, 5vw, 4rem);
+}
+.article .post-meta {
+    margin-bottom: 1.5rem;
+}
+.article .caption {
+    margin-top: 1rem;
+}
+.article-body {
+    font-size: 1rem;
+    color: var(--muted-text);
+    line-height: 1.9;
+    min-width: 0;
+}
+.article-body h2 {
+    margin-block: 2.5rem 1rem;
+    font-size: 1.75rem;
+}
+.article-body h3 {
+    margin-block: 2rem 0.8rem;
+    font-size: 1.3rem;
+}
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+    margin-block: 1.8rem 0.8rem;
+    font-size: 1.05rem;
+}
+.article-body p {
+    margin-block: 1rem;
+}
+.article-body ul,
+.article-body ol {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-block: 1rem;
+}
+.article-body ol {
+    list-style: decimal;
+}
+.article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+}
+.article-body blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.3rem;
+    margin-block: 1.5rem;
+}
+.article-body pre {
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 1.4rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    font-size: 0.8rem;
+    line-height: 1.8;
+}
+.article-body code {
+    font-family: var(--font-mono);
+    overflow-wrap: normal;
+}
+.article-body :not(pre) > code {
+    background: var(--surface);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.86em;
+}
+.article-body table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+.article-body th,
+.article-body td {
+    border: 1px solid var(--line);
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+}
+.article-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.article-footer {
+    border-top: 1px solid var(--line);
+    padding-block: 2rem;
+    margin-top: 3rem;
+}
+.case-description {
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+.case-overview {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 5rem;
+    align-items: start;
+    border-top: 1px solid var(--line);
+    padding-block: 4rem;
+}
+.case-overview h2 {
+    font-size: 2rem;
+    margin-block: 0.8rem 1.2rem;
+}
+.case-overview h3 {
+    font-size: 1.2rem;
+    margin-block: 2rem 1rem;
+}
+.case-overview p {
+    font-size: 0.94rem;
+}
+.architecture-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1rem 1.5rem 1.5rem;
+}
+.architecture-panel h2 {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    color: var(--muted-text);
+}
+.architecture-sketch {
+    width: 100%;
+    height: auto;
+    max-width: 380px;
+    margin-inline: auto;
+}
+.diagram-box {
+    fill: var(--background);
+    stroke: var(--line);
+}
+.diagram-core {
+    stroke: var(--accent);
+}
+.diagram-connector {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+}
+.diagram-title {
+    fill: var(--foreground);
+    font-size: 20px;
+    font-family: var(--font-sans);
+}
+.diagram-detail {
+    fill: var(--muted-text);
+    font-size: 17px;
+    font-family: var(--font-mono);
+}
+.architecture-panel > .caption {
+    font-size: 0.7rem;
+}
+.architecture-panel > img {
+    width: 100%;
+    height: auto;
+}
+.case-section {
+    padding-block: 3.5rem;
+    border-top: 1px solid var(--line);
+}
+.case-section > h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-block: 0.8rem 2rem;
+}
+.decision-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 4rem;
+}
+.decision-list h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.decision-list p {
+    font-size: 0.9rem;
+    line-height: 1.85;
+}
+.decision-list .tradeoff {
+    border-left: 1px solid var(--line);
+    padding-left: 1rem;
+    margin-top: 1rem;
+    font-size: 0.83rem;
+}
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 4rem;
+}
+.results-grid dt {
+    font-size: 0.83rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+.results-grid dd {
+    color: var(--muted-text);
+    font-size: 0.9rem;
+}
+.case-study .article-body {
+    max-width: 850px;
+}
+.case-study .article-body h2:first-child {
+    margin-top: 0;
+}
+.case-footer {
+    border-top: 1px solid var(--line);
+    padding-block: 3rem 5rem;
+}
+.case-footer h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+@media (max-width: 850px) {
+    .case-overview {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding-block: 3rem;
+    }
+    .architecture-panel {
+        max-width: 440px;
+        width: 100%;
+    }
+    .decision-list,
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .case-section {
+        padding-block: 2.5rem;
+    }
+}
+
+.article-body .token.comment,
+.article-body .token.prolog,
+.article-body .token.doctype {
+    color: var(--muted-text);
+    font-style: italic;
+}
+.article-body .token.keyword,
+.article-body .token.operator,
+.article-body .token.boolean,
+.article-body .token.function,
+.article-body .token.class-name {
+    color: var(--accent);
+}
+.article-body .token.string,
+.article-body .token.number,
+.article-body .token.variable {
+    color: var(--foreground);
+}

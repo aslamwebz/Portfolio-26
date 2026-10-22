@@ -107,11 +107,11 @@
         /* Completeness */
         // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
         "skipLibCheck": true /* Skip type checking all .d.ts files. */,
-        "baseUrl": ".",
+        "types": ["node", "vite/client", "react-syntax-highlighter"],
         "paths": {
             "@/*": ["./resources/js/*"]
         },
         "jsx": "react-jsx"
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx"]
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx", "vite.config.ts"]
 }

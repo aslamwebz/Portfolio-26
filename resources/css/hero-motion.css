@@ -1,0 +1,125 @@
+@media (prefers-reduced-motion: no-preference) and (min-width: 851px) {
+    .panel-motion-toggle {
+        display: inline-flex;
+    }
+    .system-window {
+        animation: panel-float 8s ease-in-out infinite;
+    }
+    .system-tag-backend {
+        animation: panel-float 9s ease-in-out -2s infinite reverse;
+    }
+    .system-tag-ai {
+        animation: panel-float 10s ease-in-out -4s infinite;
+    }
+    .flow-input::after,
+    .flow-core::after,
+    .flow-services > div::after {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border: 1px solid var(--accent);
+        border-radius: inherit;
+        box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 22%, transparent);
+        opacity: 0;
+        pointer-events: none;
+        animation: panel-node-glow 9s ease-in-out infinite;
+    }
+    .flow-core::after {
+        animation-delay: 1.1s;
+    }
+    .flow-services > div:nth-child(1)::after {
+        animation-delay: 2.7s;
+    }
+    .flow-services > div:nth-child(2)::after {
+        animation-delay: 3.5s;
+    }
+    .flow-services > div:nth-child(3)::after {
+        animation-delay: 4.3s;
+    }
+    .flow-connector::after,
+    .flow-branches::after {
+        content: '';
+        position: absolute;
+        left: calc(50% - 2px);
+        top: -2px;
+        width: 4px;
+        height: 7px;
+        border-radius: 4px;
+        background: var(--accent);
+        box-shadow: 0 0 8px var(--accent);
+        opacity: 0;
+        pointer-events: none;
+        animation: panel-signal 9s linear 0.5s infinite;
+    }
+    .flow-branches::after {
+        animation-delay: 1.8s;
+    }
+    .flow-services > div::before {
+        background: var(--accent);
+        animation: panel-branch-glow 9s ease-in-out 2.5s infinite;
+    }
+    .flow-services > div:nth-child(2)::before {
+        animation-delay: 3.3s;
+    }
+    .flow-services > div:nth-child(3)::before {
+        animation-delay: 4.1s;
+    }
+    .system-scene.is-motion-paused *,
+    .system-scene.is-motion-paused *::before,
+    .system-scene.is-motion-paused *::after {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes panel-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes panel-node-glow {
+    0%,
+    18%,
+    100% {
+        opacity: 0;
+    }
+    5%,
+    10% {
+        opacity: 1;
+    }
+}
+
+@keyframes panel-signal {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scaleY(0.6);
+    }
+    2% {
+        opacity: 1;
+    }
+    9% {
+        opacity: 1;
+        transform: translateY(20px) scaleY(1);
+    }
+    11%,
+    100% {
+        opacity: 0;
+        transform: translateY(25px) scaleY(0.6);
+    }
+}
+
+@keyframes panel-branch-glow {
+    0%,
+    20%,
+    100% {
+        opacity: 0.45;
+    }
+    6%,
+    12% {
+        opacity: 1;
+    }
+}

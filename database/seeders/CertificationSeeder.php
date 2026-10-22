@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Certification;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class CertificationSeeder extends Seeder
 {
@@ -72,10 +71,8 @@ class CertificationSeeder extends Seeder
             ],
         ];
 
-        DB::table('certifications')->truncate();
-
         foreach ($certifications as $cert) {
-            Certification::create($cert);
+            Certification::firstOrCreate(['name' => $cert['name']], $cert);
         }
     }
 }

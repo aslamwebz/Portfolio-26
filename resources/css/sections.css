@@ -1,0 +1,188 @@
+.section {
+    padding-block: 80px;
+    border-top: 1px solid var(--line);
+}
+.section-heading {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 3rem;
+    row-gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+.section-heading > .eyebrow {
+    grid-row: span 2;
+    align-self: start;
+    justify-self: start;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    background: var(--surface);
+}
+.section-heading h2 {
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+}
+.section-heading > p:not(.eyebrow) {
+    grid-column: 2;
+    max-width: 38rem;
+    font-size: 0.92rem;
+}
+.contact-section {
+    padding-block: 96px;
+    background: radial-gradient(
+        ellipse at 90% 80%,
+        color-mix(in srgb, var(--accent) 5%, transparent),
+        transparent 65%
+    );
+}
+.contact-section h2 {
+    font-size: clamp(2.2rem, 4.5vw, 4rem);
+    margin-block: 1rem;
+}
+.contact-section > p:not(.eyebrow) {
+    font-size: 0.9rem;
+}
+.contact-email {
+    display: inline-block;
+    color: var(--accent);
+    font-size: clamp(1.15rem, 3vw, 2rem);
+    letter-spacing: -0.03em;
+    margin-block: 1.5rem 0;
+    overflow-wrap: anywhere;
+}
+.search-form {
+    display: flex;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+.search-form > div {
+    display: grid;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: min(100%, 200px);
+}
+.search-form label {
+    color: var(--muted-text);
+    font-size: 0.8rem;
+}
+.search-form input,
+.search-form select {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.7rem 0.9rem;
+    color: var(--foreground);
+    background: var(--surface);
+    min-height: 46px;
+    font-size: 0.9rem;
+}
+.search-form > div > p {
+    font-size: 0.8rem;
+}
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-block: 2rem;
+    font-size: 0.8rem;
+}
+.pagination > * {
+    border: 1px solid var(--line);
+    padding: 0.4rem 0.7rem;
+    border-radius: 3px;
+}
+.pagination [aria-current] {
+    background: var(--accent);
+    color: var(--accent-ink);
+}
+.pagination [aria-disabled] {
+    color: var(--muted-text);
+}
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .case-card,
+        .other-card {
+            animation: reveal-in linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 12%;
+        }
+        @keyframes reveal-in {
+            from {
+                opacity: 0.85;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
+}
+@media (max-width: 850px) {
+    .section {
+        padding-block: 56px;
+    }
+    .section-heading,
+    .timeline-entry {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    .section-heading > p:not(.eyebrow) {
+        grid-column: 1;
+    }
+    .other-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem;
+    }
+    .stack-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .case-copy {
+        padding: 2rem;
+    }
+    .case-card {
+        grid-template-columns: 0.85fr 1.2fr;
+    }
+    .case-sketch {
+        padding: 1.5rem;
+    }
+}
+@media (max-width: 600px) {
+    .case-card {
+        grid-template-columns: 1fr;
+    }
+    .case-sketch {
+        min-height: 170px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 1.2rem;
+    }
+    .case-sketch > .mono {
+        margin-bottom: 0.7rem;
+    }
+    .case-sketch .sketch-node {
+        max-width: 170px;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    .case-sketch .sketch-line {
+        height: 16px;
+    }
+    .case-sketch .sketch-branches {
+        max-width: 250px;
+    }
+    .case-copy {
+        padding: 1.6rem;
+    }
+    .case-copy h3 {
+        font-size: 1.7rem;
+    }
+    .other-grid {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+    .contact-section {
+        padding-block: 64px;
+    }
+}

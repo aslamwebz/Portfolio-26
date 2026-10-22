@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->isProduction()) {
+            config(['app.debug' => false]);
+        }
         $this->configureDefaults();
     }
 

@@ -1,0 +1,141 @@
+.portfolio {
+    font-size: 1rem;
+    line-height: 1.75;
+    overflow-wrap: break-word;
+}
+.page-width {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+}
+.portfolio h1,
+.portfolio h2,
+.portfolio h3 {
+    color: var(--foreground);
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+}
+.portfolio p {
+    color: var(--muted-text);
+}
+.portfolio a {
+    text-underline-offset: 0.25em;
+}
+.portfolio a:hover {
+    color: var(--accent);
+}
+.portfolio .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.71rem;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    line-height: 1.7;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+.mono {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+}
+.caption {
+    font-size: 0.8rem;
+    line-height: 1.65;
+}
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--foreground);
+    font-size: 0.9rem;
+    font-weight: 550;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+}
+.skip-link {
+    position: fixed;
+    z-index: 100;
+    left: 1rem;
+    top: 1rem;
+    transform: translateY(-200%);
+    padding: 0.6rem 1rem;
+    color: var(--accent-ink);
+    background: var(--accent);
+}
+.skip-link:focus {
+    transform: translateY(0);
+}
+.site-header {
+    position: relative;
+    z-index: 5;
+    border-bottom: 1px solid var(--line);
+    background: var(--background);
+}
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    min-height: 84px;
+}
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-right: auto;
+    font-size: 0.86rem;
+    font-weight: 550;
+    letter-spacing: -0.02em;
+}
+.monogram {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1.13rem;
+    font-weight: 650;
+    letter-spacing: -0.07em;
+    padding-right: 0.15em;
+}
+.site-header nav {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.8rem;
+}
+.site-header nav a {
+    padding-block: 0.5rem;
+}
+.theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--foreground);
+    background: var(--surface);
+    flex-shrink: 0;
+}
+.site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.73rem;
+}
+.site-footer a {
+    color: var(--foreground);
+}
+.page-intro {
+    padding-block: 5rem 3rem;
+}
+.page-intro h1 {
+    margin-block: 1rem 1.5rem;
+    font-size: clamp(2.5rem, 5vw, 4.7rem);
+    max-width: 18ch;
+}
+.page-intro > p {
+    max-width: 44rem;
+}
+.page-intro > .text-link {
+    margin-bottom: 2rem;
+}
