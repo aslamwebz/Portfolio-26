@@ -12,8 +12,10 @@
         "types": "tsc --noEmit"
     },
     "devDependencies": {
+        "@babel/core": "^8.0.7",
         "@eslint/js": "^9.19.0",
         "@laravel/vite-plugin-wayfinder": "^0.1.11",
+        "@rolldown/plugin-babel": "^0.2.4",
         "@tailwindcss/typography": "^0.5.19",
         "@types/node": "^24.19.2",
         "@types/react-syntax-highlighter": "^15.5.13",
@@ -50,7 +52,7 @@
         "@types/lodash": "^4.17.24",
         "@types/react": "^19.2.0",
         "@types/react-dom": "^19.2.0",
-        "@vitejs/plugin-react": "^5.2.0",
+        "@vitejs/plugin-react": "^6.1.2",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "concurrently": "^9.0.1",
